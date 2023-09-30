@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../../../../assets/icons/background-login.jpg") !important;
+  background-image: url("../../../../assets/images/background-login.jpg") !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -14,30 +14,49 @@
     height: 85%;
     border-radius: 1rem;
     display: flex;
-    gap: 17%;
+    gap: 8%;
     flex-direction: column;
     background-color: white;
+
+    &__login-top-image {
+      display: flex;
+      justify-content: center;
+      margin-top: 10%;
+    }
 
     &__login-image {
       width: 30%;
     }
 
     &__login-title {
-      margin-top: 10%;
       font-weight: bold;
       display: flex;
       justify-content: center;
+      font-size: 180%;
     }
     &__credentials {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 3rem;
+      margin-right: 10%;
       &__username {
         display: flex;
         flex-direction: column;
+        &__input {
+          width: 120%;
+          border-radius: 0.5em;
+          height: 1.4rem;
+        }
         &__label {
           font-weight: bold;
+          &__icon {
+            width: 10%;
+            margin-top: 10%;
+          }
+          &__label {
+            margin-top: 10%;
+          }
         }
       }
       &__password {
@@ -46,6 +65,11 @@
         &__label {
           font-weight: bold;
         }
+        &__input {
+          width: 120%;
+          height: 1.4rem;
+          border-radius: 0.5em;
+        }
       }
     }
     &__div-button {
@@ -53,8 +77,17 @@
       align-items: center;
       flex-direction: column;
 
+      &__paragraph {
+        display: flex;
+        font-weight: bold;
+        margin-top: 5%;
+        &__a {
+          margin-left: 10px;
+        }
+      }
+
       &__button {
-        width: 30%;
+        width: 50%;
         height: 2rem;
         background-color: rgb(110, 25, 147);
         color: white;
