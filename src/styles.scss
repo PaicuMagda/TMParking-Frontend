@@ -1,4 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.cdk-global-scrollblock {
+  position: fixed;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+@function form-login-register-styles(
+  $width,
+  $height,
+  $border-radius,
+  $border-style
+) {
+  @return (
+    width: $width,
+    height: $height,
+    border-radius: $border-radius,
+    border-style: $border-style
+  );
+}
