@@ -16,7 +16,16 @@ export class IconsModule {
   ) {
     matIconRegistry
       .addSvgIcon('user', this.setPath(`${this.path}/user.svg`))
-      .addSvgIcon('password', this.setPath(`${this.path}/password.svg`));
+      .addSvgIcon('email', this.setPath(`${this.path}/email.svg`))
+      .addSvgIcon('password', this.setPath(`${this.path}/password.svg`))
+      .addSvgIcon(
+        'passwordRequirementsChecked',
+        this.setPath(`${this.path}/passwordRequirementsChecked`)
+      )
+      .addSvgIcon(
+        'passwordRequirementsUnchecked',
+        this.setPath(`${this.path}/passwordRequirementsUnchecked`)
+      );
   }
 
   private setPath(url: string): SafeResourceUrl {

@@ -1,19 +1,23 @@
 <div class="container">
   <form class="container__login-form">
     <div class="container__login-form__login-top-image">
-      <img src="../../../../assets/images/login.png" />
+      <img
+        class="container__login-form__login-top-image__login-image"
+        src="../../../../assets/images/profile-user.png"
+      />
+      <div class="container__login-form__login-title">Create Account</div>
     </div>
-    <div class="container__login-form__login-title">Login</div>
+
     <div class="container__login-form__credentials">
       <div class="container__login-form__credentials__username">
         <div class="container__login-form__credentials__username__label">
           <mat-icon
-            svgIcon="user"
+            svgIcon="email"
             class="container__login-form__credentials__username__label__icon"
           ></mat-icon>
           <label
             class="container__login-form__credentials__username__label__label"
-            >Username</label
+            >Email Address</label
           >
         </div>
         <input
@@ -23,10 +27,10 @@
       </div>
       <div class="container__login-form__credentials__password">
         <div class="container__login-form__credentials__password__label">
-          <mat-icon svgIcon="password"></mat-icon>
+          <mat-icon svgIcon="user"></mat-icon>
           <label
             class="container__login-form__credentials__password__label__label"
-            >Password</label
+            >Username</label
           >
         </div>
 
@@ -35,15 +39,43 @@
           type="password"
         />
       </div>
+      <div class="container__login-form__credentials__username">
+        <div class="container__login-form__credentials__username__label">
+          <mat-icon sgv="password.svg"></mat-icon>
+          <label
+            class="container__login-form__credentials__password__label__label"
+            >Password</label
+          >
+        </div>
+        <input
+          class="container__login-form__credentials__password__input"
+          type="password"
+        />
+      </div>
+    </div>
+    <div class="container__login-form__password-requires">
+      <p>Passoword must contain:</p>
+      <ul>
+        <li>
+          <span>At least 8 characters</span>
+        </li>
+        <li>At least one small letter</li>
+        <li>At least one capital letter</li>
+        <li>At least one number or symbol</li>
+      </ul>
     </div>
     <div class="container__login-form__div-button">
-      <button class="container__login-form__div-button__button">LOGIN</button>
+      <button class="container__login-form__div-button__button">
+        CREATE ACCOUNT
+      </button>
       <div class="container__login-form__div-button__paragraph">
-        <p class="container__login-form__div-button__paragraph__p">New here?</p>
+        <p class="container__login-form__div-button__paragraph__p">
+          Already have an account?
+        </p>
         <a
           class="container__login-form__div-button__paragraph__a"
-          [routerLink]="'/create-account'"
-          >Create account.</a
+          [routerLink]="'/login'"
+          >Login.</a
         >
       </div>
     </div>
