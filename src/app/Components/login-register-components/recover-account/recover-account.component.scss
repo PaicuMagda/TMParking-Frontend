@@ -1,0 +1,97 @@
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../../../assets/images/background-login.jpg") !important;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  &__recover-account-form {
+    width: 20%;
+    height: 85%;
+    border-radius: 1rem;
+    display: flex;
+    gap: 13%;
+    flex-direction: column;
+    background-color: white;
+
+    &__login-top-image {
+      display: flex;
+      justify-content: center;
+      margin-top: 10%;
+      &__image {
+        width: 35%;
+      }
+    }
+
+    &__login-title {
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      font-size: 150%;
+    }
+    &__text {
+      font-size: 120%;
+      &__d {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        &__input {
+          width: 50%;
+          border-radius: 0.5em;
+          height: 1.4rem;
+        }
+      }
+      &__p {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        &__p1 {
+          margin-left: 50px;
+        }
+        &__p2 {
+          margin-left: 130px;
+        }
+      }
+    }
+    &__div-button {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      &__text {
+        display: flex;
+        flex-direction: row;
+      }
+
+      &__paragraph {
+        display: flex;
+        font-weight: bold;
+        margin-top: 5%;
+        &__a {
+          margin-left: 10px;
+        }
+      }
+
+      &__button {
+        width: 50%;
+        height: 2rem;
+        background-color: rgb(110, 25, 147);
+        color: white;
+        border-radius: 1rem;
+      }
+    }
+
+    &__div-logo {
+      display: flex;
+      justify-content: center;
+      &__logo-image {
+        width: 25%;
+        height: 60%;
+      }
+    }
+  }
+}

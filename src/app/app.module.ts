@@ -8,9 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateAccountComponent } from './Components/login-register-components/create-account/create-account.component';
+import { RecoverAccountComponent } from './Components/login-register-components/recover-account/recover-account.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CreateAccountComponent],
+  declarations: [AppComponent, LoginComponent, CreateAccountComponent, RecoverAccountComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
