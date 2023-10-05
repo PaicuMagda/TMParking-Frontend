@@ -1,12 +1,12 @@
 <div class="container">
   <form class="container__recover-account-form">
-    <div class="container__recover-account-form__login-top-image">
+    <div class="container__recover-account-form__top-image">
       <img
         class="container__recover-account-form__login-top-image__image"
         src="../../../../assets/images/icons-send-email.png"
       />
     </div>
-    <div class="container__recover-account-form__login-title">
+    <div class="container__recover-account-form__recover-account-title">
       Recover Account
     </div>
     <div class="container__recover-account-form__text">
@@ -32,9 +32,13 @@
       <button class="container__recover-account-form__div-button__button">
         SEND
       </button>
-      <div class="container__recover-account-form__div-button__text">
-        <p>Have another account?</p>
-        <a [routerLink]="'/login'">Login here.</a>
+      <div class="container__recover-account-form__div-button__paragraph">
+        <p>Have another account ?</p>
+        <a
+          [routerLink]="'/login'"
+          class="container__recover-account-form__div-button__paragraph__a"
+          >Login here.</a
+        >
       </div>
     </div>
 

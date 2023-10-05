@@ -82,7 +82,9 @@
         font-weight: bold;
         margin-top: 5%;
         &__a {
-          margin-left: 10px;
+          margin-left: 0.3rem;
+          text-decoration: none;
+          color: #0a77f4;
         }
       }
 
