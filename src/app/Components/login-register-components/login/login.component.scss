@@ -38,37 +38,43 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3rem;
-      margin-right: 10%;
+
       &__username {
-        display: flex;
-        flex-direction: column;
-        &__input {
-          width: 120%;
-          border-radius: 0.5em;
-          height: 1.4rem;
+        margin-left: 21.9%;
+        &__icon {
+          width: 10%;
+          margin-top: 10%;
         }
+
+        &__input {
+          border: 2px solid black;
+          border-radius: 8px;
+          height: 30px;
+          font-size: 1.2rem;
+        }
+
         &__label {
           font-weight: bold;
-          &__icon {
-            width: 10%;
-            margin-top: 10%;
-          }
-          &__label {
-            margin-top: 10%;
-          }
         }
       }
       &__password {
-        display: flex;
-        flex-direction: column;
-        &__label {
-          font-weight: bold;
-        }
+        font-weight: bold;
+
         &__input {
-          width: 120%;
-          height: 1.4rem;
-          border-radius: 0.5em;
+          border: 2px solid black;
+          border-radius: 8px;
+          height: 30px;
+          font-size: 1.2rem;
+        }
+        &__mat-error {
+          font-size: 13px;
+          width: 13rem;
+          color: rgb(255, 84, 16);
+
+          &__a {
+            cursor: pointer;
+            color: rgb(255, 84, 16);
+          }
         }
       }
     }
@@ -81,6 +87,7 @@
         display: flex;
         font-weight: bold;
         margin-top: 5%;
+
         &__a {
           margin-left: 0.3rem;
           text-decoration: none;
@@ -100,10 +107,14 @@
     &__div-logo {
       display: flex;
       justify-content: center;
+
       &__logo-image {
         width: 25%;
         height: 60%;
       }
     }
   }
+}
+.mat-mdc-text-field-wrapper {
+  width: 100%;
 }

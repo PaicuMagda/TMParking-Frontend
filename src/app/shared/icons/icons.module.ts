@@ -16,6 +16,14 @@ export class IconsModule {
   ) {
     matIconRegistry
       .addSvgIcon('user', this.setPath(`${this.path}/user.svg`))
+      .addSvgIcon(
+        'show-password',
+        this.setPath(`${this.path}/show password.svg`)
+      )
+      .addSvgIcon(
+        'hide password',
+        this.setPath(`${this.path}/hide password.svg`)
+      )
       .addSvgIcon('email', this.setPath(`${this.path}/email.svg`))
       .addSvgIcon('password', this.setPath(`${this.path}/password.svg`))
       .addSvgIcon(

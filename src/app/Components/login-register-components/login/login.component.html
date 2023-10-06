@@ -1,43 +1,68 @@
 <div class="container">
-  <form class="container__login-form">
+  <form [formGroup]="loginForm" class="container__login-form">
     <div class="container__login-form__login-top-image">
       <img src="../../../../assets/images/login.png" />
     </div>
     <div class="container__login-form__login-title">Login</div>
     <div class="container__login-form__credentials">
       <div class="container__login-form__credentials__username">
-        <div class="container__login-form__credentials__username__label">
-          <mat-icon
-            svgIcon="user"
-            class="container__login-form__credentials__username__label__icon"
-          ></mat-icon>
-          <label
-            class="container__login-form__credentials__username__label__label"
-            >Username</label
+        <mat-icon
+          svgIcon="user"
+          class="container__login-form__credentials__username__icon"
+        ></mat-icon>
+        <label class="container__login-form__credentials__username__label"
+          >Username</label
+        >
+        <mat-form-field appearance="outline">
+          <input matInput type="text" formControlName="username" />
+          <mat-error
+            class="container__login-form__credentials__password__mat-error"
+            *ngIf="
+              loginForm.get('username')?.hasError('required') &&
+              loginForm.get('username')?.touched
+            "
           >
-        </div>
-        <input
-          class="container__login-form__credentials__username__input"
-          type="text"
-        />
+            Username not found.
+            <a
+              class="container__login-form__credentials__password__mat-error__a"
+              routerLink="/recover-account"
+              >Recover your account.</a
+            >
+          </mat-error>
+        </mat-form-field>
       </div>
-      <div class="container__login-form__credentials__password">
-        <div class="container__login-form__credentials__password__label">
-          <mat-icon svgIcon="password"></mat-icon>
-          <label
-            class="container__login-form__credentials__password__label__label"
-            >Password</label
+      <div class="container__login-form__credentials__username">
+        <mat-icon
+          svgIcon="password"
+          class="container__login-form__credentials__username__icon"
+        ></mat-icon>
+        <label class="container__login-form__credentials__username__label"
+          >Password</label
+        >
+        <mat-form-field appearance="outline">
+          <input matInput type="text" formControlName="password" />
+          <mat-error
+            class="container__login-form__credentials__password__mat-error"
+            *ngIf="loginForm.get('password')?.hasError('minlength')"
           >
-        </div>
-
-        <input
-          class="container__login-form__credentials__password__input"
-          type="password"
-        />
+            Incorect password.
+            <a
+              class="container__login-form__credentials__password__mat-error__a"
+              routerLink="/recover-account"
+              >Recover your account.</a
+            >
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
     <div class="container__login-form__div-button">
-      <button class="container__login-form__div-button__button">LOGIN</button>
+      <button
+        class="container__login-form__div-button__button"
+        (click)="login()"
+        [disabled]="!loginForm.valid"
+      >
+        LOGIN
+      </button>
       <div class="container__login-form__div-button__paragraph">
         <p class="container__login-form__div-button__paragraph__p">
           New here ?
