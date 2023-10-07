@@ -1,4 +1,62 @@
-::ng-deep.mat-mdc-text-field-wrapper {
-  height: 35px !important;
-  border: 2px solid black !important;
+.mat-toolbar {
+  background-color: rgb(66, 3, 112);
+  display: flex;
+  flex-direction: row;
+  gap: 50%;
+  width: 100%;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+
+  &__img {
+    width: 6%;
+    height: 85%;
+    border-radius: 10px;
+  }
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 30%;
+
+    &__button-register,
+    &__button-login {
+      height: 3rem;
+      background-color: rgb(66, 3, 112);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+    }
+
+    &__button-register:hover,
+    &__button-login:hover {
+      background-color: #1c0549;
+      color: white;
+      cursor: pointer;
+    }
+
+    &__search {
+      width: 85%;
+      color: white;
+
+      &__icon {
+        margin-top: 10px;
+        position: absolute;
+        margin-top: 14px;
+        cursor: pointer;
+      }
+    }
+
+    &__input {
+      border: none;
+      background: rgb(66, 3, 112);
+      width: 14rem;
+      height: 2rem;
+      font-size: 18px;
+      color: white;
+      margin-left: 30px;
+      margin-top: 10px;
+    }
+    &__input:focus {
+      outline: none;
+    }
+  }
 }
