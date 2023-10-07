@@ -1,0 +1,118 @@
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../../../assets/images/background-login.jpg") !important;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  &__login-form {
+    width: 20%;
+    height: 85%;
+    border-radius: 1rem;
+    display: flex;
+    gap: 5%;
+    flex-direction: column;
+    background-color: white;
+
+    &__login-top-image {
+      display: flex;
+      margin-top: 10%;
+      height: 10%;
+      flex-direction: column;
+      align-items: center;
+      &__login-image {
+        width: 20%;
+        height: 95%;
+      }
+    }
+
+    &__login-title {
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      font-size: 150%;
+      margin-top: 7%;
+    }
+    &__credentials {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      margin-right: 10%;
+      margin-top: 15%;
+      &__username {
+        display: flex;
+        flex-direction: column;
+        &__input {
+          width: 120%;
+          border-radius: 0.5em;
+          height: 1.4rem;
+        }
+        &__label {
+          font-weight: bold;
+          &__icon {
+            width: 10%;
+            margin-top: 10%;
+          }
+          &__label {
+            margin-top: 10%;
+          }
+        }
+      }
+      &__password {
+        display: flex;
+        flex-direction: column;
+        &__label {
+          font-weight: bold;
+        }
+        &__input {
+          width: 120%;
+          height: 1.4rem;
+          border-radius: 0.5em;
+        }
+      }
+    }
+    &__password-requires {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &__div-button {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      &__paragraph {
+        display: flex;
+        font-weight: bold;
+        margin-top: 5%;
+        &__a {
+          margin-left: 0.3rem;
+          text-decoration: none;
+          color: #0a77f4;
+        }
+      }
+
+      &__button {
+        width: 50%;
+        height: 2rem;
+        background-color: rgb(110, 25, 147);
+        color: white;
+        border-radius: 1rem;
+      }
+    }
+
+    &__div-logo {
+      display: flex;
+      justify-content: center;
+      &__logo-image {
+        width: 25%;
+        height: 60%;
+      }
+    }
+  }
+}

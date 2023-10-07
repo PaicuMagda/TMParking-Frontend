@@ -1,0 +1,137 @@
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../../../assets/images/background-login.jpg") !important;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  &__login-form {
+    width: 20%;
+    height: 85%;
+    border-radius: 1rem;
+    display: flex;
+    gap: 8%;
+    flex-direction: column;
+    background-color: white;
+
+    &__login-top-image {
+      display: flex;
+      justify-content: center;
+      margin-top: 10%;
+    }
+
+    &__login-image {
+      width: 30%;
+    }
+
+    &__login-title {
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      font-size: 150%;
+    }
+    &__credentials {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__username {
+        margin-left: 21.9%;
+        &__icon {
+          width: 10%;
+          margin-top: 10%;
+        }
+
+        &__input {
+          border: 2px solid black;
+          border-radius: 8px;
+          height: 30px;
+          font-size: 1.2rem;
+        }
+
+        &__label {
+          font-weight: bold;
+        }
+      }
+      &__password {
+        font-weight: bold;
+
+        &__icon {
+          padding: 8px;
+        }
+
+        &__input {
+          border: 2px solid black;
+          border-radius: 8px;
+          height: 30px;
+          font-size: 1.2rem;
+        }
+        &__mat-error {
+          font-size: 13px;
+          width: 13rem;
+          color: rgb(255, 84, 16);
+          margin-left: -15px;
+
+          &__a {
+            cursor: pointer;
+            color: rgb(255, 84, 16);
+            margin-left: 70px;
+          }
+        }
+      }
+    }
+    &__div-button {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      &__paragraph {
+        display: flex;
+        font-weight: bold;
+        margin-top: 5%;
+
+        &__a {
+          margin-left: 0.3rem;
+          text-decoration: none;
+          color: #0a77f4;
+        }
+      }
+
+      &__button {
+        width: 50%;
+        height: 2rem;
+        background-color: rgb(110, 25, 147);
+        color: white;
+        border-radius: 1rem;
+      }
+    }
+
+    &__div-logo {
+      display: flex;
+      justify-content: center;
+
+      &__logo-image {
+        width: 25%;
+        height: 60%;
+      }
+    }
+  }
+}
+
+::ng-deep.mat-mdc-text-field-wrapper {
+  height: 35px !important;
+  border-radius: 10px !important;
+  width: 250px !important;
+}
+
+::ng-deep .mat-mdc-input-element {
+  top: -10px !important;
+  position: relative !important;
+}
+::ng-deep .mat-mdc-form-field-icon-suffix .mat-icon {
+  padding: 0px;
+}

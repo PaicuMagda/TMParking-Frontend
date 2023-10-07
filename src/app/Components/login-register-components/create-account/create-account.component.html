@@ -1,0 +1,89 @@
+<div class="container">
+  <form class="container__login-form">
+    <div class="container__login-form__login-top-image">
+      <img
+        class="container__login-form__login-top-image__login-image"
+        src="../../../../assets/images/profile-user.png"
+      />
+      <div class="container__login-form__login-title">Create Account</div>
+    </div>
+
+    <div class="container__login-form__credentials">
+      <div class="container__login-form__credentials__username">
+        <div class="container__login-form__credentials__username__label">
+          <mat-icon
+            svgIcon="email"
+            class="container__login-form__credentials__username__label__icon"
+          ></mat-icon>
+          <label
+            class="container__login-form__credentials__username__label__label"
+            >Email Address</label
+          >
+        </div>
+        <input
+          class="container__login-form__credentials__username__input"
+          type="text"
+        />
+      </div>
+      <div class="container__login-form__credentials__password">
+        <div class="container__login-form__credentials__password__label">
+          <mat-icon svgIcon="user"></mat-icon>
+          <label
+            class="container__login-form__credentials__password__label__label"
+            >Username</label
+          >
+        </div>
+
+        <input
+          class="container__login-form__credentials__password__input"
+          type="password"
+        />
+      </div>
+      <div class="container__login-form__credentials__username">
+        <div class="container__login-form__credentials__username__label">
+          <mat-icon svgIcon="password"></mat-icon>
+          <label
+            class="container__login-form__credentials__password__label__label"
+            >Password</label
+          >
+        </div>
+        <input
+          class="container__login-form__credentials__password__input"
+          type="password"
+        />
+      </div>
+    </div>
+    <div class="container__login-form__password-requires">
+      <p>Passoword must contain:</p>
+      <ul>
+        <li>
+          <span>At least 8 characters</span>
+        </li>
+        <li>At least one small letter</li>
+        <li>At least one capital letter</li>
+        <li>At least one number or symbol</li>
+      </ul>
+    </div>
+    <div class="container__login-form__div-button">
+      <button class="container__login-form__div-button__button">
+        CREATE ACCOUNT
+      </button>
+      <div class="container__login-form__div-button__paragraph">
+        <p class="container__login-form__div-button__paragraph__p">
+          Already have an account ?
+        </p>
+        <a
+          class="container__login-form__div-button__paragraph__a"
+          [routerLink]="'/login'"
+          >Login.</a
+        >
+      </div>
+    </div>
+    <div class="container__login-form__div-logo">
+      <img
+        class="container__login-form__div-logo__logo-image"
+        src="../../../../assets/images/logo-TMParking.png"
+      />
+    </div>
+  </form>
+</div>

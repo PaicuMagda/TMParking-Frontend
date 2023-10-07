@@ -1,0 +1,107 @@
+<div class="container">
+  <form [formGroup]="loginForm" class="container__login-form">
+    <div class="container__login-form__login-top-image">
+      <img src="../../../../assets/images/login.png" />
+    </div>
+    <div class="container__login-form__login-title">Login</div>
+    <div class="container__login-form__credentials">
+      <div class="container__login-form__credentials__username">
+        <mat-icon
+          svgIcon="user"
+          class="container__login-form__credentials__username__icon"
+        ></mat-icon>
+        <label class="container__login-form__credentials__username__label"
+          >Username</label
+        >
+        <mat-form-field appearance="outline">
+          <input matInput type="text" formControlName="username" />
+          <mat-error
+            class="container__login-form__credentials__password__mat-error"
+            *ngIf="
+              loginForm.get('username')?.hasError('required') &&
+              loginForm.get('username')?.touched
+            "
+          >
+            Username not found.
+            <a
+              class="container__login-form__credentials__password__mat-error__a"
+              routerLink="/recover-account"
+              >Recover your account.</a
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="container__login-form__credentials__username">
+        <mat-icon
+          svgIcon="password"
+          class="container__login-form__credentials__username__icon"
+        ></mat-icon>
+        <label class="container__login-form__credentials__username__label"
+          >Password</label
+        >
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="{{ showPassword ? 'text' : 'password' }}"
+            formControlName="password"
+          />
+          <mat-icon
+            *ngIf="showPassword"
+            (click)="showPasswordChange()"
+            matSuffix
+            class="container__login-form__credentials__password__icon"
+            svgIcon="show-password"
+          ></mat-icon>
+          <mat-icon
+            *ngIf="!showPassword"
+            (click)="showPasswordChange()"
+            matSuffix
+            class="container__login-form__credentials__password__icon"
+            svgIcon="hide password"
+          ></mat-icon>
+          <mat-error
+            class="container__login-form__credentials__password__mat-error"
+            *ngIf="
+              (loginForm.get('password')?.hasError('minlength') &&
+                loginForm.get('password')?.touched) ||
+              (loginForm.get('password')?.touched &&
+                loginForm.get('password')?.hasError('required'))
+            "
+          >
+            Incorect password.
+            <a
+              class="container__login-form__credentials__password__mat-error__a"
+              routerLink="/recover-account"
+              >Recover your account.</a
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="container__login-form__div-button">
+      <button
+        class="container__login-form__div-button__button"
+        (click)="login()"
+        [disabled]="!loginForm.valid"
+      >
+        LOGIN
+      </button>
+      <div class="container__login-form__div-button__paragraph">
+        <p class="container__login-form__div-button__paragraph__p">
+          New here ?
+        </p>
+        <a
+          class="container__login-form__div-button__paragraph__a"
+          [routerLink]="'/create-account'"
+          >Create account.</a
+        >
+      </div>
+    </div>
+    <div class="container__login-form__div-logo">
+      <img
+        class="container__login-form__div-logo__logo-image"
+        src="../../../../assets/images/logo-TMParking.png"
+      />
+    </div>
+  </form>
+</div>
