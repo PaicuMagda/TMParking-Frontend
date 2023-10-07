@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  showPassword: boolean = false;
+
   constructor(private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
@@ -21,5 +23,9 @@ export class LoginComponent {
 
   login() {
     console.log(this.loginForm);
+  }
+
+  showPasswordChange() {
+    this.showPassword = !this.showPassword;
   }
 }

@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     LoginComponent,
     CreateAccountComponent,
     RecoverAccountComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,

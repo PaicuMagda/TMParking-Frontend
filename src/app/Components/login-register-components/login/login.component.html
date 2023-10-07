@@ -40,10 +40,33 @@
           >Password</label
         >
         <mat-form-field appearance="outline">
-          <input matInput type="text" formControlName="password" />
+          <input
+            matInput
+            type="{{ showPassword ? 'text' : 'password' }}"
+            formControlName="password"
+          />
+          <mat-icon
+            *ngIf="showPassword"
+            (click)="showPasswordChange()"
+            matSuffix
+            class="container__login-form__credentials__password__icon"
+            svgIcon="show-password"
+          ></mat-icon>
+          <mat-icon
+            *ngIf="!showPassword"
+            (click)="showPasswordChange()"
+            matSuffix
+            class="container__login-form__credentials__password__icon"
+            svgIcon="hide password"
+          ></mat-icon>
           <mat-error
             class="container__login-form__credentials__password__mat-error"
-            *ngIf="loginForm.get('password')?.hasError('minlength')"
+            *ngIf="
+              (loginForm.get('password')?.hasError('minlength') &&
+                loginForm.get('password')?.touched) ||
+              (loginForm.get('password')?.touched &&
+                loginForm.get('password')?.hasError('required'))
+            "
           >
             Incorect password.
             <a

@@ -60,6 +60,10 @@
       &__password {
         font-weight: bold;
 
+        &__icon {
+          margin-bottom: 20px;
+        }
+
         &__input {
           border: 2px solid black;
           border-radius: 8px;
@@ -70,10 +74,12 @@
           font-size: 13px;
           width: 13rem;
           color: rgb(255, 84, 16);
+          margin-left: -15px;
 
           &__a {
             cursor: pointer;
             color: rgb(255, 84, 16);
+            margin-left: 70px;
           }
         }
       }
@@ -115,10 +121,17 @@
     }
   }
 }
-.mat-mdc-text-field-wrapper {
-  width: 100%;
+
+::ng-deep.mat-mdc-text-field-wrapper {
+  height: 35px !important;
+  border-radius: 10px !important;
+  width: 250px !important;
 }
 
-::ng-deep .mat-mdc-form-field-infix {
-  min-height: 30px;
+::ng-deep .mat-mdc-input-element {
+  top: -10px !important;
+  position: relative !important;
+}
+::ng-deep .mat-mdc-form-field-icon-suffix .mat-icon {
+  padding: 0px;
 }
