@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './Components/home/home/home.component';
+import { LayoutComponent } from './Components/home/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { HomeComponent } from './Components/home/home/home.component';
     RecoverAccountComponent,
     NavBarComponent,
     HomeComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
