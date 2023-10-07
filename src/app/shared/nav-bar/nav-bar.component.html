@@ -1,3 +1,34 @@
-<mat-form-field appearance="outline">
-  <input type="text" matInput />
-</mat-form-field>
+<mat-toolbar class="mat-toolbar">
+  <img
+    class="mat-toolbar__img"
+    src="../../../assets/images/logo-TMParking.png"
+  />
+
+  <div class="mat-toolbar__buttons">
+    <div class="mat-toolbar__buttons__search">
+      <mat-icon
+        class="mat-toolbar__buttons__search__icon"
+        svgIcon="search"
+      ></mat-icon>
+      <input
+        class="mat-toolbar__buttons__input"
+        type="text"
+        placeholder="Search for parking places..."
+      />
+    </div>
+    <button
+      mat-button
+      class="mat-toolbar__buttons__button-register"
+      (click)="goToRegister()"
+    >
+      REGISTER
+    </button>
+    <button
+      mat-button
+      class="mat-toolbar__buttons__button-login"
+      (click)="goToLogin()"
+    >
+      LOGIN
+    </button>
+  </div>
+</mat-toolbar>

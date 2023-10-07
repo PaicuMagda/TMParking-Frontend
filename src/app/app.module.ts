@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { HomeComponent } from './Components/home/home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
     CreateAccountComponent,
     RecoverAccountComponent,
     NavBarComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
