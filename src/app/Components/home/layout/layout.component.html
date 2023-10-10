@@ -1,6 +1,9 @@
 <div class="layout">
   <div class="layout__searchs"></div>
   <div class="layout__display">
-    <div></div>
+    <div
+      class="layout__display__parkingCard"
+      *ngFor="let parkingPlace of parkingPlaces"
+    ></div>
   </div>
 </div>
