@@ -5,18 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login-register-components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateAccountComponent } from './Components/login-register-components/create-account/create-account.component';
 import { RecoverAccountComponent } from './Components/login-register-components/recover-account/recover-account.component';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
 import { HomeComponent } from './Components/home/home/home.component';
 import { LayoutComponent } from './Components/home/layout/layout.component';
+import { MaterialModule } from './shared/material/material.module';
+import { TmParkingInfoDialogComponent } from './shared/components/tm-parking-info-dialog/tm-parking-info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,20 +24,16 @@ import { LayoutComponent } from './Components/home/layout/layout.component';
     NavBarComponent,
     HomeComponent,
     LayoutComponent,
+    TmParkingInfoDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     IconsModule,
-    MatIconModule,
     HttpClientModule,
-    MatInputModule,
-    FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatToolbarModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
