@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ParkingPlacesService } from 'src/app/services/parking-places/parking-places.service';
+import { ParkingPlacesService } from 'src/app/services/parking-spaces/parking-spaces.service';
 
 @Component({
   selector: 'app-layout',
@@ -9,6 +9,7 @@ import { ParkingPlacesService } from 'src/app/services/parking-places/parking-pl
 export class LayoutComponent implements OnInit {
   constructor(private _parkingPlaces: ParkingPlacesService) {}
   parkingPlaces: any[] = [];
+  role: string = 'Administrator';
 
   ngOnInit() {
     this.parkingPlaces = this._parkingPlaces.getParcari();

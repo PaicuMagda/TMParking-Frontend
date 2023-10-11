@@ -1,9 +1,25 @@
 <div class="layout">
   <div class="layout__searchs"></div>
-  <div class="layout__display">
-    <div
-      class="layout__display__parkingCard"
-      *ngFor="let parkingPlace of parkingPlaces"
-    ></div>
+  <div class="layout__admin">
+    <div class="layout__admin__buttons" *ngIf="role === 'Administrator'">
+      <mat-button-toggle-group
+        class="layout__admin__buttons__mat-toggle-buttons"
+      >
+        <mat-button-toggle value="all-parking"
+          >All Parking spaces</mat-button-toggle
+        >
+        <mat-button-toggle value="green">Users</mat-button-toggle>
+        <mat-button-toggle value="blue">My Parking spaces</mat-button-toggle>
+      </mat-button-toggle-group>
+      <button class="layout__admin__buttons__add-new-park-space" mat-button>
+        Add new Parking space
+      </button>
+    </div>
+    <div class="layout__admin__display">
+      <div
+        class="layout__admin__display__parkingCard"
+        *ngFor="let parkingPlace of parkingPlaces"
+      ></div>
+    </div>
   </div>
 </div>
