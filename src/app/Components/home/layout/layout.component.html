@@ -11,7 +11,11 @@
         <mat-button-toggle value="green">Users</mat-button-toggle>
         <mat-button-toggle value="blue">My Parking spaces</mat-button-toggle>
       </mat-button-toggle-group>
-      <button class="layout__admin__buttons__add-new-park-space" mat-button>
+      <button
+        class="layout__admin__buttons__add-new-park-space"
+        mat-button
+        (click)="openAddNewParkingDialog()"
+      >
         Add new Parking space
       </button>
     </div>
