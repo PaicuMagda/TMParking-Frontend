@@ -1,0 +1,76 @@
+<form class="add_new_parking">
+  <div class="add_new_parking__form">
+    <div class="add_new_parking__form__details">
+      <div class="add_new_parking__form__details__title">
+        Add New Parking Space
+      </div>
+      <div class="add_new_parking__form__details__inputs">
+        <div class="form__details__inputs__location">
+          <label for="location">Location *</label>
+          <input
+            type="text"
+            class="form-control add_new_parking__form__details__inputs__location__input"
+            id="location"
+          />
+        </div>
+        <div class="add_new_parking__form__details__inputs__about-parking">
+          <label for="about-parking">About parking</label>
+          <textarea name="about-parking" id="about-parking" rows="3"></textarea>
+        </div>
+        <div class="add_new_parking__form__details__inputs__spaces">
+          <label for="spaces">Parking Spaces * (number)</label>
+          <input
+            type="text"
+            id="spaces"
+            class="add_new_parking__form__details__inputs__spaces__input form-control"
+          />
+        </div>
+      </div>
+
+      <div class="add_new_parking__form__details__buttons">
+        <div>
+          <label>Underground parking lots*</label>
+          <mat-button-toggle-group class="mat-mini">
+            <mat-button-toggle value="yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="no">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div>
+          <label>Multistorey car park</label>
+          <mat-button-toggle-group>
+            <mat-button-toggle value="yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="no">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+        <div
+          class="btn-group btn-group-toggle add_new_parking__form__details__buttons__toggle"
+          data-toggle="buttons"
+        >
+          <label class="btn btn-secondary active"> Yes</label>
+          <label class="btn btn-secondary">No </label>
+        </div>
+        <div>
+          <label>Another payment method</label>
+          <mat-button-toggle-group>
+            <mat-button-toggle value="yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="no">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div>
+          <label>Paid parking</label>
+          <mat-button-toggle-group>
+            <mat-button-toggle value="yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="no">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+    </div>
+    <div class="add_new_parking__form__create-card"></div>
+  </div>
+  <div class="add_new_parking__buttons">
+    <button class="btn btn-warning">Save as Draft</button>
+    <button class="btn btn-primary">Send</button>
+    <button class="btn btn-danger">Discard</button>
+  </div>
+</form>
