@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatIconModule,
     MatDialogModule,
     MatButtonToggleModule,
+    MatCheckboxModule,
   ],
 })
 export class MaterialModule {}
