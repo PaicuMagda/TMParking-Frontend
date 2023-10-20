@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { __values } from 'tslib';
 
 @Component({
@@ -11,11 +12,36 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   address: string = '';
   numberOfParkingSpaces: number = 0;
   undergroundParking: string = '';
+  automobile: boolean = false;
+  truck: boolean = false;
+  agricultural: boolean = false;
+  dateStart: Date = new Date();
+  dateEnd: Date = new Date();
+  userAuthenticated: string = 'MAGDA PAICU';
 
   changeToggleButtonsUndergroundParking(event: string) {
     this.undergroundParking = event;
-    console.log(this.undergroundParking);
   }
+
+  isAutomobile() {
+    this.automobile = !this.automobile;
+    console.log(this.automobile);
+  }
+
+  isTruck() {
+    this.truck = !this.truck;
+    console.log(this.truck);
+  }
+
+  isAgricultural() {
+    this.agricultural = !this.agricultural;
+    console.log(this.agricultural);
+  }
+
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
 
   ngOnInit() {}
 }
