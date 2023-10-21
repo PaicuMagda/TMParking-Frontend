@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { __values } from 'tslib';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-new-parking-space-dialog',
@@ -8,7 +8,9 @@ import { __values } from 'tslib';
   styleUrls: ['./add-new-parking-space-dialog.component.scss'],
 })
 export class AddNewParkingSpaceDialogComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private dialogRef: MatDialogRef<AddNewParkingSpaceDialogComponent>
+  ) {}
   address: string = '';
   numberOfParkingSpaces: number = 0;
   undergroundParking: string = '';
@@ -42,6 +44,10 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 
   ngOnInit() {}
 }

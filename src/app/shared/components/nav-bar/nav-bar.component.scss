@@ -2,7 +2,7 @@
   background-color: rgb(66, 3, 112);
   display: flex;
   flex-direction: row;
-  gap: 50%;
+  gap: 65%;
   width: 100%;
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
 
@@ -14,23 +14,15 @@
   &__buttons {
     display: flex;
     flex-direction: row;
-    gap: 30%;
+    gap: 20%;
 
     &__button-register,
     &__button-login {
       height: 3rem;
       background-color: rgb(66, 3, 112);
       color: white;
-      font-weight: bold;
       border: none;
       border-radius: 10px;
-    }
-
-    &__button-register:hover,
-    &__button-login:hover {
-      background-color: #1c0549;
-      color: white;
-      cursor: pointer;
     }
 
     &__search {
@@ -40,7 +32,7 @@
       &__icon {
         margin-top: 10px;
         position: absolute;
-        margin-top: 14px;
+        margin-top: 12px;
         cursor: pointer;
       }
     }
