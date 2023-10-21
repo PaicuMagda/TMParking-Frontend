@@ -9,12 +9,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateAccountComponent } from './Components/login-register-components/create-account/create-account.component';
 import { RecoverAccountComponent } from './Components/login-register-components/recover-account/recover-account.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
+import { NavBarComponent } from './Components/home/nav-bar/nav-bar.component';
 import { HomeComponent } from './Components/home/home/home.component';
 import { LayoutComponent } from './Components/home/layout/layout.component';
 import { MaterialModule } from './shared/material/material.module';
-import { TmParkingInfoDialogComponent } from './shared/components/tm-parking-info-dialog/tm-parking-info-dialog.component';
-import { AddNewParkingSpaceDialogComponent } from './shared/components/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
+import { TmParkingInfoDialogComponent } from './Components/home/tm-parking-info-dialog/tm-parking-info-dialog.component';
+import { AddNewParkingSpaceDialogComponent } from './Components/home/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 
 @NgModule({
   declarations: [
