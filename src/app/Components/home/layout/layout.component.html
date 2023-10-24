@@ -1,5 +1,7 @@
 <div class="layout">
-  <div class="layout__searchs"></div>
+  <div class="layout__searchs">
+    <app-search></app-search>
+  </div>
   <div class="layout__admin">
     <div class="layout__admin__buttons" *ngIf="role === 'Administrator'">
       <mat-button-toggle-group

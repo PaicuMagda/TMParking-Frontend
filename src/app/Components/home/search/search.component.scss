@@ -1,0 +1,14 @@
+.zone {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7em;
+  width: 90%;
+
+  &__button {
+    background: #f1f2f3;
+    border-radius: 0.7em;
+    border: none;
+    height: 2.5rem;
+    text-transform: uppercase;
+  }
+}

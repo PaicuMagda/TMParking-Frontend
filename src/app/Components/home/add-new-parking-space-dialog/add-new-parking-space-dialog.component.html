@@ -154,26 +154,27 @@
             class="add_new_parking__form__create-card__card-full__image__paid"
           >
             <div>
-              <img
-                *ngIf="undergroundParking === 'yes'"
-                class="add_new_parking__form__create-card__card-full__image__paid__img"
-                src="../../../../assets/images/paid.png"
-              />
-              <img
-                src="../../../../assets/images/no-paid.png"
-                *ngIf="undergroundParking === 'no'"
-                class="add_new_parking__form__create-card__card-full__image__paid__img-no"
-              />
+              <div>
+                <img
+                  *ngIf="undergroundParking === 'yes'"
+                  class="add_new_parking__form__create-card__card-full__image__paid__img"
+                  src="../../../../assets/images/paid.png"
+                />
+                <img
+                  src="../../../../assets/images/no-paid.png"
+                  *ngIf="undergroundParking === 'no'"
+                  class="add_new_parking__form__create-card__card-full__image__paid__img-no"
+                />
+              </div>
+              <div
+                class="add_new_parking__form__create-card__card-full__image__security"
+              >
+                <img
+                  src="../../../../assets/images/camera.png"
+                  class="add_new_parking__form__create-card__card-full__image__security__img"
+                />
+              </div>
             </div>
-
-            <!-- <div
-              class="add_new_parking__form__create-card__card-full__image__security"
-            >
-              <img
-                src="../../../../assets/images/camera.png"
-                class="add_new_parking__form__create-card__card-full__image__security__img"
-              />
-            </div> -->
           </div>
 
           <img

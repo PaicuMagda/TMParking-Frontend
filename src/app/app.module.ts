@@ -15,6 +15,7 @@ import { LayoutComponent } from './Components/home/layout/layout.component';
 import { MaterialModule } from './shared/material/material.module';
 import { TmParkingInfoDialogComponent } from './Components/home/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { AddNewParkingSpaceDialogComponent } from './Components/home/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
+import { SearchComponent } from './Components/home/search/search.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AddNewParkingSpaceDialogComponent } from './Components/home/add-new-par
     LayoutComponent,
     TmParkingInfoDialogComponent,
     AddNewParkingSpaceDialogComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

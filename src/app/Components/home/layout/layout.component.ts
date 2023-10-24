@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ParkingPlacesService } from 'src/app/services/parking-spaces/parking-spaces.service';
+import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { AddNewParkingSpaceDialogComponent } from 'src/app/Components/home/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 
 @Component({
