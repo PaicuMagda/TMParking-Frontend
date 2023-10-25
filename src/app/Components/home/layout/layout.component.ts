@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { AddNewParkingSpaceDialogComponent } from 'src/app/Components/home/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-layout',
@@ -15,6 +16,7 @@ export class LayoutComponent implements OnInit {
   ) {}
   parkingPlaces: any[] = [];
   role: string = 'Administrator';
+  @Input() inputSideNav!: MatSidenav;
 
   openAddNewParkingDialog() {
     this.dialog.open(AddNewParkingSpaceDialogComponent, {
