@@ -1,17 +1,27 @@
 <div class="layout">
   <div class="layout__searchs">
-    <app-search></app-search>
+    <div
+      *ngIf="
+        allParkingSpaces === 'allParkingSpaces' ||
+        allParkingSpaces === 'myParkingSpaces'
+      "
+    >
+      <app-search></app-search>
+    </div>
   </div>
   <div class="layout__admin">
     <div class="layout__admin__buttons" *ngIf="role === 'Administrator'">
       <mat-button-toggle-group
+        [(ngModel)]="allParkingSpaces"
         class="layout__admin__buttons__mat-toggle-buttons"
       >
-        <mat-button-toggle value="all-parking"
+        <mat-button-toggle value="allParkingSpaces"
           >All Parking spaces</mat-button-toggle
         >
-        <mat-button-toggle value="green">Users</mat-button-toggle>
-        <mat-button-toggle value="blue">My Parking spaces</mat-button-toggle>
+        <mat-button-toggle value="users">Users</mat-button-toggle>
+        <mat-button-toggle value="myParkingSpaces"
+          >My Parking spaces</mat-button-toggle
+        >
       </mat-button-toggle-group>
       <button
         class="layout__admin__buttons__add-new-park-space"
@@ -23,9 +33,26 @@
     </div>
     <div class="layout__admin__display">
       <div
-        class="layout__admin__display__parkingCard"
-        *ngFor="let parkingPlace of parkingPlaces"
-      ></div>
+        *ngIf="
+          allParkingSpaces === 'allParkingSpaces' ||
+          allParkingSpaces === 'myParkingSpaces'
+        "
+        class="layout__admin__display__all-parking-spaces"
+      >
+        <div
+          class="layout__admin__display__all-parking-spaces__parkingCard"
+          *ngFor="let parkingPlace of parkingPlaces"
+        ></div>
+      </div>
+      <div
+        *ngIf="allParkingSpaces === 'users'"
+        class="layout__admin__display__users-display"
+      >
+        <div
+          class="layout__admin__display__users-display__userCard"
+          *ngFor="let parkingPlace of parkingPlaces"
+        ></div>
+      </div>
     </div>
   </div>
 </div>

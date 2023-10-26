@@ -10,12 +10,15 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
+  parkingPlaces: any[] = [];
+  role: string = 'Administrator';
+  allParkingSpaces: string = 'allParkingSpaces';
+
   constructor(
     private _parkingPlaces: ParkingPlacesService,
     private dialog: MatDialog
   ) {}
-  parkingPlaces: any[] = [];
-  role: string = 'Administrator';
+
   @Input() inputSideNav!: MatSidenav;
 
   openAddNewParkingDialog() {
