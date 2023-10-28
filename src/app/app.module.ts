@@ -18,6 +18,7 @@ import { AddNewParkingSpaceDialogComponent } from './Components/home/add-new-par
 import { SearchComponent } from './Components/home/search/search.component';
 import { OpenSidenavComponent } from './shared/components/open-sidenav/open-sidenav.component';
 import { NavbarService } from './services/navbar.service';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NavbarService } from './services/navbar.service';
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
+    NgToastModule,
   ],
   providers: [NavbarService],
   bootstrap: [AppComponent],

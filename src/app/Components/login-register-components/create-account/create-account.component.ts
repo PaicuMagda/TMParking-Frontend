@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class CreateAccountComponent {
 
   constructor(
     private formBuider: FormBuilder,
-    private authentication: AuthenticationService
+    private authentication: AuthenticationService,
+    private toast: NgToastService
   ) {
     this.createAccountForm = this.formBuider.group({
       email: ['', [Validators.required, Validators.email]],
@@ -25,18 +27,21 @@ export class CreateAccountComponent {
   }
 
   register() {
-    if (this.createAccountForm.valid) {
-      this.authentication.registerUser(this.createAccountForm.value).subscribe({
-        next: (resp) => {
-          alert(resp.message);
-        },
-        error: (err) => {
-          alert(err?.error.message);
-        },
-      });
-      console.log(this.createAccountForm.value);
-    } else {
-      console.log(this.createAccountForm.value);
-    }
+    this.authentication.registerUser(this.createAccountForm.value).subscribe({
+      next: (resp) => {
+        this.toast.success({
+          detail: 'Success Message',
+          summary: resp.message,
+          duration: 5000,
+        });
+      },
+      error: (err) => {
+        this.toast.warning({
+          detail: 'Error Message',
+          summary: err?.error.message,
+          duration: 5000,
+        });
+      },
+    });
   }
 }
