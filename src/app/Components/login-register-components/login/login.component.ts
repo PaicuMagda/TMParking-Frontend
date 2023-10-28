@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authentication: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private toast: NgToastService
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
@@ -28,20 +30,26 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.loginForm.valid) {
-      this.authentication.login(this.loginForm.value).subscribe(
-        // next: (resp) => {
-        //   alert(resp.message);
-        //   this.loginForm.reset();
-        //   this.router.navigate(['/home']);
-        //   console.log(resp);
-        // },
-        // error: (err) => {
-        //   alert(err?.error.message);
-        // },
-        (resp) => console.log(resp)
-      );
-    }
+    this.authentication.login(this.loginForm.value).subscribe({
+      next: (resp) => {
+        this.toast.success({
+          detail: 'Success Message',
+          summary: resp.message,
+          duration: 5000,
+        });
+
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1500);
+      },
+      error: (err) => {
+        this.toast.error({
+          detail: 'Error Message',
+          summary: err.error.message,
+          duration: 5000,
+        });
+      },
+    });
   }
 
   showPasswordChange() {

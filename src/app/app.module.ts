@@ -16,6 +16,7 @@ import { MaterialModule } from './shared/material/material.module';
 import { TmParkingInfoDialogComponent } from './Components/home/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { AddNewParkingSpaceDialogComponent } from './Components/home/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { SearchComponent } from './Components/home/search/search.component';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SearchComponent } from './Components/home/search/search.component';
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
+    NgToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
