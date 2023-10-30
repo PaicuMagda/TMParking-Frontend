@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
           summary: resp.message,
           duration: 5000,
         });
-
+        this.authentication.storeToken(resp.token);
         setTimeout(() => {
           this.router.navigate(['/home']);
         }, 1500);
