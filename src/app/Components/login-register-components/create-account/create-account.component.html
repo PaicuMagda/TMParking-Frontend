@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="container__login-form">
+  <form class="container__login-form" [formGroup]="createAccountForm">
     <div class="container__login-form__login-top-image">
       <img
         class="container__login-form__login-top-image__login-image"
@@ -23,6 +23,7 @@
         <input
           class="container__login-form__credentials__username__input"
           type="text"
+          formControlName="email"
         />
       </div>
       <div class="container__login-form__credentials__password">
@@ -37,6 +38,7 @@
         <input
           class="container__login-form__credentials__password__input"
           type="password"
+          formControlName="username"
         />
       </div>
       <div class="container__login-form__credentials__username">
@@ -50,6 +52,7 @@
         <input
           class="container__login-form__credentials__password__input"
           type="password"
+          formControlName="password"
         />
       </div>
     </div>
@@ -65,7 +68,10 @@
       </ul>
     </div>
     <div class="container__login-form__div-button">
-      <button class="container__login-form__div-button__button">
+      <button
+        class="container__login-form__div-button__button"
+        (click)="register()"
+      >
         CREATE ACCOUNT
       </button>
       <div class="container__login-form__div-button__paragraph">
