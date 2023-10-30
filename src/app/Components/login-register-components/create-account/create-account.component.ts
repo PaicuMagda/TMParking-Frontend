@@ -29,18 +29,19 @@ export class CreateAccountComponent {
   register() {
     this.authentication.registerUser(this.createAccountForm.value).subscribe({
       next: (resp) => {
-        this.toast.success({
-          detail: 'Success Message',
+        this.toast.info({
+          detail: 'Info Message',
           summary: resp.message,
           duration: 5000,
         });
       },
       error: (err) => {
-        this.toast.warning({
+        this.toast.error({
           detail: 'Error Message',
           summary: err?.error.message,
           duration: 5000,
         });
+        console.log(err.message);
       },
     });
   }
