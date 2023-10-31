@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         this.authentication.storeToken(resp.token);
         setTimeout(() => {
           this.router.navigate(['/home']);
-        }, 1500);
+        }, 500);
       },
       error: (err) => {
         this.toast.error({

@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Component, OnInit } from '@angular/core';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +11,17 @@ export class HomeComponent implements OnInit {
   opened = false;
 
   constructor(
-    private authentication: AuthenticationService,
-    private sidenavService: NavbarService
+    private sidenavService: NavbarService,
+    private users: UsersService
   ) {
     this.sidenavService.getOpenClose().subscribe((isOpened) => {
       this.opened = isOpened;
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.users.getAllUsers().subscribe((resp) => {
+      console.log(resp);
+    });
+  }
 }
