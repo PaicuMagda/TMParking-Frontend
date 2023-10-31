@@ -11,6 +11,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<AddNewParkingSpaceDialogComponent>
   ) {}
+
   address: string = '';
   numberOfParkingSpaces: number = 0;
   undergroundParking: string = '';
@@ -27,17 +28,14 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
 
   isAutomobile() {
     this.automobile = !this.automobile;
-    console.log(this.automobile);
   }
 
   isTruck() {
     this.truck = !this.truck;
-    console.log(this.truck);
   }
 
   isAgricultural() {
     this.agricultural = !this.agricultural;
-    console.log(this.agricultural);
   }
 
   range = new FormGroup({

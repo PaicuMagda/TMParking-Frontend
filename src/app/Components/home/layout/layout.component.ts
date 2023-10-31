@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { AddNewParkingSpaceDialogComponent } from 'src/app/Components/home/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { MatSidenav } from '@angular/material/sidenav';
+import { UserStoreService } from 'src/app/services/user-store.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-layout',
@@ -11,15 +13,19 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class LayoutComponent implements OnInit {
   parkingPlaces: any[] = [];
-  role: string = 'Administrator';
+  role: string = '';
   allParkingSpaces: string = 'allParkingSpaces';
+  isLogin: boolean = false;
 
   constructor(
     private _parkingPlaces: ParkingPlacesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userStore: UserStoreService,
+    private auth: AuthenticationService
   ) {}
 
   @Input() inputSideNav!: MatSidenav;
+  fullName: string = '';
 
   openAddNewParkingDialog() {
     this.dialog.open(AddNewParkingSpaceDialogComponent, {
@@ -29,7 +35,16 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLogin = this.auth.isLoggedIn();
     this.parkingPlaces = this._parkingPlaces.getParcari();
-    console.log(this.parkingPlaces);
+    this.userStore.getFullNameFromStore().subscribe((val) => {
+      let fullNameFromToken = this.auth.getFullNameFromToken();
+      this.fullName = val || fullNameFromToken;
+    });
+
+    this.userStore.getRoleFromStore().subscribe((val) => {
+      const roleFromToken = this.auth.getRoleFromToken();
+      this.role = val || roleFromToken;
+    });
   }
 }

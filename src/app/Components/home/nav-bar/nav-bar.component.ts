@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TmParkingInfoDialogComponent } from '../tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,8 +14,11 @@ export class NavBarComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private sidenavService: NavbarService
+    private sidenavService: NavbarService,
+    private auth: AuthenticationService
   ) {}
+
+  isLogin: boolean = false;
 
   goToLogin() {
     this.router.navigate(['/login']);
@@ -36,5 +40,12 @@ export class NavBarComponent implements OnInit {
     console.log('S-a deschis!');
   }
 
-  ngOnInit() {}
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['login']);
+  }
+
+  ngOnInit() {
+    this.isLogin = this.auth.isLoggedIn();
+  }
 }

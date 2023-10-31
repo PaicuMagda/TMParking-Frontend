@@ -19,9 +19,5 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.users.getAllUsers().subscribe((resp) => {
-      console.log(resp);
-    });
-  }
+  ngOnInit() {}
 }
