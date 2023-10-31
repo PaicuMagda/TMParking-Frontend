@@ -15,9 +15,5 @@ export class HomeComponent implements OnInit {
     private users: UsersService
   ) {}
 
-  ngOnInit() {
-    this.users.getAllUsers().subscribe((resp) => {
-      console.log(resp);
-    });
-  }
+  ngOnInit() {}
 }

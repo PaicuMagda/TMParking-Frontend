@@ -2,27 +2,27 @@
   background-color: rgb(66, 3, 112);
   display: flex;
   flex-direction: row;
-  gap: 65%;
   width: 100%;
-  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 8px 8px 8px rgba(152, 145, 145, 0.5);
 
   &__img {
-    width: 6%;
-    height: 85%;
-    border-radius: 10px;
+    width: 9rem;
+    height: 2.95rem;
+    border-radius: 1rem;
   }
+
   &__buttons {
     display: flex;
     flex-direction: row;
-    gap: 20%;
+    gap: 15%;
 
     &__button-register,
-    &__button-login {
+    &__button-login,
+    &__button-logout {
       height: 3rem;
       background-color: rgb(66, 3, 112);
       color: white;
       border: none;
-      border-radius: 10px;
     }
 
     &__search {
@@ -51,4 +51,20 @@
       outline: none;
     }
   }
+
+  &__my-profile {
+    height: 3rem;
+    background-color: rgb(66, 3, 112);
+    color: white;
+    border: none;
+    margin-left: 2rem;
+  }
+}
+
+.logged-in {
+  gap: 50%;
+}
+
+.logged-out {
+  gap: 66%;
 }
