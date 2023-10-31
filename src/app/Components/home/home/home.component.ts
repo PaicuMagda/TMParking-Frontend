@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,16 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private authentication: AuthenticationService) {}
+  usersAll: any[] = [];
 
-  ngOnInit() {}
+  constructor(
+    private authentication: AuthenticationService,
+    private users: UsersService
+  ) {}
+
+  ngOnInit() {
+    this.users.getAllUsers().subscribe((resp) => {
+      console.log(resp);
+    });
+  }
 }

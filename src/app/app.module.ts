@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login-register-components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CreateAccountComponent } from './Components/login-register-components/create-account/create-account.component';
 import { RecoverAccountComponent } from './Components/login-register-components/recover-account/recover-account.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import { TmParkingInfoDialogComponent } from './Components/home/tm-parking-info-
 import { AddNewParkingSpaceDialogComponent } from './Components/home/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { SearchComponent } from './Components/home/search/search.component';
 import { NgToastModule } from 'ng-angular-popup';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { NgToastModule } from 'ng-angular-popup';
     MaterialModule,
     NgToastModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
