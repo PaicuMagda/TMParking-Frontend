@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TmParkingInfoDialogComponent } from '../tm-parking-info-dialog/tm-parking-info-dialog.component';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,7 +10,13 @@ import { TmParkingInfoDialogComponent } from '../tm-parking-info-dialog/tm-parki
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-  constructor(private router: Router, private dialog: MatDialog) {}
+  isLogin: boolean = false;
+
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private auth: AuthenticationService
+  ) {}
 
   goToLogin() {
     this.router.navigate(['/login']);
@@ -26,5 +33,12 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['login']);
+  }
+
+  ngOnInit() {
+    this.isLogin = this.auth.isLoggedIn();
+  }
 }

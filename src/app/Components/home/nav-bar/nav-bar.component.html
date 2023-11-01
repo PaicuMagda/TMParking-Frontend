@@ -1,9 +1,20 @@
-<mat-toolbar class="mat-toolbar">
-  <img
-    (click)="openTmParkingInfoDialog()"
-    class="mat-toolbar__img"
-    src="../../../assets/images/logo-TMParking.png"
-  />
+<mat-toolbar
+  [ngClass]="{
+    'mat-toolbar': true,
+    'logged-in': isLogin,
+    'logged-out': !isLogin
+  }"
+>
+  <div class="mat-toolba">
+    <img
+      (click)="openTmParkingInfoDialog()"
+      class="mat-toolbar__img"
+      src="../../../assets/images/logo-TMParking.png"
+    />
+    <button class="mat-toolbar__my-profile" *ngIf="isLogin === true">
+      MY PROFILE
+    </button>
+  </div>
 
   <div class="mat-toolbar__buttons">
     <div class="mat-toolbar__buttons__search">
@@ -17,7 +28,6 @@
         placeholder="Search for parking places..."
       />
     </div>
-    <div>Hello, Magdalena</div>
     <button
       mat-button
       class="mat-toolbar__buttons__button-register"
@@ -31,6 +41,13 @@
       (click)="goToLogin()"
     >
       LOGIN
+    </button>
+    <button
+      class="mat-toolbar__buttons__button-logout"
+      *ngIf="isLogin === true"
+      (click)="logout()"
+    >
+      LOGOUT
     </button>
   </div>
 </mat-toolbar>
