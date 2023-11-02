@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { TmParkingInfoDialogComponent } from '../tm-parking-info-dialog/tm-parking-info-dialog.component';
+import { TmParkingInfoDialogComponent } from '../../dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -41,8 +42,11 @@ export class NavBarComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout();
-    this.router.navigate(['login']);
+    this.dialog.open(LogoutDialogComponent, {
+      width: '30%',
+      height: '20%',
+      position: { top: '5%' },
+    });
   }
 
   ngOnInit() {

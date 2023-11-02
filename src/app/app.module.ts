@@ -13,13 +13,16 @@ import { NavBarComponent } from './Components/home/nav-bar/nav-bar.component';
 import { HomeComponent } from './Components/home/home/home.component';
 import { LayoutComponent } from './Components/home/layout/layout.component';
 import { MaterialModule } from './shared/material/material.module';
-import { TmParkingInfoDialogComponent } from './Components/home/tm-parking-info-dialog/tm-parking-info-dialog.component';
-import { AddNewParkingSpaceDialogComponent } from './Components/home/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
+import { TmParkingInfoDialogComponent } from './Components/dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
+import { AddNewParkingSpaceDialogComponent } from './Components/dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { SearchComponent } from './Components/home/search/search.component';
 import { OpenSidenavComponent } from './shared/components/open-sidenav/open-sidenav.component';
 import { NavbarService } from './services/navbar.service';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { LogoutDialogComponent } from './Components/dialogs/logout-dialog/logout-dialog.component';
+import { LoginRequiredDialogComponent } from './Components/dialogs/login-required-dialog/login-required-dialog.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     AddNewParkingSpaceDialogComponent,
     SearchComponent,
     OpenSidenavComponent,
+    LogoutDialogComponent,
+    LoginRequiredDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     ReactiveFormsModule,
     MaterialModule,
     NgToastModule,
+    MatDividerModule,
   ],
 
   providers: [

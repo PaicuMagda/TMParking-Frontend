@@ -21,7 +21,8 @@
 
     &__button-register,
     &__button-login,
-    &__button-logout {
+    &__button-logout,
+    &__my-profile {
       height: 3rem;
       background-color: rgb(66, 3, 112);
       color: white;
@@ -54,18 +55,10 @@
       outline: none;
     }
   }
-
-  &__my-profile {
-    height: 3rem;
-    background-color: rgb(66, 3, 112);
-    color: white;
-    border: none;
-    margin-left: 2rem;
-  }
 }
 
 .logged-in {
-  gap: 50%;
+  gap: 64%;
 }
 
 .logged-out {

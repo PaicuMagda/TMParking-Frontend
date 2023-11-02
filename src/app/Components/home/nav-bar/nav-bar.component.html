@@ -33,13 +33,18 @@
       />
     </div>
     <button
+      *ngIf="isLogin === false"
       mat-button
       class="mat-toolbar__buttons__button-register"
       (click)="goToRegister()"
     >
       REGISTER
     </button>
+    <button class="mat-toolbar__buttons__my-profile" *ngIf="isLogin === true">
+      MY PROFILE
+    </button>
     <button
+      *ngIf="isLogin === false"
       mat-button
       class="mat-toolbar__buttons__button-login"
       (click)="goToLogin()"
