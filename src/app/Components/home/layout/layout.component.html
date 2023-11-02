@@ -13,13 +13,19 @@
     <div class="layout__admin__buttons">
       <div>
         <mat-button-toggle-group
+          [disabled]="!isLogin"
           [(ngModel)]="allParkingSpaces"
           class="layout__admin__buttons__mat-toggle-buttons"
         >
           <mat-button-toggle value="allParkingSpaces"
             >All Parking spaces</mat-button-toggle
           >
-          <mat-button-toggle value="users">Users</mat-button-toggle>
+          <mat-button-toggle value="users" *ngIf="role === 'Administrator'"
+            >Users</mat-button-toggle
+          >
+          <mat-button-toggle value="my-cars" *ngIf="role === 'User' || !isLogin"
+            >My Cars</mat-button-toggle
+          >
           <mat-button-toggle value="myParkingSpaces"
             >My Parking spaces</mat-button-toggle
           >
@@ -27,13 +33,16 @@
         <button
           class="layout__admin__buttons__add-new-park-space"
           mat-button
-          (click)="openAddNewParkingDialog()"
+          (click)="openAddNewParkingDialogFunction()"
         >
           Add new Parking space
         </button>
       </div>
       <div class="layout__admin__buttons__greeting" *ngIf="isLogin === true">
         Hello, {{ fullName }} !
+      </div>
+      <div class="layout__admin__buttons__message" *ngIf="!isLogin">
+        You are not logged in ...
       </div>
     </div>
 
