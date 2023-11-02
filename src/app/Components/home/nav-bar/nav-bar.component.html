@@ -11,9 +11,6 @@
       class="mat-toolbar__img"
       src="../../../assets/images/logo-TMParking.png"
     />
-    <button class="mat-toolbar__my-profile" *ngIf="isLogin === true">
-      MY PROFILE
-    </button>
   </div>
 
   <div class="mat-toolbar__buttons">
@@ -29,13 +26,18 @@
       />
     </div>
     <button
+      *ngIf="isLogin === false"
       mat-button
       class="mat-toolbar__buttons__button-register"
       (click)="goToRegister()"
     >
       REGISTER
     </button>
+    <button class="mat-toolbar__buttons__my-profile" *ngIf="isLogin === true">
+      MY PROFILE
+    </button>
     <button
+      *ngIf="isLogin === false"
       mat-button
       class="mat-toolbar__buttons__button-login"
       (click)="goToLogin()"

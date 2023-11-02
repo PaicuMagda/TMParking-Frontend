@@ -46,6 +46,20 @@
       &__greeting {
         font-size: 1.5rem;
         font-weight: 700;
+        width: 27rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      &__message {
+        font-weight: 500;
+        font-size: 1.4rem;
+        color: #099709;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 25rem;
       }
     }
 
