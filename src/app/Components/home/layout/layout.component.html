@@ -39,7 +39,8 @@
         </button>
       </div>
       <div class="layout__admin__buttons__greeting" *ngIf="isLogin === true">
-        Hello, {{ fullName }} !
+        <mat-icon svgIcon="user"></mat-icon>
+        <p>{{ fullName }}</p>
       </div>
       <div class="layout__admin__buttons__message" *ngIf="!isLogin">
         You are not logged in ...
