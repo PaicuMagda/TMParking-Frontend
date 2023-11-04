@@ -24,12 +24,17 @@
         <input
           class="container__recover-account-form__text__d__input"
           type="text"
+          [(ngModel)]="email"
+          name="email"
         />
       </div>
     </div>
 
     <div class="container__recover-account-form__div-button">
-      <button class="container__recover-account-form__div-button__button">
+      <button
+        class="container__recover-account-form__div-button__button"
+        (click)="sendEmail()"
+      >
         SEND
       </button>
       <div class="container__recover-account-form__div-button__paragraph">
