@@ -23,6 +23,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { LogoutDialogComponent } from './Components/dialogs/logout-dialog/logout-dialog.component';
 import { LoginRequiredDialogComponent } from './Components/dialogs/login-required-dialog/login-required-dialog.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { ResetPasswordComponent } from './Components/login-register-components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MatDividerModule } from '@angular/material/divider';
     OpenSidenavComponent,
     LogoutDialogComponent,
     LoginRequiredDialogComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
