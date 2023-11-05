@@ -24,8 +24,6 @@ export class LayoutComponent implements OnInit {
     private auth: AuthenticationService
   ) {}
 
-  fullName: string = '';
-
   openAddNewParkingDialogFunction() {
     if (this.isLogin) {
       this.openAddNewParkingDialog();
@@ -52,10 +50,6 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     this.isLogin = this.auth.isLoggedIn();
     this.parkingPlaces = this._parkingPlaces.getParcari();
-    this.userStore.getFullNameFromStore().subscribe((val) => {
-      let fullNameFromToken = this.auth.getFullNameFromToken();
-      this.fullName = val || fullNameFromToken;
-    });
 
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.auth.getRoleFromToken();

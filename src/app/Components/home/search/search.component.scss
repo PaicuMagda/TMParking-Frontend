@@ -1,14 +1,57 @@
 .zone {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.7em;
-  width: 90%;
+  gap: 0.9em;
+  width: 100%;
+  margin-top: 1rem;
 
   &__button {
     background: #f1f2f3;
     border-radius: 0.7em;
     border: none;
-    height: 2.5rem;
+    height: 2rem;
     text-transform: uppercase;
   }
+}
+
+.types-of-vehicles {
+  margin-top: 1rem;
+
+  &__mat-checkbox {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.type-of-parking {
+  margin-top: 1rem;
+
+  &__checkbox {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.number-of-parking-spaces {
+  input {
+    border: 2px solid black;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+.select-date {
+  input {
+    border: 2px solid black;
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.related-tags {
+  margin-top: 1rem;
 }
