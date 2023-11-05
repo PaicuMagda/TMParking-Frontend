@@ -5,7 +5,7 @@
     'logged-out': !isLogin
   }"
 >
-  <div class="mat-toolba">
+  <div class="mat-toolbar">
     <img
       (click)="openTmParkingInfoDialog()"
       class="mat-toolbar__img"
@@ -18,6 +18,11 @@
     >
       MY PROFILE
     </button>
+    <div class="mat-toolbar__user-login" *ngIf="isLogin === true">
+      <img src="../../../../assets/images/user-image.png" />
+      <p>{{ fullName | uppercase }}</p>
+    </div>
+    <div *ngIf="!isLogin">You are not logged in ...</div>
   </div>
 
   <div class="mat-toolbar__buttons">
@@ -41,6 +46,7 @@
       REGISTER
     </button>
     <button class="mat-toolbar__buttons__my-profile" *ngIf="isLogin === true">
+      <mat-icon svgIcon="user-white"></mat-icon>
       MY PROFILE
     </button>
     <button

@@ -5,6 +5,7 @@ import { TmParkingInfoDialogComponent } from '../../dialogs/tm-parking-info-dial
 import { NavbarService } from 'src/app/services/navbar.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,14 +13,17 @@ import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
+  isLogin: boolean = false;
+  fullName: string = '';
+  role: string = '';
+
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private sidenavService: NavbarService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private userStore: UserStoreService,
+    private sidenavService: NavbarService
   ) {}
-
-  isLogin: boolean = false;
 
   goToLogin() {
     this.router.navigate(['/login']);
@@ -44,12 +48,20 @@ export class NavBarComponent implements OnInit {
   logout() {
     this.dialog.open(LogoutDialogComponent, {
       width: '30%',
-      height: '20%',
+      height: '40%',
       position: { top: '5%' },
     });
   }
 
   ngOnInit() {
     this.isLogin = this.auth.isLoggedIn();
+    this.userStore.getFullNameFromStore().subscribe((val) => {
+      let fullNameFromToken = this.auth.getFullNameFromToken();
+      this.fullName = val || fullNameFromToken;
+    });
+    this.userStore.getRoleFromStore().subscribe((val) => {
+      const roleFromToken = this.auth.getRoleFromToken();
+      this.role = val || roleFromToken;
+    });
   }
 }

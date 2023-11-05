@@ -24,6 +24,14 @@ export class RecoverAccountComponent {
           duration: 3000,
         });
       },
+
+      error: (err) => {
+        this.toast.error({
+          detail: 'Error Message',
+          summary: err.error.message,
+          duration: 5000,
+        });
+      },
     });
   }
 }
