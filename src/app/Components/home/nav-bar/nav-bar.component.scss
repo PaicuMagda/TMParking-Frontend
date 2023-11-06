@@ -1,9 +1,14 @@
 .mat-toolbar {
   background-color: rgb(66, 3, 112);
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  box-shadow: 8px 8px 8px rgba(152, 145, 145, 0.5);
+  gap: 2rem;
+  align-items: center;
+  color: white;
+
+  p {
+    margin-top: 1rem;
+    font-weight: 600;
+  }
 
   &__img {
     width: 9rem;
@@ -52,12 +57,20 @@
       outline: none;
     }
   }
+
+  &__user-login {
+    display: flex;
+    gap: 1rem;
+    img {
+      width: 4rem;
+    }
+  }
 }
 
 .logged-in {
-  gap: 64%;
+  gap: 40%;
 }
 
 .logged-out {
-  gap: 66%;
+  gap: 55%;
 }

@@ -34,7 +34,8 @@ export class IconsModule {
         'passwordRequirementsUnchecked',
         this.setPath(`${this.path}/passwordRequirementsUnchecked`)
       )
-      .addSvgIcon('search', this.setPath(`${this.path}/search.svg`));
+      .addSvgIcon('search', this.setPath(`${this.path}/search.svg`))
+      .addSvgIcon('user-white', this.setPath(`${this.path}/user-white.svg`));
   }
 
   private setPath(url: string): SafeResourceUrl {

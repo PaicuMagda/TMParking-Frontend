@@ -18,16 +18,19 @@
           class="layout__admin__buttons__mat-toggle-buttons"
         >
           <mat-button-toggle value="allParkingSpaces"
-            >All Parking spaces</mat-button-toggle
+            >🚙 All Parking Spaces</mat-button-toggle
           >
           <mat-button-toggle value="users" *ngIf="role === 'Administrator'"
-            >Users</mat-button-toggle
+            >🙍🏻‍♂️ Users</mat-button-toggle
           >
-          <mat-button-toggle value="my-cars" *ngIf="role === 'User' || !isLogin"
-            >My Cars</mat-button-toggle
+          <mat-button-toggle value="myCars" *ngIf="role === 'User' || !isLogin"
+            >❤️ My Vehicles</mat-button-toggle
           >
           <mat-button-toggle value="myParkingSpaces"
-            >My Parking spaces</mat-button-toggle
+            >❤️ My Parking Spaces</mat-button-toggle
+          >
+          <mat-button-toggle value="allCars" *ngIf="role === 'Administrator'"
+            >🚙All Vehicles</mat-button-toggle
           >
         </mat-button-toggle-group>
         <button
@@ -35,14 +38,24 @@
           mat-button
           (click)="openAddNewParkingDialogFunction()"
         >
-          Add new Parking space
+          ➕ ADD NEW PARKING SPACE
         </button>
-      </div>
-      <div class="layout__admin__buttons__greeting" *ngIf="isLogin === true">
-        Hello, {{ fullName }} !
-      </div>
-      <div class="layout__admin__buttons__message" *ngIf="!isLogin">
-        You are not logged in ...
+
+        <button
+          class="layout__admin__buttons__add-new-park-space"
+          mat-button
+          (click)="openAddNewVehicleDialogFunction()"
+        >
+          ➕ ADD NEW VEHICLE
+        </button>
+
+        <button
+          *ngIf="role === 'Administrator'"
+          class="layout__admin__buttons__add-new-park-space"
+          mat-button
+        >
+          ➕ ADD NEW USER
+        </button>
       </div>
     </div>
 

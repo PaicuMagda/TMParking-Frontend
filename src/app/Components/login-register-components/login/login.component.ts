@@ -34,13 +34,16 @@ export class LoginComponent implements OnInit {
   login() {
     this.authentication.login(this.loginForm.value).subscribe({
       next: (resp) => {
-        this.authentication.storeToken(resp.token);
+        this.authentication.storeToken(resp.accessToken);
+        this.authentication.storeRefreshToken(resp.refreshToken);
         const tokenPayload = this.authentication.decodedToken();
         this.userStore.setFullNameFromStore(tokenPayload.unique_name);
         this.userStore.setRoleFromStore(tokenPayload.role);
+
         setTimeout(() => {
           this.router.navigate(['/home']);
         }, 500);
+
         this.toast.success({
           detail: 'Success Message',
           summary: resp.message,
