@@ -24,6 +24,7 @@ import { LogoutDialogComponent } from './Components/dialogs/logout-dialog/logout
 import { LoginRequiredDialogComponent } from './Components/dialogs/login-required-dialog/login-required-dialog.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { ResetPasswordComponent } from './Components/login-register-components/reset-password/reset-password.component';
+import { AddNewVehicleDialogComponent } from './Components/dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ResetPasswordComponent } from './Components/login-register-components/r
     LogoutDialogComponent,
     LoginRequiredDialogComponent,
     ResetPasswordComponent,
+    AddNewVehicleDialogComponent,
   ],
   imports: [
     BrowserModule,
