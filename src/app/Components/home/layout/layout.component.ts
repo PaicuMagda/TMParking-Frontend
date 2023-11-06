@@ -5,6 +5,7 @@ import { AddNewParkingSpaceDialogComponent } from 'src/app/Components/dialogs/ad
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LoginRequiredDialogComponent } from '../../dialogs/login-required-dialog/login-required-dialog.component';
+import { AddNewVehicleDialogComponent } from '../../dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 
 @Component({
   selector: 'app-layout',
@@ -32,6 +33,14 @@ export class LayoutComponent implements OnInit {
     }
   }
 
+  openAddNewVehicleDialogFunction() {
+    if (this.isLogin) {
+      this.openAddNewVehicleDialog();
+    } else {
+      this.openRequiredLogedInDialog();
+    }
+  }
+
   openAddNewParkingDialog() {
     this.dialog.open(AddNewParkingSpaceDialogComponent, {
       width: '100%',
@@ -44,6 +53,13 @@ export class LayoutComponent implements OnInit {
       width: '30%',
       height: '40%',
       position: { top: '5%' },
+    });
+  }
+
+  openAddNewVehicleDialog() {
+    this.dialog.open(AddNewVehicleDialogComponent, {
+      width: '100%',
+      height: '85%',
     });
   }
 
