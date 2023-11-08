@@ -53,6 +53,7 @@
           *ngIf="role === 'Administrator'"
           class="layout__admin__buttons__add-new-park-space"
           mat-button
+          (click)="openAddNewUserDialog()"
         >
           ➕ ADD NEW USER
         </button>

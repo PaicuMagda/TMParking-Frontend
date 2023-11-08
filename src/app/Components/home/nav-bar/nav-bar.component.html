@@ -45,7 +45,11 @@
     >
       REGISTER
     </button>
-    <button class="mat-toolbar__buttons__my-profile" *ngIf="isLogin === true">
+    <button
+      class="mat-toolbar__buttons__my-profile"
+      *ngIf="isLogin === true"
+      (click)="openMyProfileDialog()"
+    >
       <mat-icon svgIcon="user-white"></mat-icon>
       MY PROFILE
     </button>

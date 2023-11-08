@@ -6,6 +6,8 @@ import { NavbarService } from 'src/app/services/navbar.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { DialogRef } from '@angular/cdk/dialog';
+import { MyProfileDialogComponent } from '../../dialogs/my-profile-dialog/my-profile-dialog.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -50,6 +52,13 @@ export class NavBarComponent implements OnInit {
       width: '30%',
       height: '40%',
       position: { top: '5%' },
+    });
+  }
+
+  openMyProfileDialog() {
+    this.dialog.open(MyProfileDialogComponent, {
+      width: '80%',
+      height: '80%',
     });
   }
 
