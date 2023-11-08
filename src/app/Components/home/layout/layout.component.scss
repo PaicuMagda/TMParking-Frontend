@@ -23,6 +23,7 @@
       flex-direction: row;
       align-items: center;
       justify-content: flex-end;
+      padding: 0.7rem;
 
       &__mat-toggle-buttons {
         border-radius: 20px;
@@ -71,6 +72,7 @@
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(5, 1fr);
         gap: 40px;
+        max-height: 58rem;
 
         &__parkingCard {
           width: 285px;

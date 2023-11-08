@@ -11,13 +11,6 @@
       class="mat-toolbar__img"
       src="../../../assets/images/logo-TMParking.png"
     />
-    <button
-      class="mat-toolbar__my-profile"
-      *ngIf="isLogin === true"
-      (click)="toggleSidenav()"
-    >
-      MY PROFILE
-    </button>
     <div class="mat-toolbar__user-login" *ngIf="isLogin === true">
       <img src="../../../../assets/images/user-image.png" />
       <p>{{ fullName | uppercase }}</p>
@@ -48,7 +41,7 @@
     <button
       class="mat-toolbar__buttons__my-profile"
       *ngIf="isLogin === true"
-      (click)="openMyProfileDialog()"
+      (click)="toggleSidenav()"
     >
       <mat-icon svgIcon="user-white"></mat-icon>
       MY PROFILE
