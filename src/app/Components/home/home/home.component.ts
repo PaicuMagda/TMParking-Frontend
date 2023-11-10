@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from 'src/app/services/navbar.service';
-import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class HomeComponent implements OnInit {
   opened = false;
 
-  constructor(
-    private sidenavService: NavbarService,
-    private users: UsersService
-  ) {
+  constructor(private sidenavService: NavbarService) {
     this.sidenavService.getOpenClose().subscribe((isOpened) => {
       this.opened = isOpened;
     });

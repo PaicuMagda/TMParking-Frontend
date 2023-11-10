@@ -7,7 +7,6 @@
   &__searchs {
     height: 96%;
     width: 17%;
-
     border-radius: 10px;
     padding: 1rem;
   }
@@ -72,19 +71,20 @@
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(5, 1fr);
         gap: 40px;
-        max-height: 58rem;
+        max-height: 58.4rem;
+        margin-top: 0.5rem;
 
         &__parkingCard {
           width: 285px;
           height: 270px;
           border-radius: 10px;
-          margin-left: 3%;
-          margin-top: 3%;
           border: 2px solid black;
         }
       }
 
       &__users-display {
+        max-height: 58.4rem;
+
         &__userCard {
           width: 95%;
           height: 8rem;
@@ -92,6 +92,14 @@
           border-radius: 10px;
           margin-left: 3%;
           margin-top: 3%;
+          display: flex;
+
+          &__div7 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+          }
         }
       }
     }

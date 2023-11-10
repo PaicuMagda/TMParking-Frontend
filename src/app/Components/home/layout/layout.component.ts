@@ -22,6 +22,8 @@ export class LayoutComponent implements OnInit {
   isLogin: boolean = false;
 
   @ViewChild('myProfile') sidenav!: MatSidenav;
+  @Input() inputSideNav!: MatSidenav;
+  fullName: string = '';
 
   constructor(
     private _parkingPlaces: ParkingPlacesService,
@@ -29,9 +31,6 @@ export class LayoutComponent implements OnInit {
     private userStore: UserStoreService,
     private auth: AuthenticationService
   ) {}
-
-  @Input() inputSideNav!: MatSidenav;
-  fullName: string = '';
 
   openAddNewParkingDialogFunction() {
     if (this.isLogin) {

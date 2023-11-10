@@ -27,6 +27,7 @@ import { ResetPasswordComponent } from './Components/login-register-components/r
 import { AddNewVehicleDialogComponent } from './Components/dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 import { MyProfileDialogComponent } from './Components/dialogs/my-profile-dialog/my-profile-dialog.component';
 import { AddNewUserDialogComponent } from './Components/dialogs/add-new-user-dialog/add-new-user-dialog.component';
+import { UsersAdminComponent } from './Components/users-admin/users-admin.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AddNewUserDialogComponent } from './Components/dialogs/add-new-user-dia
     AddNewVehicleDialogComponent,
     MyProfileDialogComponent,
     AddNewUserDialogComponent,
+    UsersAdminComponent,
   ],
   imports: [
     BrowserModule,
