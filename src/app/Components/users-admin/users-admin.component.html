@@ -1,12 +1,69 @@
-<div class="userCard" *ngFor="let parkingPlace of parkingPlaces">
-  <div>Element 1</div>
-  <div>Element 2</div>
-  <div>Element 3</div>
-  <div>Element 4</div>
-  <div>Element 5</div>
-  <div>Element 6</div>
-  <div class="layout__admin__display__users-display__userCard__div7">
-    <button class="btn btn-danger">Delete</button>
-    <button class="btn btn-primary">Edit</button>
+<form>
+  <div class="userCard" *ngFor="let parkingPlace of parkingPlaces">
+    <div class="col-sm-1">
+      <img
+        class="userCard__img"
+        src="../../../assets/images/profile-user.png"
+      />
+    </div>
+
+    <div class="col-sm-4 userCard__div2">
+      <div>
+        <label>Name</label>
+        <input type="text" placeholder="Last Name" />
+        <input type="text" placeholder="First Name" />
+      </div>
+      <div>
+        <label for="email">E-mail Address</label>
+        <input type="text" placeholder="E-mail" />
+      </div>
+      <div class="userCard__div2__address">
+        <label for="address">Address</label>
+        <input type="text" placeholder="Sreet or P.O Number" />
+      </div>
+      <div><p>Valid driver license</p></div>
+    </div>
+
+    <div class="col-sm-2 userCard__div3">
+      <div class="userCard__div3__role">
+        <label for="role">Role</label>
+        <input type="text" />
+      </div>
+      <div class="userCard__div3__zip">
+        <label for="state">Zip Code</label> <input type="zipCode" />
+      </div>
+      <div class="userCard__div3__state">
+        <label for="state">State</label> <input type="text" />
+      </div>
+      <div class="userCard__div3__active">
+        <p>Active</p>
+        <select>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-sm-4 userCard__div4">
+      <div class="userCard__div4__phone">
+        <label for="phone">Phone</label>
+        <input type="text" placeholder="Phone Number" />
+      </div>
+      <div class="userCard__div4__birth">
+        <label for="birth">Date Of Birth</label> <input type="text" />
+      </div>
+      <div class="userCard__div4__pnc">
+        <label for="PNC">Personal Numerical Code</label> <input type="text" />
+      </div>
+      <div>
+        <label for="vehicle">Number of Vehicles Registered </label>
+        <input type="text" />
+      </div>
+    </div>
+    `
+    <div class="userCard__div7 col-sm-1">
+      <button class="btn btn-danger">Delete</button>
+      <button class="btn btn-primary">Edit</button>
+    </div>
   </div>
-</div>
+</form>

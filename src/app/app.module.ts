@@ -15,7 +15,7 @@ import { LayoutComponent } from './Components/home/layout/layout.component';
 import { MaterialModule } from './shared/material/material.module';
 import { TmParkingInfoDialogComponent } from './Components/dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { AddNewParkingSpaceDialogComponent } from './Components/dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
-import { SearchComponent } from './Components/home/search/search.component';
+import { SearchComponent } from './Components/home/search/parking-search/search.component';
 import { OpenSidenavComponent } from './shared/components/open-sidenav/open-sidenav.component';
 import { NavbarService } from './services/navbar.service';
 import { NgToastModule } from 'ng-angular-popup';
@@ -28,6 +28,8 @@ import { AddNewVehicleDialogComponent } from './Components/dialogs/add-new-vehic
 import { MyProfileDialogComponent } from './Components/dialogs/my-profile-dialog/my-profile-dialog.component';
 import { AddNewUserDialogComponent } from './Components/dialogs/add-new-user-dialog/add-new-user-dialog.component';
 import { UsersAdminComponent } from './Components/users-admin/users-admin.component';
+import { CarSearchComponent } from './Components/home/search/car-search/car-search.component';
+import { UserSearchComponent } from './Components/home/search/user-search/user-search.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,6 @@ import { UsersAdminComponent } from './Components/users-admin/users-admin.compon
     LayoutComponent,
     TmParkingInfoDialogComponent,
     AddNewParkingSpaceDialogComponent,
-    SearchComponent,
     OpenSidenavComponent,
     LogoutDialogComponent,
     LoginRequiredDialogComponent,
@@ -49,6 +50,9 @@ import { UsersAdminComponent } from './Components/users-admin/users-admin.compon
     MyProfileDialogComponent,
     AddNewUserDialogComponent,
     UsersAdminComponent,
+    SearchComponent,
+    CarSearchComponent,
+    UserSearchComponent,
   ],
   imports: [
     BrowserModule,
