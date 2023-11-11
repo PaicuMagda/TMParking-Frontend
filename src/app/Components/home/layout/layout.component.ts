@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
+import { MatSidenav } from '@angular/material/sidenav';
 import { AddNewParkingSpaceDialogComponent } from 'src/app/Components/dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LoginRequiredDialogComponent } from '../../dialogs/login-required-dialog/login-required-dialog.component';
 import { AddNewVehicleDialogComponent } from '../../dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
+import { AddNewUserDialogComponent } from '../../dialogs/add-new-user-dialog/add-new-user-dialog.component';
 
 @Component({
   selector: 'app-layout',
@@ -17,6 +20,10 @@ export class LayoutComponent implements OnInit {
   role: string = '';
   allParkingSpaces: string = 'allParkingSpaces';
   isLogin: boolean = false;
+
+  @ViewChild('myProfile') sidenav!: MatSidenav;
+  @Input() inputSideNav!: MatSidenav;
+  fullName: string = '';
 
   constructor(
     private _parkingPlaces: ParkingPlacesService,
@@ -61,6 +68,17 @@ export class LayoutComponent implements OnInit {
       width: '100%',
       height: '85%',
     });
+  }
+
+  openAddNewUserDialog() {
+    this.dialog.open(AddNewUserDialogComponent, {
+      width: '100%',
+      height: '85%',
+    });
+  }
+
+  openEndCloseMyProfile() {
+    this.sidenav.toggle();
   }
 
   ngOnInit() {

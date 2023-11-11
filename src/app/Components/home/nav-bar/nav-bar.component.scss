@@ -1,6 +1,7 @@
 .mat-toolbar {
   background-color: rgb(66, 3, 112);
   display: flex;
+  flex-direction: row;
   gap: 2rem;
   align-items: center;
   color: white;
@@ -14,6 +15,10 @@
     width: 9rem;
     height: 2.95rem;
     border-radius: 1rem;
+  }
+  &__my-profile {
+    color: white;
+    cursor: pointer;
   }
 
   &__buttons {
@@ -68,7 +73,7 @@
 }
 
 .logged-in {
-  gap: 40%;
+  gap: 43%;
 }
 
 .logged-out {

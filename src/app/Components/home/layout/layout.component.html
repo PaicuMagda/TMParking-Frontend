@@ -53,6 +53,7 @@
           *ngIf="role === 'Administrator'"
           class="layout__admin__buttons__add-new-park-space"
           mat-button
+          (click)="openAddNewUserDialog()"
         >
           ➕ ADD NEW USER
         </button>
@@ -76,10 +77,7 @@
         *ngIf="allParkingSpaces === 'users'"
         class="layout__admin__display__users-display"
       >
-        <div
-          class="layout__admin__display__users-display__userCard"
-          *ngFor="let parkingPlace of parkingPlaces"
-        ></div>
+        <app-users-admin></app-users-admin>
       </div>
     </div>
   </div>

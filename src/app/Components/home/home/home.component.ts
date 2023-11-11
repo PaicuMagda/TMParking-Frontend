@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { UsersService } from 'src/app/services/users.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +7,13 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  usersAll: any[] = [];
+  opened = false;
 
-  constructor(
-    private authentication: AuthenticationService,
-    private users: UsersService
-  ) {}
+  constructor(private sidenavService: NavbarService) {
+    this.sidenavService.getOpenClose().subscribe((isOpened) => {
+      this.opened = isOpened;
+    });
+  }
 
   ngOnInit() {}
 }
