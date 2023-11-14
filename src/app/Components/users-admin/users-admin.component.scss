@@ -40,6 +40,14 @@
       align-items: center;
       @include dimensions(3rem, row);
     }
+
+    &__license {
+      @include dimensions(10%, row);
+
+      mat-icon {
+        cursor: pointer;
+      }
+    }
   }
 
   &__div3 {

@@ -12,6 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [],
@@ -29,6 +30,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatNativeDateModule,
     MatDatepickerModule,
     MatSidenavModule,
+    MatDividerModule,
   ],
 })
 export class MaterialModule {}
