@@ -1,0 +1,30 @@
+@mixin dimensions($gap, $direction, $align-items: center) {
+  display: flex;
+  flex-direction: $direction;
+  gap: $gap;
+  align-items: $align-items;
+}
+
+.users-search {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  font-weight: 500;
+
+  input {
+    border: 2px solid black;
+    height: 2rem;
+    width: 15rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  &__date-registered {
+    @include dimensions(0%, row);
+  }
+
+  &__name {
+    @include dimensions(0%, column, flex-start);
+  }
+}
