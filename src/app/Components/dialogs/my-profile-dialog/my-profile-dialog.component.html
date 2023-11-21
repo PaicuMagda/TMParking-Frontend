@@ -1,1 +1,54 @@
-<p>my-profile-dialog works!</p>
+<form class="my-profile">
+  <div>
+    <div class="title">
+      <h2>My Account</h2>
+      <mat-divider></mat-divider>
+    </div>
+    <div class="my-profile__details">
+      <div class="my-profile__details__name">
+        <label>Name <span>*</span></label>
+        <input type="text" placeholder="Firstname" />
+        <input type="text" placeholder="Lastname" />
+      </div>
+      <div>
+        <label>Email Address <span>*</span></label>
+        <input type="text" />
+      </div>
+      <div>
+        <label>Personal Numerical Code</label>
+        <input type="text" />
+      </div>
+      <div class="my-profile__details__address">
+        <div>
+          <label>Street <span>*</span></label> <input type="text" />
+        </div>
+        <div>
+          <label>Street Number <span>*</span></label> <input type="text" />
+        </div>
+      </div>
+      <div>
+        <label>Phone<span>*</span></label> <input type="text" />
+      </div>
+      <div><label>Date of Birth</label> <input type="text" /></div>
+      <div>
+        <label>State <span>*</span></label> <input type="text" />
+      </div>
+      <div>
+        <label>Zip Code <span>*</span></label> <input type="text" />
+      </div>
+      <div>
+        <label>Role <span>*</span></label> <input type="text" />
+      </div>
+      <div>
+        <label>Vehicle Registered <span>*</span></label> <input type="text" />
+      </div>
+    </div>
+  </div>
+  <div>
+    <mat-divider></mat-divider>
+    <div class="my-profile__buttons">
+      <button class="btn btn-primary">Edit</button>
+      <button class="btn btn-danger">Discard</button>
+    </div>
+  </div>
+</form>

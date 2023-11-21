@@ -10,46 +10,63 @@
     <input id="lastname" type="text" />
   </div>
   <div>
-    <label for="email">Email Address</label> <input id="email" type="text" />
-  </div>
-  <div>
-    <label for="phone">Phone </label>
-    <input id="phone" type="text" />
-  </div>
-  <div>
-    <label for="pnc"> Personal Numerical Code</label>
-    <input id="pnc" type="text" />
-  </div>
-  <div>
-    <label for="number-of-vehicle">Number of Vehicle Registered</label>
-    <input id="number-of-vehicle" type="text" />
-  </div>
-  <div>
-    <label for="state">State </label>
-    <input id="state" type="text" />
-  </div>
-  <div>
-    <label for="active"> Active</label>
-    <input id="active" type="text" />
-  </div>
-  <div>
-    <label for="zipCode">Zip Code </label>
-    <input id="zipCode" type="text" />
-  </div>
-  <div>
-    <label for="license"> Valid Driver License</label>
-    <input id="license" type="text" />
-  </div>
-  <div>
-    <label for="orderDocuments">All Documents are in order</label>
-    <input id="orderDocuments" type="text" />
+    <label for="email">Email Address 📩</label>
+    <input id="email" type="text" />
   </div>
   <div>
     <label for="registeredVehicle">Registered Vehicle</label>
     <input id="registeredVehicle" type="text" />
   </div>
   <div>
-    <label for="role">Role</label>
-    <input id="role" type="text" />
+    <label for="pnc"> Personal Numerical Code</label>
+    <input id="pnc" type="text" />
+  </div>
+  <div class="users-search__phone">
+    <label for="phone">Phone 📞 </label>
+    <input id="phone" type="text" />
+  </div>
+  <div class="users-search__number-of-vehicle">
+    <label for="number-of-vehicle">Number of Vehicle Registered</label>
+    <input id="number-of-vehicle" type="text" />
+  </div>
+  <div class="users-search__state">
+    <label for="state">State </label>
+    <input id="state" type="text" />
+  </div>
+  <div class="users-search__role-zipCode">
+    <div>
+      <label for="role">Role</label>
+      <select>
+        <option value="admin">User</option>
+        <option value="user">Admin</option>
+      </select>
+    </div>
+    <div>
+      <label for="zipCode">Zip Code </label>
+      <input id="zipCode" type="text" />
+    </div>
+  </div>
+
+  <div class="users-search__valid-driver-licene">
+    <label for="license"> Valid Driver License</label>
+    <mat-button-toggle-group>
+      <mat-button-toggle value="yes">Yes</mat-button-toggle>
+      <mat-button-toggle value="no">No</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="users-search__documents">
+    <label>All Documents are in order</label>
+    <mat-button-toggle-group>
+      <mat-button-toggle value="yes">Yes</mat-button-toggle>
+      <mat-button-toggle value="no">No</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="users-search__active">
+    <label for="active"> Active</label>
+    <mat-button-toggle-group>
+      <mat-button-toggle value="yes">Yes</mat-button-toggle>
+      <mat-button-toggle value="no">No</mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
 </div>
