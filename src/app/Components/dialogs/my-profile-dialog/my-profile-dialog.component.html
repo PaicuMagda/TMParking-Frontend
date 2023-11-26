@@ -1,54 +1,239 @@
-<form class="my-profile">
+<div class="my-profile">
   <div>
-    <div class="title">
-      <h2>My Account</h2>
-      <mat-divider></mat-divider>
-    </div>
-    <div class="my-profile__details">
-      <div class="my-profile__details__name">
-        <label>Name <span>*</span></label>
-        <input type="text" placeholder="Firstname" />
-        <input type="text" placeholder="Lastname" />
-      </div>
-      <div>
-        <label>Email Address <span>*</span></label>
-        <input type="text" />
-      </div>
-      <div>
-        <label>Personal Numerical Code</label>
-        <input type="text" />
-      </div>
-      <div class="my-profile__details__address">
-        <div>
-          <label>Street <span>*</span></label> <input type="text" />
-        </div>
-        <div>
-          <label>Street Number <span>*</span></label> <input type="text" />
-        </div>
-      </div>
-      <div>
-        <label>Phone<span>*</span></label> <input type="text" />
-      </div>
-      <div><label>Date of Birth</label> <input type="text" /></div>
-      <div>
-        <label>State <span>*</span></label> <input type="text" />
-      </div>
-      <div>
-        <label>Zip Code <span>*</span></label> <input type="text" />
-      </div>
-      <div>
-        <label>Role <span>*</span></label> <input type="text" />
-      </div>
-      <div>
-        <label>Vehicle Registered <span>*</span></label> <input type="text" />
-      </div>
-    </div>
-  </div>
-  <div>
+    <h2>My Account</h2>
     <mat-divider></mat-divider>
-    <div class="my-profile__buttons">
-      <button class="btn btn-primary">Edit</button>
-      <button class="btn btn-danger">Discard</button>
+  </div>
+  <div class="my-profile__image-upload">
+    <div class="my-profile__image-upload__image-div">
+      <img src="../../../../assets/images/my-profile-image.jpg" />
+    </div>
+    <div class="my-profile__image-upload__image-button">
+      <button class="my-profile__image-upload__image-button__button-next">
+        Upload Image
+      </button>
     </div>
   </div>
-</form>
+  <div class="stepper">
+    <mat-vertical-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="nameFormGroup">
+        <form [formGroup]="nameFormGroup">
+          <ng-template matStepLabel>Name <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="First name"
+              formControlName="firstname"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Last name"
+              formControlName="lastname"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="addressFormGroup">
+        <form [formGroup]="addressFormGroup">
+          <ng-template matStepLabel>Address <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Address"
+              formControlName="address"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="emailFormGroup">
+        <form [formGroup]="emailFormGroup">
+          <ng-template matStepLabel>E-mail Address <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="E-mail Address"
+              formControlName="email"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="pncFormGroup">
+        <form [formGroup]="pncFormGroup">
+          <ng-template matStepLabel
+            >Personal Numerical Code <span>*</span></ng-template
+          >
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Personal Numerical Code"
+              formControlName="pnc"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="phoneFormGroup">
+        <form [formGroup]="phoneFormGroup">
+          <ng-template matStepLabel>Phone <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Phone"
+              formControlName="phone"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="dateBirthFormGroup">
+        <form [formGroup]="dateBirthFormGroup">
+          <ng-template matStepLabel>Date of Birth</ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Date of Birth"
+              formControlName="dateBirth"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="stateZipCode">
+        <form [formGroup]="stateZipCode">
+          <ng-template matStepLabel
+            >State & Zip Code <span>*</span></ng-template
+          >
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="State"
+              formControlName="state"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Zip Code"
+              formControlName="zip"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="vehicleRegisteredFormGroup">
+        <form [formGroup]="vehicleRegisteredFormGroup">
+          <ng-template matStepLabel>Vehicle Registered</ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Vehicle Registered"
+              formControlName="vehiclesRegistered"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="changePasswordFormGroup">
+        <form [formGroup]="changePasswordFormGroup">
+          <ng-template matStepLabel>Change Password</ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Old Password"
+              formControlName="oldPassword"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="New Password"
+              formControlName="newPassword"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Repeat New Password"
+              formControlName="repeatPassword"
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Save Changes</ng-template>
+        <div class="buttons">
+          <button mat-button matStepperPrevious class="button-back">
+            Back
+          </button>
+          <button mat-button (click)="stepper.reset()" class="button-next">
+            Reset
+          </button>
+          <button
+            mat-button
+            class="button-saveChanges"
+            (click)="openSaveChangesConfirmDialog()"
+          >
+            Save Changes
+          </button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+</div>

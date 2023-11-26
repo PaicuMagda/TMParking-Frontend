@@ -13,6 +13,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [],
@@ -31,6 +32,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDatepickerModule,
     MatSidenavModule,
     MatDividerModule,
+    MatStepperModule,
   ],
 })
 export class MaterialModule {}
