@@ -16,13 +16,11 @@ import { MaterialModule } from './shared/material/material.module';
 import { TmParkingInfoDialogComponent } from './Components/dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { AddNewParkingSpaceDialogComponent } from './Components/dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { SearchComponent } from './Components/home/search/parking-search/search.component';
-import { OpenSidenavComponent } from './shared/components/open-sidenav/open-sidenav.component';
 import { NavbarService } from './services/navbar.service';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { LogoutDialogComponent } from './Components/dialogs/logout-dialog/logout-dialog.component';
 import { LoginRequiredDialogComponent } from './Components/dialogs/login-required-dialog/login-required-dialog.component';
-import { MatDividerModule } from '@angular/material/divider';
 import { ResetPasswordComponent } from './Components/login-register-components/reset-password/reset-password.component';
 import { AddNewVehicleDialogComponent } from './Components/dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 import { MyProfileDialogComponent } from './Components/dialogs/my-profile-dialog/my-profile-dialog.component';
@@ -30,6 +28,7 @@ import { AddNewUserDialogComponent } from './Components/dialogs/add-new-user-dia
 import { UsersAdminComponent } from './Components/users-admin/users-admin.component';
 import { CarSearchComponent } from './Components/home/search/car-search/car-search.component';
 import { UserSearchComponent } from './Components/home/search/user-search/user-search.component';
+import { SaveChangesDialogComponent } from './Components/dialogs/save-changes-dialog/save-changes-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,6 @@ import { UserSearchComponent } from './Components/home/search/user-search/user-s
     LayoutComponent,
     TmParkingInfoDialogComponent,
     AddNewParkingSpaceDialogComponent,
-    OpenSidenavComponent,
     LogoutDialogComponent,
     LoginRequiredDialogComponent,
     ResetPasswordComponent,
@@ -53,6 +51,7 @@ import { UserSearchComponent } from './Components/home/search/user-search/user-s
     SearchComponent,
     CarSearchComponent,
     UserSearchComponent,
+    SaveChangesDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +62,6 @@ import { UserSearchComponent } from './Components/home/search/user-search/user-s
     ReactiveFormsModule,
     MaterialModule,
     NgToastModule,
-    MatDividerModule,
   ],
 
   providers: [

@@ -15,9 +15,22 @@
   display: flex;
   padding: 1rem;
 
+  button {
+    display: flex;
+    span {
+      margin-top: 2px;
+      margin-left: 1rem;
+    }
+  }
+
   &__div7 {
     justify-content: center;
     @include dimensions(1rem, column);
+
+    &__edit-button {
+      display: flex;
+      flex-direction: row;
+    }
   }
 
   &__img {
@@ -39,6 +52,40 @@
     &__address {
       align-items: center;
       @include dimensions(3rem, row);
+    }
+
+    &__license {
+      @include dimensions(10%, row);
+
+      mat-icon {
+        cursor: pointer;
+      }
+    }
+
+    &__info {
+      label {
+        font-weight: 600;
+      }
+      margin-left: 0.5rem;
+
+      @include dimensions(10%, column);
+      margin-top: 1rem;
+
+      &__name {
+        @include dimensions(34%, row);
+      }
+
+      &__email {
+        @include dimensions(22%, row);
+      }
+
+      &__address {
+        @include dimensions(31%, row);
+      }
+
+      &__license {
+        @include dimensions(17%, row);
+      }
     }
   }
 
@@ -73,6 +120,31 @@
         border-radius: 4px;
       }
     }
+
+    &__info {
+      label {
+        font-weight: 600;
+      }
+
+      @include dimensions(10%, column);
+      margin-top: 1rem;
+
+      &__role {
+        @include dimensions(29%, row);
+      }
+
+      &__zip {
+        @include dimensions(16%, row);
+      }
+
+      &__state {
+        @include dimensions(26%, row);
+      }
+
+      &__active {
+        @include dimensions(24%, row);
+      }
+    }
   }
 
   &__div4 {
@@ -93,6 +165,31 @@
 
     &__pnc {
       @include dimensions(7.5%, row);
+    }
+
+    &__info {
+      label {
+        font-weight: 600;
+      }
+
+      @include dimensions(10%, column);
+      margin-top: 1rem;
+
+      &__phone {
+        @include dimensions(40%, row);
+      }
+
+      &__birth {
+        @include dimensions(31%, row);
+      }
+
+      &__pnc {
+        @include dimensions(14%, row);
+      }
+
+      &__vehicle {
+        @include dimensions(6%, row);
+      }
     }
   }
 }

@@ -1,0 +1,86 @@
+@mixin dimensions($gap, $direction, $align-items: center) {
+  display: flex;
+  flex-direction: $direction;
+  gap: $gap;
+  align-items: $align-items;
+}
+
+.users-search {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  font-weight: 500;
+
+  input {
+    border: 2px solid black;
+    height: 2rem;
+    width: 15rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  select {
+    border: 2px solid black;
+    height: 2rem;
+    width: 129%;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  &__date-registered {
+    @include dimensions(0%, row);
+  }
+
+  &__name {
+    @include dimensions(0%, column, flex-start);
+  }
+
+  &__phone {
+    @include dimensions(7%, row);
+  }
+  &__state {
+    @include dimensions(17%, row);
+  }
+  &__role-zipCode {
+    @include dimensions(10%, row);
+  }
+
+  &__number-of-vehicle {
+    @include dimensions(17%, row);
+
+    input {
+      width: 5rem;
+    }
+  }
+
+  &__valid-driver-licene {
+    @include dimensions(24%, row);
+  }
+
+  &__active {
+    @include dimensions(50%, row);
+  }
+
+  &__documents {
+    @include dimensions(10%, row);
+  }
+
+  #role,
+  #zipCode {
+    width: 9.2rem;
+  }
+  mat-button-toggle-group {
+    height: 2rem;
+
+    mat-button-toggle {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.mat-button-toggle-appearance-standard.mat-button-toggle-checked {
+  background-color: #7989e5;
+}

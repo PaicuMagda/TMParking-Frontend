@@ -8,6 +8,9 @@
     >
       <app-search></app-search>
     </div>
+    <div *ngIf="allParkingSpaces === 'users'">
+      <app-user-search></app-user-search>
+    </div>
   </div>
   <div class="layout__admin">
     <div class="layout__admin__buttons">

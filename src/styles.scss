@@ -90,3 +90,11 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+input {
+  border: 2px solid black;
+  height: 2rem;
+  width: auto;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}

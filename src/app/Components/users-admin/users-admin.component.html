@@ -1,69 +1,148 @@
 <form>
-  <div class="userCard" *ngFor="let parkingPlace of parkingPlaces">
-    <div class="col-sm-1">
-      <img
-        class="userCard__img"
-        src="../../../assets/images/profile-user.png"
-      />
-    </div>
+  <div>
+    <div class="userCard" *ngFor="let user of users">
+      <div class="col-sm-1">
+        <img
+          class="userCard__img"
+          src="../../../assets/images/profile-user.png"
+        />
+      </div>
 
-    <div class="col-sm-4 userCard__div2">
-      <div>
-        <label>Name</label>
-        <input type="text" placeholder="Last Name" />
-        <input type="text" placeholder="First Name" />
+      <div *ngIf="user.isEdit" class="col-sm-4 userCard__div2">
+        <div>
+          <label>Name</label>
+          <input type="text" />
+          <input type="text" />
+        </div>
+        <div>
+          <label for="email">E-mail Address</label>
+          <input type="text" />
+        </div>
+        <div class="userCard__div2__address">
+          <label for="address">Address</label>
+          <input type="text" placeholder="Sreet or P.O Number" />
+        </div>
+        <div class="userCard__div2__license">
+          <p>Valid driver license</p>
+          <mat-icon [svgIcon]="'file-pdf'"></mat-icon>
+        </div>
       </div>
-      <div>
-        <label for="email">E-mail Address</label>
-        <input type="text" placeholder="E-mail" />
-      </div>
-      <div class="userCard__div2__address">
-        <label for="address">Address</label>
-        <input type="text" placeholder="Sreet or P.O Number" />
-      </div>
-      <div><p>Valid driver license</p></div>
-    </div>
 
-    <div class="col-sm-2 userCard__div3">
-      <div class="userCard__div3__role">
-        <label for="role">Role</label>
-        <input type="text" />
+      <div *ngIf="!user.isEdit" class="col-sm-4 userCard__div2__info">
+        <div class="userCard__div2__info__name">
+          <label>Name</label>
+          <span>{{ user.firstname }}{{ " " + user.lastname }}</span>
+        </div>
+        <div class="userCard__div2__info__email">
+          <label for="email">E-mail Address</label>
+          <span>{{ user.email }}</span>
+        </div>
+        <div class="userCard__div2__info__address">
+          <label for="address">Address</label>
+          <span>{{ user.address }}</span>
+        </div>
+        <div class="userCard__div2__info__license">
+          <label>Valid driver license</label>
+          <span>{{ user.licenseValid }}</span>
+        </div>
       </div>
-      <div class="userCard__div3__zip">
-        <label for="state">Zip Code</label> <input type="zipCode" />
-      </div>
-      <div class="userCard__div3__state">
-        <label for="state">State</label> <input type="text" />
-      </div>
-      <div class="userCard__div3__active">
-        <p>Active</p>
-        <select>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </div>
-    </div>
 
-    <div class="col-sm-4 userCard__div4">
-      <div class="userCard__div4__phone">
-        <label for="phone">Phone</label>
-        <input type="text" placeholder="Phone Number" />
+      <div *ngIf="user.isEdit" class="col-sm-2 userCard__div3">
+        <div class="userCard__div3__role">
+          <label for="role">Role</label>
+          <input type="text" />
+        </div>
+        <div class="userCard__div3__zip">
+          <label for="state">Zip Code</label> <input type="zipCode" />
+        </div>
+        <div class="userCard__div3__state">
+          <label for="state">State</label> <input type="text" />
+        </div>
+        <div class="userCard__div3__active">
+          <p>Active</p>
+          <select>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
       </div>
-      <div class="userCard__div4__birth">
-        <label for="birth">Date Of Birth</label> <input type="text" />
+
+      <div *ngIf="!user.isEdit" class="col-sm-2 userCard__div3__info">
+        <div class="userCard__div3__info__role">
+          <label for="role">Role</label>
+          <span>{{ user.role }}</span>
+        </div>
+        <div class="userCard__div3__info__zip">
+          <label for="state">Zip Code</label>
+          <span>{{ user.zipCode }}</span>
+        </div>
+        <div class="userCard__div3__info__state">
+          <label for="state">State</label>
+          <span>{{ user.state }}</span>
+        </div>
+        <div class="userCard__div3__info__active">
+          <label>Active</label>
+          <span>{{ user.isActive }}</span>
+        </div>
       </div>
-      <div class="userCard__div4__pnc">
-        <label for="PNC">Personal Numerical Code</label> <input type="text" />
+
+      <div *ngIf="user.isEdit" class="col-sm-4 userCard__div4">
+        <div class="userCard__div4__phone">
+          <label for="phone">Phone</label>
+          <input type="text" />
+        </div>
+        <div class="userCard__div4__birth">
+          <label for="birth">Date Of Birth</label> <input type="text" />
+        </div>
+        <div class="userCard__div4__pnc">
+          <label for="PNC">Personal Numerical Code</label> <input type="text" />
+        </div>
+        <div>
+          <label for="vehicle">Number of Vehicles Registered </label>
+          <input type="text" />
+        </div>
       </div>
-      <div>
-        <label for="vehicle">Number of Vehicles Registered </label>
-        <input type="text" />
+
+      <div *ngIf="!user.isEdit" class="col-sm-4 userCard__div4__info">
+        <div class="userCard__div4__info__phone">
+          <label for="phone">Phone</label>
+          <span>{{ user.phone }}</span>
+        </div>
+        <div class="userCard__div4__info__birth">
+          <label for="birth">Date Of Birth</label>
+          <span>{{ user.dateOfBirth | date : "d MMMM y" }}</span>
+        </div>
+        <div class="userCard__div4__info__pnc">
+          <label for="PNC">Personal Numerical Code</label>
+          <span>{{ user.pnc }}</span>
+        </div>
+        <div class="userCard__div4__info__vehicle">
+          <label for="vehicle">Number of Vehicles Registered </label>
+          <span>{{ user.vehiclesRegistered }}</span>
+        </div>
       </div>
-    </div>
-    `
-    <div class="userCard__div7 col-sm-1">
-      <button class="btn btn-danger">Delete</button>
-      <button class="btn btn-primary">Edit</button>
+
+      <div *ngIf="user.isEdit" class="userCard__div7 col-sm-1">
+        <button class="btn btn-danger">
+          <mat-icon svgIcon="delete-trash"></mat-icon>
+          <span>Delete</span>
+        </button>
+        <button class="btn btn-warning" (click)="editUser(user)">
+          <mat-icon svgIcon="refresh"></mat-icon>
+          <span>Update</span>
+        </button>
+      </div>
+
+      <div *ngIf="!user.isEdit" class="userCard__div7 col-sm-1">
+        <button class="btn btn-danger">
+          <mat-icon svgIcon="delete-trash"></mat-icon>
+          <span>Delete</span>
+        </button>
+        <button class="btn btn-primary" (click)="editUser(user)">
+          <mat-icon svgIcon="edit"></mat-icon>
+          <span>Edit</span>
+        </button>
+      </div>
     </div>
   </div>
 </form>
