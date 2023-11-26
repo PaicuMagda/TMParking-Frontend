@@ -38,6 +38,7 @@ export class IconsModule {
       .addSvgIcon('file-pdf', this.setPath(`${this.path}/file-pdf.svg`))
       .addSvgIcon('delete-trash', this.setPath(`${this.path}/delete-trash.svg`))
       .addSvgIcon('edit', this.setPath(`${this.path}/edit.svg`))
+      .addSvgIcon('refresh', this.setPath(`${this.path}/refresh.svg`))
       .addSvgIcon('user-white', this.setPath(`${this.path}/user-white.svg`));
   }
 
