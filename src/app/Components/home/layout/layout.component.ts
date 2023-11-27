@@ -72,8 +72,8 @@ export class LayoutComponent implements OnInit {
 
   openAddNewUserDialog() {
     this.dialog.open(AddNewUserDialogComponent, {
-      width: '100%',
-      height: '85%',
+      width: '45%',
+      height: '98%',
     });
   }
 
