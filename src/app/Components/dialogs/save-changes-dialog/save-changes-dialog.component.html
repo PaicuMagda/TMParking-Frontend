@@ -1,7 +1,9 @@
 <div class="save-changes">
   <div><h2>Do you want to save changes?</h2></div>
   <div class="buttons">
-    <button class="button-save">Save</button>
-    <button class="discard-button">Discard</button>
+    <button class="button-save" (click)="saveData()">Save</button>
+    <button class="discard-button" (click)="closeSaveChangesDialog()">
+      Discard
+    </button>
   </div>
 </div>
