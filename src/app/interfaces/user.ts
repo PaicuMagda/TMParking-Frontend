@@ -18,4 +18,5 @@ export interface User {
   password?: string;
   licenseValid: boolean;
   isEdit?: boolean;
+  imageUrl?: string;
 }
