@@ -18,7 +18,7 @@ import { AddNewUserDialogComponent } from '../../dialogs/add-new-user-dialog/add
 export class LayoutComponent implements OnInit {
   parkingPlaces: any[] = [];
   role: string = '';
-  allParkingSpaces: string = 'allParkingSpaces';
+  toggleButtonValue: string = 'allParkingSpaces';
   isLogin: boolean = false;
 
   @ViewChild('myProfile') sidenav!: MatSidenav;

@@ -29,6 +29,7 @@ import { UsersAdminComponent } from './Components/users-admin/users-admin.compon
 import { CarSearchComponent } from './Components/home/search/car-search/car-search.component';
 import { UserSearchComponent } from './Components/home/search/user-search/user-search.component';
 import { SaveChangesDialogComponent } from './Components/dialogs/save-changes-dialog/save-changes-dialog.component';
+import { VehiclesComponent } from './Components/vehicles/vehicles.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { SaveChangesDialogComponent } from './Components/dialogs/save-changes-di
     CarSearchComponent,
     UserSearchComponent,
     SaveChangesDialogComponent,
+    VehiclesComponent,
   ],
   imports: [
     BrowserModule,

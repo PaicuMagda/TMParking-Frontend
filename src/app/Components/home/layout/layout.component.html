@@ -2,13 +2,13 @@
   <div class="layout__searchs">
     <div
       *ngIf="
-        allParkingSpaces === 'allParkingSpaces' ||
-        allParkingSpaces === 'myParkingSpaces'
+        toggleButtonValue === 'allParkingSpaces' ||
+        toggleButtonValue === 'myParkingSpaces'
       "
     >
       <app-search></app-search>
     </div>
-    <div *ngIf="allParkingSpaces === 'users'">
+    <div *ngIf="toggleButtonValue === 'users'">
       <app-user-search></app-user-search>
     </div>
   </div>
@@ -17,7 +17,7 @@
       <div>
         <mat-button-toggle-group
           [disabled]="!isLogin"
-          [(ngModel)]="allParkingSpaces"
+          [(ngModel)]="toggleButtonValue"
           class="layout__admin__buttons__mat-toggle-buttons"
         >
           <mat-button-toggle value="allParkingSpaces"
@@ -32,7 +32,9 @@
           <mat-button-toggle value="myParkingSpaces"
             >❤️ My Parking Spaces</mat-button-toggle
           >
-          <mat-button-toggle value="allCars" *ngIf="role === 'Administrator'"
+          <mat-button-toggle
+            value="allVehicles"
+            *ngIf="role === 'Administrator'"
             >🚙All Vehicles</mat-button-toggle
           >
         </mat-button-toggle-group>
@@ -66,8 +68,8 @@
     <div class="layout__admin__display">
       <div
         *ngIf="
-          allParkingSpaces === 'allParkingSpaces' ||
-          allParkingSpaces === 'myParkingSpaces'
+          toggleButtonValue === 'allParkingSpaces' ||
+          toggleButtonValue === 'myParkingSpaces'
         "
         class="layout__admin__display__all-parking-spaces"
       >
@@ -77,10 +79,13 @@
         ></div>
       </div>
       <div
-        *ngIf="allParkingSpaces === 'users'"
+        *ngIf="toggleButtonValue === 'users'"
         class="layout__admin__display__users-display"
       >
         <app-users-admin></app-users-admin>
+      </div>
+      <div *ngIf="toggleButtonValue === 'allVehicles'">
+        <app-vehicles></app-vehicles>
       </div>
     </div>
   </div>

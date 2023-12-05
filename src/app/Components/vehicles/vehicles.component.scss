@@ -1,0 +1,20 @@
+.vehicle {
+  display: flex;
+  flex-direction: column;
+
+  &__card {
+    margin-top: 1rem;
+    width: 95%;
+    height: 7rem;
+    box-shadow: 0px 0px 50px 0px rgba(101, 101, 101, 0.9);
+    border-radius: 1rem;
+    margin-left: 1%;
+    margin-top: 3%;
+
+    img {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+    }
+  }
+}
