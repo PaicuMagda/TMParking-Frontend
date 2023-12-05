@@ -32,6 +32,7 @@ export class UsersService {
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
+      imageUrl: '../../../assets/images/users/user1.jpg',
     },
     {
       id: 1,
@@ -48,6 +49,7 @@ export class UsersService {
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
+      imageUrl: '../../../assets/images/users/user2.jpg',
     },
     {
       id: 2,
@@ -64,6 +66,7 @@ export class UsersService {
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
+      imageUrl: '../../../assets/images/users/user3.jpg',
     },
     {
       id: 3,
@@ -80,6 +83,7 @@ export class UsersService {
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
+      imageUrl: '../../../assets/images/users/user4.jpg',
     },
   ];
 

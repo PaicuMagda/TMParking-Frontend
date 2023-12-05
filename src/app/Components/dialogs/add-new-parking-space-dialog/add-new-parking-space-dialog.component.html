@@ -6,7 +6,7 @@
       </div>
       <div class="add_new_parking__form__details__inputs">
         <div class="form__details__inputs__location">
-          <label for="location">Location *(street and number)</label>
+          <!-- <label for="location">Location *(street and number)</label>
           <input
             type="text"
             [(ngModel)]="address"
@@ -14,7 +14,12 @@
             class="form-control add_new_parking__form__details__inputs__location__input"
             id="location"
             placeholder="Strada Labrirint, Numarul 14 "
-          />
+          /> -->
+
+          <mat-form-field>
+            <label>Location</label>
+            <input type="text" />
+          </mat-form-field>
         </div>
         <div class="add_new_parking__form__details__inputs__about-parking">
           <label for="about-parking">About parking</label>

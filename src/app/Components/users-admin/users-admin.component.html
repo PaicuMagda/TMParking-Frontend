@@ -2,10 +2,7 @@
   <div>
     <div class="userCard" *ngFor="let user of users">
       <div class="col-sm-1">
-        <img
-          class="userCard__img"
-          src="../../../assets/images/my-profile-image.jpg"
-        />
+        <img class="userCard__img" src="{{ user.imageUrl }}" />
       </div>
 
       <div *ngIf="user.isEdit" class="col-sm-4 userCard__div2">

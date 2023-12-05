@@ -1,1 +1,135 @@
-<p>add-new-vehicle-dialog works!</p>
+<div class="add-new-vehicle">
+  <form [formGroup]="addNewVehicleFormGroup">
+    <div class="add-new-vehicle__carousel">
+      <img src="../../../../assets/images/car-upload.jpg" />
+      <div>
+        <input
+          type="file"
+          formControlName="image"
+          (change)="onFileSelected($event)"
+          #fileInput
+        />
+        <button
+          class="add-new-vehicle__carousel__upload-button"
+          (click)="fileInput.click()"
+        >
+          Upload Image
+        </button>
+      </div>
+    </div>
+    <div class="add-new-vehicle__form">
+      <div>
+        <h2>Add New Vehicle</h2>
+        <mat-divider></mat-divider>
+        <div class="add-new-vehicle__form__informations">
+          <div class="add-new-vehicle__form__informations__makeModel">
+            <mat-form-field appearance="outline">
+              <mat-label>Make</mat-label>
+              <input matInput type="text" formControlName="make" />
+              <mat-error
+                *ngIf="
+                  addNewVehicleFormGroup.get('make')?.hasError('required') &&
+                  addNewVehicleFormGroup.get('make')?.touched
+                "
+              >
+                Make is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Model</mat-label
+              ><input matInput type="text" formControlName="model" />
+              <mat-error
+                *ngIf="
+                  addNewVehicleFormGroup.get('model')?.hasError('required') &&
+                  addNewVehicleFormGroup.get('model')?.touched
+                "
+              >
+                Model is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="add-new-vehicle__form__informations__colorYear">
+            <mat-form-field appearance="outline"
+              ><mat-label>Color</mat-label
+              ><input matInput type="text" formControlName="color" />
+              <mat-error
+                *ngIf="
+                  addNewVehicleFormGroup.get('color')?.hasError('required') &&
+                  addNewVehicleFormGroup.get('color')?.touched
+                "
+              >
+                Color is required.
+              </mat-error></mat-form-field
+            >
+            <mat-form-field appearance="outline"
+              ><mat-label>Year</mat-label
+              ><input matInput type="text" formControlName="year" />
+              <mat-error
+                *ngIf="
+                  addNewVehicleFormGroup.get('year')?.hasError('required') &&
+                  addNewVehicleFormGroup.get('year')?.touched
+                "
+              >
+                Year is required.
+              </mat-error></mat-form-field
+            >
+          </div>
+          <div class="add-new-vehicle__form__informations__ownerVIN">
+            <mat-form-field appearance="outline"
+              ><mat-label>Owner</mat-label
+              ><input matInput type="text" formControlName="owner" />
+              <mat-error
+                *ngIf="
+                  addNewVehicleFormGroup.get('owner')?.hasError('required') &&
+                  addNewVehicleFormGroup.get('owner')?.touched
+                "
+              >
+                Owner is required.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline"
+              ><mat-label>Vehicle Identification Number</mat-label
+              ><input matInput type="text" formControlName="vin" />
+              <mat-error
+                *ngIf="
+                  addNewVehicleFormGroup.get('vin')?.hasError('required') &&
+                  addNewVehicleFormGroup.get('vin')?.touched
+                "
+              >
+                Vehicle Identificatoion Number is required.
+              </mat-error></mat-form-field
+            >
+          </div>
+
+          <div class="add-new-vehicle__form__informations__license-plate">
+            <mat-label (click)="fileInput.click()"
+              >Licence Plate <mat-icon svgIcon="file-pdf"></mat-icon></mat-label
+            ><input
+              #fileInput
+              type="file"
+              formControlName="licencePlate"
+              (change)="onFileSelected($event)"
+            />
+            <mat-error
+              *ngIf="
+                addNewVehicleFormGroup
+                  .get('licensePlate')
+                  ?.hasError('required') &&
+                addNewVehicleFormGroup.get('licensePlate')?.touched
+              "
+            >
+              License Plate is required.
+            </mat-error>
+          </div>
+        </div>
+      </div>
+      <div class="add-new-vehicle__form__buttons">
+        <button class="btn btn-primary">Save as Draft</button>
+        <button class="btn btn-warning">Send</button>
+        <button class="btn btn-danger">Discard</button>
+      </div>
+    </div>
+  </form>
+</div>
