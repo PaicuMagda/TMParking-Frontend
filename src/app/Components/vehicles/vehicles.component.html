@@ -1,11 +1,47 @@
 <div class="vehicle">
   <div *ngFor="let vehicle of vehicles">
-    <div class="vehicle__card">
-      <div class="col-sm-1">
-        <img src="../../../assets/images/car.jpg" />
+    <form>
+      <div class="vehicle__card">
+        <div class="col-sm-1 vehicle__card__div1">
+          <img src="{{ vehicle.imageUrl }}" />
+        </div>
+        <div class="col-sm-2 vehicle__card__div2">
+          <div class="vehicle__card__div2__make">
+            <label>Make</label> <span>{{ vehicle.make }}</span>
+          </div>
+          <div class="vehicle__card__div2__model">
+            <label>Model</label>
+            <span>{{ vehicle.model }}</span>
+          </div>
+        </div>
+        <div class="col-sm-2 vehicle__card__div3">
+          <div class="vehicle__card__div3__color">
+            <label>Color</label> <span>{{ vehicle.color }}</span>
+          </div>
+          <div class="vehicle__card__div3__year">
+            <label>Year</label> <span>{{ vehicle.year }}</span>
+          </div>
+        </div>
+        <div class="col-sm-4 vehicle__card__div4">
+          <div class="vehicle__card__div4__owner">
+            <label>Owner</label> <span>{{ vehicle.owner }}</span>
+          </div>
+          <div class="vehicle__card__div4__vin">
+            <label> Vehicle Identification Number </label>
+            <span> {{ vehicle.vehicleIdentificationNumber }}</span>
+          </div>
+        </div>
+        <div class="col-sm-3 vehicle__card__div5">
+          <button class="btn btn-danger">
+            <mat-icon svgIcon="delete-trash"></mat-icon>
+            <span>Delete</span>
+          </button>
+          <button class="vehicle__card__div5__edit-button">
+            <mat-icon svgIcon="edit"></mat-icon>
+            <span>Edit</span>
+          </button>
+        </div>
       </div>
-      <div class="col-sm-1"></div>
-      <div class="col-sm-1"></div>
-    </div>
+    </form>
   </div>
 </div>
