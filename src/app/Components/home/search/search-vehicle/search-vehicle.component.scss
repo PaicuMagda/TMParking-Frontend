@@ -1,0 +1,56 @@
+@mixin display-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.search-vehicle {
+  &__fields {
+    &__model,
+    &__make,
+    &__color,
+    &__year,
+    &__owner {
+      @include display-field();
+
+      input {
+        border-radius: 4px;
+        width: 60%;
+        height: 2.2rem;
+      }
+    }
+
+    &__vin {
+      input {
+        margin-top: 3%;
+        width: 100%;
+        border-radius: 4px;
+        height: 2.2rem;
+      }
+    }
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 35vh;
+
+  &__fields {
+    gap: 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__tmParkingLogo {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 50%;
+    }
+  }
+}

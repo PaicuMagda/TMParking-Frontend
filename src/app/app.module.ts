@@ -26,10 +26,10 @@ import { AddNewVehicleDialogComponent } from './Components/dialogs/add-new-vehic
 import { MyProfileDialogComponent } from './Components/dialogs/my-profile-dialog/my-profile-dialog.component';
 import { AddNewUserDialogComponent } from './Components/dialogs/add-new-user-dialog/add-new-user-dialog.component';
 import { UsersAdminComponent } from './Components/users-admin/users-admin.component';
-import { CarSearchComponent } from './Components/home/search/car-search/car-search.component';
 import { UserSearchComponent } from './Components/home/search/user-search/user-search.component';
 import { SaveChangesDialogComponent } from './Components/dialogs/save-changes-dialog/save-changes-dialog.component';
 import { VehiclesComponent } from './Components/vehicles/vehicles.component';
+import { SearchVehicleComponent } from './Components/home/search/search-vehicle/search-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -50,10 +50,10 @@ import { VehiclesComponent } from './Components/vehicles/vehicles.component';
     AddNewUserDialogComponent,
     UsersAdminComponent,
     SearchComponent,
-    CarSearchComponent,
     UserSearchComponent,
     SaveChangesDialogComponent,
     VehiclesComponent,
+    SearchVehicleComponent,
   ],
   imports: [
     BrowserModule,
