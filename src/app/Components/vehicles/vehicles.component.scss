@@ -1,0 +1,140 @@
+@mixin button-edit {
+  font-weight: 500;
+  width: auto;
+  background-color: rgb(54 0 105);
+  color: white;
+  border: none;
+  height: 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@mixin flex($flex-direction, $justify-content: center, $gap: 20%) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  gap: $gap;
+}
+
+label {
+  font-weight: 600;
+}
+
+.vehicle {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+
+  &__card {
+    margin-top: 1rem;
+    width: 95%;
+    height: 7rem;
+    box-shadow: 0px 0px 50px 0px rgba(101, 101, 101, 0.9);
+    border-radius: 1rem;
+    margin-left: 1%;
+    margin-top: 3%;
+    display: flex;
+
+    img {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      box-shadow: 0px 0px 50px 0px rgba(55, 0, 103, 0.9);
+      margin-top: 0.5rem;
+    }
+
+    &__div1 {
+      @include flex(column);
+      align-items: center;
+    }
+
+    &__div2 {
+      @include flex(column);
+
+      &__make {
+        @include flex(row, center, 22%);
+      }
+
+      &__makeIsEdit {
+        @include flex(row, center, 10%);
+        align-items: center;
+      }
+
+      &__model {
+        @include flex(row, center, 21%);
+      }
+
+      &__modelIsEdit {
+        @include flex(row, center, 8%);
+        align-items: center;
+      }
+
+      input {
+        border-radius: 4px;
+        width: 70%;
+        height: 2.2rem;
+      }
+    }
+
+    &__div3 {
+      @include flex(column);
+
+      &__color {
+        @include flex(row, center);
+      }
+
+      &__year {
+        @include flex(row, center, 23%);
+      }
+
+      input {
+        border-radius: 4px;
+        width: 40%;
+        height: 2.2rem;
+      }
+    }
+
+    &__div4 {
+      @include flex(column);
+
+      &__owner {
+        @include flex(row, center, 54%);
+      }
+
+      &__ownerIsEdit {
+        @include flex(row, center, 31%);
+      }
+
+      &__vin {
+        @include flex(row, center);
+      }
+
+      &__vinIsEdit {
+        @include flex(row, center, 0%);
+      }
+
+      input {
+        border-radius: 4px;
+        width: 60%;
+        height: 2.2rem;
+      }
+    }
+
+    &__div5 {
+      @include flex(column);
+      justify-content: center;
+      align-items: center;
+      gap: 5%;
+
+      &__edit-button {
+        @include button-edit();
+      }
+
+      button {
+        @include flex(row, center, 8%);
+        width: 30%;
+        align-items: center;
+      }
+    }
+  }
+}

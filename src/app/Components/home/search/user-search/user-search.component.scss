@@ -11,26 +11,15 @@
   gap: 1.8rem;
   font-weight: 500;
 
-  input {
-    border: 2px solid black;
-    height: 2rem;
-    width: 15rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
+  input,
   select {
-    border: 2px solid black;
-    height: 2rem;
-    width: 129%;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
+    border-radius: 4px;
+    width: 90%;
+    height: 2.2rem;
   }
 
   &__date-registered {
-    @include dimensions(0%, row);
+    @include dimensions(0%, column, normal);
   }
 
   &__name {
@@ -38,17 +27,28 @@
   }
 
   &__phone {
-    @include dimensions(7%, row);
+    @include dimensions(0%, row);
+    justify-content: space-between;
+
+    input {
+      width: 80%;
+    }
   }
   &__state {
     @include dimensions(17%, row);
   }
   &__role-zipCode {
-    @include dimensions(10%, row);
+    @include dimensions(0%, row);
+    justify-content: space-between;
+
+    input {
+      width: 100%;
+    }
   }
 
   &__number-of-vehicle {
-    @include dimensions(17%, row);
+    @include dimensions(16%, row);
+    justify-content: space-between;
 
     input {
       width: 5rem;
@@ -67,10 +67,6 @@
     @include dimensions(10%, row);
   }
 
-  #role,
-  #zipCode {
-    width: 9.2rem;
-  }
   mat-button-toggle-group {
     height: 2rem;
 

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  selector: 'app-parking-space-search',
+  templateUrl: './parking-space-search.component.html',
+  styleUrls: ['./parking-space-search.component.scss'],
 })
-export class SearchComponent {
+export class ParkingSpaceSearchComponent {
   zone: any = [
     'Dumbravita',
     'Complex Studentesc',
