@@ -6,29 +6,61 @@
           <img src="{{ vehicle.imageUrl }}" />
         </div>
         <div class="col-sm-2 vehicle__card__div2">
-          <div class="vehicle__card__div2__make">
-            <label>Make</label> <span>{{ vehicle.make }}</span>
+          <div
+            [ngClass]="{
+              vehicle__card__div2__make: !vehicle.isEdit,
+              vehicle__card__div2__makeIsEdit: vehicle.isEdit
+            }"
+          >
+            <label>Make</label>
+            <span *ngIf="!vehicle.isEdit">{{ vehicle.make }}</span>
+            <input *ngIf="vehicle.isEdit" type="text" />
           </div>
-          <div class="vehicle__card__div2__model">
+          <div
+            [ngClass]="{
+              vehicle__card__div2__model: !vehicle.isEdit,
+              vehicle__card__div2__modelIsEdit: vehicle.isEdit
+            }"
+          >
             <label>Model</label>
-            <span>{{ vehicle.model }}</span>
+            <span *ngIf="!vehicle.isEdit">{{ vehicle.model }}</span>
+            <input *ngIf="vehicle.isEdit" type="text" />
           </div>
         </div>
         <div class="col-sm-2 vehicle__card__div3">
           <div class="vehicle__card__div3__color">
-            <label>Color</label> <span>{{ vehicle.color }}</span>
+            <label>Color</label>
+            <span *ngIf="!vehicle.isEdit">{{ vehicle.color }}</span>
+            <input *ngIf="vehicle.isEdit" type="text" />
           </div>
           <div class="vehicle__card__div3__year">
-            <label>Year</label> <span>{{ vehicle.year }}</span>
+            <label>Year</label>
+            <span *ngIf="!vehicle.isEdit">{{ vehicle.year }}</span>
+            <input *ngIf="vehicle.isEdit" type="text" />
           </div>
         </div>
         <div class="col-sm-4 vehicle__card__div4">
-          <div class="vehicle__card__div4__owner">
-            <label>Owner</label> <span>{{ vehicle.owner }}</span>
+          <div
+            [ngClass]="{
+              vehicle__card__div4__owner: !vehicle.isEdit,
+              vehicle__card__div4__ownerIsEdit: vehicle.isEdit
+            }"
+          >
+            <label>Owner</label>
+            <span *ngIf="!vehicle.isEdit">{{ vehicle.owner }}</span>
+            <input *ngIf="vehicle.isEdit" type="text" />
           </div>
-          <div class="vehicle__card__div4__vin">
+          <div
+            [ngClass]="{
+              vehicle__card__div4__vin: !vehicle.isEdit,
+              vehicle__card__div4__vinIsEdit: vehicle.isEdit
+            }"
+          >
             <label> Vehicle Identification Number </label>
-            <span> {{ vehicle.vehicleIdentificationNumber }}</span>
+            <span *ngIf="!vehicle.isEdit">
+              {{ vehicle.vehicleIdentificationNumber }}</span
+            >
+            <input *ngIf="vehicle.isEdit" type="text" />
           </div>
         </div>
         <div class="col-sm-3 vehicle__card__div5">
@@ -36,9 +68,22 @@
             <mat-icon svgIcon="delete-trash"></mat-icon>
             <span>Delete</span>
           </button>
-          <button class="vehicle__card__div5__edit-button">
+          <button
+            *ngIf="!vehicle.isEdit"
+            (click)="editVehicle(vehicle)"
+            class="vehicle__card__div5__edit-button"
+          >
             <mat-icon svgIcon="edit"></mat-icon>
             <span>Edit</span>
+          </button>
+
+          <button
+            *ngIf="vehicle.isEdit"
+            class="btn btn-warning"
+            (click)="editVehicle(vehicle)"
+          >
+            <mat-icon svgIcon="refresh"></mat-icon>
+            <span>Update</span>
           </button>
         </div>
       </div>

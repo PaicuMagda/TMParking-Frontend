@@ -12,6 +12,10 @@ export class VehiclesComponent implements OnInit {
 
   constructor(private vehicleService: VehiclesService) {}
 
+  editVehicle(vehicle: Vehicle) {
+    vehicle.isEdit = !vehicle.isEdit;
+  }
+
   ngOnInit() {
     this.vehicles = this.vehicleService.vehicles;
   }

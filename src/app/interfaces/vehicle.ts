@@ -6,4 +6,5 @@ export interface Vehicle {
   year?: number;
   owner?: string;
   vehicleIdentificationNumber?: number;
+  isEdit?: boolean;
 }

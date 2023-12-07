@@ -55,8 +55,24 @@ label {
         @include flex(row, center, 22%);
       }
 
+      &__makeIsEdit {
+        @include flex(row, center, 10%);
+        align-items: center;
+      }
+
       &__model {
         @include flex(row, center, 21%);
+      }
+
+      &__modelIsEdit {
+        @include flex(row, center, 8%);
+        align-items: center;
+      }
+
+      input {
+        border-radius: 4px;
+        width: 70%;
+        height: 2.2rem;
       }
     }
 
@@ -68,7 +84,13 @@ label {
       }
 
       &__year {
-        @include flex(row, center, 22%);
+        @include flex(row, center, 23%);
+      }
+
+      input {
+        border-radius: 4px;
+        width: 40%;
+        height: 2.2rem;
       }
     }
 
@@ -79,8 +101,22 @@ label {
         @include flex(row, center, 54%);
       }
 
+      &__ownerIsEdit {
+        @include flex(row, center, 31%);
+      }
+
       &__vin {
         @include flex(row, center);
+      }
+
+      &__vinIsEdit {
+        @include flex(row, center, 0%);
+      }
+
+      input {
+        border-radius: 4px;
+        width: 60%;
+        height: 2.2rem;
       }
     }
 
@@ -95,9 +131,9 @@ label {
       }
 
       button {
-        @include flex(row);
-        justify-content: center;
-        width: 40%;
+        @include flex(row, center, 8%);
+        width: 30%;
+        align-items: center;
       }
     }
   }

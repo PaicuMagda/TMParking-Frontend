@@ -9,7 +9,7 @@ export class VehiclesService {
 
   vehicles: Vehicle[] = [
     {
-      imageUrl: '../../../assets/images/car.jpg',
+      imageUrl: '../../../assets/images/vehicles/bmv.jpg',
       make: 'Toyota',
       model: 'Corolla',
       color: 'Silver',
@@ -18,7 +18,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
     },
     {
-      imageUrl: '../../../assets/images/car.jpg',
+      imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'Toyota',
       model: 'Corolla',
       color: 'Silver',
@@ -27,7 +27,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
     },
     {
-      imageUrl: '../../../assets/images/car.jpg',
+      imageUrl: '../../../assets/images/vehicles/car-default.jpg',
       make: 'Toyota',
       model: 'Corolla',
       color: 'Silver',
@@ -36,7 +36,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
     },
     {
-      imageUrl: '../../../assets/images/car.jpg',
+      imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'Toyota',
       model: 'Corolla',
       color: 'Silver',
@@ -45,7 +45,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
     },
     {
-      imageUrl: '../../../assets/images/car.jpg',
+      imageUrl: '../../../assets/images/vehicles/tractor.jpg',
       make: 'Toyota',
       model: 'Corolla',
       color: 'Silver',
@@ -54,7 +54,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
     },
     {
-      imageUrl: '../../../assets/images/car.jpg',
+      imageUrl: '../../../assets/images/vehicles/bmv.jpg',
       make: 'Toyota',
       model: 'Corolla',
       color: 'Silver',
@@ -63,7 +63,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
     },
     {
-      imageUrl: '../../../assets/images/car.jpg',
+      imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'Toyota',
       model: 'Corolla',
       color: 'Silver',
@@ -72,7 +72,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
     },
     {
-      imageUrl: '../../../assets/images/car.jpg',
+      imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
       make: 'Toyota',
       model: 'Corolla',
       color: 'Silver',
