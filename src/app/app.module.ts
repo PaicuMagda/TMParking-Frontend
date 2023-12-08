@@ -30,6 +30,7 @@ import { SaveChangesDialogComponent } from './Components/dialogs/save-changes-di
 import { VehiclesComponent } from './Components/vehicles/vehicles.component';
 import { ParkingSpaceSearchComponent } from './Components/home/search/parking-space-search/parking-space-search.component';
 import { VehicleSearchComponent } from './Components/home/search/vehicle-search/vehicle-search.component';
+import { ParkingSpacesComponent } from './Components/parking-spaces/parking-spaces.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { VehicleSearchComponent } from './Components/home/search/vehicle-search/
     VehiclesComponent,
     ParkingSpaceSearchComponent,
     VehicleSearchComponent,
+    ParkingSpacesComponent,
   ],
   imports: [
     BrowserModule,

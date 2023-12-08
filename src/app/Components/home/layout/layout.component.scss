@@ -7,13 +7,7 @@
   &__searchs {
     width: 17%;
     padding: 1rem;
-
-    // background: linear-gradient(
-    //     109.6deg,
-    //     rgb(54 0 105) 11.2%,
-    //     rgb(255, 255, 255)
-    //   )
-    //   83.1%;
+    background: white;
   }
 
   &__admin {
@@ -38,8 +32,8 @@
       &__add-new-park-space {
         width: 15rem;
         height: 2.5rem;
-        border-radius: 20px;
-        background-color: rgb(66, 3, 112);
+        border-radius: 8px;
+        background-color: rgb(42, 0, 81);
         color: white;
         margin-left: 4rem;
       }
@@ -69,22 +63,6 @@
       overflow: auto;
       margin-left: 0.5%;
       max-height: 58.4rem;
-
-      &__all-parking-spaces {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(5, 1fr);
-        gap: 40px;
-        max-height: 58.4rem;
-        margin-top: 0.5rem;
-
-        &__parkingCard {
-          width: 285px;
-          height: 270px;
-          border-radius: 10px;
-          border: 2px solid black;
-        }
-      }
 
       &__users-display {
         max-height: 58.4rem;

@@ -1,5 +1,5 @@
 .mat-toolbar {
-  background-color: rgb(54 0 105);
+  background-color: rgb(42, 0, 81);
   display: flex;
   flex-direction: row;
   gap: 2rem;
@@ -31,7 +31,7 @@
     &__button-logout,
     &__my-profile {
       height: 3rem;
-      background-color: rgb(66, 3, 112);
+      background-color: rgb(42, 0, 81);
       color: white;
       border: none;
     }
@@ -50,7 +50,7 @@
 
     &__input {
       border: none;
-      background: rgb(66, 3, 112);
+      background: rgb(42, 0, 81);
       width: 14rem;
       height: 2rem;
       font-size: 18px;

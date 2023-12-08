@@ -1,0 +1,72 @@
+<div class="parking-spaces">
+  <div class="parking-spaces__card" *ngFor="let parkingSpace of parkingSpaces">
+    <div class="parking-spaces__card__image">
+      <img src="{{ parkingSpace.imageUrl }}" />
+      <div class="parking-spaces__card__image__icons">
+        <div><mat-icon svgIcon="delete-trash"></mat-icon></div>
+        <div><mat-icon svgIcon="edit"></mat-icon></div>
+      </div>
+    </div>
+    <div class="parking-spaces__card__informations">
+      <div class="parking-spaces__card__informations__ownerAddressDate">
+        <div
+          class="parking-spaces__card__informations__ownerAddressDate__camera"
+        >
+          <span>{{ parkingSpace.owner }}</span>
+          <img
+            *ngIf="parkingSpace.isVideoSurveillance"
+            src="../../../assets/images/camera.png"
+          />
+        </div>
+        <div class="parking-spaces__card__informations__ownerAddressDate__paid">
+          <span>{{ parkingSpace.address }}</span>
+          <img
+            *ngIf="!parkingSpace.isFree"
+            src="../../../assets/images/paid.png"
+          />
+          <img
+            *ngIf="parkingSpace.isFree"
+            src="../../../assets/images/no-paid.jpg"
+          />
+        </div>
+
+        <span class="parking-spaces__card__informations__ownerAddressDate__date"
+          >{{ parkingSpace.startDate | date }} -
+          {{ parkingSpace.endDate | date }}</span
+        >
+      </div>
+      <div
+        class="parking-spaces__card__informations__typesOfVehicleNumberOfParkingSpaces"
+      >
+        <div
+          class="parking-spaces__card__informations__typesOfVehicleNumberOfParkingSpaces__typesOfVehicles"
+        >
+          <img
+            *ngIf="parkingSpace.isAutomobil"
+            src="../../../assets/images/img-auto.png"
+          />
+
+          <img
+            *ngIf="parkingSpace.isTruck"
+            src="../../../assets/images/truck-image.png"
+          />
+
+          <img
+            *ngIf="parkingSpace.isAgriculturalMachinery"
+            src="../../../assets/images/tractor.png"
+          />
+
+          <img
+            *ngIf="parkingSpace.isPublicTransport"
+            src="../../../assets/images/bus.jpg"
+          />
+        </div>
+        <div
+          class="parking-spaces__card__informations__typesOfVehicleNumberOfParkingSpaces__numberOfParkingSpaces"
+        >
+          {{ parkingSpace.locuriDisponibile }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

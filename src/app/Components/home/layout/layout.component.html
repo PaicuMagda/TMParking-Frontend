@@ -74,12 +74,8 @@
           toggleButtonValue === 'allParkingSpaces' ||
           toggleButtonValue === 'myParkingSpaces'
         "
-        class="layout__admin__display__all-parking-spaces"
       >
-        <div
-          class="layout__admin__display__all-parking-spaces__parkingCard"
-          *ngFor="let parkingPlace of parkingPlaces"
-        ></div>
+        <app-parking-spaces></app-parking-spaces>
       </div>
       <div
         *ngIf="toggleButtonValue === 'users'"
