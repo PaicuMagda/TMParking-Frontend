@@ -16,7 +16,6 @@ import { AddNewUserDialogComponent } from '../../dialogs/add-new-user-dialog/add
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  parkingPlaces: any[] = [];
   role: string = '';
   toggleButtonValue: string = 'allParkingSpaces';
   isLogin: boolean = false;
@@ -83,8 +82,6 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.isLogin = this.auth.isLoggedIn();
-    this.parkingPlaces = this._parkingPlaces.getParcari();
-
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.auth.getRoleFromToken();
       this.role = val || roleFromToken;
