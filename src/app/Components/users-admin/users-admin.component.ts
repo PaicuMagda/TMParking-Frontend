@@ -4,6 +4,7 @@ import { User } from 'src/app/interfaces/user';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { UsersService } from 'src/app/services/users.service';
 import { SaveChangesDialogComponent } from '../dialogs/save-changes-dialog/save-changes-dialog.component';
+import { DeleteConfirmationDialogComponent } from '../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-users-admin',
@@ -34,6 +35,16 @@ export class UsersAdminComponent implements OnInit {
 
   openSaveChangesConfirmDialog() {
     this.dialog.open(SaveChangesDialogComponent, {
+      width: '20%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
+  }
+
+  openDeleteConfirmDialog() {
+    this.dialog.open(DeleteConfirmationDialogComponent, {
       width: '20%',
       height: '20%',
       position: {

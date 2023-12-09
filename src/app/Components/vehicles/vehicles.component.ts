@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { SaveChangesDialogComponent } from '../dialogs/save-changes-dialog/save-changes-dialog.component';
+import { DeleteConfirmationDialogComponent } from '../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-vehicles',
@@ -23,6 +24,16 @@ export class VehiclesComponent implements OnInit {
 
   openSaveChangesConfirmDialog() {
     this.dialog.open(SaveChangesDialogComponent, {
+      width: '20%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
+  }
+
+  openDeleteConfirmDialog() {
+    this.dialog.open(DeleteConfirmationDialogComponent, {
       width: '20%',
       height: '20%',
       position: {
