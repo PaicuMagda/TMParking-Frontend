@@ -64,14 +64,14 @@ export class LayoutComponent implements OnInit {
 
   openAddNewVehicleDialog() {
     this.dialog.open(AddNewVehicleDialogComponent, {
-      width: '45%',
+      width: '40%',
       height: '98%',
     });
   }
 
   openAddNewUserDialog() {
     this.dialog.open(AddNewUserDialogComponent, {
-      width: '45%',
+      width: '40%',
       height: '98%',
     });
   }

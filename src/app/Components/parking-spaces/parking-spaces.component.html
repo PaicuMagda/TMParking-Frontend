@@ -3,7 +3,9 @@
     <div class="parking-spaces__card__image">
       <img src="{{ parkingSpace.imageUrl }}" />
       <div class="parking-spaces__card__image__icons">
-        <div><mat-icon svgIcon="delete-trash"></mat-icon></div>
+        <div (click)="openDeleteConfirmDialog()">
+          <mat-icon svgIcon="delete-trash"></mat-icon>
+        </div>
         <div><mat-icon svgIcon="edit"></mat-icon></div>
       </div>
     </div>

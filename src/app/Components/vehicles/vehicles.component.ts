@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { VehiclesService } from 'src/app/services/vehicles.service';
+import { SaveChangesDialogComponent } from '../dialogs/save-changes-dialog/save-changes-dialog.component';
 
 @Component({
   selector: 'app-vehicles',
@@ -10,10 +12,23 @@ import { VehiclesService } from 'src/app/services/vehicles.service';
 export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[] = [];
 
-  constructor(private vehicleService: VehiclesService) {}
+  constructor(
+    private vehicleService: VehiclesService,
+    private dialog: MatDialog
+  ) {}
 
   editVehicle(vehicle: Vehicle) {
     vehicle.isEdit = !vehicle.isEdit;
+  }
+
+  openSaveChangesConfirmDialog() {
+    this.dialog.open(SaveChangesDialogComponent, {
+      width: '20%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
   }
 
   ngOnInit() {

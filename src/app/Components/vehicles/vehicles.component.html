@@ -80,7 +80,7 @@
           <button
             *ngIf="vehicle.isEdit"
             class="btn btn-warning"
-            (click)="editVehicle(vehicle)"
+            (click)="openSaveChangesConfirmDialog()"
           >
             <mat-icon svgIcon="refresh"></mat-icon>
             <span>Update</span>
