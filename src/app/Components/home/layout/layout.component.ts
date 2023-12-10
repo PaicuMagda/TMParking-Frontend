@@ -6,7 +6,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { AddNewParkingSpaceDialogComponent } from 'src/app/Components/dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { LoginRequiredDialogComponent } from '../../dialogs/login-required-dialog/login-required-dialog.component';
+import { LoginRequiredDialogComponent } from '../../dialogs/confirmation-dialogs/login-required-dialog/login-required-dialog.component';
 import { AddNewVehicleDialogComponent } from '../../dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 import { AddNewUserDialogComponent } from '../../dialogs/add-new-user-dialog/add-new-user-dialog.component';
 

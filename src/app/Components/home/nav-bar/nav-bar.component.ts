@@ -5,7 +5,7 @@ import { TmParkingInfoDialogComponent } from '../../dialogs/tm-parking-info-dial
 import { NavbarService } from 'src/app/services/navbar.service';
 import { MyProfileDialogComponent } from '../../dialogs/my-profile-dialog/my-profile-dialog.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
+import { LogoutDialogComponent } from '../../dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({

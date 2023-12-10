@@ -18,8 +18,8 @@ import { AddNewParkingSpaceDialogComponent } from './Components/dialogs/add-new-
 import { NavbarService } from './services/navbar.service';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { LogoutDialogComponent } from './Components/dialogs/logout-dialog/logout-dialog.component';
-import { LoginRequiredDialogComponent } from './Components/dialogs/login-required-dialog/login-required-dialog.component';
+import { LogoutDialogComponent } from './Components/dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
+import { LoginRequiredDialogComponent } from './Components/dialogs/confirmation-dialogs/login-required-dialog/login-required-dialog.component';
 import { ResetPasswordComponent } from './Components/login-register-components/reset-password/reset-password.component';
 import { AddNewVehicleDialogComponent } from './Components/dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 import { MyProfileDialogComponent } from './Components/dialogs/my-profile-dialog/my-profile-dialog.component';
