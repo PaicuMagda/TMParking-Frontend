@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { SaveChangesDialogComponent } from '../save-changes-dialog/save-changes-dialog.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
+import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 
 @Component({
   selector: 'app-add-new-user-dialog',
@@ -24,7 +25,11 @@ export class AddNewUserDialogComponent {
   imageUrl: string | ArrayBuffer | null = null;
   showIsNotDigitMessage: boolean;
 
-  constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog,
+    private dialogRef: MatDialogRef<AddNewUserDialogComponent>
+  ) {}
 
   ngOnInit() {
     this.imageFormGroup = this.formBuilder.group({
@@ -108,6 +113,29 @@ export class AddNewUserDialogComponent {
         },
       },
     });
+  }
+
+  closeAddNewUserDialog() {
+    this.dialogRef.close();
+  }
+
+  openConfirmCloseDialog() {
+    this.dialog
+      .open(ConfirmCloseDialogComponent, {
+        width: '23%',
+        height: '20%',
+        position: {
+          top: '5%',
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result === 'yes') {
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 300);
+        }
+      });
   }
 
   onKeyPress(event: KeyboardEvent) {

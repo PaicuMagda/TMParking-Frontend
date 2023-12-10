@@ -24,6 +24,12 @@
   padding: 1%;
   overflow: hidden;
 
+  &__close {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   &__image-upload {
     display: flex;
     flex-direction: column;
@@ -116,4 +122,8 @@ mat-error {
 
 input[type="file"] {
   display: none;
+}
+
+h2 {
+  margin-bottom: 0%;
 }

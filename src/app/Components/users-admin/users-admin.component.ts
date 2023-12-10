@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/interfaces/user';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { UsersService } from 'src/app/services/users.service';
-import { SaveChangesDialogComponent } from '../dialogs/save-changes-dialog/save-changes-dialog.component';
-import { DeleteConfirmationDialogComponent } from '../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
+import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-users-admin',

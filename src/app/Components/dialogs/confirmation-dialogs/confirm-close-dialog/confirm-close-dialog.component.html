@@ -1,0 +1,21 @@
+<div class="icon-close" (click)="closeConfirmCloseDialog()">
+  <mat-icon svgIcon="icon-close"></mat-icon>
+</div>
+<mat-divider></mat-divider>
+
+<div class="delete-dialog">
+  <div>
+    <h2>Are you sure you want to close this dialog ?</h2>
+  </div>
+  <div class="buttons">
+    <button
+      class="button-delete button-close"
+      (click)="closeAddNewVehicleDialog()"
+    >
+      Yes
+    </button>
+    <button class="discard-button" (click)="closeConfirmCloseDialog()">
+      No
+    </button>
+  </div>
+</div>

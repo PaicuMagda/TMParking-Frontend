@@ -1,5 +1,22 @@
+@mixin button-save {
+  font-weight: 500;
+  width: auto;
+  background-color: rgb(54 0 105);
+  color: white;
+  border: none;
+  height: 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .add-new-vehicle {
   height: 100%;
+
+  &__close-icon {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1%;
+  }
 
   &__carousel {
     height: 45%;
@@ -32,7 +49,16 @@
   }
 
   &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    padding: 2%;
+
     &__buttons {
+      &__send {
+        @include button-save();
+      }
+
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
@@ -40,6 +66,10 @@
     }
 
     &__informations {
+      display: flex;
+      flex-direction: column;
+      gap: 2vh;
+
       &__makeModel {
         display: flex;
         flex-direction: row;

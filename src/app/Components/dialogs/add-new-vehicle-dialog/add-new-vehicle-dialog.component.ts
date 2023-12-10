@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 
 @Component({
   selector: 'app-add-new-vehicle-dialog',
@@ -12,7 +14,11 @@ export class AddNewVehicleDialogComponent {
   isLinear = false;
   file: string | ArrayBuffer | null = null;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<AddNewVehicleDialogComponent>,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.addNewVehicleFormGroup = this.formBuilder.group({
@@ -45,5 +51,24 @@ export class AddNewVehicleDialogComponent {
         console.log('Fișierul încărcat nu este o imagine.');
       }
     }
+  }
+
+  closeAddNewVehicleDialogComponent() {
+    this.dialog
+      .open(ConfirmCloseDialogComponent, {
+        width: '23%',
+        height: '20%',
+        position: {
+          top: '5%',
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result === 'yes') {
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 300);
+        }
+      });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { SaveChangesDialogComponent } from '../save-changes-dialog/save-changes-dialog.component';
+import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
 
 @Component({
   selector: 'app-my-profile-dialog',

@@ -1,4 +1,11 @@
 <div class="add-new-vehicle">
+  <div class="add-new-vehicle__close-icon">
+    <mat-icon
+      svgIcon="icon-close"
+      (click)="closeAddNewVehicleDialogComponent()"
+    ></mat-icon>
+  </div>
+  <mat-divider></mat-divider>
   <form [formGroup]="addNewVehicleFormGroup">
     <div class="add-new-vehicle__carousel">
       <img src="../../../../assets/images/car-upload.jpg" />
@@ -126,9 +133,14 @@
         </div>
       </div>
       <div class="add-new-vehicle__form__buttons">
-        <button class="btn btn-primary">Save as Draft</button>
-        <button class="btn btn-warning">Send</button>
-        <button class="btn btn-danger">Discard</button>
+        <button class="btn btn-warning">Save as Draft</button>
+        <button class="btn add-new-vehicle__form__buttons__send">Send</button>
+        <button
+          class="btn btn-danger"
+          (click)="closeAddNewVehicleDialogComponent()"
+        >
+          Discard
+        </button>
       </div>
     </div>
   </form>
