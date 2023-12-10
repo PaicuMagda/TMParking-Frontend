@@ -1,5 +1,5 @@
-<div class="layout">
-  <div class="layout__searchs">
+<div class="display-cards">
+  <div class="display-cards__searchs">
     <div
       *ngIf="
         toggleButtonValue === 'allParkingSpaces' ||
@@ -11,17 +11,22 @@
     <div *ngIf="toggleButtonValue === 'users'">
       <app-user-search></app-user-search>
     </div>
-    <div *ngIf="toggleButtonValue === 'allVehicles'">
+    <div
+      *ngIf="
+        toggleButtonValue === 'allVehicles' ||
+        toggleButtonValue === 'myVehicles'
+      "
+    >
       <app-vehicle-search></app-vehicle-search>
     </div>
   </div>
-  <div class="layout__admin">
-    <div class="layout__admin__buttons">
+  <div class="display-cards__admin">
+    <div class="display-cards__admin__buttons">
       <div>
         <mat-button-toggle-group
           [disabled]="!isLogin"
           [(ngModel)]="toggleButtonValue"
-          class="layout__admin__buttons__mat-toggle-buttons"
+          class="display-cards__admin__buttons__mat-toggle-buttons"
         >
           <mat-button-toggle value="allParkingSpaces"
             >🚙 All Parking Spaces</mat-button-toggle
@@ -29,7 +34,9 @@
           <mat-button-toggle value="users" *ngIf="role === 'Administrator'"
             >🙍🏻‍♂️ Users</mat-button-toggle
           >
-          <mat-button-toggle value="myCars" *ngIf="role === 'User' || !isLogin"
+          <mat-button-toggle
+            value="myVehicles"
+            *ngIf="role === 'User' || !isLogin"
             >❤️ My Vehicles</mat-button-toggle
           >
           <mat-button-toggle value="myParkingSpaces"
@@ -42,7 +49,7 @@
           >
         </mat-button-toggle-group>
         <button
-          class="layout__admin__buttons__add-new-park-space"
+          class="display-cards__admin__buttons__add-new-park-space"
           mat-button
           (click)="openAddNewParkingDialogFunction()"
         >
@@ -50,7 +57,7 @@
         </button>
 
         <button
-          class="layout__admin__buttons__add-new-park-space"
+          class="display-cards__admin__buttons__add-new-park-space"
           mat-button
           (click)="openAddNewVehicleDialogFunction()"
         >
@@ -59,7 +66,7 @@
 
         <button
           *ngIf="role === 'Administrator'"
-          class="layout__admin__buttons__add-new-park-space"
+          class="display-cards__admin__buttons__add-new-park-space"
           mat-button
           (click)="openAddNewUserDialog()"
         >
@@ -68,7 +75,7 @@
       </div>
     </div>
 
-    <div class="layout__admin__display">
+    <div class="display-cards__admin__display">
       <div
         *ngIf="
           toggleButtonValue === 'allParkingSpaces' ||
@@ -79,11 +86,16 @@
       </div>
       <div
         *ngIf="toggleButtonValue === 'users'"
-        class="layout__admin__display__users-display"
+        class="display-cards__admin__display__users-display"
       >
         <app-users-admin></app-users-admin>
       </div>
-      <div *ngIf="toggleButtonValue === 'allVehicles'">
+      <div
+        *ngIf="
+          toggleButtonValue === 'allVehicles' ||
+          toggleButtonValue === 'myVehicles'
+        "
+      >
         <app-vehicles></app-vehicles>
       </div>
     </div>

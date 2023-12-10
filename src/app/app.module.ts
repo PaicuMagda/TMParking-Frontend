@@ -11,7 +11,6 @@ import { RecoverAccountComponent } from './Components/login-register-components/
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavBarComponent } from './Components/home/nav-bar/nav-bar.component';
 import { HomeComponent } from './Components/home/home/home.component';
-import { LayoutComponent } from './Components/home/layout/layout.component';
 import { MaterialModule } from './shared/material/material.module';
 import { TmParkingInfoDialogComponent } from './Components/dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { AddNewParkingSpaceDialogComponent } from './Components/dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
@@ -33,6 +32,7 @@ import { VehicleSearchComponent } from './Components/home/search/vehicle-search/
 import { ParkingSpacesComponent } from './Components/parking-spaces/parking-spaces.component';
 import { DeleteConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { ConfirmCloseDialogComponent } from './Components/dialogs/confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
+import { DisplayCardsComponent } from './Components/display-cards/display-cards.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,6 @@ import { ConfirmCloseDialogComponent } from './Components/dialogs/confirmation-d
     RecoverAccountComponent,
     NavBarComponent,
     HomeComponent,
-    LayoutComponent,
     TmParkingInfoDialogComponent,
     AddNewParkingSpaceDialogComponent,
     LogoutDialogComponent,
@@ -60,6 +59,7 @@ import { ConfirmCloseDialogComponent } from './Components/dialogs/confirmation-d
     ParkingSpacesComponent,
     DeleteConfirmationDialogComponent,
     ConfirmCloseDialogComponent,
+    DisplayCardsComponent,
   ],
   imports: [
     BrowserModule,

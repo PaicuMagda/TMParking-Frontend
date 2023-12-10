@@ -8,6 +8,7 @@ export class ParkingPlacesService {
 
   parcari = [
     {
+      id: 0,
       nume: 'Parcare Centrală',
       owner: 'John Doe',
       address: 'Centru oraș',
@@ -24,6 +25,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
     },
     {
+      id: 1,
       nume: 'Parcare Aeroport',
       owner: 'Jane Smith',
       address: 'Aeroport internațional',
@@ -40,6 +42,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
     },
     {
+      id: 2,
       nume: 'Parcare Subterană',
       owner: 'Alex Johnson',
       address: 'Centru oraș',
@@ -56,6 +59,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
     },
     {
+      id: 3,
       nume: 'Parcare Centrală',
       owner: 'John Doe',
       address: 'Centru oraș',
@@ -72,6 +76,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
     },
     {
+      id: 4,
       nume: 'Parcare Aeroport',
       owner: 'Jane Smith',
       address: 'Aeroport internațional',
@@ -88,6 +93,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
     },
     {
+      id: 5,
       nume: 'Parcare Subterană',
       owner: 'Alex Johnson',
       address: 'Centru oraș',
@@ -104,6 +110,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
     },
     {
+      id: 6,
       nume: 'Parcare Centrală',
       owner: 'John Doe',
       address: 'Centru oraș',
@@ -120,6 +127,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
     },
     {
+      id: 7,
       nume: 'Parcare Aeroport',
       owner: 'Jane Smith',
       address: 'Aeroport internațional',
@@ -136,6 +144,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
     },
     {
+      id: 7,
       nume: 'Parcare Subterană',
       owner: 'Alex Johnson',
       address: 'Centru oraș',
@@ -152,6 +161,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
     },
     {
+      id: 8,
       nume: 'Parcare Centrală',
       owner: 'John Doe',
       address: 'Centru oraș',
@@ -168,6 +178,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
     },
     {
+      id: 9,
       nume: 'Parcare Subterană',
       owner: 'Alex Johnson',
       address: 'Centru oraș',
@@ -184,6 +195,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
     },
     {
+      id: 10,
       nume: 'Parcare Centrală',
       owner: 'John Doe',
       address: 'Centru oraș',
@@ -200,6 +212,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
     },
     {
+      id: 11,
       nume: 'Parcare Centrală',
       owner: 'John Doe',
       address: 'Centru oraș',
@@ -216,6 +229,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
     },
     {
+      id: 12,
       nume: 'Parcare Aeroport',
       owner: 'Jane Smith',
       address: 'Aeroport internațional',
@@ -232,6 +246,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
     },
     {
+      id: 13,
       nume: 'Parcare Subterană',
       owner: 'Alex Johnson',
       address: 'Centru oraș',
@@ -248,6 +263,7 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
     },
     {
+      id: 14,
       nume: 'Parcare Centrală',
       owner: 'John Doe',
       address: 'Centru oraș',
