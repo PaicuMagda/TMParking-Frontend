@@ -1,5 +1,9 @@
 <div class="parking-spaces">
-  <div class="parking-spaces__card" *ngFor="let parkingSpace of parkingSpaces">
+  <div
+    class="parking-spaces__card"
+    *ngFor="let parkingSpace of parkingSpaces"
+    (click)="goToParkingSpaceDetails(parkingSpace.id)"
+  >
     <div class="parking-spaces__card__image">
       <img src="{{ parkingSpace.imageUrl }}" />
       <div class="parking-spaces__card__image__icons">

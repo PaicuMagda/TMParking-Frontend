@@ -24,7 +24,6 @@ export class DisplayCardsComponent {
   fullName: string = '';
 
   constructor(
-    private _parkingPlaces: ParkingPlacesService,
     private dialog: MatDialog,
     private userStore: UserStoreService,
     private auth: AuthenticationService

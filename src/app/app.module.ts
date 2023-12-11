@@ -33,6 +33,7 @@ import { ParkingSpacesComponent } from './Components/parking-spaces/parking-spac
 import { DeleteConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { ConfirmCloseDialogComponent } from './Components/dialogs/confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { DisplayCardsComponent } from './Components/display-cards/display-cards.component';
+import { ParkingSpaceDetailsComponent } from './Components/parking-space-details/parking-space-details.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { DisplayCardsComponent } from './Components/display-cards/display-cards.
     DeleteConfirmationDialogComponent,
     ConfirmCloseDialogComponent,
     DisplayCardsComponent,
+    ParkingSpaceDetailsComponent,
   ],
   imports: [
     BrowserModule,

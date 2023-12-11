@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TmParkingInfoDialogComponent } from '../../dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { NavbarService } from 'src/app/services/navbar.service';
-import { MyProfileDialogComponent } from '../../dialogs/my-profile-dialog/my-profile-dialog.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LogoutDialogComponent } from '../../dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
@@ -42,7 +41,7 @@ export class NavBarComponent implements OnInit {
   }
 
   openMyProfileSidenav() {
-    this.sidenavService.openClose();
+    this.sidenavService.toggleSidenav();
   }
 
   logout() {
