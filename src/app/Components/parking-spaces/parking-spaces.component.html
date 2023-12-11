@@ -1,13 +1,21 @@
 <div class="parking-spaces">
   <div class="parking-spaces__card" *ngFor="let parkingSpace of parkingSpaces">
     <div class="parking-spaces__card__image">
-      <img src="{{ parkingSpace.imageUrl }}" />
+      <img
+        src="{{ parkingSpace.imageUrl }}"
+        (click)="goToParkingSpaceDetails(parkingSpace.id)"
+      />
       <div class="parking-spaces__card__image__icons">
-        <div><mat-icon svgIcon="delete-trash"></mat-icon></div>
+        <div (click)="openDeleteConfirmDialog()">
+          <mat-icon svgIcon="delete-trash"></mat-icon>
+        </div>
         <div><mat-icon svgIcon="edit"></mat-icon></div>
       </div>
     </div>
-    <div class="parking-spaces__card__informations">
+    <div
+      class="parking-spaces__card__informations"
+      (click)="goToParkingSpaceDetails(parkingSpace.id)"
+    >
       <div class="parking-spaces__card__informations__ownerAddressDate">
         <div
           class="parking-spaces__card__informations__ownerAddressDate__camera"

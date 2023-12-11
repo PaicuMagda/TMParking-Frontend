@@ -39,7 +39,8 @@ export class IconsModule {
       .addSvgIcon('delete-trash', this.setPath(`${this.path}/delete-trash.svg`))
       .addSvgIcon('edit', this.setPath(`${this.path}/edit.svg`))
       .addSvgIcon('refresh', this.setPath(`${this.path}/refresh.svg`))
-      .addSvgIcon('user-white', this.setPath(`${this.path}/user-white.svg`));
+      .addSvgIcon('user-white', this.setPath(`${this.path}/user-white.svg`))
+      .addSvgIcon('icon-close', this.setPath(`${this.path}/icon-close.svg`));
   }
 
   private setPath(url: string): SafeResourceUrl {

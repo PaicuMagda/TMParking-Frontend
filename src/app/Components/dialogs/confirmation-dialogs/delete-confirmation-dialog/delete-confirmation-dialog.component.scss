@@ -1,7 +1,7 @@
-@mixin button-save {
+@mixin button-delete {
   font-weight: 500;
   width: auto;
-  background-color: rgb(54 0 105);
+  background-color: rgb(230 0 0);
   color: white;
   border: none;
   height: 2.5rem;
@@ -20,17 +20,24 @@
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.save-changes {
+.icon-close {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   padding: 2%;
-  height: 100%;
+}
+
+.delete-dialog {
+  padding: 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  gap: 3vh;
 }
 
-.button-save {
-  @include button-save();
+.button-delete {
+  @include button-delete();
   width: 4rem;
 }
 
@@ -52,6 +59,6 @@ mat-divider {
   width: 100%;
 }
 
-h2 {
-  margin-top: 3rem;
+h3 {
+  margin-top: 10%;
 }

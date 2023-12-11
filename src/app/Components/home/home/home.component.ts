@@ -8,11 +8,17 @@ import { NavbarService } from 'src/app/services/navbar.service';
 })
 export class HomeComponent implements OnInit {
   opened = false;
+  isOpenDetailsParkingSpace = false;
 
   constructor(private sidenavService: NavbarService) {
-    this.sidenavService.getOpenClose().subscribe((isOpened) => {
+    this.sidenavService.gettoggleSidenavValue().subscribe((isOpened) => {
       this.opened = isOpened;
     });
+    this.sidenavService
+      .getOpenDetailsParkingSpaceValue()
+      .subscribe((isOpenDetailsParkingSpace) => {
+        this.isOpenDetailsParkingSpace = isOpenDetailsParkingSpace;
+      });
   }
 
   ngOnInit() {}

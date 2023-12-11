@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/interfaces/user';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { UsersService } from 'src/app/services/users.service';
+import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
+import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-users-admin',
@@ -15,7 +18,8 @@ export class UsersAdminComponent implements OnInit {
 
   constructor(
     private _parkingPlaces: ParkingPlacesService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -27,5 +31,25 @@ export class UsersAdminComponent implements OnInit {
 
   editUser(user: User) {
     user.isEdit = !user.isEdit;
+  }
+
+  openSaveChangesConfirmDialog() {
+    this.dialog.open(SaveChangesDialogComponent, {
+      width: '20%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
+  }
+
+  openDeleteConfirmDialog() {
+    this.dialog.open(DeleteConfirmationDialogComponent, {
+      width: '20%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
   }
 }

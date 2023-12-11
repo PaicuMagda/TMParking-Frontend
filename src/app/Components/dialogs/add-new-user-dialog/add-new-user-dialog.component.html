@@ -1,8 +1,12 @@
 <div class="my-profile">
-  <div>
+  <div class="my-profile__close">
     <h2>Add New User</h2>
-    <mat-divider></mat-divider>
+    <mat-icon
+      svgIcon="icon-close"
+      (click)="openConfirmCloseDialog()"
+    ></mat-icon>
   </div>
+  <mat-divider></mat-divider>
   <form [formGroup]="imageFormGroup" class="my-profile__image-upload">
     <div class="my-profile__image-upload__image-div">
       <img src="../../../../assets/images/my-profile-image.jpg" />

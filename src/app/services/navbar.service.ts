@@ -8,12 +8,21 @@ export class NavbarService {
   constructor() {}
 
   private isOpened = new BehaviorSubject<boolean>(false);
+  private isOpenDetailsParkingSpace = new BehaviorSubject<boolean>(false);
 
-  openClose() {
-    this.isOpened.next(!this.isOpened.value);
+  toggleSidenav() {
+    this.isOpened.next(true);
   }
 
-  getOpenClose() {
+  gettoggleSidenavValue() {
     return this.isOpened.asObservable();
+  }
+
+  openDetailParkingSpace() {
+    this.isOpenDetailsParkingSpace.next(true);
+  }
+
+  getOpenDetailsParkingSpaceValue() {
+    return this.isOpenDetailsParkingSpace.asObservable();
   }
 }
