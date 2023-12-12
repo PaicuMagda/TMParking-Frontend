@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { AddNewParkingSpaceDialogComponent } from '../dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 
 @Component({
   selector: 'app-parking-spaces',
@@ -27,6 +28,13 @@ export class ParkingSpacesComponent implements OnInit {
       position: {
         top: '5%',
       },
+    });
+  }
+
+  openEditParkingSpaceDialog() {
+    this.dialog.open(AddNewParkingSpaceDialogComponent, {
+      width: '100%',
+      height: '85%',
     });
   }
 
