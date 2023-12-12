@@ -20,13 +20,24 @@
     &__details {
       max-height: 90vh;
       overflow: auto;
-      padding: 1rem;
+      padding: 1%;
       width: 50%;
 
       &__title {
         display: flex;
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
+
+        span {
+          font-weight: 500;
+          font-size: 2vh;
+          margin-bottom: 1%;
+        }
+      }
+
+      mat-divider {
+        margin-top: 1.5%;
       }
 
       mat-form-field {

@@ -19,6 +19,8 @@ export class MyProfileDialogComponent implements OnInit {
   stateZipCode: FormGroup;
   vehicleRegisteredFormGroup: FormGroup;
   changePasswordFormGroup: FormGroup;
+  imageProfileFormGroup: FormGroup;
+  driverLicenseFormGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {}
 
@@ -48,6 +50,12 @@ export class MyProfileDialogComponent implements OnInit {
     });
     this.vehicleRegisteredFormGroup = this.formBuilder.group({
       vehiclesRegistered: [''],
+    });
+    this.driverLicenseFormGroup = this.formBuilder.group({
+      driverLicense: ['', Validators.required],
+    });
+    this.imageProfileFormGroup = this.formBuilder.group({
+      imageProfile: [''],
     });
     this.changePasswordFormGroup = this.formBuilder.group({
       oldPassword: ['', Validators.required],

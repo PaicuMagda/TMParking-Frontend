@@ -1,11 +1,13 @@
 <div class="add-new-vehicle">
   <div class="add-new-vehicle__close-icon">
+    <span>Add New Vehicle</span>
     <mat-icon
       svgIcon="icon-close"
       (click)="closeAddNewVehicleDialogComponent()"
     ></mat-icon>
   </div>
   <mat-divider></mat-divider>
+
   <form [formGroup]="addNewVehicleFormGroup">
     <div class="add-new-vehicle__carousel">
       <img src="../../../../assets/images/car-upload.jpg" />
@@ -26,8 +28,6 @@
     </div>
     <div class="add-new-vehicle__form">
       <div>
-        <h2>Add New Vehicle</h2>
-        <mat-divider></mat-divider>
         <div class="add-new-vehicle__form__informations">
           <div class="add-new-vehicle__form__informations__makeModel">
             <mat-form-field appearance="outline">
