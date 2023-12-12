@@ -101,7 +101,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     this.addNewParkingSpaceFormGroup = this.formBuilder.group({
       address: ['', Validators.required],
       descriptionParking: [''],
-      numberSpaces: ['', Validators.required],
+      numberSpaces: ['', [Validators.required, Validators.maxLength(3)]],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       undergroundParkingLots: ['', Validators.required],

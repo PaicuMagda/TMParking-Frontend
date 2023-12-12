@@ -62,6 +62,14 @@
             "
             >Number spaces is required!
           </mat-error>
+          <mat-error
+            *ngIf="
+              this.addNewParkingSpaceFormGroup
+                .get('numberSpaces')
+                ?.hasError('maxlength')
+            "
+            >Limit is set to 3 numbers.</mat-error
+          >
         </mat-form-field>
       </div>
       <div>
@@ -268,6 +276,11 @@
                 *ngIf="agricultural"
                 src="../../../../assets/images/tractor.png"
                 class="add_new_parking__form__create-card__card-full__informations__div__img-agr"
+              />
+              <img
+                *ngIf="publicTransportationVehicle"
+                src="../../../../assets/images/bus.jpg"
+                class="add_new_parking__form__create-card__card-full__informations__div__img-bus"
               />
             </div>
 

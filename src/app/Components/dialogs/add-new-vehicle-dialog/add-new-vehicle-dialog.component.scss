@@ -68,7 +68,6 @@
     &__informations {
       display: flex;
       flex-direction: column;
-      gap: 2vh;
 
       &__makeModel {
         display: flex;
@@ -97,26 +96,18 @@
           width: 60%;
         }
       }
-
-      &__license-plate {
-        width: 15%;
-
-        mat-label {
-          cursor: pointer;
-          display: flex;
-          flex-direction: row;
-          gap: 15%;
-          align-items: center;
-        }
-      }
     }
   }
 }
 
-span {
-  color: red;
-}
-
 input[type="file"] {
   display: none;
+}
+
+::ng-deep.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
+}
+
+mat-form-field {
+  width: 100%;
 }
