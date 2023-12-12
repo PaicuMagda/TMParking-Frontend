@@ -30,6 +30,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   automobile: boolean = false;
   truck: boolean = false;
   agricultural: boolean = false;
+  publicTransportationVehicle = false;
   startDate: Date | null = null;
   endDate: Date | null = null;
 
@@ -99,7 +100,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   ngOnInit() {
     this.addNewParkingSpaceFormGroup = this.formBuilder.group({
       address: ['', Validators.required],
-      aboutParking: ['', Validators.required],
+      descriptionParking: [''],
       numberSpaces: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
@@ -109,7 +110,10 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       paidParking: ['', Validators.required],
       isAutomobile: [''],
       isTruck: [''],
+      isPublicTransportationVehicle: [''],
       isAgriculturalMachinery: [''],
+      imageFileUpload: [null, Validators.required],
+      leasePermit: [null, Validators.required],
     });
   }
 }
