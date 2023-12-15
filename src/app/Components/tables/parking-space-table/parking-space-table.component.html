@@ -1,1 +1,113 @@
-<p>parking-space-table works!</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Name">Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.nume }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="Address">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Address">Address</th>
+    <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="Agricultural Vehicles">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header="Agricultural Vehicles"
+    >
+      Agricultural Vehicles
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.isAgriculturalMachinery ? "Yes" : "No" }}
+    </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="Public Transport">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Public Transport">
+      Public Transport
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.isPublicTransport ? "Yes" : "No" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Cargo Vehicles">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Cargo Vehicles">
+      Cargo Vehicles
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.isTruck ? "Yes" : "No" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Compact Cars">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Compact Cars">
+      Compact Cars
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.isAutomobil ? "Yes" : "No" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Available Parking Spaces">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header="Available Parking Spaces"
+    >
+      Available Parking Spaces
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.locuriDisponibile }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="With Payment">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="With Payment">
+      With Payment
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.isFree ? "No" : "Yes" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Video Surveillance">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Video Surveillance">
+      Video Surveillance
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.videoSurveillance ? "Yes" : "No" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Start Date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Start Date">
+      Start Date
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.startDate | date }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="End Date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="End Date">
+      End Date
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.endDate | date }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Available Days">
+    <th mat-header-cell *matHeaderCellDef>Available Days</th>
+    <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="parkingSpacesDisplayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: parkingSpacesDisplayedColumns"></tr>
+</table>
