@@ -19,8 +19,8 @@ export class UsersService {
   users: User[] = [
     {
       id: 0,
-      firstname: 'John',
-      lastname: 'Doe',
+      firstname: 'Magda',
+      lastname: 'Paicu',
       email: 'john@example.com',
       role: Role.ADMIN,
       address: '123 Main St',
@@ -36,8 +36,8 @@ export class UsersService {
     },
     {
       id: 1,
-      firstname: 'John',
-      lastname: 'Doe',
+      firstname: 'Ana',
+      lastname: 'Dinica',
       email: 'john@example.com',
       role: Role.ADMIN,
       address: '123 Main St',
@@ -53,8 +53,8 @@ export class UsersService {
     },
     {
       id: 2,
-      firstname: 'John',
-      lastname: 'Doe',
+      firstname: 'Dan',
+      lastname: 'Ionescu',
       email: 'john@example.com',
       role: Role.ADMIN,
       address: '123 Main St',
@@ -70,8 +70,8 @@ export class UsersService {
     },
     {
       id: 3,
-      firstname: 'John',
-      lastname: 'Doe',
+      firstname: 'Andrei',
+      lastname: 'Vasilescu',
       email: 'john@example.com',
       role: Role.ADMIN,
       address: '123 Main St',
