@@ -5,6 +5,8 @@ import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialo
 import { Router } from '@angular/router';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { AddNewParkingSpaceDialogComponent } from '../dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
   selector: 'app-parking-spaces',
@@ -16,14 +18,18 @@ export class ParkingSpacesComponent implements OnInit {
     private parkingSpacesService: ParkingPlacesService,
     private dialog: MatDialog,
     private router: Router,
-    private navbarService: NavbarService
+    private navbarService: NavbarService,
+    private authenticationService: AuthenticationService,
+    private userStore: UserStoreService
   ) {}
 
   parkingSpaces: any = [];
+  isLogin: boolean;
+  role: string = '';
 
   openDeleteConfirmDialog() {
     this.dialog.open(DeleteConfirmationDialogComponent, {
-      width: '20%',
+      width: '23%',
       height: '20%',
       position: {
         top: '5%',
@@ -45,5 +51,10 @@ export class ParkingSpacesComponent implements OnInit {
 
   ngOnInit() {
     this.parkingSpaces = this.parkingSpacesService.getParcari();
+    this.isLogin = this.authenticationService.isLoggedIn();
+    this.userStore.getRoleFromStore().subscribe((val) => {
+      const roleFromToken = this.authenticationService.getRoleFromToken();
+      this.role = val || roleFromToken;
+    });
   }
 }

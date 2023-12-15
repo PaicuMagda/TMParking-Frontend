@@ -24,7 +24,7 @@ export class VehiclesComponent implements OnInit {
 
   openSaveChangesConfirmDialog() {
     this.dialog.open(SaveChangesDialogComponent, {
-      width: '20%',
+      width: '23%',
       height: '20%',
       position: {
         top: '5%',
@@ -34,7 +34,7 @@ export class VehiclesComponent implements OnInit {
 
   openDeleteConfirmDialog() {
     this.dialog.open(DeleteConfirmationDialogComponent, {
-      width: '20%',
+      width: '23%',
       height: '20%',
       position: {
         top: '5%',

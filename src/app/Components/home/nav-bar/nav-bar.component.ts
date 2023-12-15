@@ -46,8 +46,8 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     this.dialog.open(LogoutDialogComponent, {
-      width: '30%',
-      height: '40%',
+      width: '23%',
+      height: '20%',
       position: { top: '5%' },
     });
   }

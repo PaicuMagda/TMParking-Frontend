@@ -5,7 +5,10 @@
         src="{{ parkingSpace.imageUrl }}"
         (click)="goToParkingSpaceDetails(parkingSpace.id)"
       />
-      <div class="parking-spaces__card__image__icons">
+      <div
+        class="parking-spaces__card__image__icons"
+        *ngIf="role === 'Administrator'"
+      >
         <div (click)="openDeleteConfirmDialog()">
           <mat-icon svgIcon="delete-trash"></mat-icon>
         </div>
