@@ -24,6 +24,7 @@ export class ParkingSpacesComponent implements OnInit {
   ) {}
 
   parkingSpaces: any = [];
+  myParkingSpace: any = [];
   isLogin: boolean;
   role: string = '';
 
@@ -49,8 +50,14 @@ export class ParkingSpacesComponent implements OnInit {
     this.navbarService.openDetailParkingSpace();
   }
 
+  parkingSpaceIsExpired(endDate: Date): boolean {
+    const currentDate = new Date();
+    return endDate < currentDate;
+  }
+
   ngOnInit() {
     this.parkingSpaces = this.parkingSpacesService.getParcari();
+    this.myParkingSpace = this.parkingSpacesService.getMyParkingSpace();
     this.isLogin = this.authenticationService.isLoggedIn();
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.authenticationService.getRoleFromToken();

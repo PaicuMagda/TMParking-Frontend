@@ -2,7 +2,6 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AddNewParkingSpaceDialogComponent } from '../dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { LoginRequiredDialogComponent } from '../dialogs/confirmation-dialogs/login-required-dialog/login-required-dialog.component';
@@ -54,9 +53,11 @@ export class DisplayCardsComponent {
 
   openRequiredLogedInDialog() {
     this.dialog.open(LoginRequiredDialogComponent, {
-      width: '30%',
-      height: '40%',
-      position: { top: '5%' },
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
     });
   }
 

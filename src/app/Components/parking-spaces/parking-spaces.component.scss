@@ -12,6 +12,10 @@
     border-radius: 10px;
     border: 2px solid black;
 
+    &__parkingSpaceIsExpired {
+      opacity: 0.4;
+    }
+
     img {
       border-radius: 10px 10px 0rem 0rem;
       width: 100%;
