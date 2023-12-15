@@ -12,7 +12,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class UsersTableComponent implements OnInit {
   displayedColumnsUsersTable: string[] = Object.values(EnumUsersTable);
-  dataSource = new MatTableDataSource<User>();
+  dataSource = new MatTableDataSource<User>([]);
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private usersService: UsersService) {}

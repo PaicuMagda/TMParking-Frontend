@@ -17,6 +17,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatCardModule,
     MatSortModule,
+    MatTabsModule,
   ],
 })
 export class MaterialModule {}
