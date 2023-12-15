@@ -7,6 +7,7 @@ import { AddNewParkingSpaceDialogComponent } from '../dialogs/add-new-parking-sp
 import { LoginRequiredDialogComponent } from '../dialogs/confirmation-dialogs/login-required-dialog/login-required-dialog.component';
 import { AddNewVehicleDialogComponent } from '../dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 import { AddNewUserDialogComponent } from '../dialogs/add-new-user-dialog/add-new-user-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-cards',
@@ -25,7 +26,8 @@ export class DisplayCardsComponent {
   constructor(
     private dialog: MatDialog,
     private userStore: UserStoreService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private router: Router
   ) {}
 
   openAddNewParkingDialogFunction() {
@@ -77,6 +79,10 @@ export class DisplayCardsComponent {
 
   openEndCloseMyProfile() {
     this.sidenav.toggle();
+  }
+
+  goToTables() {
+    this.router.navigate(['/tables']);
   }
 
   ngOnInit() {

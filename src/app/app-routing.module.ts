@@ -6,7 +6,7 @@ import { RecoverAccountComponent } from './Components/login-register-components/
 import { HomeComponent } from './Components/home/home/home.component';
 import { ResetPasswordComponent } from './Components/login-register-components/reset-password/reset-password.component';
 import { ParkingSpaceDetailsComponent } from './Components/parking-space-details/parking-space-details.component';
-import { DisplayCardsComponent } from './Components/display-cards/display-cards.component';
+import { TablesComponent } from './Components/tables/tables.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -35,6 +35,10 @@ const routes: Routes = [
   {
     path: 'parking-space-details/:id',
     component: ParkingSpaceDetailsComponent,
+  },
+  {
+    path: 'tables',
+    component: TablesComponent,
   },
 ];
 

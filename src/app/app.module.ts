@@ -35,6 +35,11 @@ import { ConfirmCloseDialogComponent } from './Components/dialogs/confirmation-d
 import { DisplayCardsComponent } from './Components/display-cards/display-cards.component';
 import { ParkingSpaceDetailsComponent } from './Components/parking-space-details/parking-space-details.component';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { TablesComponent } from './Components/tables/tables.component';
+import { ParkingSpaceTableComponent } from './Components/tables/parking-space-table/parking-space-table.component';
+import { UsersTableComponent } from './Components/tables/users-table/users-table.component';
+import { VehiclesTableComponent } from './Components/tables/vehicles-table/vehicles-table.component';
+import { RentingParkingSpacesComponent } from './Components/tables/renting-parking-spaces/renting-parking-spaces.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +68,11 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
     ConfirmCloseDialogComponent,
     DisplayCardsComponent,
     ParkingSpaceDetailsComponent,
+    TablesComponent,
+    ParkingSpaceTableComponent,
+    UsersTableComponent,
+    VehiclesTableComponent,
+    RentingParkingSpacesComponent,
   ],
   imports: [
     BrowserModule,
