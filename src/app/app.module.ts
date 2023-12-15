@@ -34,6 +34,7 @@ import { DeleteConfirmationDialogComponent } from './Components/dialogs/confirma
 import { ConfirmCloseDialogComponent } from './Components/dialogs/confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { DisplayCardsComponent } from './Components/display-cards/display-cards.component';
 import { ParkingSpaceDetailsComponent } from './Components/parking-space-details/parking-space-details.component';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ParkingSpaceDetailsComponent } from './Components/parking-space-details
     ReactiveFormsModule,
     MaterialModule,
     NgToastModule,
+    NgxMatFileInputModule,
   ],
 
   providers: [

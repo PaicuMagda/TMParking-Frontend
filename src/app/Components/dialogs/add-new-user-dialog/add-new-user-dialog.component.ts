@@ -92,7 +92,7 @@ export class AddNewUserDialogComponent {
 
   openSaveChangesConfirmDialog() {
     this.dialog.open(SaveChangesDialogComponent, {
-      width: '20%',
+      width: '23%',
       height: '20%',
       position: {
         top: '5%',

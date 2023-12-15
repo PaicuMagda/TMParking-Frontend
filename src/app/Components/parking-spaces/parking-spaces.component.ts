@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { AddNewParkingSpaceDialogComponent } from '../dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
   selector: 'app-parking-spaces',
@@ -15,18 +18,30 @@ export class ParkingSpacesComponent implements OnInit {
     private parkingSpacesService: ParkingPlacesService,
     private dialog: MatDialog,
     private router: Router,
-    private navbarService: NavbarService
+    private navbarService: NavbarService,
+    private authenticationService: AuthenticationService,
+    private userStore: UserStoreService
   ) {}
 
   parkingSpaces: any = [];
+  myParkingSpace: any = [];
+  isLogin: boolean;
+  role: string = '';
 
   openDeleteConfirmDialog() {
     this.dialog.open(DeleteConfirmationDialogComponent, {
-      width: '20%',
+      width: '23%',
       height: '20%',
       position: {
         top: '5%',
       },
+    });
+  }
+
+  openEditParkingSpaceDialog() {
+    this.dialog.open(AddNewParkingSpaceDialogComponent, {
+      width: '100%',
+      height: '85%',
     });
   }
 
@@ -35,7 +50,18 @@ export class ParkingSpacesComponent implements OnInit {
     this.navbarService.openDetailParkingSpace();
   }
 
+  parkingSpaceIsExpired(endDate: Date): boolean {
+    const currentDate = new Date();
+    return endDate < currentDate;
+  }
+
   ngOnInit() {
     this.parkingSpaces = this.parkingSpacesService.getParcari();
+    this.myParkingSpace = this.parkingSpacesService.getMyParkingSpace();
+    this.isLogin = this.authenticationService.isLoggedIn();
+    this.userStore.getRoleFromStore().subscribe((val) => {
+      const roleFromToken = this.authenticationService.getRoleFromToken();
+      this.role = val || roleFromToken;
+    });
   }
 }

@@ -1,15 +1,31 @@
 <div class="parking-spaces">
-  <div class="parking-spaces__card" *ngFor="let parkingSpace of parkingSpaces">
+  <div
+    class="parking-spaces__card"
+    *ngFor="let parkingSpace of parkingSpaces"
+    [ngClass]="
+      parkingSpaceIsExpired(parkingSpace.endDate)
+        ? 'parking-spaces__card__parkingSpaceIsExpired'
+        : ''
+    "
+  >
     <div class="parking-spaces__card__image">
       <img
         src="{{ parkingSpace.imageUrl }}"
         (click)="goToParkingSpaceDetails(parkingSpace.id)"
       />
-      <div class="parking-spaces__card__image__icons">
+      <div
+        class="parking-spaces__card__image__icons"
+        *ngIf="
+          role === 'Administrator' &&
+          !parkingSpaceIsExpired(parkingSpace.endDate)
+        "
+      >
         <div (click)="openDeleteConfirmDialog()">
           <mat-icon svgIcon="delete-trash"></mat-icon>
         </div>
-        <div><mat-icon svgIcon="edit"></mat-icon></div>
+        <div (click)="openEditParkingSpaceDialog()">
+          <mat-icon svgIcon="edit"></mat-icon>
+        </div>
       </div>
     </div>
     <div

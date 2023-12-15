@@ -7,11 +7,6 @@
     <div class="my-profile__image-upload__image-div">
       <img src="../../../../assets/images/my-profile-image.jpg" />
     </div>
-    <div class="my-profile__image-upload__image-button">
-      <button class="my-profile__image-upload__image-button__button-next">
-        Upload Image
-      </button>
-    </div>
   </div>
   <div class="stepper">
     <mat-vertical-stepper [linear]="isLinear" #stepper>
@@ -177,6 +172,51 @@
             />
           </mat-form-field>
           <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="driverLicenseFormGroup">
+        <form [formGroup]="driverLicenseFormGroup">
+          <ng-template matStepLabel>Driver License<span>*</span></ng-template>
+          <mat-form-field>
+            <ngx-mat-file-input
+              formControlName="driverLicense"
+              placeholder="Upload a driver licence."
+            ></ngx-mat-file-input>
+            <mat-hint>File format: image(.img, .jpg, .jpeg) or .pdf</mat-hint>
+            <mat-error
+              *ngIf="
+                driverLicenseFormGroup
+                  .get('driverLicense')
+                  ?.hasError('required')
+              "
+            >
+              Driver license upload is required !
+            </mat-error>
+          </mat-form-field>
+          <div class="stepper__file-upload-button">
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="imageProfileFormGroup">
+        <form [formGroup]="imageProfileFormGroup">
+          <ng-template matStepLabel>Upload Image Profile</ng-template>
+          <mat-form-field>
+            <ngx-mat-file-input
+              formControlName="imageProfile"
+              placeholder="Upload a significant image for your profile"
+            ></ngx-mat-file-input>
+            <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
+          </mat-form-field>
+          <div class="stepper__file-upload-button">
             <button mat-button matStepperPrevious class="button-back">
               Back
             </button>

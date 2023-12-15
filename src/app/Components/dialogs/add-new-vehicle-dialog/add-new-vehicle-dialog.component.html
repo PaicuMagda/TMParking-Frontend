@@ -1,11 +1,13 @@
 <div class="add-new-vehicle">
   <div class="add-new-vehicle__close-icon">
+    <span>Add New Vehicle</span>
     <mat-icon
       svgIcon="icon-close"
       (click)="closeAddNewVehicleDialogComponent()"
     ></mat-icon>
   </div>
   <mat-divider></mat-divider>
+
   <form [formGroup]="addNewVehicleFormGroup">
     <div class="add-new-vehicle__carousel">
       <img src="../../../../assets/images/car-upload.jpg" />
@@ -26,8 +28,6 @@
     </div>
     <div class="add-new-vehicle__form">
       <div>
-        <h2>Add New Vehicle</h2>
-        <mat-divider></mat-divider>
         <div class="add-new-vehicle__form__informations">
           <div class="add-new-vehicle__form__informations__makeModel">
             <mat-form-field appearance="outline">
@@ -110,25 +110,23 @@
             >
           </div>
 
-          <div class="add-new-vehicle__form__informations__license-plate">
-            <mat-label (click)="fileInput.click()"
-              >Licence Plate <mat-icon svgIcon="file-pdf"></mat-icon></mat-label
-            ><input
-              #fileInput
-              type="file"
-              formControlName="licencePlate"
-              (change)="onFileSelected($event)"
-            />
-            <mat-error
-              *ngIf="
-                addNewVehicleFormGroup
-                  .get('licensePlate')
-                  ?.hasError('required') &&
-                addNewVehicleFormGroup.get('licensePlate')?.touched
-              "
-            >
-              License Plate is required.
-            </mat-error>
+          <div>
+            <mat-form-field>
+              <ngx-mat-file-input
+                formControlName="licensePlate"
+                placeholder="Upload license plate "
+              ></ngx-mat-file-input>
+              <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
+              <mat-error
+                *ngIf="
+                  addNewVehicleFormGroup
+                    .get('licensePlate')
+                    ?.hasError('required')
+                "
+              >
+                License Plate is required.
+              </mat-error>
+            </mat-form-field>
           </div>
         </div>
       </div>
