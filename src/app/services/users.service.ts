@@ -65,7 +65,7 @@ export class UsersService {
       dateOfBirth: new Date('1990-01-01'),
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
-      licenseValid: true,
+      licenseValid: false,
       imageUrl: '../../../assets/images/users/user3.jpg',
     },
     {
@@ -99,7 +99,7 @@ export class UsersService {
       dateOfBirth: new Date('1990-01-01'),
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
-      licenseValid: true,
+      licenseValid: false,
       imageUrl: '../../../assets/images/users/user1.jpg',
     },
     {
@@ -133,7 +133,7 @@ export class UsersService {
       dateOfBirth: new Date('1990-01-01'),
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
-      licenseValid: true,
+      licenseValid: false,
       imageUrl: '../../../assets/images/users/user3.jpg',
     },
     {

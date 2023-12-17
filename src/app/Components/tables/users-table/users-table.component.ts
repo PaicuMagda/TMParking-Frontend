@@ -24,7 +24,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
       const usersWithFullName = values.map((user) => {
         return {
           ...user,
-          fullName: user.lastname + ' ' + user.firstname,
+          fullname: user.lastname + ' ' + user.firstname,
         };
       });
       this.dataSource.data = usersWithFullName;

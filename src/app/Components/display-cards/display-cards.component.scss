@@ -29,6 +29,13 @@
         color: white;
         height: 2.5rem;
         width: 5vw;
+        display: flex;
+        align-items: center;
+        gap: 13%;
+
+        img {
+          width: 26%;
+        }
       }
 
       &__mat-toggle-buttons {

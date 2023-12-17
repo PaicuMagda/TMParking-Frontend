@@ -4,5 +4,5 @@ export enum EnumVehiclesTables {
   YEAR = 'year',
   COLOR = 'color',
   OWNER = 'owner',
-  VEHICLE_IDENTIFICATION_NUMBER = 'vehicle identification number',
+  VEHICLE_IDENTIFICATION_NUMBER = 'vehicleIdentificationNumber',
 }
