@@ -4,23 +4,19 @@
 
   <!-- Position Column -->
   <ng-container matColumnDef="Name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Name">Name</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
     <td mat-cell *matCellDef="let element">{{ element.nume }}</td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="Address">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Address">Address</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
     <td mat-cell *matCellDef="let element">{{ element.address }}</td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="Agricultural Vehicles">
-    <th
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header="Agricultural Vehicles"
-    >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
       Agricultural Vehicles
     </th>
     <td mat-cell *matCellDef="let element">
@@ -30,54 +26,42 @@
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="Public Transport">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Public Transport">
-      Public Transport
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Public Transport</th>
     <td mat-cell *matCellDef="let element">
       {{ element.isPublicTransport ? "Yes" : "No" }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="Cargo Vehicles">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Cargo Vehicles">
-      Cargo Vehicles
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Cargo Vehicles</th>
     <td mat-cell *matCellDef="let element">
       {{ element.isTruck ? "Yes" : "No" }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="Compact Cars">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Compact Cars">
-      Compact Cars
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Compact Cars</th>
     <td mat-cell *matCellDef="let element">
       {{ element.isAutomobil ? "Yes" : "No" }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="Available Parking Spaces">
-    <th
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header="Available Parking Spaces"
-    >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
       Available Parking Spaces
     </th>
     <td mat-cell *matCellDef="let element">{{ element.locuriDisponibile }}</td>
   </ng-container>
 
   <ng-container matColumnDef="With Payment">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="With Payment">
-      With Payment
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>With Payment</th>
     <td mat-cell *matCellDef="let element">
       {{ element.isFree ? "No" : "Yes" }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="Video Surveillance">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Video Surveillance">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
       Video Surveillance
     </th>
     <td mat-cell *matCellDef="let element">
@@ -86,18 +70,14 @@
   </ng-container>
 
   <ng-container matColumnDef="Start Date">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="Start Date">
-      Start Date
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
     <td mat-cell *matCellDef="let element">
       {{ element.startDate | date }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="End Date">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="End Date">
-      End Date
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
     <td mat-cell *matCellDef="let element">
       {{ element.endDate | date }}
     </td>
@@ -111,3 +91,11 @@
   <tr mat-header-row *matHeaderRowDef="parkingSpacesDisplayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: parkingSpacesDisplayedColumns"></tr>
 </table>
+<mat-divider></mat-divider>
+<mat-paginator
+  [length]="100"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 14]"
+  aria-label="Select page"
+>
+</mat-paginator>

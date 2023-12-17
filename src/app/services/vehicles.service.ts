@@ -19,7 +19,7 @@ export class VehiclesService {
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
-      make: 'Toyota',
+      make: 'kwgffetg',
       model: 'Corolla',
       color: 'Silver',
       year: 2019,
@@ -28,7 +28,7 @@ export class VehiclesService {
     },
     {
       imageUrl: '../../../assets/images/vehicles/car-default.jpg',
-      make: 'Toyota',
+      make: 'jfyuj',
       model: 'Corolla',
       color: 'Silver',
       year: 2019,
@@ -37,7 +37,7 @@ export class VehiclesService {
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
-      make: 'Toyota',
+      make: 'afdf',
       model: 'Corolla',
       color: 'Silver',
       year: 2019,
@@ -46,7 +46,7 @@ export class VehiclesService {
     },
     {
       imageUrl: '../../../assets/images/vehicles/tractor.jpg',
-      make: 'Toyota',
+      make: 'mymngch',
       model: 'Corolla',
       color: 'Silver',
       year: 2019,
