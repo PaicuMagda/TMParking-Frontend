@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TabTitle } from 'src/app/enums/tab-title';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-tables',
@@ -7,13 +11,31 @@ import { TabTitle } from 'src/app/enums/tab-title';
   styleUrls: ['./tables.component.scss'],
 })
 export class TablesComponent implements OnInit {
-  activeTable: string = 'Parking Spaces';
+  activeTable: string[] = [];
+  activeTabIndex: number = 0;
 
   constructor() {}
 
-  parseEnumToArray(enumObject: any) {
-    return Object.values(enumObject);
+  updateTableNumber(activeTabIndex: number) {
+    this.activeTabIndex = activeTabIndex;
   }
 
-  ngOnInit() {}
+  parseEnumToArray(enumObj: Object) {
+    return Object.values(enumObj);
+  }
+
+  generatePdf(): void {
+    let docDefinition = {
+      content: ['This ia a sample PDF printed with pdfMake.'],
+    };
+    const pdfDoc = pdfMake.createPdf(docDefinition);
+
+    pdfDoc.getBlob((blob: Blob) => {
+      saveAs(blob, 'sample.pdf');
+    });
+  }
+
+  ngOnInit() {
+    this.activeTable = this.parseEnumToArray(TabTitle);
+  }
 }

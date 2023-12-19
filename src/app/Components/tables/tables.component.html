@@ -1,12 +1,23 @@
 <app-nav-bar></app-nav-bar>
 <mat-card>
   <mat-card>
-    <mat-card-header>
-      <div class="active-tabs">{{ activeTable }}</div>
-    </mat-card-header>
+    <div class="active-tabs">
+      <div>{{ activeTable[activeTabIndex] }}</div>
+      <button mat-button [matMenuTriggerFor]="menu" class="active-tabs__export">
+        Export as
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="generatePdf()">PDF</button>
+        <button mat-menu-item>CSV</button>
+      </mat-menu>
+    </div>
     <mat-divider></mat-divider>
     <div>
-      <mat-tab-group class="mat-tab-group">
+      <mat-tab-group
+        class="mat-tab-group"
+        #matTabGroup
+        (selectedIndexChange)="updateTableNumber($event)"
+      >
         <mat-tab label="Parking Spaces"
           ><app-parking-space-table></app-parking-space-table>
         </mat-tab>
