@@ -41,7 +41,7 @@ export class NavBarComponent implements OnInit {
   }
 
   openMyProfileSidenav() {
-    this.sidenavService.toggleSidenav();
+    this.sidenavService.toggleSidenav(true);
   }
 
   logout() {

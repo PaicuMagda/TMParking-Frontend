@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-my-profile-dialog',
@@ -22,7 +23,11 @@ export class MyProfileDialogComponent implements OnInit {
   imageProfileFormGroup: FormGroup;
   driverLicenseFormGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog,
+    private navbarService: NavbarService
+  ) {}
 
   ngOnInit() {
     this.nameFormGroup = this.formBuilder.group({
@@ -72,5 +77,9 @@ export class MyProfileDialogComponent implements OnInit {
         top: '5%',
       },
     });
+  }
+
+  closeSidenavMyProfile() {
+    this.navbarService.toggleSidenav(false);
   }
 }

@@ -53,6 +53,13 @@
       }
     }
   }
+
+  &__title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 81%;
+  }
 }
 
 mat-vertical-stepper {
