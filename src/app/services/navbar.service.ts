@@ -10,19 +10,11 @@ export class NavbarService {
   private isOpened = new BehaviorSubject<boolean>(false);
   private isOpenDetailsParkingSpace = new BehaviorSubject<boolean>(false);
 
-  toggleSidenav() {
-    this.isOpened.next(true);
+  toggleSidenav(value: boolean) {
+    this.isOpened.next(value);
   }
 
   gettoggleSidenavValue() {
     return this.isOpened.asObservable();
-  }
-
-  openDetailParkingSpace() {
-    this.isOpenDetailsParkingSpace.next(true);
-  }
-
-  getOpenDetailsParkingSpaceValue() {
-    return this.isOpenDetailsParkingSpace.asObservable();
   }
 }

@@ -1,8 +1,14 @@
 <div class="my-profile">
-  <div>
-    <h2>My Account</h2>
-    <mat-divider></mat-divider>
+  <div class="my-profile__title">
+    <div><h2>My Account</h2></div>
+    <div>
+      <mat-icon
+        svgIcon="icon-close"
+        (click)="closeSidenavMyProfile()"
+      ></mat-icon>
+    </div>
   </div>
+  <mat-divider></mat-divider>
   <div class="my-profile__image-upload">
     <div class="my-profile__image-upload__image-div">
       <img src="../../../../assets/images/my-profile-image.jpg" />

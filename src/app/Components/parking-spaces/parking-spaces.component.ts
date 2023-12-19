@@ -47,7 +47,6 @@ export class ParkingSpacesComponent implements OnInit {
 
   goToParkingSpaceDetails(id: number) {
     this.router.navigate(['/parking-space-details', id]);
-    this.navbarService.openDetailParkingSpace();
   }
 
   parkingSpaceIsExpired(endDate: Date): boolean {

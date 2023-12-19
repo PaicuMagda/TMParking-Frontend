@@ -1,2 +1,9 @@
 <router-outlet></router-outlet>
 <ng-toast></ng-toast>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav [(opened)]="opened" mode="over" position="start" #sideNav>
+    <app-my-profile-dialog></app-my-profile-dialog>
+  </mat-sidenav>
+  <router-outlet></router-outlet>
+  <ng-toast></ng-toast>
+</mat-sidenav-container>
