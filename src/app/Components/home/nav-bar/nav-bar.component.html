@@ -1,65 +1,58 @@
-<mat-toolbar
-  [ngClass]="{
-    'mat-toolbar': true,
-    'logged-in': isLogin,
-    'logged-out': !isLogin
-  }"
->
-  <div class="mat-toolbar">
+<mat-toolbar>
+  <div class="toolbar">
     <img
       (click)="openTmParkingInfoDialog()"
-      class="mat-toolbar__img"
+      class="toolbar__img"
       src="../../../assets/images/logo-TMParking.png"
     />
-    <div class="mat-toolbar__user-login" *ngIf="isLogin === true">
+    <div class="toolbar__user-login" *ngIf="isLogin === true">
       <img src="../../../../assets/images/user-image.png" />
       <p>{{ fullName | uppercase }}</p>
     </div>
     <div *ngIf="!isLogin">You are not logged in ...</div>
   </div>
 
-  <div class="mat-toolbar__buttons">
-    <div class="mat-toolbar__buttons__search">
-      <mat-icon
-        class="mat-toolbar__buttons__search__icon"
-        svgIcon="search"
-      ></mat-icon>
+  <div class="buttons">
+    <div class="buttons__search">
+      <mat-icon class="buttons__search__icon" svgIcon="search"></mat-icon>
       <input
-        class="mat-toolbar__buttons__input"
+        class="buttons__input"
         type="text"
         placeholder="Search for parking places..."
       />
     </div>
-    <button
-      *ngIf="isLogin === false"
-      mat-button
-      class="mat-toolbar__buttons__button-register"
-      (click)="goToRegister()"
-    >
-      REGISTER
-    </button>
-    <button
-      class="mat-toolbar__buttons__my-profile"
-      *ngIf="isLogin === true"
-      (click)="openMyProfileSidenav()"
-    >
-      <mat-icon svgIcon="user-white"></mat-icon>
-      MY ACCOUNT
-    </button>
-    <button
-      *ngIf="isLogin === false"
-      mat-button
-      class="mat-toolbar__buttons__button-login"
-      (click)="goToLogin()"
-    >
-      LOGIN
-    </button>
-    <button
-      class="mat-toolbar__buttons__button-logout"
-      *ngIf="isLogin === true"
-      (click)="logout()"
-    >
-      LOGOUT
-    </button>
+    <div *ngIf="isLogin === false">
+      <button
+        mat-button
+        class="buttons__button-register"
+        (click)="goToRegister()"
+      >
+        REGISTER
+      </button>
+    </div>
+    <div *ngIf="isLogin === true">
+      <button class="buttons__my-profile" (click)="openMyProfileSidenav()">
+        <mat-icon svgIcon="user-white"></mat-icon>
+        MY ACCOUNT
+      </button>
+    </div>
+
+    <div>
+      <button
+        *ngIf="isLogin === false"
+        mat-button
+        class="buttons__button-login"
+        (click)="goToLogin()"
+      >
+        LOGIN
+      </button>
+      <button
+        class="buttons__button-logout"
+        *ngIf="isLogin === true"
+        (click)="logout()"
+      >
+        LOGOUT
+      </button>
+    </div>
   </div>
 </mat-toolbar>
