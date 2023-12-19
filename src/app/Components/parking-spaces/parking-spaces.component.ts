@@ -56,7 +56,9 @@ export class ParkingSpacesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.parkingSpaces = this.parkingSpacesService.getParcari();
+    this.parkingSpacesService.getParcari().subscribe((values) => {
+      this.parkingSpaces = values;
+    });
     this.myParkingSpace = this.parkingSpacesService.getMyParkingSpace();
     this.isLogin = this.authenticationService.isLoggedIn();
     this.userStore.getRoleFromStore().subscribe((val) => {

@@ -16,17 +16,12 @@ export class UsersAdminComponent implements OnInit {
   users: User[] = [];
   userId: number | null = null;
 
-  constructor(
-    private _parkingPlaces: ParkingPlacesService,
-    private usersService: UsersService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private usersService: UsersService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.usersService.getUsers().subscribe((users) => {
       this.users = users;
     });
-    this.parkingPlaces = this._parkingPlaces.getParcari();
   }
 
   editUser(user: User) {

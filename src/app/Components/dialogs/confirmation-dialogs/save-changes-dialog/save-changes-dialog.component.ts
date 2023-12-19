@@ -18,7 +18,6 @@ export class SaveChangesDialogComponent implements OnInit {
   }
 
   saveData() {
-    console.log(this.data);
     this.dialogRef.close();
   }
 

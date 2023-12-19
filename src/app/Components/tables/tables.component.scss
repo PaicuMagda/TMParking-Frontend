@@ -1,0 +1,23 @@
+::ng-deep.mat-mdc-tab-labels {
+  width: 20%;
+}
+
+.active-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5%;
+  align-items: center;
+
+  &__export {
+    font-weight: 500;
+    width: auto;
+    background-color: rgb(54, 0, 105);
+    color: white;
+    border: none;
+    height: 2.5rem;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}

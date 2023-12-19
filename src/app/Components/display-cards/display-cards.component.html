@@ -23,6 +23,15 @@
   <div class="display-cards__admin">
     <div class="display-cards__admin__buttons">
       <div>
+        <button
+          class="display-cards__admin__buttons__tables"
+          (click)="goToTables()"
+        >
+          <img src="../../../assets/images/table.png" />
+          <span>Tables</span>
+        </button>
+      </div>
+      <div>
         <mat-button-toggle-group
           [disabled]="!isLogin"
           [(ngModel)]="toggleButtonValue"
