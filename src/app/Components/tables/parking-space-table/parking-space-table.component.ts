@@ -24,7 +24,7 @@ export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild('tableRef') tableRef!: ElementRef;
+  @ViewChild('tableRef', { static: false }) tableRef!: ElementRef;
 
   constructor(private parkingSpaceService: ParkingPlacesService) {}
 
