@@ -29,7 +29,9 @@ export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
   constructor(private parkingSpaceService: ParkingPlacesService) {}
 
   ngOnInit(): void {
-    this.dataSource.data = this.parkingSpaceService.getParcari();
+    this.parkingSpaceService.getParcari().subscribe((values) => {
+      this.dataSource.data = values;
+    });
   }
 
   ngAfterViewInit(): void {

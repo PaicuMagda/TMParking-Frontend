@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -364,8 +365,8 @@ export class ParkingPlacesService {
     },
   ];
 
-  getParcari() {
-    return this.parcari;
+  getParcari(): Observable<any[]> {
+    return of(this.parcari);
   }
 
   getMyParkingSpace() {

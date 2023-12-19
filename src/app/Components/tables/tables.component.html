@@ -3,19 +3,15 @@
   <mat-card>
     <div class="active-tabs">
       <div>{{ activeTable[activeTabIndex] }}</div>
-      <button mat-button [matMenuTriggerFor]="menu" class="active-tabs__export">
-        Export as
+      <button mat-button class="active-tabs__export" (click)="exportToCsv()">
+        Export as CSV
       </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>PDF</button>
-        <button mat-menu-item>CSV</button>
-      </mat-menu>
     </div>
     <mat-divider></mat-divider>
     <div>
       <mat-tab-group
-        class="mat-tab-group"
         #matTabGroup
+        class="mat-tab-group"
         (selectedIndexChange)="updateTableNumber($event)"
       >
         <mat-tab label="Parking Spaces"

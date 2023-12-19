@@ -27,6 +27,7 @@
     "file-saver": "^2.0.5",
     "jquery": "^3.7.1",
     "ng-angular-popup": "^0.4.7",
+    "ngx-csv": "^0.3.2",
     "ngx-mat-file-input": "^3.0.0-beta.0",
     "ngx-material-file-input": "^4.0.1",
     "pdfmake": "^0.2.8",

@@ -29,7 +29,6 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
       });
       this.dataSource.data = usersWithFullName;
     });
-    console.log(this.dataSource.data);
   }
 
   ngAfterViewInit(): void {
