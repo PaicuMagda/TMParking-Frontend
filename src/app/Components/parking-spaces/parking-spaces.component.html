@@ -11,7 +11,11 @@
     <div class="parking-spaces__card__image">
       <img
         src="{{ parkingSpace.imageUrl }}"
-        (click)="goToParkingSpaceDetails(parkingSpace.id)"
+        (click)="
+          !parkingSpaceIsExpired(parkingSpace.endDate)
+            ? goToParkingSpaceDetails(parkingSpace.id)
+            : openParkingSpaceExpiredConfirmDialog()
+        "
       />
       <div
         class="parking-spaces__card__image__icons"

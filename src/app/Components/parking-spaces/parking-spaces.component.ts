@@ -3,10 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { Router } from '@angular/router';
-import { NavbarService } from 'src/app/services/navbar.service';
 import { AddNewParkingSpaceDialogComponent } from '../dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { ConfirmationParkingSpaceExpiredDialogComponent } from '../dialogs/confirmation-parking-space-expired-dialog/confirmation-parking-space-expired-dialog.component';
+import { LoginRequiredDialogComponent } from '../dialogs/confirmation-dialogs/login-required-dialog/login-required-dialog.component';
 
 @Component({
   selector: 'app-parking-spaces',
@@ -18,7 +19,6 @@ export class ParkingSpacesComponent implements OnInit {
     private parkingSpacesService: ParkingPlacesService,
     private dialog: MatDialog,
     private router: Router,
-    private navbarService: NavbarService,
     private authenticationService: AuthenticationService,
     private userStore: UserStoreService
   ) {}
@@ -45,8 +45,34 @@ export class ParkingSpacesComponent implements OnInit {
     });
   }
 
+  openParkingSpaceExpiredConfirmDialog() {
+    if (this.isLogin) {
+      this.dialog.open(ConfirmationParkingSpaceExpiredDialogComponent, {
+        width: '23%',
+        height: '20%',
+        position: {
+          top: '5%',
+        },
+      });
+    } else this.openRequiredLogedInDialog();
+  }
+
   goToParkingSpaceDetails(id: number) {
-    this.router.navigate(['/parking-space-details', id]);
+    if (this.isLogin) {
+      this.router.navigate(['/parking-space-details', id]);
+    } else {
+      this.openRequiredLogedInDialog();
+    }
+  }
+
+  openRequiredLogedInDialog() {
+    this.dialog.open(LoginRequiredDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
   }
 
   parkingSpaceIsExpired(endDate: Date): boolean {

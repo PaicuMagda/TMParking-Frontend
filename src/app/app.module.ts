@@ -40,6 +40,7 @@ import { ParkingSpaceTableComponent } from './Components/tables/parking-space-ta
 import { UsersTableComponent } from './Components/tables/users-table/users-table.component';
 import { VehiclesTableComponent } from './Components/tables/vehicles-table/vehicles-table.component';
 import { RentingParkingSpacesComponent } from './Components/tables/renting-parking-spaces/renting-parking-spaces.component';
+import { ConfirmationParkingSpaceExpiredDialogComponent } from './Components/dialogs/confirmation-parking-space-expired-dialog/confirmation-parking-space-expired-dialog.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { RentingParkingSpacesComponent } from './Components/tables/renting-parki
     UsersTableComponent,
     VehiclesTableComponent,
     RentingParkingSpacesComponent,
+    ConfirmationParkingSpaceExpiredDialogComponent,
   ],
   imports: [
     BrowserModule,
