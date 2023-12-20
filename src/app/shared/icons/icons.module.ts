@@ -42,6 +42,10 @@ export class IconsModule {
       .addSvgIcon('user-white', this.setPath(`${this.path}/user-white.svg`))
       .addSvgIcon('plus-solid', this.setPath(`${this.path}/plus-solid.svg`))
       .addSvgIcon('table-solid', this.setPath(`${this.path}/table-solid.svg`))
+      .addSvgIcon(
+        'ellipsis-vertical-solid',
+        this.setPath(`${this.path}/ellipsis-vertical-solid.svg`)
+      )
       .addSvgIcon('icon-close', this.setPath(`${this.path}/icon-close.svg`));
   }
 

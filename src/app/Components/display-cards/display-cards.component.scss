@@ -74,6 +74,66 @@
       }
     }
 
+    &__buttons-user {
+      width: 100%;
+      height: 8%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0.7rem;
+
+      &__tables {
+        border-radius: 8px;
+        background-color: rgb(42, 0, 81);
+        color: white;
+        height: 2.5rem;
+        width: 5vw;
+        display: flex;
+        align-items: center;
+        gap: 13%;
+
+        img {
+          width: 26%;
+        }
+      }
+
+      &__mat-toggle-buttons {
+        border-radius: 20px;
+        height: 2.5rem;
+        align-items: center;
+      }
+
+      &__add-new-park-space {
+        width: 11vw;
+        height: 2.5rem;
+        border-radius: 8px;
+        background-color: rgb(42, 0, 81);
+        color: white;
+        margin-left: 4rem;
+      }
+
+      &__greeting {
+        font-size: 1.5rem;
+        font-weight: 700;
+        width: 27rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 0.5rem;
+      }
+
+      &__message {
+        font-weight: 500;
+        font-size: 1.4rem;
+        color: #099709;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 25rem;
+      }
+    }
+
     &__display {
       overflow: auto;
       margin-left: 0.5%;
