@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { TmParkingInfoDialogComponent } from '../../dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
+import { TmParkingInfoDialogComponent } from '../dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { LogoutDialogComponent } from '../../dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
+import { LogoutDialogComponent } from '../dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class NavBarComponent implements OnInit {
   isLogin: boolean = false;
   fullName: string = '';
   role: string = '';
+  @Input() showSearch: boolean = false;
 
   constructor(
     private router: Router,
