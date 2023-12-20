@@ -22,3 +22,17 @@
       0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 }
+
+.table {
+  height: 92.4vh;
+  display: flex;
+  justify-content: center;
+
+  &__div-table {
+    width: 90%;
+  }
+
+  mat-card {
+    width: 100%;
+  }
+}

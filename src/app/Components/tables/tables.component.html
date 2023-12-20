@@ -1,27 +1,29 @@
 <app-nav-bar [showSearch]="true"></app-nav-bar>
-<mat-card>
-  <mat-card>
-    <div class="active-tabs">
-      <div>{{ activeTable[activeTabIndex] }}</div>
-      <button mat-button class="active-tabs__export" (click)="exportToCsv()">
-        Export as CSV
-      </button>
-    </div>
-    <mat-divider></mat-divider>
-    <div>
-      <mat-tab-group
-        #matTabGroup
-        class="mat-tab-group"
-        (selectedIndexChange)="updateTableNumber($event)"
-      >
-        <mat-tab label="Parking Spaces"
-          ><app-parking-space-table></app-parking-space-table>
-        </mat-tab>
-        <mat-tab label="Users"><app-users-table></app-users-table> </mat-tab>
-        <mat-tab label="Vehicles">
-          <app-vehicles-table></app-vehicles-table>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-  </mat-card>
-</mat-card>
+<div class="table">
+  <div class="table__div-table">
+    <mat-card>
+      <div class="active-tabs">
+        <div>{{ activeTable[activeTabIndex] }}</div>
+        <button mat-button class="active-tabs__export" (click)="exportToCsv()">
+          Export as CSV
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+      <div>
+        <mat-tab-group
+          #matTabGroup
+          class="mat-tab-group"
+          (selectedIndexChange)="updateTableNumber($event)"
+        >
+          <mat-tab label="Parking Spaces"
+            ><app-parking-space-table></app-parking-space-table>
+          </mat-tab>
+          <mat-tab label="Users"><app-users-table></app-users-table> </mat-tab>
+          <mat-tab label="Vehicles">
+            <app-vehicles-table></app-vehicles-table>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-card>
+  </div>
+</div>
