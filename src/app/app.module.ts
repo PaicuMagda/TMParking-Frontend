@@ -41,6 +41,7 @@ import { UsersTableComponent } from './Components/tables/users-table/users-table
 import { VehiclesTableComponent } from './Components/tables/vehicles-table/vehicles-table.component';
 import { RentingParkingSpacesComponent } from './Components/tables/renting-parking-spaces/renting-parking-spaces.component';
 import { ConfirmationParkingSpaceExpiredDialogComponent } from './Components/dialogs/confirmation-parking-space-expired-dialog/confirmation-parking-space-expired-dialog.component';
+import { HoverElementDirective } from './Components/directives/hover-element.directive';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ConfirmationParkingSpaceExpiredDialogComponent } from './Components/dia
     VehiclesTableComponent,
     RentingParkingSpacesComponent,
     ConfirmationParkingSpaceExpiredDialogComponent,
+    HoverElementDirective,
   ],
   imports: [
     BrowserModule,

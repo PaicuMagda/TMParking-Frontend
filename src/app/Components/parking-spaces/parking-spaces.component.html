@@ -2,6 +2,7 @@
   <div
     class="parking-spaces__card"
     *ngFor="let parkingSpace of parkingSpaces"
+    appHoverElement
     [ngClass]="
       parkingSpaceIsExpired(parkingSpace.endDate)
         ? 'parking-spaces__card__parkingSpaceIsExpired'

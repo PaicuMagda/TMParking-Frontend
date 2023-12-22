@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 1,
@@ -39,6 +41,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: false,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 2,
@@ -55,6 +59,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 3,
@@ -71,6 +77,8 @@ export class ParkingPlacesService {
       endDate: new Date(),
       isFree: false,
       isVideoSurveillance: false,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 4,
@@ -87,6 +95,8 @@ export class ParkingPlacesService {
       endDate: new Date(),
       isFree: true,
       isVideoSurveillance: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 5,
@@ -103,6 +113,8 @@ export class ParkingPlacesService {
       endDate: new Date(),
       isFree: false,
       isVideoSurveillance: false,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 6,
@@ -119,6 +131,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 7,
@@ -135,6 +149,8 @@ export class ParkingPlacesService {
       endDate: new Date(),
       isFree: false,
       isVideoSurveillance: false,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 7,
@@ -151,6 +167,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 8,
@@ -167,6 +185,8 @@ export class ParkingPlacesService {
       endDate: new Date(),
       isFree: false,
       isVideoSurveillance: false,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 9,
@@ -183,6 +203,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 10,
@@ -199,6 +221,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: false,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 11,
@@ -215,6 +239,8 @@ export class ParkingPlacesService {
       endDate: new Date(),
       isFree: false,
       isVideoSurveillance: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 12,
@@ -231,6 +257,8 @@ export class ParkingPlacesService {
       endDate: new Date(),
       isFree: false,
       isVideoSurveillance: false,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 13,
@@ -247,6 +275,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 14,
@@ -263,6 +293,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: false,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
   ];
 
@@ -367,6 +399,14 @@ export class ParkingPlacesService {
 
   getParcari(): Observable<any[]> {
     return of(this.parcari);
+  }
+
+  getParkingPlaceById(id: any): Observable<any> {
+    return this.getParcari().pipe(
+      map((values) => {
+        return values.find((value) => value.id === id);
+      })
+    );
   }
 
   getMyParkingSpace() {
