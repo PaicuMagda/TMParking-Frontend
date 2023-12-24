@@ -27,6 +27,7 @@ export class ParkingSpacesComponent implements OnInit {
   myParkingSpace: any = [];
   isLogin: boolean;
   role: string = '';
+  toggleVaue: string;
 
   openDeleteConfirmDialog() {
     this.dialog.open(DeleteConfirmationDialogComponent, {

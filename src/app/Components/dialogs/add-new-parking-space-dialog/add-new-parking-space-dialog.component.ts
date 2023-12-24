@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 
 @Component({
@@ -19,7 +23,8 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<AddNewParkingSpaceDialogComponent>,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   toggleButtonValue: boolean = false;
@@ -33,7 +38,6 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   publicTransportationVehicle = false;
   startDate: Date | null = null;
   endDate: Date | null = null;
-
   userAuthenticated: string = 'MAGDA PAICU';
   imageUrl: string | ArrayBuffer | null = null;
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
+import { ParkingSpace } from '../interfaces/parking-space';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ import { Observable, map, of } from 'rxjs';
 export class ParkingPlacesService {
   constructor() {}
 
-  parcari = [
+  parcari: ParkingSpace[] = [
     {
       id: 0,
       name: 'Parcare Centrală',
@@ -397,7 +398,7 @@ export class ParkingPlacesService {
     },
   ];
 
-  getParcari(): Observable<any[]> {
+  getParcari(): Observable<ParkingSpace[]> {
     return of(this.parcari);
   }
 

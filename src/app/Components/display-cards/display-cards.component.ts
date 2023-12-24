@@ -8,6 +8,7 @@ import { LoginRequiredDialogComponent } from '../dialogs/confirmation-dialogs/lo
 import { AddNewVehicleDialogComponent } from '../dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 import { AddNewUserDialogComponent } from '../dialogs/add-new-user-dialog/add-new-user-dialog.component';
 import { Router } from '@angular/router';
+import { DisplayCardsService } from 'src/app/services/display-cards.service';
 
 @Component({
   selector: 'app-display-cards',
@@ -27,7 +28,8 @@ export class DisplayCardsComponent {
     private dialog: MatDialog,
     private userStore: UserStoreService,
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private displayCradsService: DisplayCardsService
   ) {}
 
   openAddNewParkingDialogFunction() {
@@ -83,6 +85,58 @@ export class DisplayCardsComponent {
 
   goToTables() {
     this.router.navigate(['/tables']);
+  }
+
+  sendToggleValueMyParkingPlaces() {
+    if (this.toggleButtonValue === 'myParkingSpaces') {
+      this.displayCradsService.sendToggleValue(true);
+    }
+    console.log(
+      this.displayCradsService.toggleValueSubjectObservable.subscribe(
+        (value) => {
+          console.log(value);
+        }
+      )
+    );
+  }
+
+  sendToggleValueMyVehicles() {
+    if (this.toggleButtonValue === 'allVehicles') {
+      this.displayCradsService.sendToggleValue(false);
+    }
+    console.log(
+      this.displayCradsService.toggleValueSubjectObservable.subscribe(
+        (value) => {
+          console.log(value);
+        }
+      )
+    );
+  }
+
+  sendToggleValueAllPlaces() {
+    if (this.toggleButtonValue === 'myVehicles') {
+      this.displayCradsService.sendToggleValue(false);
+    }
+    console.log(
+      this.displayCradsService.toggleValueSubjectObservable.subscribe(
+        (value) => {
+          console.log(value);
+        }
+      )
+    );
+  }
+
+  sendToggleValueAllVehicles() {
+    if (this.toggleButtonValue === 'allVehicles') {
+      this.displayCradsService.sendToggleValue(false);
+    }
+    console.log(
+      this.displayCradsService.toggleValueSubjectObservable.subscribe(
+        (value) => {
+          console.log(value);
+        }
+      )
+    );
   }
 
   ngOnInit() {
