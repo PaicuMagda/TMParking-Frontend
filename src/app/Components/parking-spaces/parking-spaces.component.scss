@@ -36,7 +36,8 @@
         top: -97%;
         padding: 2%;
 
-        div {
+        &__delete,
+        &__edit {
           background-color: white;
           border-radius: 50%;
           width: 18%;
@@ -45,6 +46,11 @@
           align-items: center;
           justify-content: center;
           border: 1px solid black;
+        }
+
+        &__draft {
+          width: 100%;
+          margin-top: 14%;
         }
       }
     }

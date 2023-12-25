@@ -17,7 +17,7 @@ import { DisplayCardsService } from 'src/app/services/display-cards.service';
 })
 export class DisplayCardsComponent {
   role: string = '';
-  toggleButtonValue: string = 'allParkingSpaces';
+  toggleButtonValue: string = '';
   isLogin: boolean = false;
 
   @ViewChild('myProfile') sidenav!: MatSidenav;
@@ -29,7 +29,7 @@ export class DisplayCardsComponent {
     private userStore: UserStoreService,
     private auth: AuthenticationService,
     private router: Router,
-    private displayCradsService: DisplayCardsService
+    private displayCardsService: DisplayCardsService
   ) {}
 
   openAddNewParkingDialogFunction() {
@@ -87,59 +87,14 @@ export class DisplayCardsComponent {
     this.router.navigate(['/tables']);
   }
 
-  sendToggleValueMyParkingPlaces() {
-    if (this.toggleButtonValue === 'myParkingSpaces') {
-      this.displayCradsService.sendToggleValue(true);
-    }
-    console.log(
-      this.displayCradsService.toggleValueSubjectObservable.subscribe(
-        (value) => {
-          console.log(value);
-        }
-      )
-    );
-  }
-
-  sendToggleValueMyVehicles() {
-    if (this.toggleButtonValue === 'allVehicles') {
-      this.displayCradsService.sendToggleValue(false);
-    }
-    console.log(
-      this.displayCradsService.toggleValueSubjectObservable.subscribe(
-        (value) => {
-          console.log(value);
-        }
-      )
-    );
-  }
-
-  sendToggleValueAllPlaces() {
-    if (this.toggleButtonValue === 'myVehicles') {
-      this.displayCradsService.sendToggleValue(false);
-    }
-    console.log(
-      this.displayCradsService.toggleValueSubjectObservable.subscribe(
-        (value) => {
-          console.log(value);
-        }
-      )
-    );
-  }
-
-  sendToggleValueAllVehicles() {
-    if (this.toggleButtonValue === 'allVehicles') {
-      this.displayCradsService.sendToggleValue(false);
-    }
-    console.log(
-      this.displayCradsService.toggleValueSubjectObservable.subscribe(
-        (value) => {
-          console.log(value);
-        }
-      )
-    );
+  sendToggleValueParkingSpaces() {
+    this.displayCardsService.sendToggleValue(this.toggleButtonValue);
   }
 
   ngOnInit() {
+    this.displayCardsService.toggleValueSubjectObservable.subscribe((value) => {
+      this.toggleButtonValue = value;
+    });
     this.isLogin = this.auth.isLoggedIn();
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.auth.getRoleFromToken();

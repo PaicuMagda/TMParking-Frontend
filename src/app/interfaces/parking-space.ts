@@ -15,4 +15,5 @@ export interface ParkingSpace {
   isVideoSurveillance: boolean;
   description: string;
   paidParking?: boolean;
+  isDraft?: boolean;
 }

@@ -42,10 +42,9 @@
           [disabled]="!isLogin"
           [(ngModel)]="toggleButtonValue"
           class="display-cards__admin__buttons__mat-toggle-buttons"
+          (change)="sendToggleValueParkingSpaces()"
         >
-          <mat-button-toggle
-            value="allParkingSpaces"
-            (click)="sendToggleValueAllPlaces()"
+          <mat-button-toggle value="allParkingSpaces"
             >🚙 All Parking Spaces</mat-button-toggle
           >
           <mat-button-toggle value="users" *ngIf="role === 'Administrator'"
@@ -53,19 +52,15 @@
           >
           <mat-button-toggle
             value="myVehicles"
-            (click)="sendToggleValueMyVehicles()"
             *ngIf="role === 'User' || !isLogin"
             >❤️ My Vehicles</mat-button-toggle
           >
-          <mat-button-toggle
-            value="myParkingSpaces"
-            (click)="sendToggleValueMyParkingPlaces()"
+          <mat-button-toggle value="myParkingSpaces"
             >❤️ My Parking Spaces</mat-button-toggle
           >
           <mat-button-toggle
             value="allVehicles"
             *ngIf="role === 'Administrator'"
-            (click)="sendToggleValueAllVehicles()"
             >🚙All Vehicles</mat-button-toggle
           >
         </mat-button-toggle-group>

@@ -42,6 +42,7 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: false,
+      isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
@@ -60,6 +61,7 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: true,
+      isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
@@ -222,6 +224,7 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: false,
+      isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
@@ -299,7 +302,7 @@ export class ParkingPlacesService {
     },
   ];
 
-  myParkingSpace = [
+  myParkingSpace: ParkingSpace[] = [
     {
       id: 0,
       name: 'Parcare Centrală',
@@ -315,6 +318,9 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: true,
+      isDraft: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 1,
@@ -323,14 +329,17 @@ export class ParkingPlacesService {
       address: 'Aeroport internațional',
       locuriDisponibile: 500,
       imageUrl: '../../../assets/images/parking-spaces/parcare2.jpg',
-      isCargoVehicles: true,
+      isCargoVehicles: false,
       isTruck: true,
       isAgriculturalMachinery: false,
-      isPublicTransport: false,
+      isPublicTransport: true,
       startDate: new Date(),
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: false,
+      isDraft: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 2,
@@ -347,6 +356,8 @@ export class ParkingPlacesService {
       endDate: new Date('2024-12-31'),
       isFree: false,
       isVideoSurveillance: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 3,
@@ -355,7 +366,7 @@ export class ParkingPlacesService {
       address: 'Centru oraș',
       locuriDisponibile: 15,
       imageUrl: '../../../assets/images/parking-spaces/parcare4.jpg',
-      isCargoVehicles: true,
+      isCargoVehicles: false,
       isTruck: true,
       isAgriculturalMachinery: true,
       isPublicTransport: true,
@@ -363,6 +374,9 @@ export class ParkingPlacesService {
       endDate: new Date(),
       isFree: false,
       isVideoSurveillance: false,
+      isDraft: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
     {
       id: 4,
@@ -374,27 +388,14 @@ export class ParkingPlacesService {
       isCargoVehicles: true,
       isTruck: false,
       isAgriculturalMachinery: true,
-      isPublicTransport: false,
+      isPublicTransport: true,
       startDate: new Date(),
       endDate: new Date(),
       isFree: true,
       isVideoSurveillance: true,
-    },
-    {
-      id: 5,
-      name: 'Parcare Subterană',
-      owner: 'Alex Johnson',
-      address: 'Centru oraș',
-      locuriDisponibile: 20,
-      imageUrl: '../../../assets/images/parking-spaces/parcare5.jpg',
-      isCargoVehicles: false,
-      isTruck: true,
-      isAgriculturalMachinery: true,
-      isPublicTransport: false,
-      startDate: new Date(),
-      endDate: new Date(),
-      isFree: false,
-      isVideoSurveillance: false,
+      isDraft: true,
+      description:
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
     },
   ];
 
@@ -410,7 +411,7 @@ export class ParkingPlacesService {
     );
   }
 
-  getMyParkingSpace() {
-    return this.myParkingSpace;
+  getMyParkingSpace(): Observable<ParkingSpace[]> {
+    return of(this.myParkingSpace);
   }
 }

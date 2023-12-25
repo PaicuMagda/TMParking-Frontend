@@ -3,11 +3,6 @@
     class="parking-spaces__card"
     *ngFor="let parkingSpace of parkingSpaces"
     appHoverElement
-    (click)="
-      !parkingSpaceIsExpired(parkingSpace.endDate)
-        ? goToParkingSpaceDetails(parkingSpace.id)
-        : openParkingSpaceExpiredConfirmDialog()
-    "
     [ngClass]="
       parkingSpaceIsExpired(parkingSpace.endDate)
         ? 'parking-spaces__card__parkingSpaceIsExpired'
@@ -15,23 +10,57 @@
     "
   >
     <div class="parking-spaces__card__image">
-      <img src="{{ parkingSpace.imageUrl }}" />
+      <img
+        src="{{ parkingSpace.imageUrl }}"
+        (click)="
+          !parkingSpaceIsExpired(parkingSpace.endDate) ||
+          toggleValue === 'myParkingSpaces'
+            ? goToParkingSpaceDetails(parkingSpace.id)
+            : openParkingSpaceExpiredConfirmDialog()
+        "
+      />
       <div
         class="parking-spaces__card__image__icons"
-        *ngIf="
-          role === 'Administrator' &&
-          !parkingSpaceIsExpired(parkingSpace.endDate)
-        "
+        *ngIf="role === 'Administrator' || toggleValue === 'myParkingSpaces'"
       >
-        <div (click)="openDeleteConfirmDialog()">
+        <div
+          class="parking-spaces__card__image__icons__delete"
+          (click)="
+            !parkingSpaceIsExpired(parkingSpace.endDate) ||
+            toggleValue === 'myParkingSpaces'
+              ? openDeleteConfirmDialog()
+              : openParkingSpaceExpiredConfirmDialog()
+          "
+        >
           <mat-icon svgIcon="delete-trash"></mat-icon>
         </div>
-        <div (click)="openEditParkingSpaceDialog()">
+        <div *ngIf="parkingSpace.isDraft && toggleValue === 'myParkingSpaces'">
+          <mat-icon
+            class="parking-spaces__card__image__icons__draft"
+            svgIcon="draft"
+          ></mat-icon>
+        </div>
+        <div
+          class="parking-spaces__card__image__icons__edit"
+          (click)="
+            !parkingSpaceIsExpired(parkingSpace.endDate) ||
+            toggleValue === 'myParkingSpaces'
+              ? openEditParkingSpaceDialog()
+              : openParkingSpaceExpiredConfirmDialog()
+          "
+        >
           <mat-icon svgIcon="edit"></mat-icon>
         </div>
       </div>
     </div>
-    <div class="parking-spaces__card__informations">
+    <div
+      class="parking-spaces__card__informations"
+      (click)="
+        !parkingSpaceIsExpired(parkingSpace.endDate)
+          ? goToParkingSpaceDetails(parkingSpace.id)
+          : openParkingSpaceExpiredConfirmDialog()
+      "
+    >
       <div class="parking-spaces__card__informations__ownerAddressDate">
         <div
           class="parking-spaces__card__informations__ownerAddressDate__camera"

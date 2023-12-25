@@ -7,10 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 export class DisplayCardsService {
   constructor() {}
 
-  private toggleValueSubject$ = new BehaviorSubject<boolean>(false);
+  private toggleValueSubject$ = new BehaviorSubject<string>('allParkingSpaces');
   toggleValueSubjectObservable = this.toggleValueSubject$.asObservable();
 
-  sendToggleValue(value: boolean) {
+  sendToggleValue(value: string) {
     this.toggleValueSubject$.next(value);
   }
 }
