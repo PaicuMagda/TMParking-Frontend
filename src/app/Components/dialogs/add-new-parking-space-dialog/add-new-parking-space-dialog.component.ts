@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -24,7 +24,8 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<AddNewParkingSpaceDialogComponent>,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private cdr: ChangeDetectorRef
   ) {}
 
   toggleButtonValue: boolean = false;
@@ -43,6 +44,8 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
 
   changeToggleButtonValue(event: boolean) {
     this.toggleButtonValue = event;
+    console.log(this.toggleButtonValue);
+    this.cdr.detectChanges();
   }
 
   isAutomobile() {

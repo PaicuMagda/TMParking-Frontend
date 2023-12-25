@@ -3,6 +3,11 @@
     class="parking-spaces__card"
     *ngFor="let parkingSpace of parkingSpaces"
     appHoverElement
+    (click)="
+      !parkingSpaceIsExpired(parkingSpace.endDate)
+        ? goToParkingSpaceDetails(parkingSpace.id)
+        : openParkingSpaceExpiredConfirmDialog()
+    "
     [ngClass]="
       parkingSpaceIsExpired(parkingSpace.endDate)
         ? 'parking-spaces__card__parkingSpaceIsExpired'
@@ -10,14 +15,7 @@
     "
   >
     <div class="parking-spaces__card__image">
-      <img
-        src="{{ parkingSpace.imageUrl }}"
-        (click)="
-          !parkingSpaceIsExpired(parkingSpace.endDate)
-            ? goToParkingSpaceDetails(parkingSpace.id)
-            : openParkingSpaceExpiredConfirmDialog()
-        "
-      />
+      <img src="{{ parkingSpace.imageUrl }}" />
       <div
         class="parking-spaces__card__image__icons"
         *ngIf="
@@ -33,10 +31,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="parking-spaces__card__informations"
-      (click)="goToParkingSpaceDetails(parkingSpace.id)"
-    >
+    <div class="parking-spaces__card__informations">
       <div class="parking-spaces__card__informations__ownerAddressDate">
         <div
           class="parking-spaces__card__informations__ownerAddressDate__camera"

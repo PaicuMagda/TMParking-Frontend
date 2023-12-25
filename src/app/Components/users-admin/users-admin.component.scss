@@ -56,7 +56,6 @@
 
   &__div2 {
     padding-left: 1rem;
-
     @include dimensions(10%, column);
 
     input {
@@ -64,6 +63,10 @@
       width: 14rem;
       height: 2.2rem;
       margin-left: 0.5em;
+    }
+
+    &__name {
+      display: flex;
     }
 
     &__address {

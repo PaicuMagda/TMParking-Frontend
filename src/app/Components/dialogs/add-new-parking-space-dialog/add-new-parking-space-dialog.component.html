@@ -177,9 +177,9 @@
           <label>Paid parking*</label>
           <mat-button-toggle-group
             formControlName="paidParking"
-            #toggleGroup="matButtonToggleGroup"
+            #toggleGroupPaid="matButtonToggleGroup"
             [(ngModel)]="paidParking"
-            (change)="changeToggleButtonValue(toggleGroup.value)"
+            (change)="changeToggleButtonValue(toggleGroupPaid.value)"
           >
             <mat-button-toggle value="true">Yes</mat-button-toggle>
             <mat-button-toggle value="false">No</mat-button-toggle>
@@ -232,6 +232,30 @@
             class="add_new_parking__form__create-card__card-full__image__img"
             src="./../../../../assets/images/parking-spaces/parcare-etaj.jpg"
           />
+          <div
+            class="add_new_parking__form__create-card__card-full__image__img__div"
+          >
+            <div
+              *ngIf="videoSurveillance === 'true'"
+              class="add_new_parking__form__create-card__card-full__image__img__div__camera"
+            >
+              <img src="../../../../assets/images/camera.png" />
+            </div>
+
+            <div
+              *ngIf="paidParking === 'true' || paidParking === 'false'"
+              class="add_new_parking__form__create-card__card-full__image__img__div__paid"
+            >
+              <img
+                *ngIf="paidParking === 'true'"
+                src="../../../../assets/images/paid.png"
+              />
+              <img
+                *ngIf="paidParking === 'false'"
+                src="../../../../assets/images/no-paid.png"
+              />
+            </div>
+          </div>
         </div>
         <div
           class="add_new_parking__form__create-card__card-full__informations"
