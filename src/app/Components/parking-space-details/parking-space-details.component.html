@@ -1,3 +1,18 @@
-<div class="details">
-  <app-nav-bar></app-nav-bar>
+<div class="parking-space-details">
+  <app-nav-bar [showSearch]="!showSearch"></app-nav-bar>
+  <div class="parking-space-details__container">
+    <div class="parking-space-details__container__left">
+      <div class="parking-space-details__container__left__informations"></div>
+      <div class="parking-space-details__container__left__calendar"></div>
+    </div>
+    <div class="parking-space-details__container__right">
+      <div class="parking-space-details__container__right__image">
+        <img src="{{ parkingPlace.imageUrl }}" />
+      </div>
+      <div class="parking-space-details__container__right__description">
+        {{ parkingPlace.description }}
+      </div>
+      <div class="parking-space-details__container__right__buttons"></div>
+    </div>
+  </div>
 </div>

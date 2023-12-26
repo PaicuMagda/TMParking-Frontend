@@ -1,4 +1,38 @@
-.details {
+.parking-space-details {
   width: 100%;
   height: 100vh;
+
+  &__container {
+    display: flex;
+    height: 93.9%;
+
+    &__left {
+      width: 65%;
+
+      &__informations {
+        padding: 1%;
+        height: 45vh;
+      }
+
+      &__calendar {
+        height: 45vh;
+      }
+    }
+
+    &__right {
+      width: 35%;
+
+      img {
+        margin-top: 5%;
+        width: 90%;
+        border-radius: 1rem;
+        height: 47vh;
+      }
+
+      &__description {
+        width: 90%;
+        margin-top: 5%;
+      }
+    }
+  }
 }

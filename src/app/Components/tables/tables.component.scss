@@ -8,6 +8,7 @@
   justify-content: space-between;
   padding: 0.5%;
   align-items: center;
+  font-weight: 600;
 
   &__export {
     font-weight: 500;
@@ -19,5 +20,19 @@
     border-radius: 6px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
       0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+.table {
+  height: 92.4vh;
+  display: flex;
+  justify-content: center;
+
+  &__div-table {
+    width: 90%;
+  }
+
+  mat-card {
+    width: 100%;
   }
 }

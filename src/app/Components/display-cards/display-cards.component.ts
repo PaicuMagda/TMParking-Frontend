@@ -8,6 +8,7 @@ import { LoginRequiredDialogComponent } from '../dialogs/confirmation-dialogs/lo
 import { AddNewVehicleDialogComponent } from '../dialogs/add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 import { AddNewUserDialogComponent } from '../dialogs/add-new-user-dialog/add-new-user-dialog.component';
 import { Router } from '@angular/router';
+import { DisplayCardsService } from 'src/app/services/display-cards.service';
 
 @Component({
   selector: 'app-display-cards',
@@ -16,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class DisplayCardsComponent {
   role: string = '';
-  toggleButtonValue: string = 'allParkingSpaces';
+  toggleButtonValue: string = '';
   isLogin: boolean = false;
 
   @ViewChild('myProfile') sidenav!: MatSidenav;
@@ -27,7 +28,8 @@ export class DisplayCardsComponent {
     private dialog: MatDialog,
     private userStore: UserStoreService,
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private displayCardsService: DisplayCardsService
   ) {}
 
   openAddNewParkingDialogFunction() {
@@ -85,7 +87,14 @@ export class DisplayCardsComponent {
     this.router.navigate(['/tables']);
   }
 
+  sendToggleValueParkingSpaces() {
+    this.displayCardsService.sendToggleValue(this.toggleButtonValue);
+  }
+
   ngOnInit() {
+    this.displayCardsService.toggleValueSubjectObservable.subscribe((value) => {
+      this.toggleButtonValue = value;
+    });
     this.isLogin = this.auth.isLoggedIn();
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.auth.getRoleFromToken();

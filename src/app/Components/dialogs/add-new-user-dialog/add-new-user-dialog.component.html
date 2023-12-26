@@ -11,20 +11,7 @@
     <div class="my-profile__image-upload__image-div">
       <img src="../../../../assets/images/my-profile-image.jpg" />
     </div>
-    <div class="my-profile__image-upload__image-button">
-      <input
-        type="file"
-        formControlName="image"
-        (change)="onFileSelected($event)"
-        #fileInput
-      />
-      <button
-        class="my-profile__image-upload__image-button__button-next"
-        (click)="fileInput.click()"
-      >
-        Upload Image
-      </button>
-    </div>
+    <div class="my-profile__image-upload__image-button"></div>
   </form>
   <div class="stepper">
     <mat-vertical-stepper [linear]="isLinear" #stepper>
@@ -284,6 +271,25 @@
           </div>
 
           <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="imageFormGroup">
+        <form [formGroup]="imageFormGroup">
+          <ng-template matStepLabel>Upload Image Profile</ng-template>
+          <mat-form-field>
+            <ngx-mat-file-input
+              formControlName="image"
+              placeholder="Upload a significant image for your profile"
+            ></ngx-mat-file-input>
+            <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
+          </mat-form-field>
+          <div class="stepper__file-upload-button">
             <button mat-button matStepperPrevious class="button-back">
               Back
             </button>

@@ -21,8 +21,14 @@
     </div>
   </div>
   <div class="display-cards__admin">
-    <div class="display-cards__admin__buttons">
-      <div>
+    <div
+      [ngClass]="
+        role === 'Administrator'
+          ? 'display-cards__admin__buttons'
+          : 'display-cards__admin__buttons-user'
+      "
+    >
+      <div *ngIf="role === 'Administrator'">
         <button
           class="display-cards__admin__buttons__tables"
           (click)="goToTables()"
@@ -36,6 +42,7 @@
           [disabled]="!isLogin"
           [(ngModel)]="toggleButtonValue"
           class="display-cards__admin__buttons__mat-toggle-buttons"
+          (change)="sendToggleValueParkingSpaces()"
         >
           <mat-button-toggle value="allParkingSpaces"
             >🚙 All Parking Spaces</mat-button-toggle

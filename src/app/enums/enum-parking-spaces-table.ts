@@ -11,4 +11,5 @@ export enum EnumParkingSpacesTable {
   START_DATE = 'startDate',
   END_DATE = 'endDate',
   AVAILABLE_DAYS = 'Available Days',
+  SETTINGS = 'settings',
 }

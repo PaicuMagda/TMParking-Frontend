@@ -2,13 +2,15 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 5%;
+  gap: 3%;
   max-height: 58.4rem;
   margin-top: 0.5rem;
+  margin-left: 3%;
+  margin-top: 2%;
 
   &__card {
-    width: 12.5vw;
-    height: 25vh;
+    width: 11.5vw;
+    height: 23vh;
     border-radius: 10px;
     border: 2px solid black;
 
@@ -34,7 +36,8 @@
         top: -97%;
         padding: 2%;
 
-        div {
+        &__delete,
+        &__edit {
           background-color: white;
           border-radius: 50%;
           width: 18%;
@@ -43,6 +46,11 @@
           align-items: center;
           justify-content: center;
           border: 1px solid black;
+        }
+
+        &__draft {
+          width: 100%;
+          margin-top: 14%;
         }
       }
     }

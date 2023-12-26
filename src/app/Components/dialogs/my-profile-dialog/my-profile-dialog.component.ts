@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 
 @Component({
   selector: 'app-my-profile-dialog',
@@ -79,7 +80,17 @@ export class MyProfileDialogComponent implements OnInit {
     });
   }
 
+  openCloseConfirmSidenav() {
+    this.dialog.open(ConfirmCloseDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
+  }
+
   closeSidenavMyProfile() {
-    this.navbarService.toggleSidenav(false);
+    this.openCloseConfirmSidenav();
   }
 }

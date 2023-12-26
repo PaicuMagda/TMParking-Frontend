@@ -22,7 +22,7 @@ export class AddNewVehicleDialogComponent {
 
   ngOnInit() {
     this.addNewVehicleFormGroup = this.formBuilder.group({
-      image: [''],
+      image: ['', Validators.required],
       make: ['', Validators.required],
       model: ['', Validators.required],
       color: ['', Validators.required],

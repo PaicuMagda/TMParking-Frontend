@@ -5,4 +5,5 @@ export enum EnumVehiclesTables {
   COLOR = 'color',
   OWNER = 'owner',
   VEHICLE_IDENTIFICATION_NUMBER = 'vehicleIdentificationNumber',
+  SETTINGS = 'settings',
 }

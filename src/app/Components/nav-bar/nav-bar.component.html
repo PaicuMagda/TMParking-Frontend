@@ -13,7 +13,7 @@
   </div>
 
   <div class="buttons">
-    <div class="buttons__search">
+    <div class="buttons__search" *ngIf="!showSearch">
       <mat-icon class="buttons__search__icon" svgIcon="search"></mat-icon>
       <input
         class="buttons__input"

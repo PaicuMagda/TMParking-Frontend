@@ -9,7 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CreateAccountComponent } from './Components/login-register-components/create-account/create-account.component';
 import { RecoverAccountComponent } from './Components/login-register-components/recover-account/recover-account.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NavBarComponent } from './Components/home/nav-bar/nav-bar.component';
+import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { HomeComponent } from './Components/home/home/home.component';
 import { MaterialModule } from './shared/material/material.module';
 import { TmParkingInfoDialogComponent } from './Components/dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
@@ -40,6 +40,8 @@ import { ParkingSpaceTableComponent } from './Components/tables/parking-space-ta
 import { UsersTableComponent } from './Components/tables/users-table/users-table.component';
 import { VehiclesTableComponent } from './Components/tables/vehicles-table/vehicles-table.component';
 import { RentingParkingSpacesComponent } from './Components/tables/renting-parking-spaces/renting-parking-spaces.component';
+import { ConfirmationParkingSpaceExpiredDialogComponent } from './Components/dialogs/confirmation-parking-space-expired-dialog/confirmation-parking-space-expired-dialog.component';
+import { HoverElementDirective } from './Components/directives/hover-element.directive';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { RentingParkingSpacesComponent } from './Components/tables/renting-parki
     UsersTableComponent,
     VehiclesTableComponent,
     RentingParkingSpacesComponent,
+    ConfirmationParkingSpaceExpiredDialogComponent,
+    HoverElementDirective,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-confirm-close-dialog',
@@ -7,7 +8,10 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./confirm-close-dialog.component.scss'],
 })
 export class ConfirmCloseDialogComponent {
-  constructor(private dialogRef: MatDialogRef<ConfirmCloseDialogComponent>) {}
+  constructor(
+    private dialogRef: MatDialogRef<ConfirmCloseDialogComponent>,
+    private navbarService: NavbarService
+  ) {}
 
   closeConfirmCloseDialog() {
     this.dialogRef.close();
@@ -15,5 +19,6 @@ export class ConfirmCloseDialogComponent {
 
   closeAddNewVehicleDialog() {
     this.dialogRef.close('yes');
+    this.navbarService.toggleSidenav(false);
   }
 }
