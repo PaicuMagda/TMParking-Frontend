@@ -282,13 +282,16 @@
       <mat-step [stepControl]="imageFormGroup">
         <form [formGroup]="imageFormGroup">
           <ng-template matStepLabel>Upload Image Profile</ng-template>
-          <mat-form-field>
-            <ngx-mat-file-input
-              formControlName="image"
+          <div>
+            <input
               placeholder="Upload a significant image for your profile"
-            ></ngx-mat-file-input>
+              (change)="onFileSelect($event)"
+              type="file"
+              name="image"
+            />
+            <label>Upload</label>
             <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
-          </mat-form-field>
+          </div>
           <div class="stepper__file-upload-button">
             <button mat-button matStepperPrevious class="button-back">
               Back
@@ -352,11 +355,7 @@
           <button mat-button (click)="stepper.reset()" class="button-next">
             Reset
           </button>
-          <button
-            mat-button
-            class="button-saveChanges"
-            (click)="openSaveChangesConfirmDialog()"
-          >
+          <button mat-button class="button-saveChanges" (click)="(onSubmit)">
             Save Changes
           </button>
         </div>

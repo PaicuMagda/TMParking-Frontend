@@ -158,4 +158,19 @@ export class UsersService {
   getUsers(): Observable<User[]> {
     return of(this.users);
   }
+
+  async uploadFile(file: File): Promise<any> {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await this.http
+        .post<any>('https://localhost:7010/api/Files/upload', formData)
+        .toPromise();
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
