@@ -111,16 +111,44 @@ export class AddNewUserDialogComponent {
     });
   }
 
-  onFileSelect(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.imageFormGroup.get('image')?.setValue(file);
-    }
-  }
+  // onFileSelect(event: any) {
+  //   if (event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     this.imageFormGroup.get('image')?.setValue(file);
+  //   }
+  // }
 
   onSubmit() {
     const formData = new FormData();
+
+    const selectedFile = this.onFileChange();
+    if (selectedFile) {
+      formData.append('file', selectedFile);
+    }
+
     formData.append('file', this.imageFormGroup.get('image')?.value);
+    formData.append('firstname', this.nameFormGroup.get('firstname')?.value);
+    formData.append('lastname', this.nameFormGroup.get('lastname')?.value);
+    formData.append('address', this.addressFormGroup.get('address')?.value);
+    formData.append('username', this.usernameFormGroup.get('username')?.value);
+    formData.append('email', this.emailFormGroup.get('email')?.value);
+    formData.append('pnc', this.pncFormGroup.get('pnc')?.value);
+    formData.append('phone', this.phoneFormGroup.get('phone')?.value);
+    formData.append(
+      'dateBirth',
+      this.dateBirthFormGroup.get('dateBirth')?.value
+    );
+    formData.append('zip', this.stateZipCodeFormGroup.get('zip')?.value);
+    formData.append('state', this.stateZipCodeFormGroup.get('state')?.value);
+    formData.append(
+      'vehiclesRegistered',
+      this.vehicleRegisteredFormGroup.get('vehiclesRegistered')?.value
+    );
+    formData.append('password', this.passwordFormGroup.get('password')?.value);
+    formData.append(
+      'confirmPassword',
+      this.passwordFormGroup.get('confirmPassword')?.value
+    );
 
     this.http
       .post<any>('https://localhost:7010/api/Files/upload', formData)
@@ -130,31 +158,12 @@ export class AddNewUserDialogComponent {
       );
   }
 
-  onFileChange(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      const formData = new FormData();
-      formData.append('file', file);
-      this.http
-        .post('https://localhost:7010/api/Files/upload', formData)
-        .subscribe((resp: any) => {});
+  onFileChange(): File | null {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      return fileInput.files[0];
     }
-  }
-
-  async uploadFile() {
-    try {
-      if (this.file) {
-        const response = await this.userService.uploadFile(this.file);
-        console.log('Răspunsul de la server:', response);
-        console.log('Fișierul a fost încărcat cu succes!', response);
-        // Continuă cu alte acțiuni după încărcarea cu succes
-      } else {
-        console.error('Nu există un fișier de încărcat!');
-      }
-    } catch (error) {
-      console.error('Eroare la încărcarea fișierului:', error);
-      // Gestionează eroarea aici, afișează un mesaj pentru utilizator sau iei alte măsuri
-    }
+    return null;
   }
 
   openSaveChangesConfirmDialog() {

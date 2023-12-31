@@ -9,7 +9,7 @@
   <mat-divider></mat-divider>
   <form [formGroup]="imageFormGroup" class="my-profile__image-upload">
     <div class="my-profile__image-upload__image-div">
-      <img src="../../../../assets/images/my-profile-image.jpg" />
+      <img [src]="imageUrl" />
     </div>
     <div class="my-profile__image-upload__image-button"></div>
   </form>
@@ -282,16 +282,17 @@
       <mat-step [stepControl]="imageFormGroup">
         <form [formGroup]="imageFormGroup">
           <ng-template matStepLabel>Upload Image Profile</ng-template>
-          <div>
-            <input
-              placeholder="Upload a significant image for your profile"
-              (change)="onFileSelect($event)"
-              type="file"
-              name="image"
-            />
-            <label>Upload</label>
-            <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
-          </div>
+
+          <input
+            placeholder="Upload a significant image for your profile"
+            (change)="onFileChange()"
+            name="image"
+            type="file"
+            id="fileInput"
+          />
+          <label>Upload</label>
+          <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
+
           <div class="stepper__file-upload-button">
             <button mat-button matStepperPrevious class="button-back">
               Back
@@ -355,7 +356,7 @@
           <button mat-button (click)="stepper.reset()" class="button-next">
             Reset
           </button>
-          <button mat-button class="button-saveChanges" (click)="(onSubmit)">
+          <button mat-button class="button-saveChanges" (click)="onSubmit()">
             Save Changes
           </button>
         </div>
