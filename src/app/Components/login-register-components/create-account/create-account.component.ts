@@ -10,6 +10,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class CreateAccountComponent {
   createAccountForm: FormGroup;
+  isPasswordValid: boolean = false;
+  isMinLengthValid: boolean = false;
+  isLowerCaseValid: boolean = false;
+  isUpperCaseValid: boolean = false;
+  isSpecialCharValid: boolean = false;
 
   constructor(
     private formBuider: FormBuilder,
@@ -18,12 +23,24 @@ export class CreateAccountComponent {
   ) {
     this.createAccountForm = this.formBuider.group({
       email: ['', [Validators.required, Validators.email]],
-      username: [
+      username: ['', [Validators.required]],
+      password: [
         '',
-        [Validators.required, Validators.pattern(/^[a-zA-Z]{4,30}$/)],
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%^&+=]).*$'),
+        ],
       ],
-      password: ['', [Validators.required, Validators.minLength(8)]],
     });
+  }
+
+  checkPassword() {
+    const passwordValue = this.createAccountForm.get('password')?.value;
+    this.isMinLengthValid = passwordValue.length >= 8;
+    this.isLowerCaseValid = /[a-z]/.test(passwordValue);
+    this.isUpperCaseValid = /[A-Z]/.test(passwordValue);
+    this.isSpecialCharValid = /[0-9@#$%^&+=]/.test(passwordValue);
   }
 
   register() {

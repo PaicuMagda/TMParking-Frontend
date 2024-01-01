@@ -9,68 +9,113 @@
     </div>
 
     <div class="container__login-form__credentials">
-      <div class="container__login-form__credentials__username">
-        <div class="container__login-form__credentials__username__label">
+      <div class="container__login-form__credentials__email">
+        <div class="container__login-form__credentials__email__label">
           <mat-icon
             svgIcon="email"
-            class="container__login-form__credentials__username__label__icon"
+            class="container__login-form__credentials__email__label__icon"
           ></mat-icon>
-          <label
-            class="container__login-form__credentials__username__label__label"
-            >Email Address</label
-          >
+          <label>Email Address</label>
         </div>
-        <input
-          class="container__login-form__credentials__username__input"
-          type="text"
-          formControlName="email"
-        />
+        <mat-form-field appearance="outline">
+          <input
+            (input)="checkPassword()"
+            matInput
+            type="text"
+            formControlName="email"
+          />
+          <mat-error
+            *ngIf="createAccountForm.get('email')?.hasError('required')"
+            >Email is required.
+          </mat-error>
+          <mat-error *ngIf="createAccountForm.get('email')?.hasError('email')"
+            >Invadivd email address.</mat-error
+          >
+        </mat-form-field>
       </div>
       <div class="container__login-form__credentials__password">
         <div class="container__login-form__credentials__password__label">
           <mat-icon svgIcon="user"></mat-icon>
-          <label
-            class="container__login-form__credentials__password__label__label"
-            >Username</label
-          >
+          <label>Username</label>
         </div>
-
-        <input
-          class="container__login-form__credentials__password__input"
-          type="password"
-          formControlName="username"
-        />
+        <mat-form-field appearance="outline">
+          <input
+            (input)="checkPassword()"
+            matInput
+            type="password"
+            formControlName="username"
+          />
+          <mat-error
+            *ngIf="createAccountForm.get('username')?.hasError('required')"
+            >Username is required.
+          </mat-error>
+        </mat-form-field>
       </div>
-      <div class="container__login-form__credentials__username">
-        <div class="container__login-form__credentials__username__label">
+      <div class="container__login-form__credentials__password">
+        <div class="container__login-form__credentials__password__label">
           <mat-icon svgIcon="password"></mat-icon>
-          <label
-            class="container__login-form__credentials__password__label__label"
-            >Password</label
-          >
+          <label>Password</label>
         </div>
-        <input
-          class="container__login-form__credentials__password__input"
-          type="password"
-          formControlName="password"
-        />
+        <mat-form-field appearance="outline">
+          <input
+            (input)="checkPassword()"
+            matInput
+            type="password"
+            formControlName="password"
+          />
+        </mat-form-field>
+      </div>
+      <div class="container__login-form__password-requires">
+        <p>Passoword must contain:</p>
+        <ul>
+          <div>
+            <span>
+              <mat-icon svgIcon="check" *ngIf="!isMinLengthValid"></mat-icon>
+              <mat-icon
+                svgIcon="check-green"
+                *ngIf="isMinLengthValid"
+              ></mat-icon>
+              At least 8 characters</span
+            >
+          </div>
+          <div>
+            <span>
+              <mat-icon svgIcon="check" *ngIf="!isLowerCaseValid"></mat-icon>
+              <mat-icon
+                svgIcon="check-green"
+                *ngIf="isLowerCaseValid"
+              ></mat-icon>
+              At least one small letter</span
+            >
+          </div>
+          <div>
+            <span>
+              <mat-icon svgIcon="check" *ngIf="!isUpperCaseValid"></mat-icon>
+              <mat-icon
+                svgIcon="check-green"
+                *ngIf="isUpperCaseValid"
+              ></mat-icon>
+              At least one capital letter
+            </span>
+          </div>
+          <div>
+            <span>
+              <mat-icon svgIcon="check" *ngIf="!isSpecialCharValid"></mat-icon>
+              <mat-icon
+                svgIcon="check-green"
+                *ngIf="isSpecialCharValid"
+              ></mat-icon>
+              At least one number or symbol</span
+            >
+          </div>
+        </ul>
       </div>
     </div>
-    <div class="container__login-form__password-requires">
-      <p>Passoword must contain:</p>
-      <ul>
-        <li>
-          <span>At least 8 characters</span>
-        </li>
-        <li>At least one small letter</li>
-        <li>At least one capital letter</li>
-        <li>At least one number or symbol</li>
-      </ul>
-    </div>
+
     <div class="container__login-form__div-button">
       <button
         class="container__login-form__div-button__button"
-        (click)="register()"
+        (cdivck)="register()"
       >
         CREATE ACCOUNT
       </button>
