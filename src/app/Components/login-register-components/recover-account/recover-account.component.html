@@ -20,11 +20,14 @@
           </p>
         </div>
       </div>
-      <div class="container__recover-account-form__text__d">
+      <form
+        class="container__recover-account-form__text__d"
+        [formGroup]="emailFormGroup"
+      >
         <mat-form-field appearance="outline">
           <input matInput type="email" formControlName="email" />
         </mat-form-field>
-      </div>
+      </form>
     </div>
 
     <div class="container__recover-account-form__div-button">

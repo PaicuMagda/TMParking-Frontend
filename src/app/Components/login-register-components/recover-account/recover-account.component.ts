@@ -19,23 +19,25 @@ export class RecoverAccountComponent implements OnInit {
   ) {}
 
   sendEmail() {
-    this.resetPassword.sendResetPasswordLink(this.email).subscribe({
-      next: (resp) => {
-        this.toast.success({
-          detail: 'Success Message',
-          summary: resp.message,
-          duration: 3000,
-        });
-      },
+    this.resetPassword
+      .sendResetPasswordLink(this.emailFormGroup.get('email')?.value)
+      .subscribe({
+        next: (resp) => {
+          this.toast.success({
+            detail: 'Success Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+        },
 
-      error: (err) => {
-        this.toast.error({
-          detail: 'Error Message',
-          summary: err.error.message,
-          duration: 5000,
-        });
-      },
-    });
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
   }
 
   ngOnInit() {
