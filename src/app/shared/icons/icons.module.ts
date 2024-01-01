@@ -43,6 +43,8 @@ export class IconsModule {
       .addSvgIcon('plus-solid', this.setPath(`${this.path}/plus-solid.svg`))
       .addSvgIcon('table-solid', this.setPath(`${this.path}/table-solid.svg`))
       .addSvgIcon('draft', this.setPath(`${this.path}/draft.svg`))
+      .addSvgIcon('check', this.setPath(`${this.path}/check.svg`))
+      .addSvgIcon('check-green', this.setPath(`${this.path}/check-green.svg`))
       .addSvgIcon(
         'ellipsis-vertical-solid',
         this.setPath(`${this.path}/ellipsis-vertical-solid.svg`)

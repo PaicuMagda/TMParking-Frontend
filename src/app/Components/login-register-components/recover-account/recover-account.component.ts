@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 
@@ -7,12 +8,14 @@ import { ResetPasswordService } from 'src/app/services/reset-password.service';
   templateUrl: './recover-account.component.html',
   styleUrls: ['./recover-account.component.scss'],
 })
-export class RecoverAccountComponent {
+export class RecoverAccountComponent implements OnInit {
   email: string = '';
+  emailFormGroup: FormGroup;
 
   constructor(
     private resetPassword: ResetPasswordService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private formBuilder: FormBuilder
   ) {}
 
   sendEmail() {
@@ -32,6 +35,12 @@ export class RecoverAccountComponent {
           duration: 5000,
         });
       },
+    });
+  }
+
+  ngOnInit() {
+    this.emailFormGroup = this.formBuilder.group({
+      email: [''],
     });
   }
 }
