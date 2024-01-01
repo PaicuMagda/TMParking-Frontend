@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
@@ -20,6 +15,8 @@ export class ResetPasswordComponent implements OnInit {
   isLowerCaseValid: boolean = false;
   isUpperCaseValid: boolean = false;
   isSpecialCharValid: boolean = false;
+  showNewPassword: boolean = false;
+  showNewPasswordConfirm: boolean = false;
 
   checkPassword() {
     const passwordValue = this.resetPassword.get('newPassword')?.value;
@@ -34,6 +31,14 @@ export class ResetPasswordComponent implements OnInit {
       this.resetPassword.get('newPassword')?.value ===
       this.resetPassword.get('confirmNewPassword')?.value
     );
+  }
+
+  showNewPasswordChange() {
+    this.showNewPassword = !this.showNewPassword;
+  }
+
+  showNewPasswordConfirmChange() {
+    this.showNewPasswordConfirm = !this.showNewPasswordConfirm;
   }
 
   ngOnInit(): void {
