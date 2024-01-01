@@ -21,12 +21,9 @@
         </div>
       </div>
       <div class="container__recover-account-form__text__d">
-        <input
-          class="container__recover-account-form__text__d__input"
-          type="text"
-          [(ngModel)]="email"
-          name="email"
-        />
+        <mat-form-field appearance="outline">
+          <input matInput type="email" formControlName="email" />
+        </mat-form-field>
       </div>
     </div>
 
