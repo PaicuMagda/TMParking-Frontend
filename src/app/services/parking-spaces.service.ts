@@ -1,12 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { ParkingSpace } from '../interfaces/parking-space';
+import { ParkingSpot } from '../interfaces/parking-spot';
+import { ParkingStatus } from '../enums/parking-status';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ParkingPlacesService {
   constructor() {}
+
+  parkingSpotsMock: ParkingSpot[] = [
+    { id: 1, spotNumber: 1, isReserved: ParkingStatus.AVAILABLE },
+    { id: 2, spotNumber: 2, isReserved: ParkingStatus.OCCUPIED },
+    { id: 2, spotNumber: 3, isReserved: ParkingStatus.PARTIALLYOCCUPIED },
+    { id: 4, spotNumber: 4, isReserved: ParkingStatus.OCCUPIED },
+    { id: 5, spotNumber: 5, isReserved: ParkingStatus.PARTIALLYOCCUPIED },
+    { id: 6, spotNumber: 6, isReserved: ParkingStatus.AVAILABLE },
+    { id: 7, spotNumber: 7, isReserved: ParkingStatus.OCCUPIED },
+    { id: 8, spotNumber: 8, isReserved: ParkingStatus.AVAILABLE },
+    { id: 9, spotNumber: 9, isReserved: ParkingStatus.AVAILABLE },
+    { id: 10, spotNumber: 10, isReserved: ParkingStatus.OCCUPIED },
+    { id: 11, spotNumber: 11, isReserved: ParkingStatus.PARTIALLYOCCUPIED },
+    { id: 12, spotNumber: 12, isReserved: ParkingStatus.PARTIALLYOCCUPIED },
+  ];
 
   parcari: ParkingSpace[] = [
     {
@@ -25,8 +42,23 @@ export class ParkingPlacesService {
       isFree: false,
       isVideoSurveillance: true,
       description:
-        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+        'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.        Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces         Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.        Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces         Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces ',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
+
     {
       id: 1,
       name: 'Parcare Aeroport',
@@ -45,7 +77,22 @@ export class ParkingPlacesService {
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
+
     {
       id: 2,
       name: 'Parcare Subterană',
@@ -64,6 +111,20 @@ export class ParkingPlacesService {
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 3,
@@ -82,6 +143,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 4,
@@ -100,6 +175,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 5,
@@ -118,6 +207,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 6,
@@ -136,6 +239,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 7,
@@ -154,6 +271,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 7,
@@ -172,6 +303,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 8,
@@ -190,6 +335,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 9,
@@ -208,6 +367,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 10,
@@ -227,6 +400,20 @@ export class ParkingPlacesService {
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 11,
@@ -245,6 +432,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 12,
@@ -263,6 +464,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 13,
@@ -281,6 +496,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 14,
@@ -299,6 +528,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
   ];
 
@@ -321,6 +564,20 @@ export class ParkingPlacesService {
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 1,
@@ -340,6 +597,20 @@ export class ParkingPlacesService {
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 2,
@@ -358,6 +629,20 @@ export class ParkingPlacesService {
       isVideoSurveillance: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 3,
@@ -377,6 +662,20 @@ export class ParkingPlacesService {
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
     {
       id: 4,
@@ -396,6 +695,20 @@ export class ParkingPlacesService {
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
+      parkingSpots: [
+        this.parkingSpotsMock[0],
+        this.parkingSpotsMock[1],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[2],
+        this.parkingSpotsMock[3],
+        this.parkingSpotsMock[4],
+        this.parkingSpotsMock[5],
+        this.parkingSpotsMock[6],
+        this.parkingSpotsMock[7],
+        this.parkingSpotsMock[8],
+        this.parkingSpotsMock[9],
+        this.parkingSpotsMock[10],
+      ],
     },
   ];
 

@@ -1,0 +1,24 @@
+.legend {
+  display: flex;
+  flex-direction: row;
+  gap: 3%;
+  margin-bottom: 1%;
+
+  &__status {
+    display: flex;
+    gap: 5%;
+    flex-direction: row;
+
+    label {
+      display: flex;
+    }
+
+    &__dot {
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      border: 2px solid black;
+      flex-shrink: 0;
+    }
+  }
+}

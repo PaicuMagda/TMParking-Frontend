@@ -2,17 +2,69 @@
   <app-nav-bar [showSearch]="!showSearch"></app-nav-bar>
   <div class="parking-space-details__container">
     <div class="parking-space-details__container__left">
-      <div class="parking-space-details__container__left__informations"></div>
-      <div class="parking-space-details__container__left__calendar"></div>
+      <div class="parking-space-details__container__left__informations">
+        <div
+          class="parking-space-details__container__left__informations__parking-lot"
+        ></div>
+        <div
+          class="parking-space-details__container__left__informations__owner"
+        ></div>
+      </div>
+      <div class="parking-space-details__container__left__all-spots">
+        <app-legend></app-legend>
+        <div class="parking-space-details__container__left__all-spots__cards">
+          <div
+            class="parking-space-details__container__left__all-spots__cards__spot"
+            *ngFor="let spot of parkingPlace.parkingSpots"
+          >
+            <div
+              class="parking-space-details__container__left__all-spots__cards__spot__status"
+              [ngStyle]="{
+                'background-color':
+                  spot.isReserved === 'occupied'
+                    ? '#0D1C61'
+                    : spot.isReserved === 'partially_occupied'
+                    ? '#CBCFCF'
+                    : spot.isReserved === 'available'
+                    ? '#25A605'
+                    : 'white'
+              }"
+            ></div>
+            <div>
+              <p>{{ spot.spotNumber }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="parking-space-details__container__right">
       <div class="parking-space-details__container__right__image">
         <img src="{{ parkingPlace.imageUrl }}" />
       </div>
-      <div class="parking-space-details__container__right__description">
+      <textarea
+        readonly
+        class="parking-space-details__container__right__description"
+      >
         {{ parkingPlace.description }}
+      </textarea>
+      <div class="parking-space-details__container__right__buttons">
+        <button class="parking-space-details__container__right__buttons__start">
+          🏁START
+        </button>
+        <button
+          class="parking-space-details__container__right__buttons__directions"
+        >
+          🗺️DIRECTIONS
+        </button>
+        <button
+          class="parking-space-details__container__right__buttons__book-now"
+        >
+          BOOK NOW
+        </button>
+        <button class="parking-space-details__container__right__buttons__exit">
+          ❌ EXIT
+        </button>
       </div>
-      <div class="parking-space-details__container__right__buttons"></div>
     </div>
   </div>
 </div>

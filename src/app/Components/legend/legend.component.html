@@ -1,0 +1,9 @@
+<div class="legend">
+  <div *ngFor="let parkingStatus of parkingStatus" class="legend__status">
+    <div
+      class="legend__status__dot"
+      [style.background-color]="getParkingStatusColor(parkingStatus)"
+    ></div>
+    <label>{{ parkingStatus | uppercase }}</label>
+  </div>
+</div>

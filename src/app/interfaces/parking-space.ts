@@ -1,3 +1,5 @@
+import { ParkingSpot } from './parking-spot';
+
 export interface ParkingSpace {
   id: number;
   name: string;
@@ -16,4 +18,5 @@ export interface ParkingSpace {
   description: string;
   paidParking?: boolean;
   isDraft?: boolean;
+  parkingSpots: ParkingSpot[];
 }
