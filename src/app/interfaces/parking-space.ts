@@ -1,9 +1,10 @@
 import { ParkingSpot } from './parking-spot';
+import { User } from './user';
 
 export interface ParkingSpace {
   id: number;
   name: string;
-  owner: string;
+  owner: User;
   address: string;
   locuriDisponibile: number;
   imageUrl: string;

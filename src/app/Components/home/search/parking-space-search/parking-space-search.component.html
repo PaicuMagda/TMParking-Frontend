@@ -1,7 +1,11 @@
-<div class="select-date">
-  <input type="text" />
+<div>
+  <mat-form-field appearance="outline">
+    <input matInput [matDatepicker]="picker" placeholder="Select date..." />
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
 </div>
-<div class="related-tags">
+<div>
   <h1>Related Tags 🏬</h1>
   <div class="zone">
     <button *ngFor="let zona of zone" mat-button class="zone__button">

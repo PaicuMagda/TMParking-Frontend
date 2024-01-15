@@ -39,15 +39,12 @@
     font-size: 1.5em;
   }
 }
-.select-date {
-  input {
-    border-radius: 4px;
-    width: 90%;
-    height: 2.2rem;
-    font-size: 1.5em;
-  }
-}
 
-.related-tags {
-  margin-top: 1rem;
+mat-form-field {
+  width: 100%;
+  font-size: 120%;
+}
+::ng-deep .mat-datepicker-content .mat-calendar {
+  width: 330px !important;
+  height: 354px !important;
 }

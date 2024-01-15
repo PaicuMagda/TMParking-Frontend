@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Vehicle } from '../interfaces/vehicle';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -81,4 +82,8 @@ export class VehiclesService {
       vehicleIdentificationNumber: 96988963,
     },
   ];
+
+  getAllVehicle(): Observable<Vehicle[]> {
+    return of(this.vehicles);
+  }
 }

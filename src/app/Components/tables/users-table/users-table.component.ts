@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { EnumUsersTable } from 'src/app/enums/enum-users-table';
 import { User } from 'src/app/interfaces/user';
 import { UsersService } from 'src/app/services/users.service';
@@ -16,12 +17,21 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<User>([]);
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  data: User[] = [];
 
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.usersService.getUsers().subscribe((values) => {
-      const usersWithFullName = values.map((user) => {
+    console.log(
+      this.activatedRoute.data.subscribe((value) => {
+        console.log(value);
+      })
+    );
+    this.activatedRoute.data.subscribe((values: any) => {
+      const usersWithFullName = values.users.map((user: any) => {
         return {
           ...user,
           fullname: user.lastname + ' ' + user.firstname,
