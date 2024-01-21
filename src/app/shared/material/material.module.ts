@@ -20,6 +20,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -45,6 +46,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTabsModule,
     MatPaginatorModule,
     MatMenuModule,
+    MatSelectModule,
   ],
 })
 export class MaterialModule {}

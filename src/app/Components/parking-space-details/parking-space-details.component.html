@@ -1,22 +1,41 @@
 <div class="parking-space-details">
   <app-nav-bar [showSearch]="!showSearch"></app-nav-bar>
+  <div class="parking-space-details__close">
+    <span>Book a parking spot here</span>
+    <mat-icon svgIcon="icon-close"></mat-icon>
+  </div>
+  <mat-divider></mat-divider>
   <div class="parking-space-details__container">
     <div class="parking-space-details__container__left">
       <div class="parking-space-details__container__left__informations">
         <div
           class="parking-space-details__container__left__informations__parking-lot"
         >
-          <h2>Informations</h2>
-
-          <div>
-            <div>Address</div>
-            <div>Locuri disponibile</div>
-          </div>
+          <span>Informations</span>
+          <div>Address</div>
+          <div>Locuri disponibile</div>
+          <div>Owner</div>
+          <div>Start Date</div>
+          <div>End Date</div>
+          <span>Properties</span>
+          <div>Paid Parking</div>
+          <div>Video Surveillance</div>
+          <div>Agricultural Machinery</div>
+          <div>Public Transport</div>
+          <div>Truck</div>
         </div>
-        <div
-          class="parking-space-details__container__left__informations__owner"
-        >
-          <h2>Book a parking spot</h2>
+
+        <div class="parking-space-details__container__right">
+          <div class="parking-space-details__container__right__image">
+            <img src="{{ parkingPlace.imageUrl }}" />
+          </div>
+          <textarea
+            readonly
+            class="parking-space-details__container__right__description"
+          >
+          {{ parkingPlace.description }}
+        </textarea
+          >
         </div>
       </div>
       <div class="parking-space-details__container__left__all-spots">
@@ -46,33 +65,137 @@
         </div>
       </div>
     </div>
-    <div class="parking-space-details__container__right">
-      <div class="parking-space-details__container__right__image">
-        <img src="{{ parkingPlace.imageUrl }}" />
+    <div class="parking-space-details__container__left__informations__booking">
+      <div class="type">
+        <div><h2>Book a parking spot</h2></div>
+        <div>
+          <mat-button-toggle-group
+            (change)="changeType($event.value)"
+            [value]="bookingType"
+          >
+            <mat-button-toggle value="day">One day</mat-button-toggle>
+            <mat-button-toggle value="manyDays">Many days</mat-button-toggle>
+            <mat-button-toggle value="subscription"
+              >Subscription</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </div>
       </div>
-      <textarea
-        readonly
-        class="parking-space-details__container__right__description"
+
+      <div
+        class="parking-space-details__container__left__informations__booking__fields"
       >
-        {{ parkingPlace.description }}
-      </textarea>
-      <div class="parking-space-details__container__right__buttons">
-        <button class="parking-space-details__container__right__buttons__start">
-          🏁START
-        </button>
-        <button
-          class="parking-space-details__container__right__buttons__directions"
+        <div
+          *ngIf="bookingType === 'day'"
+          class="parking-space-details__container__left__informations__booking__fields__one-day"
         >
-          🗺️DIRECTIONS
-        </button>
-        <button
-          class="parking-space-details__container__right__buttons__book-now"
-        >
-          BOOK NOW
-        </button>
-        <button class="parking-space-details__container__right__buttons__exit">
-          ❌ EXIT
-        </button>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__date"
+          >
+            <div>
+              <div>Choose a date</div>
+              <div>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" />
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__time"
+          >
+            <div>Alege intervalul orar</div>
+            <div
+              class="parking-space-details__container__left__informations__booking__fields__time__mat-form-field"
+            >
+              <div>
+                <mat-form-field>
+                  <mat-label>Start Hours</mat-label>
+                  <select matNativeControl required>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field>
+                  <mat-label>End Hours</mat-label>
+                  <select matNativeControl required>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>
+              Alege vehiculul care va fi parcat
+
+              <div>
+                <mat-form-field>
+                  <mat-label>End Hours</mat-label>
+                  <select matNativeControl required>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div>
+              <div>Alege locul de parcare</div>
+              <div>
+                <mat-form-field>
+                  <mat-label>End Hours</mat-label>
+                  <select matNativeControl required>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="bookingType === 'manyDays'"
+          class="parking-space-details__container__left__informations__booking__fields__many-days"
+        ></div>
+        <div
+          *ngIf="bookingType === 'subscription'"
+          class="parking-space-details__container__left__informations__booking__fields__subscription"
+        ></div>
+      </div>
+
+      <div
+        class="parking-space-details__container__left__informations__booking__button"
+      >
+        <button class="">Book</button>
       </div>
     </div>
   </div>

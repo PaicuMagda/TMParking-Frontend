@@ -19,5 +19,8 @@ export interface ParkingSpace {
   description: string;
   paidParking?: boolean;
   isDraft?: boolean;
+  paymentPerHour: number;
+  paymentPerDay: number;
+  paymentForSubscription: number;
   parkingSpots: ParkingSpot[];
 }

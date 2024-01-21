@@ -10,11 +10,17 @@ import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 export class ParkingSpaceDetailsComponent implements OnInit {
   showSearch: boolean = false;
   parkingPlace: any;
+  bookingType: string = 'day';
 
   constructor(
     private router: ActivatedRoute,
     private parkingSpaceService: ParkingPlacesService
   ) {}
+
+  changeType(value: string) {
+    this.bookingType = value;
+    console.log(this.bookingType);
+  }
 
   ngOnInit() {
     this.router.paramMap.subscribe((paramMap) => {
