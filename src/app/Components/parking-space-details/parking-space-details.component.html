@@ -92,20 +92,7 @@
           <div
             class="parking-space-details__container__left__informations__booking__fields__date"
           >
-            <div>
-              <div>Choose a date</div>
-              <div>
-                <mat-form-field>
-                  <input matInput [matDatepicker]="picker" />
-                  <mat-datepicker-toggle
-                    matIconSuffix
-                    [for]="picker"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-            </div>
-
+            <div>Choose a date</div>
             <div>
               <mat-form-field>
                 <input matInput [matDatepicker]="picker" />
@@ -151,34 +138,57 @@
           <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"
           >
+            <div>Alege vehiculul care va fi parcat</div>
             <div>
-              Alege vehiculul care va fi parcat
-
-              <div>
-                <mat-form-field>
-                  <mat-label>End Hours</mat-label>
-                  <select matNativeControl required>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </mat-form-field>
-              </div>
+              <mat-form-field>
+                <select matNativeControl required>
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+              </mat-form-field>
             </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Name of parking spot</div>
             <div>
-              <div>Alege locul de parcare</div>
-              <div>
-                <mat-form-field>
-                  <mat-label>End Hours</mat-label>
-                  <select matNativeControl required>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </mat-form-field>
-              </div>
+              <mat-form-field>
+                <select matNativeControl required>
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Choose method payment</div>
+            <div>
+              <mat-form-field>
+                <select matNativeControl required>
+                  <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Total to paint</div>
+            <div>
+              <mat-form-field>
+                <input matInput />
+              </mat-form-field>
             </div>
           </div>
         </div>
