@@ -12,19 +12,101 @@
           class="parking-space-details__container__left__informations__parking-lot"
         >
           <span>Informations</span>
-          <div>Address</div>
-          <div>Locuri disponibile</div>
-          <div>Owner</div>
-          <div>Start Date</div>
-          <div>End Date</div>
+          <div class="row">
+            <p class="col-lg">Address</p>
+            <p class="col-sm">{{ parkingPlace.address }}</p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Locuri disponibile</p>
+            <p class="col-sm">{{ parkingPlace.locuriDisponibile }}</p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Owner</p>
+            <p class="col-sm">
+              {{ parkingPlace.owner.firstname }}
+              {{ parkingPlace.owner.lastname }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Start Date</p>
+            <p class="col-sm">{{ parkingPlace.startDate | date }}</p>
+          </div>
+          <div class="row">
+            <p class="col-lg">End Date</p>
+            <p class="col-sm">{{ parkingPlace.endDate | date }}</p>
+          </div>
           <span>Properties</span>
-          <div>Paid Parking</div>
-          <div>Video Surveillance</div>
-          <div>Agricultural Machinery</div>
-          <div>Public Transport</div>
-          <div>Truck</div>
+          <div class="row">
+            <p class="col-lg">Paid Parking</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isFree,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isFree
+              }"
+            >
+              {{ parkingPlace.isFree ? "Yes" : "No" }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Video Surveillance</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isVideoSurveillance,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isVideoSurveillance
+              }"
+            >
+              {{ parkingPlace.isVideoSurveillance ? "Yes" : "No" }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Agricultural Machinery</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isAgriculturalMachinery,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isAgriculturalMachinery
+              }"
+            >
+              {{ parkingPlace.isAgriculturalMachinery ? "Yes" : "No" }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Public Transport</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isPublicTransport,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isPublicTransport
+              }"
+            >
+              {{ parkingPlace.isPublicTransport ? "Yes" : "No" }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Truck</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isTruck,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isTruck
+              }"
+            >
+              {{ parkingPlace.isTruck ? "Yes" : "No" }}
+            </p>
+          </div>
         </div>
-
         <div class="parking-space-details__container__right">
           <div class="parking-space-details__container__right__image">
             <img src="{{ parkingPlace.imageUrl }}" />
@@ -114,11 +196,10 @@
               <div>
                 <mat-form-field>
                   <mat-label>Start Hours</mat-label>
-                  <select matNativeControl required>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
+                  <select matNativeControl required [(ngModel)]="startHour">
+                    <option *ngFor="let hour of hours" value="hour">
+                      {{ hour }}
+                    </option>
                   </select>
                 </mat-form-field>
               </div>

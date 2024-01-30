@@ -52,7 +52,7 @@ export class ParkingPlacesService {
       imageUrl: '../../../assets/images/parking-spaces/parcare3.jpg',
       isCargoVehicles: true,
       isTruck: true,
-      isAgriculturalMachinery: true,
+      isAgriculturalMachinery: false,
       isPublicTransport: true,
       startDate: new Date(),
       endDate: new Date('2024-12-31'),

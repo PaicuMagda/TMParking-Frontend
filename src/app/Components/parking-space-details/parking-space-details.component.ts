@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ParkingSpaceBookingService } from 'src/app/services/parking-space-booking.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 
 @Component({
@@ -11,10 +12,14 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   showSearch: boolean = false;
   parkingPlace: any;
   bookingType: string = 'day';
+  startHour: number;
+  endHour: number;
+  hours: number[] = [];
 
   constructor(
     private router: ActivatedRoute,
-    private parkingSpaceService: ParkingPlacesService
+    private parkingSpaceService: ParkingPlacesService,
+    private bookingService: ParkingSpaceBookingService
   ) {}
 
   changeType(value: string) {
@@ -22,7 +27,14 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     console.log(this.bookingType);
   }
 
+  populateHoursArray() {
+    this.bookingService.getNumberArray().subscribe((values) => {
+      this.hours = values;
+    });
+  }
+
   ngOnInit() {
+    this.populateHoursArray();
     this.router.paramMap.subscribe((paramMap) => {
       const idString = paramMap.get('id');
       if (idString != null) {
