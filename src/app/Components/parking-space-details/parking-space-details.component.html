@@ -418,7 +418,44 @@
         <div
           *ngIf="bookingType === 'subscription'"
           class="parking-space-details__container__left__informations__booking__fields__subscription"
-        ></div>
+        >
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Select the number of months</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Select the number of monthst"
+                  [matAutocomplete]="payment"
+                />
+                <mat-autocomplete #payment="matAutocomplete">
+                  <mat-option
+                    *ngFor="let method of paymentMethods"
+                    [value]="method"
+                  >
+                    {{ method }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Total to paint</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  [(ngModel)]="calculatedPrice"
+                  placeholder="LEI 💳"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div
