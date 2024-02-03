@@ -13,4 +13,12 @@ export class ParkingSpaceBookingService {
       21, 22, 23, 24,
     ]);
   }
+
+  getMethodPayment(): string[] {
+    return [
+      'Payment by the hour',
+      'Payment by the day',
+      'Negotiation with owner',
+    ];
+  }
 }

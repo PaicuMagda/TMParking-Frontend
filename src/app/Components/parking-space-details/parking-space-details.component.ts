@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, map, startWith } from 'rxjs';
+import { Vehicle } from 'src/app/interfaces/vehicle';
 import { ParkingSpaceBookingService } from 'src/app/services/parking-space-booking.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
+import { VehiclesService } from 'src/app/services/vehicles.service';
 
 @Component({
   selector: 'app-parking-space-details',
@@ -15,12 +19,32 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   startHour: number;
   endHour: number;
   hours: number[] = [];
+  endHourIsSmaller: boolean;
+  vehicles: Vehicle[] = [];
+  vehiclesControl = new FormControl();
+  filteredVehicles: Observable<Vehicle[]>;
+  paymentMethods: string[] = [];
 
   constructor(
     private router: ActivatedRoute,
     private parkingSpaceService: ParkingPlacesService,
-    private bookingService: ParkingSpaceBookingService
-  ) {}
+    private bookingService: ParkingSpaceBookingService,
+    private vehicleService: VehiclesService
+  ) {
+    // this.filteredVehicles = this.vehiclesControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map((value) => this.filter(value))
+    // );
+  }
+
+  // filter(value: string): Vehicle[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.vehicles.filter(
+  //     (vehicle) =>
+  //       vehicle.vehicleIdentificationNumber !== undefined &&
+  //       vehicle.vehicleIdentificationNumber.toString().includes(filterValue)
+  //   );
+  // }
 
   changeType(value: string) {
     this.bookingType = value;
@@ -33,8 +57,15 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     });
   }
 
+  // checkEndHourIsSmaller() {
+  //   // return this.endHour <= this.startHour;
+  //   console.log(this.startHour);
+  //   console.log(this.endHour);
+  // }
+
   ngOnInit() {
     this.populateHoursArray();
+
     this.router.paramMap.subscribe((paramMap) => {
       const idString = paramMap.get('id');
       if (idString != null) {
@@ -44,5 +75,11 @@ export class ParkingSpaceDetailsComponent implements OnInit {
         });
       }
     });
+
+    this.vehicleService.getAllVehicle().subscribe((vehicles) => {
+      this.vehicles = vehicles;
+    });
+
+    this.paymentMethods = this.bookingService.getMethodPayment();
   }
 }

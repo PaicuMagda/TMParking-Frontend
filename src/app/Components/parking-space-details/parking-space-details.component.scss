@@ -114,6 +114,12 @@
                 display: flex;
                 gap: 10%;
 
+                select,
+                option {
+                  font-weight: bold;
+                  text-align: center;
+                }
+
                 mat-form-field {
                   width: 80%;
                 }

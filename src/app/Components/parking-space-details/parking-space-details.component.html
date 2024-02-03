@@ -198,7 +198,7 @@
                   <mat-label>Start Hours</mat-label>
                   <select matNativeControl required [(ngModel)]="startHour">
                     <option *ngFor="let hour of hours" value="hour">
-                      {{ hour }}
+                      {{ hour | hourFormat }}
                     </option>
                   </select>
                 </mat-form-field>
@@ -206,28 +206,35 @@
               <div>
                 <mat-form-field>
                   <mat-label>End Hours</mat-label>
-                  <select matNativeControl required>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
+                  <select matNativeControl required [(ngModel)]="endHour">
+                    <option *ngFor="let hour of hours" value="hour">
+                      {{ hour | hourFormat }}
+                    </option>
                   </select>
                 </mat-form-field>
               </div>
             </div>
           </div>
+          <!-- <mat-error>End date has to bee smaller than start date</mat-error> -->
           <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"
           >
             <div>Alege vehiculul care va fi parcat</div>
             <div>
               <mat-form-field>
-                <select matNativeControl required>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
+                <input
+                  matInput
+                  placeholder="Vehicle Number"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let vehicle of vehicles"
+                    [value]="vehicle.vehicleIdentificationNumber"
+                  >
+                    {{ vehicle.vehicleIdentificationNumber }}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </div>
           </div>
@@ -237,12 +244,15 @@
             <div>Name of parking spot</div>
             <div>
               <mat-form-field>
-                <select matNativeControl required>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
+                <input
+                  type="text"
+                  placeholder="Pick one"
+                  aria-label="Number"
+                  matInput
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option></mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </div>
           </div>
@@ -252,12 +262,19 @@
             <div>Choose method payment</div>
             <div>
               <mat-form-field>
-                <select matNativeControl required>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
+                <input
+                  matInput
+                  placeholder="Choose method payment"
+                  [matAutocomplete]="vehicle"
+                />
+                <mat-autocomplete #vehicle="matAutocomplete">
+                  <mat-option
+                    *ngFor="let method of paymentMethods"
+                    [value]="method"
+                  >
+                    {{ method }}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </div>
           </div>
