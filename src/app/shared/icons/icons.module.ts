@@ -45,7 +45,7 @@ export class IconsModule {
       .addSvgIcon('draft', this.setPath(`${this.path}/draft.svg`))
       .addSvgIcon('check', this.setPath(`${this.path}/check.svg`))
       .addSvgIcon(
-        'location-dot-solid.svg',
+        'location-dot-solid',
         this.setPath(`${this.path}/location-dot-solid.svg`)
       )
       .addSvgIcon('check-green', this.setPath(`${this.path}/check-green.svg`))

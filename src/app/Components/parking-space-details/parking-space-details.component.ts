@@ -6,6 +6,7 @@ import { Vehicle } from 'src/app/interfaces/vehicle';
 import { ParkingSpaceBookingService } from 'src/app/services/parking-space-booking.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
+import { PaymentMethods } from 'src/app/enums/payment-methods';
 
 @Component({
   selector: 'app-parking-space-details',
@@ -24,6 +25,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   vehiclesControl = new FormControl();
   filteredVehicles: Observable<Vehicle[]>;
   paymentMethods: string[] = [];
+  calculatedPrice: number;
 
   constructor(
     private router: ActivatedRoute,
@@ -48,7 +50,6 @@ export class ParkingSpaceDetailsComponent implements OnInit {
 
   changeType(value: string) {
     this.bookingType = value;
-    console.log(this.bookingType);
   }
 
   populateHoursArray() {
@@ -65,6 +66,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.populateHoursArray();
+    this.paymentMethods = Object.values(PaymentMethods);
 
     this.router.paramMap.subscribe((paramMap) => {
       const idString = paramMap.get('id');
@@ -79,7 +81,5 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     this.vehicleService.getAllVehicle().subscribe((vehicles) => {
       this.vehicles = vehicles;
     });
-
-    this.paymentMethods = this.bookingService.getMethodPayment();
   }
 }

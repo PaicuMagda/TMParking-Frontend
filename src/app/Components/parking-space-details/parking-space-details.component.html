@@ -245,17 +245,22 @@
             <div>
               <mat-form-field>
                 <input
-                  type="text"
-                  placeholder="Pick one"
-                  aria-label="Number"
                   matInput
+                  placeholder="Choose name of parking spot"
+                  [matAutocomplete]="parkingSpots"
                 />
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option></mat-option>
+                <mat-autocomplete #parkingSpots="matAutocomplete">
+                  <mat-option
+                    *ngFor="let parkingSpot of parkingPlace.parkingSpots"
+                    [value]="parkingSpot.spotNumber"
+                  >
+                    {{ parkingSpot.spotNumber }}
+                  </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
             </div>
           </div>
+
           <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"
           >
@@ -265,9 +270,9 @@
                 <input
                   matInput
                   placeholder="Choose method payment"
-                  [matAutocomplete]="vehicle"
+                  [matAutocomplete]="payment"
                 />
-                <mat-autocomplete #vehicle="matAutocomplete">
+                <mat-autocomplete #payment="matAutocomplete">
                   <mat-option
                     *ngFor="let method of paymentMethods"
                     [value]="method"
@@ -285,7 +290,11 @@
             <div>Total to paint</div>
             <div>
               <mat-form-field>
-                <input matInput />
+                <input
+                  matInput
+                  [(ngModel)]="calculatedPrice"
+                  placeholder="LEI 💳"
+                />
               </mat-form-field>
             </div>
           </div>
@@ -293,7 +302,119 @@
         <div
           *ngIf="bookingType === 'manyDays'"
           class="parking-space-details__container__left__informations__booking__fields__many-days"
-        ></div>
+        >
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__date"
+          >
+            <div>Choose a start date</div>
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__date"
+          >
+            <div>Choose a end date</div>
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker1" />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Alege vehiculul care va fi parcat</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Vehicle Number"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let vehicle of vehicles"
+                    [value]="vehicle.vehicleIdentificationNumber"
+                  >
+                    {{ vehicle.vehicleIdentificationNumber }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Name of parking spot</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Choose name of parking spot"
+                  [matAutocomplete]="parkingSpots"
+                />
+                <mat-autocomplete #parkingSpots="matAutocomplete">
+                  <mat-option
+                    *ngFor="let parkingSpot of parkingPlace.parkingSpots"
+                    [value]="parkingSpot.spotNumber"
+                  >
+                    {{ parkingSpot.spotNumber }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Choose method payment</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Choose method payment"
+                  [matAutocomplete]="payment"
+                />
+                <mat-autocomplete #payment="matAutocomplete">
+                  <mat-option
+                    *ngFor="let method of paymentMethods"
+                    [value]="method"
+                  >
+                    {{ method }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Total to paint</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  [(ngModel)]="calculatedPrice"
+                  placeholder="LEI 💳"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
         <div
           *ngIf="bookingType === 'subscription'"
           class="parking-space-details__container__left__informations__booking__fields__subscription"
@@ -303,7 +424,13 @@
       <div
         class="parking-space-details__container__left__informations__booking__button"
       >
-        <button class="">Book</button>
+        <button>
+          <mat-icon svgIcon="location-dot-solid"></mat-icon>
+          Location
+        </button>
+
+        <button>💳 Paid</button>
+        <button>Book</button>
       </div>
     </div>
   </div>
