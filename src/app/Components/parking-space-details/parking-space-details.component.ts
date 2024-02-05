@@ -26,6 +26,8 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   filteredVehicles: Observable<Vehicle[]>;
   paymentMethods: string[] = [];
   calculatedPrice: number;
+  months: number[] = [];
+  month: number;
 
   constructor(
     private router: ActivatedRoute,
@@ -67,6 +69,9 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   ngOnInit() {
     this.populateHoursArray();
     this.paymentMethods = Object.values(PaymentMethods);
+    this.bookingService.getMonthNumber().subscribe((values) => {
+      this.months = values;
+    });
 
     this.router.paramMap.subscribe((paramMap) => {
       const idString = paramMap.get('id');

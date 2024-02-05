@@ -425,19 +425,11 @@
             <div>Select the number of months</div>
             <div>
               <mat-form-field>
-                <input
-                  matInput
-                  placeholder="Select the number of monthst"
-                  [matAutocomplete]="payment"
-                />
-                <mat-autocomplete #payment="matAutocomplete">
-                  <mat-option
-                    *ngFor="let method of paymentMethods"
-                    [value]="method"
-                  >
-                    {{ method }}
-                  </mat-option>
-                </mat-autocomplete>
+                <mat-select [(ngModel)]="month">
+                  <option *ngFor="let m of months" [value]="m">
+                    {{ m.toString() }}
+                  </option>
+                </mat-select>
               </mat-form-field>
             </div>
           </div>
@@ -466,8 +458,14 @@
           Location
         </button>
 
-        <button>💳 Paid</button>
+        <button>Paid</button>
         <button>Book</button>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="logo">
+        <img src="../../../assets/images/logo-TMParking.png" />
       </div>
     </div>
   </div>

@@ -44,6 +44,7 @@ import { ConfirmationParkingSpaceExpiredDialogComponent } from './Components/dia
 import { HoverElementDirective } from './Components/directives/hover-element.directive';
 import { LegendComponent } from './Components/legend/legend.component';
 import { HourFormatPipe } from './pipes/hour-format.pipe';
+import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { HourFormatPipe } from './pipes/hour-format.pipe';
     HoverElementDirective,
     LegendComponent,
     HourFormatPipe,
+    ParkingReservationsComponent,
   ],
   imports: [
     BrowserModule,
