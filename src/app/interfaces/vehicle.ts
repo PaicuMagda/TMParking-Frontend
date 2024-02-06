@@ -4,7 +4,7 @@ export interface Vehicle {
   model?: string;
   color?: string;
   year?: number;
-  owner?: string;
+  ownerId?: number;
   vehicleIdentificationNumber?: number;
   isEdit?: boolean;
   vehicleRegistrationCertificate?: File;

@@ -133,22 +133,6 @@
 
       @include dimensions(10%, column);
       margin-top: 1rem;
-
-      &__role {
-        @include dimensions(29%, row);
-      }
-
-      &__zip {
-        @include dimensions(16%, row);
-      }
-
-      &__state {
-        @include dimensions(26%, row);
-      }
-
-      &__active {
-        @include dimensions(24%, row);
-      }
     }
   }
 
@@ -161,15 +145,15 @@
       margin-left: 0.5em;
     }
     &__phone {
-      @include dimensions(33.7%, row);
+      @include dimensions(37.3%, row);
     }
 
     &__birth {
-      @include dimensions(24.7%, row);
+      @include dimensions(27.7%, row);
     }
 
     &__pnc {
-      @include dimensions(7.5%, row);
+      @include dimensions(8.3%, row);
     }
 
     &__info {
@@ -179,22 +163,6 @@
 
       @include dimensions(10%, column);
       margin-top: 1rem;
-
-      &__phone {
-        @include dimensions(40%, row);
-      }
-
-      &__birth {
-        @include dimensions(31%, row);
-      }
-
-      &__pnc {
-        @include dimensions(14%, row);
-      }
-
-      &__vehicle {
-        @include dimensions(6%, row);
-      }
     }
   }
 }

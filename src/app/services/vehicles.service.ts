@@ -15,7 +15,7 @@ export class VehiclesService {
       model: 'Audi',
       color: 'Silver',
       year: 2001,
-      owner: 'John Doe',
+      ownerId: 0,
       vehicleIdentificationNumber: 1234543789,
     },
     {
@@ -24,7 +24,7 @@ export class VehiclesService {
       model: 'Corolla',
       color: 'Golden',
       year: 1874,
-      owner: 'Ionescu Alex',
+      ownerId: 1,
       vehicleIdentificationNumber: 4253659,
     },
     {
@@ -33,7 +33,7 @@ export class VehiclesService {
       model: 'BMW',
       color: 'Silver',
       year: 2019,
-      owner: 'Paicu Lidia',
+      ownerId: 2,
       vehicleIdentificationNumber: 123456789,
     },
     {
@@ -42,7 +42,7 @@ export class VehiclesService {
       model: 'Corolla',
       color: 'Red',
       year: 2019,
-      owner: 'Dinica Ana',
+      ownerId: 3,
       vehicleIdentificationNumber: 123456789,
     },
     {
@@ -51,7 +51,7 @@ export class VehiclesService {
       model: 'ghdkh',
       color: 'White',
       year: 2005,
-      owner: 'John Doe',
+      ownerId: 4,
       vehicleIdentificationNumber: 123456789,
     },
     {
@@ -60,7 +60,7 @@ export class VehiclesService {
       model: 'pmbdgc',
       color: 'Silver',
       year: 2019,
-      owner: 'Vasilescu Vlad',
+      ownerId: 5,
       vehicleIdentificationNumber: 425345,
     },
     {
@@ -69,7 +69,7 @@ export class VehiclesService {
       model: 'mbfih',
       color: 'Black',
       year: 1996,
-      owner: 'John Doe',
+      ownerId: 6,
       vehicleIdentificationNumber: 542524,
     },
     {
@@ -78,7 +78,7 @@ export class VehiclesService {
       model: 'oyrfh',
       color: 'Blue',
       year: 2023,
-      owner: 'Magda',
+      ownerId: 7,
       vehicleIdentificationNumber: 96988963,
     },
   ];

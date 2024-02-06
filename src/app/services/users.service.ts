@@ -33,6 +33,7 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user1.jpg',
+      vehicles: [],
     },
     {
       id: 1,
@@ -50,6 +51,7 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user2.jpg',
+      vehicles: [],
     },
     {
       id: 2,
@@ -67,6 +69,7 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: false,
       imageUrl: '../../../assets/images/users/user3.jpg',
+      vehicles: [],
     },
     {
       id: 3,
@@ -84,6 +87,7 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user4.jpg',
+      vehicles: [],
     },
     {
       id: 4,
@@ -101,6 +105,7 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: false,
       imageUrl: '../../../assets/images/users/user1.jpg',
+      vehicles: [],
     },
     {
       id: 5,
@@ -111,13 +116,14 @@ export class UsersService {
       address: '123 Main St',
       zipCode: 12345,
       state: 'California',
-      isActive: true,
+      isActive: false,
       phone: 36659548,
       dateOfBirth: new Date('1990-01-01'),
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user2.jpg',
+      vehicles: [],
     },
     {
       id: 6,
@@ -128,13 +134,14 @@ export class UsersService {
       address: '123 Main St',
       zipCode: 12345,
       state: 'Romania',
-      isActive: true,
+      isActive: false,
       phone: 1234567890,
       dateOfBirth: new Date('1990-01-01'),
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
       licenseValid: false,
       imageUrl: '../../../assets/images/users/user3.jpg',
+      vehicles: [],
     },
     {
       id: 7,
@@ -145,13 +152,14 @@ export class UsersService {
       address: '123 Main St',
       zipCode: 12345,
       state: 'Franta',
-      isActive: true,
+      isActive: false,
       phone: 99568472,
       dateOfBirth: new Date('1990-01-01'),
       pnc: 1234567890123,
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user4.jpg',
+      vehicles: [],
     },
   ];
 
