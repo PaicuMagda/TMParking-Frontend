@@ -28,6 +28,7 @@
 
   button {
     display: flex;
+
     span {
       margin-top: 2px;
       margin-left: 1rem;
@@ -96,6 +97,7 @@
 
   &__div3 {
     @include dimensions(8%, column);
+
     input {
       border-radius: 4px;
       width: 8rem;
@@ -120,10 +122,11 @@
 
     &__active {
       @include dimensions(2.9rem, row);
+    }
 
-      select {
-        border-radius: 4px;
-      }
+    select {
+      border-radius: 4px;
+      height: 2.2rem;
     }
 
     &__info {
@@ -159,6 +162,12 @@
     &__info {
       label {
         font-weight: 600;
+      }
+
+      select {
+        border: none;
+        outline: none;
+        width: 20%;
       }
 
       @include dimensions(10%, column);

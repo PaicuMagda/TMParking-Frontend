@@ -6,6 +6,7 @@ import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save
 import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Vehicle } from 'src/app/interfaces/vehicle';
+import { Role } from 'src/app/enums/roles';
 
 @Component({
   selector: 'app-users-admin',
@@ -18,6 +19,8 @@ export class UsersAdminComponent implements OnInit {
   userId: number | null = null;
   userFormGroup: FormGroup[] = [];
   vehicles: Vehicle[] = [];
+  roles: any[];
+  disabled: boolean = true;
 
   constructor(
     private usersService: UsersService,
@@ -37,9 +40,10 @@ export class UsersAdminComponent implements OnInit {
       role: user.role,
       zipCode: user.zipCode,
       state: user.state,
-      // isActive: user.isActive,
+      isActive: user.isActive,
       phone: user.phone,
       dateOfBirth: user.dateOfBirth,
+      numberVehiclesRegistered: user.vehicles,
     });
   }
 
@@ -82,6 +86,7 @@ export class UsersAdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.roles = Object.keys(Role);
     this.usersService.getUsers().subscribe((users: User[]) => {
       this.users = users;
       this.users.forEach((user) => {

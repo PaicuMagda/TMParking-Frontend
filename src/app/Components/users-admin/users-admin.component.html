@@ -54,7 +54,10 @@
         <div *ngIf="user.isEdit" class="col-sm-2 userCard__div3">
           <div class="userCard__div3__role">
             <label>Role</label>
-            <input type="text" formControlName="role" />
+            <select formControlName="role">
+              <option value="USER">USER</option>
+              <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+            </select>
           </div>
           <div class="userCard__div3__zip">
             <label>Zip Code</label>
@@ -65,9 +68,9 @@
           </div>
           <div class="userCard__div3__active">
             <p>Active</p>
-            <select>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+            <select formControlName="isActive">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </div>
         </div>
@@ -104,9 +107,17 @@
             <label>Personal Numerical Code</label>
             <input type="text" formControlName="personalNumericalCode" />
           </div>
-          <div>
-            <label>Number of Vehicles Registered </label>
-            <input type="text" formControlName="numberVehiclesRegistered" />
+          <div class="row">
+            <label class="col">Number of Vehicles Registered </label>
+            <select
+              [disabled]="!disabled"
+              formControlName="numberVehiclesRegistered"
+              class="col"
+            >
+              <option *ngFor="let vehicle of user.vehicles">
+                {{ vehicle.vehicleIdentificationNumber }}
+              </option>
+            </select>
           </div>
         </div>
 
@@ -117,7 +128,9 @@
           </div>
           <div class="row">
             <label class="col">Date Of Birth</label>
-            <span class="col">{{ user.dateOfBirth | date : "d MMMM y" }}</span>
+            <span class="col">{{
+              user.dateOfBirth | date : "dd/MM/yyyy"
+            }}</span>
           </div>
           <div class="row">
             <label class="col">Personal Numerical Code</label>
@@ -125,7 +138,15 @@
           </div>
           <div class="row">
             <label class="col">Number of Vehicles Registered </label>
-            <span class="col">{{ user.vehiclesRegistered }}</span>
+            <select
+              [disabled]="!disabled"
+              formControlName="numberVehiclesRegistered"
+              class="col"
+            >
+              <option *ngFor="let vehicle of user.vehicles">
+                {{ vehicle.vehicleIdentificationNumber }}
+              </option>
+            </select>
           </div>
         </div>
 

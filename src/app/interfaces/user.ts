@@ -22,5 +22,4 @@ export interface User {
   isEdit?: boolean;
   imageUrl?: string;
   vehicles: Vehicle[];
-  formGroup?: FormGroup;
 }
