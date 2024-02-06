@@ -12,19 +12,101 @@
           class="parking-space-details__container__left__informations__parking-lot"
         >
           <span>Informations</span>
-          <div>Address</div>
-          <div>Locuri disponibile</div>
-          <div>Owner</div>
-          <div>Start Date</div>
-          <div>End Date</div>
+          <div class="row">
+            <p class="col-lg">Address</p>
+            <p class="col-sm">{{ parkingPlace.address }}</p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Locuri disponibile</p>
+            <p class="col-sm">{{ parkingPlace.locuriDisponibile }}</p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Owner</p>
+            <p class="col-sm">
+              {{ parkingPlace.owner.firstname }}
+              {{ parkingPlace.owner.lastname }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Start Date</p>
+            <p class="col-sm">{{ parkingPlace.startDate | date }}</p>
+          </div>
+          <div class="row">
+            <p class="col-lg">End Date</p>
+            <p class="col-sm">{{ parkingPlace.endDate | date }}</p>
+          </div>
           <span>Properties</span>
-          <div>Paid Parking</div>
-          <div>Video Surveillance</div>
-          <div>Agricultural Machinery</div>
-          <div>Public Transport</div>
-          <div>Truck</div>
+          <div class="row">
+            <p class="col-lg">Paid Parking</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isFree,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isFree
+              }"
+            >
+              {{ parkingPlace.isFree ? "Yes" : "No" }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Video Surveillance</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isVideoSurveillance,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isVideoSurveillance
+              }"
+            >
+              {{ parkingPlace.isVideoSurveillance ? "Yes" : "No" }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Agricultural Machinery</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isAgriculturalMachinery,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isAgriculturalMachinery
+              }"
+            >
+              {{ parkingPlace.isAgriculturalMachinery ? "Yes" : "No" }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Public Transport</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isPublicTransport,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isPublicTransport
+              }"
+            >
+              {{ parkingPlace.isPublicTransport ? "Yes" : "No" }}
+            </p>
+          </div>
+          <div class="row">
+            <p class="col-lg">Truck</p>
+            <p
+              class="col-sm"
+              [ngClass]="{
+                'parking-space-details__container__left__informations__parking-lot__yes':
+                  parkingPlace.isTruck,
+                'parking-space-details__container__left__informations__parking-lot__no':
+                  !parkingPlace.isTruck
+              }"
+            >
+              {{ parkingPlace.isTruck ? "Yes" : "No" }}
+            </p>
+          </div>
         </div>
-
         <div class="parking-space-details__container__right">
           <div class="parking-space-details__container__right__image">
             <img src="{{ parkingPlace.imageUrl }}" />
@@ -114,39 +196,45 @@
               <div>
                 <mat-form-field>
                   <mat-label>Start Hours</mat-label>
-                  <select matNativeControl required>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
+                  <select matNativeControl required [(ngModel)]="startHour">
+                    <option *ngFor="let hour of hours" value="hour">
+                      {{ hour | hourFormat }}
+                    </option>
                   </select>
                 </mat-form-field>
               </div>
               <div>
                 <mat-form-field>
                   <mat-label>End Hours</mat-label>
-                  <select matNativeControl required>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
+                  <select matNativeControl required [(ngModel)]="endHour">
+                    <option *ngFor="let hour of hours" value="hour">
+                      {{ hour | hourFormat }}
+                    </option>
                   </select>
                 </mat-form-field>
               </div>
             </div>
           </div>
+          <!-- <mat-error>End date has to bee smaller than start date</mat-error> -->
           <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"
           >
             <div>Alege vehiculul care va fi parcat</div>
             <div>
               <mat-form-field>
-                <select matNativeControl required>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
+                <input
+                  matInput
+                  placeholder="Vehicle Number"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let vehicle of vehicles"
+                    [value]="vehicle.vehicleIdentificationNumber"
+                  >
+                    {{ vehicle.vehicleIdentificationNumber }}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </div>
           </div>
@@ -156,27 +244,42 @@
             <div>Name of parking spot</div>
             <div>
               <mat-form-field>
-                <select matNativeControl required>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
+                <input
+                  matInput
+                  placeholder="Choose name of parking spot"
+                  [matAutocomplete]="parkingSpots"
+                />
+                <mat-autocomplete #parkingSpots="matAutocomplete">
+                  <mat-option
+                    *ngFor="let parkingSpot of parkingPlace.parkingSpots"
+                    [value]="parkingSpot.spotNumber"
+                  >
+                    {{ parkingSpot.spotNumber }}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </div>
           </div>
+
           <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"
           >
             <div>Choose method payment</div>
             <div>
               <mat-form-field>
-                <select matNativeControl required>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
+                <input
+                  matInput
+                  placeholder="Choose method payment"
+                  [matAutocomplete]="payment"
+                />
+                <mat-autocomplete #payment="matAutocomplete">
+                  <mat-option
+                    *ngFor="let method of paymentMethods"
+                    [value]="method"
+                  >
+                    {{ method }}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </div>
           </div>
@@ -187,7 +290,11 @@
             <div>Total to paint</div>
             <div>
               <mat-form-field>
-                <input matInput />
+                <input
+                  matInput
+                  [(ngModel)]="calculatedPrice"
+                  placeholder="LEI 💳"
+                />
               </mat-form-field>
             </div>
           </div>
@@ -195,17 +302,170 @@
         <div
           *ngIf="bookingType === 'manyDays'"
           class="parking-space-details__container__left__informations__booking__fields__many-days"
-        ></div>
+        >
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__date"
+          >
+            <div>Choose a start date</div>
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__date"
+          >
+            <div>Choose a end date</div>
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker1" />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Alege vehiculul care va fi parcat</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Vehicle Number"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let vehicle of vehicles"
+                    [value]="vehicle.vehicleIdentificationNumber"
+                  >
+                    {{ vehicle.vehicleIdentificationNumber }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Name of parking spot</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Choose name of parking spot"
+                  [matAutocomplete]="parkingSpots"
+                />
+                <mat-autocomplete #parkingSpots="matAutocomplete">
+                  <mat-option
+                    *ngFor="let parkingSpot of parkingPlace.parkingSpots"
+                    [value]="parkingSpot.spotNumber"
+                  >
+                    {{ parkingSpot.spotNumber }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Choose method payment</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Choose method payment"
+                  [matAutocomplete]="payment"
+                />
+                <mat-autocomplete #payment="matAutocomplete">
+                  <mat-option
+                    *ngFor="let method of paymentMethods"
+                    [value]="method"
+                  >
+                    {{ method }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Total to paint</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  [(ngModel)]="calculatedPrice"
+                  placeholder="LEI 💳"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
         <div
           *ngIf="bookingType === 'subscription'"
           class="parking-space-details__container__left__informations__booking__fields__subscription"
-        ></div>
+        >
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Select the number of months</div>
+            <div>
+              <mat-form-field>
+                <mat-select [(ngModel)]="month">
+                  <option *ngFor="let m of months" [value]="m">
+                    {{ m.toString() }}
+                  </option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="parking-space-details__container__left__informations__booking__fields__vehicle"
+          >
+            <div>Total to paint</div>
+            <div>
+              <mat-form-field>
+                <input
+                  matInput
+                  [(ngModel)]="calculatedPrice"
+                  placeholder="LEI 💳"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div
         class="parking-space-details__container__left__informations__booking__button"
       >
-        <button class="">Book</button>
+        <button>
+          <mat-icon svgIcon="location-dot-solid"></mat-icon>
+          Location
+        </button>
+
+        <button>Paid</button>
+        <button>Book</button>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="logo">
+        <img src="../../../assets/images/logo-TMParking.png" />
       </div>
     </div>
   </div>

@@ -8,6 +8,34 @@
   border-radius: 6px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+@mixin button-paid {
+  font-weight: 500;
+  width: 13%;
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  height: 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  align-items: center;
+}
+
+@mixin button-location {
+  font-weight: 500;
+  display: flex;
+  width: 20%;
+  background-color: rgb(0, 122, 20);
+  color: white;
+  border: none;
+  height: 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  justify-content: center;
+  align-items: center;
+  gap: 6%;
+}
+
 .parking-space-details {
   width: 100%;
   height: 100vh;
@@ -44,12 +72,18 @@
           display: flex;
           flex-direction: column;
           font-size: 120%;
-          gap: 3%;
 
           span {
             font-weight: 500;
-            margin-top: 1%;
             font-size: 130%;
+            margin-bottom: 3%;
+          }
+          &__yes {
+            color: green;
+          }
+
+          &__no {
+            color: red;
           }
         }
 
@@ -66,7 +100,7 @@
           }
 
           &__fields {
-            height: 100%;
+            height: 65%;
             width: 100%;
 
             &__one-day {
@@ -75,12 +109,11 @@
 
             &__many-days {
               height: 100%;
-              background-color: green;
             }
 
             &__subscription {
+              margin-top: 3%;
               height: 100%;
-              background-color: pink;
             }
 
             &__date {
@@ -108,8 +141,14 @@
                 display: flex;
                 gap: 10%;
 
+                select,
+                option {
+                  font-weight: bold;
+                  text-align: center;
+                }
+
                 mat-form-field {
-                  width: 90%;
+                  width: 80%;
                 }
               }
 
@@ -128,17 +167,34 @@
                 width: 100%;
                 height: 100%;
               }
+
+              mat-form-field {
+                display: flex;
+              }
             }
           }
 
           &__button {
             display: flex;
             flex-direction: row;
-            justify-content: center;
+            justify-content: flex-end;
+            gap: 5%;
 
-            button {
+            button:nth-child(1) {
+              @include button-location();
+            }
+
+            button:nth-child(2) {
+              @include button-paid();
+            }
+
+            button:nth-child(3) {
               @include button-back();
             }
+          }
+
+          mat-divider {
+            margin-top: 5%;
           }
         }
       }
@@ -177,7 +233,7 @@
             }
 
             p {
-              font-size: 10vh;
+              font-size: 6vh;
             }
           }
         }
@@ -266,4 +322,17 @@ mat-button-toggle-group {
   display: flex;
   align-items: center;
   font-weight: bold;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+
+  img {
+    width: 36%;
+    height: 80%;
+  }
 }

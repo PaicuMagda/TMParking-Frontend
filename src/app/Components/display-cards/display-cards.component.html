@@ -63,6 +63,14 @@
             *ngIf="role === 'Administrator'"
             >🚙All Vehicles</mat-button-toggle
           >
+          <mat-button-toggle value="myReservations" *ngIf="role === 'User'"
+            >📆 My reservations</mat-button-toggle
+          >
+          <mat-button-toggle
+            value="allReservations"
+            *ngIf="role === 'Administrator'"
+            >📆 All reservations</mat-button-toggle
+          >
         </mat-button-toggle-group>
         <button
           class="display-cards__admin__buttons__add-new-park-space"
@@ -113,6 +121,14 @@
         "
       >
         <app-vehicles></app-vehicles>
+      </div>
+      <div
+        *ngIf="
+          toggleButtonValue === 'myReservations' ||
+          toggleButtonValue === 'allReservations'
+        "
+      >
+        <app-parking-reservations></app-parking-reservations>
       </div>
     </div>
   </div>

@@ -91,22 +91,6 @@
 
       @include dimensions(10%, column);
       margin-top: 1rem;
-
-      &__name {
-        @include dimensions(34%, row);
-      }
-
-      &__email {
-        @include dimensions(22%, row);
-      }
-
-      &__address {
-        @include dimensions(31%, row);
-      }
-
-      &__license {
-        @include dimensions(17%, row);
-      }
     }
   }
 
