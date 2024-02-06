@@ -63,6 +63,7 @@
       &__ownerAddressDate {
         &__date {
           font-weight: 600;
+          font-size: 1.5vh;
         }
 
         &__camera {
@@ -71,6 +72,10 @@
           display: flex;
           flex-direction: row;
           justify-content: space-between;
+
+          span {
+            font-size: 1.5vh;
+          }
         }
 
         &__paid {
@@ -99,7 +104,7 @@
           gap: 8%;
 
           img {
-            width: 12%;
+            width: 10%;
           }
         }
 
