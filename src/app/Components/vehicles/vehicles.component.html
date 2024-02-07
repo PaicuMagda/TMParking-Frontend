@@ -1,66 +1,78 @@
 <div class="vehicle">
-  <div *ngFor="let vehicle of vehicles">
-    <form>
+  <div *ngFor="let vehicle of vehicles; let i = index">
+    <form [formGroup]="vehicleForm[i]">
       <div class="vehicle__card">
         <div class="col-sm-1 vehicle__card__div1">
           <img src="{{ vehicle.imageUrl }}" />
         </div>
-        <div class="col-sm-2 vehicle__card__div2">
-          <div
-            [ngClass]="{
-              vehicle__card__div2__make: !vehicle.isEdit,
-              vehicle__card__div2__makeIsEdit: vehicle.isEdit
-            }"
-          >
-            <label>Make</label>
-            <span *ngIf="!vehicle.isEdit">{{ vehicle.make }}</span>
-            <input *ngIf="vehicle.isEdit" type="text" />
+        <div class="col-sm-2 vehicle__card__div2 row">
+          <div class="row">
+            <label class="col">Make</label>
+            <span *ngIf="!vehicle.isEdit" class="col">{{ vehicle.make }}</span>
+            <input
+              *ngIf="vehicle.isEdit"
+              formControlName="make"
+              type="text"
+              class="col"
+            />
           </div>
-          <div
-            [ngClass]="{
-              vehicle__card__div2__model: !vehicle.isEdit,
-              vehicle__card__div2__modelIsEdit: vehicle.isEdit
-            }"
-          >
-            <label>Model</label>
-            <span *ngIf="!vehicle.isEdit">{{ vehicle.model }}</span>
-            <input *ngIf="vehicle.isEdit" type="text" />
+          <div class="row">
+            <label class="col">Model</label>
+            <span *ngIf="!vehicle.isEdit" class="col">{{ vehicle.model }}</span>
+            <input
+              *ngIf="vehicle.isEdit"
+              type="text"
+              class="col"
+              formControlName="model"
+            />
           </div>
         </div>
-        <div class="col-sm-2 vehicle__card__div3">
-          <div class="vehicle__card__div3__color">
-            <label>Color</label>
-            <span *ngIf="!vehicle.isEdit">{{ vehicle.color }}</span>
-            <input *ngIf="vehicle.isEdit" type="text" />
+        <div class="col-sm-2 vehicle__card__div3 row">
+          <div class="row">
+            <label class="col">Color</label>
+            <span *ngIf="!vehicle.isEdit" class="col">{{ vehicle.color }}</span>
+            <input
+              *ngIf="vehicle.isEdit"
+              formControlName="color"
+              type="text"
+              class="col"
+            />
           </div>
-          <div class="vehicle__card__div3__year">
-            <label>Year</label>
-            <span *ngIf="!vehicle.isEdit">{{ vehicle.year }}</span>
-            <input *ngIf="vehicle.isEdit" type="text" />
+          <div class="row">
+            <label class="col">Year</label>
+            <span class="col" *ngIf="!vehicle.isEdit">{{ vehicle.year }}</span>
+            <input
+              class="col"
+              *ngIf="vehicle.isEdit"
+              formControlName="year"
+              type="text"
+            />
           </div>
         </div>
         <div class="col-sm-4 vehicle__card__div4">
-          <div
-            [ngClass]="{
-              vehicle__card__div4__owner: !vehicle.isEdit,
-              vehicle__card__div4__ownerIsEdit: vehicle.isEdit
-            }"
-          >
-            <label>Owner</label>
-            <span *ngIf="!vehicle.isEdit">{{ vehicle.ownerId }}</span>
-            <input *ngIf="vehicle.isEdit" type="text" />
+          <div class="row">
+            <label class="col">Owner</label>
+            <span *ngIf="!vehicle.isEdit" class="col">{{
+              vehicle.ownerId
+            }}</span>
+            <input
+              class="col"
+              *ngIf="vehicle.isEdit"
+              formControlName="ownerId"
+              type="text"
+            />
           </div>
-          <div
-            [ngClass]="{
-              vehicle__card__div4__vin: !vehicle.isEdit,
-              vehicle__card__div4__vinIsEdit: vehicle.isEdit
-            }"
-          >
-            <label> Vehicle Identification Number </label>
-            <span *ngIf="!vehicle.isEdit">
+          <div class="row">
+            <label class="col"> Vehicle Identification Number </label>
+            <span class="col" *ngIf="!vehicle.isEdit">
               {{ vehicle.vehicleIdentificationNumber }}</span
             >
-            <input *ngIf="vehicle.isEdit" type="text" />
+            <input
+              class="col"
+              *ngIf="vehicle.isEdit"
+              formControlName="vehicleIdentificationNumber"
+              type="text"
+            />
           </div>
         </div>
         <div class="col-sm-3 vehicle__card__div5">
@@ -70,7 +82,7 @@
           </button>
           <button
             *ngIf="!vehicle.isEdit"
-            (click)="editVehicle(vehicle)"
+            (click)="editVehicle(i)"
             class="vehicle__card__div5__edit-button"
           >
             <mat-icon svgIcon="edit"></mat-icon>

@@ -37,6 +37,14 @@
           <span>Tables</span>
         </button>
       </div>
+      <div *ngIf="role === 'User'">
+        <button
+          class="display-cards__admin__buttons__my-reservations"
+          (click)="goToMyReservations()"
+        >
+          <span>My Reservations</span>
+        </button>
+      </div>
       <div>
         <mat-button-toggle-group
           [disabled]="!isLogin"
@@ -62,14 +70,6 @@
             value="allVehicles"
             *ngIf="role === 'Administrator'"
             >🚙All Vehicles</mat-button-toggle
-          >
-          <mat-button-toggle value="myReservations" *ngIf="role === 'User'"
-            >📆 My reservations</mat-button-toggle
-          >
-          <mat-button-toggle
-            value="allReservations"
-            *ngIf="role === 'Administrator'"
-            >📆 All reservations</mat-button-toggle
           >
         </mat-button-toggle-group>
         <button

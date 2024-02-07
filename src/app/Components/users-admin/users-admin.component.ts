@@ -20,7 +20,6 @@ export class UsersAdminComponent implements OnInit {
   userFormGroup: FormGroup[] = [];
   vehicles: Vehicle[] = [];
   roles: any[];
-  disabled: boolean = true;
 
   constructor(
     private usersService: UsersService,

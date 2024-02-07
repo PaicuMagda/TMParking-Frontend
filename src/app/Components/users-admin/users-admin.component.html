@@ -107,13 +107,9 @@
             <label>Personal Numerical Code</label>
             <input type="text" formControlName="personalNumericalCode" />
           </div>
-          <div class="row">
-            <label class="col">Number of Vehicles Registered </label>
-            <select
-              [disabled]="!disabled"
-              formControlName="numberVehiclesRegistered"
-              class="col"
-            >
+          <div class="userCard__div4__numbersRegistered">
+            <label>Number of Vehicles Registered </label>
+            <select formControlName="numberVehiclesRegistered">
               <option *ngFor="let vehicle of user.vehicles">
                 {{ vehicle.vehicleIdentificationNumber }}
               </option>
@@ -136,13 +132,9 @@
             <label class="col">Personal Numerical Code</label>
             <span class="col">{{ user.pnc }}</span>
           </div>
-          <div class="row">
-            <label class="col">Number of Vehicles Registered </label>
-            <select
-              [disabled]="!disabled"
-              formControlName="numberVehiclesRegistered"
-              class="col"
-            >
+          <div class="userCard__div4__info__numbersRegistered">
+            <label>Number of Vehicles Registered </label>
+            <select formControlName="numberVehiclesRegistered">
               <option *ngFor="let vehicle of user.vehicles">
                 {{ vehicle.vehicleIdentificationNumber }}
               </option>

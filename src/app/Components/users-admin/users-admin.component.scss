@@ -141,12 +141,25 @@
 
   &__div4 {
     @include dimensions(10%, column);
+
     input {
       border-radius: 4px;
       width: 12rem;
       height: 2rem;
       margin-left: 0.5em;
     }
+
+    select {
+      border-radius: 4px;
+      width: 12rem;
+      height: 2rem;
+      margin-left: 0.5em;
+    }
+
+    &__numbersRegistered {
+      @include dimensions(0%, row);
+    }
+
     &__phone {
       @include dimensions(37.3%, row);
     }
@@ -166,8 +179,17 @@
 
       select {
         border: none;
-        outline: none;
-        width: 20%;
+      }
+
+      &__numbersRegistered {
+        @include dimensions(4%, row);
+
+        div {
+          display: flex;
+          flex-direction: column;
+          height: 4vh;
+          background-color: red;
+        }
       }
 
       @include dimensions(10%, column);

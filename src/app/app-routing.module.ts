@@ -8,6 +8,7 @@ import { ResetPasswordComponent } from './Components/login-register-components/r
 import { ParkingSpaceDetailsComponent } from './Components/parking-space-details/parking-space-details.component';
 import { TablesComponent } from './Components/tables/tables.component';
 import { TablesResolverService } from './Components/resolvers/tables-resolver.service';
+import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -43,6 +44,10 @@ const routes: Routes = [
     resolve: {
       users: TablesResolverService,
     },
+  },
+  {
+    path: 'my-reservations',
+    component: ParkingReservationsComponent,
   },
 ];
 

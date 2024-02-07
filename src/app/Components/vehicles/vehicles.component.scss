@@ -64,14 +64,8 @@ label {
         @include flex(row, center, 21%);
       }
 
-      &__modelIsEdit {
-        @include flex(row, center, 8%);
-        align-items: center;
-      }
-
       input {
         border-radius: 4px;
-        width: 70%;
         height: 2.2rem;
       }
     }
@@ -115,7 +109,6 @@ label {
 
       input {
         border-radius: 4px;
-        width: 60%;
         height: 2.2rem;
       }
     }
@@ -132,7 +125,7 @@ label {
 
       button {
         @include flex(row, center, 8%);
-        width: 30%;
+        width: 45%;
         align-items: center;
       }
     }
