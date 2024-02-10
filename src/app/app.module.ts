@@ -14,7 +14,6 @@ import { HomeComponent } from './Components/home/home/home.component';
 import { MaterialModule } from './shared/material/material.module';
 import { TmParkingInfoDialogComponent } from './Components/dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { AddNewParkingSpaceDialogComponent } from './Components/dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
-import { NavbarService } from './services/navbar.service';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { LogoutDialogComponent } from './Components/dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
@@ -45,6 +44,7 @@ import { LegendComponent } from './Components/legend/legend.component';
 import { HourFormatPipe } from './pipes/hour-format.pipe';
 import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';
 import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -98,6 +98,7 @@ import { MyReservationsComponent } from './Components/tables/my-reservations/my-
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

@@ -8,8 +8,8 @@ import { ResetPasswordComponent } from './Components/login-register-components/r
 import { ParkingSpaceDetailsComponent } from './Components/parking-space-details/parking-space-details.component';
 import { TablesComponent } from './Components/tables/tables.component';
 import { TablesResolverService } from './Components/resolvers/tables-resolver.service';
-import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';
 import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,6 +42,7 @@ const routes: Routes = [
   {
     path: 'tables',
     component: TablesComponent,
+    canActivate: [AuthGuard],
     resolve: {
       users: TablesResolverService,
     },

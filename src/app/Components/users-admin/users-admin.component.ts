@@ -86,7 +86,7 @@ export class UsersAdminComponent implements OnInit {
 
   ngOnInit() {
     this.roles = Object.keys(Role);
-    this.usersService.getUsers().subscribe((users: User[]) => {
+    this.usersService.getAllUsers().subscribe((users: User[]) => {
       this.users = users;
       this.users.forEach((user) => {
         this.userFormGroup.push(this.createFormGroup(user));

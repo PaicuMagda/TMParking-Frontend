@@ -60,6 +60,7 @@ export class TokenInterceptor implements HttpInterceptor {
         });
         return next.handle(req);
       }),
+
       catchError((err) => {
         return throwError(() => {
           this.toast.warning({
