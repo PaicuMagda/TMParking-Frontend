@@ -9,6 +9,7 @@ import { ParkingSpaceDetailsComponent } from './Components/parking-space-details
 import { TablesComponent } from './Components/tables/tables.component';
 import { TablesResolverService } from './Components/resolvers/tables-resolver.service';
 import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';
+import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: 'my-reservations',
-    component: ParkingReservationsComponent,
+    component: MyReservationsComponent,
   },
 ];
 

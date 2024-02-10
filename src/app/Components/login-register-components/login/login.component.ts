@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         const tokenPayload = this.authentication.decodedToken();
         this.userStore.setFullNameFromStore(tokenPayload.unique_name);
         this.userStore.setRoleFromStore(tokenPayload.role);
+        console.log(this.authentication.decodedToken());
 
         setTimeout(() => {
           this.router.navigate(['/home']);

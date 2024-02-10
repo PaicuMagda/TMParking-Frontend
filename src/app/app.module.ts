@@ -44,6 +44,7 @@ import { HoverElementDirective } from './Components/directives/hover-element.dir
 import { LegendComponent } from './Components/legend/legend.component';
 import { HourFormatPipe } from './pipes/hour-format.pipe';
 import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';
+import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { ParkingReservationsComponent } from './Components/tables/parking-reserv
     LegendComponent,
     HourFormatPipe,
     ParkingReservationsComponent,
+    MyReservationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,7 +98,6 @@ import { ParkingReservationsComponent } from './Components/tables/parking-reserv
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    NavbarService,
   ],
   bootstrap: [AppComponent],
 })
