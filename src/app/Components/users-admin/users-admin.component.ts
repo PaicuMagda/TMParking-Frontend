@@ -32,8 +32,8 @@ export class UsersAdminComponent implements OnInit {
     user.isEdit = !user.isEdit;
     const userForm = this.userFormGroup[index];
     userForm.patchValue({
-      firstname: user.firstname,
-      lastname: user.lastname,
+      firstname: user.firstName,
+      lastname: user.lastName,
       emailAddress: user.email,
       address: user.address,
       role: user.role,
@@ -45,6 +45,35 @@ export class UsersAdminComponent implements OnInit {
       numberVehiclesRegistered: user.vehicles,
     });
   }
+
+  // updateUser(index: number) {
+  //   const user = this.users[index];
+  //   const userForm = this.userFormGroup[index];
+
+  //   const updatedUser: User = {
+  //     id: index,
+  //     firstName: userForm.value.firstname,
+  //     lastName: userForm.value.lastname,
+  //     email: userForm.value.emailAddress,
+  //     address: userForm.value.address,
+  //     role: userForm.value.role,
+  //     zipCode: userForm.value.zipCode,
+  //     state: userForm.value.state,
+  //     isActive: userForm.value.isActive,
+  //     phone: userForm.value.phone,
+  //     dateOfBirth: userForm.value.dateOfBirth,
+  //     vehiclesRegistered: userForm.value.numberVehiclesRegistered,
+  //   };
+
+  //   this.usersService.updateUser(user.id, updatedUser).subscribe(
+  //     (response) => {
+  //       console.log('Utilizatorul a fost actualizat cu succes:', response);
+  //     },
+  //     (error) => {
+  //       console.error('Eroare la actualizarea utilizatorului:', error);
+  //     }
+  //   );
+  // }
 
   openSaveChangesConfirmDialog() {
     this.dialog.open(SaveChangesDialogComponent, {
@@ -68,8 +97,8 @@ export class UsersAdminComponent implements OnInit {
 
   createFormGroup(user: User): FormGroup {
     return this.formBuilder.group({
-      firstname: [user.firstname],
-      lastname: [user.lastname],
+      firstname: [user.firstName],
+      lastname: [user.lastName],
       emailAddress: [user.email],
       address: [user.address],
       validDriverLicense: [user.licenseValid],
@@ -86,7 +115,7 @@ export class UsersAdminComponent implements OnInit {
 
   ngOnInit() {
     this.roles = Object.keys(Role);
-    this.usersService.getAllUsers().subscribe((users: User[]) => {
+    this.usersService.getUsers().subscribe((users: User[]) => {
       this.users = users;
       this.users.forEach((user) => {
         this.userFormGroup.push(this.createFormGroup(user));

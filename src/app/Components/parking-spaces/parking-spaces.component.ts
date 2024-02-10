@@ -10,6 +10,7 @@ import { ConfirmationParkingSpaceExpiredDialogComponent } from '../dialogs/confi
 import { LoginRequiredDialogComponent } from '../dialogs/confirmation-dialogs/login-required-dialog/login-required-dialog.component';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { Subject, takeUntil } from 'rxjs';
+import { ParkingSpace } from 'src/app/interfaces/parking-space';
 
 @Component({
   selector: 'app-parking-spaces',
@@ -101,6 +102,15 @@ export class ParkingSpacesComponent implements OnInit {
           this.toggleValue = value;
         }
       });
+  }
+
+  isParkingNew(parkingSpace: ParkingSpace): boolean {
+    const currentDate = new Date().getDate();
+    const dateAddedParkingSpace = parkingSpace.dateAdded.getTime();
+    const differenceInDays = Math.floor(
+      (currentDate - dateAddedParkingSpace) / (1000 * 60 * 60 * 24)
+    );
+    return differenceInDays <= 3;
   }
 
   ngOnDestroy(): void {

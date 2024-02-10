@@ -33,8 +33,8 @@ export class ParkingPlacesService {
       name: 'Parcare Centrală',
       owner: {
         id: 0,
-        firstname: 'Magda',
-        lastname: 'Paicu',
+        firstName: 'Magda',
+        lastName: 'Paicu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -63,6 +63,8 @@ export class ParkingPlacesService {
       paymentPerHour: PaymentMethodsMoney.PAYMENT_BY_THE_HOUR_MONEY,
       paymentPerDay: PaymentMethodsMoney.PAYMENT_BY_THE_DAY_MONEY,
       paymentForSubscription: 100,
+      dateAdded: new Date('2024-02-10'),
+      isVerifiedByAdmin: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.        Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces         Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.        Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces         Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces ',
       parkingSpots: [
@@ -86,8 +88,8 @@ export class ParkingPlacesService {
       name: 'Parcare Aeroport',
       owner: {
         id: 0,
-        firstname: 'Magda',
-        lastname: 'Paicu',
+        firstName: 'Magda',
+        lastName: 'Paicu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -95,7 +97,7 @@ export class ParkingPlacesService {
         state: 'California',
         isActive: true,
         phone: 1234567890,
-        dateOfBirth: new Date('1990-01-01'),
+        dateOfBirth: new Date('2025-01-01'),
         pnc: 58623332,
         vehiclesRegistered: 'Car, Truck',
         licenseValid: true,
@@ -110,13 +112,15 @@ export class ParkingPlacesService {
       isAgriculturalMachinery: false,
       isPublicTransport: true,
       startDate: new Date(),
-      endDate: new Date('2024-12-31'),
+      endDate: new Date('2024-12-10'),
       isFree: false,
       isVideoSurveillance: false,
       isDraft: true,
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      dateAdded: new Date('2024-02-10'),
+      isVerifiedByAdmin: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -140,8 +144,8 @@ export class ParkingPlacesService {
       name: 'Parcare Subterană',
       owner: {
         id: 3,
-        firstname: 'Andrei',
-        lastname: 'Vasilescu',
+        firstName: 'Andrei',
+        lastName: 'Vasilescu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -149,7 +153,7 @@ export class ParkingPlacesService {
         state: 'California',
         isActive: true,
         phone: 1234567890,
-        dateOfBirth: new Date('1990-01-01'),
+        dateOfBirth: new Date('2025-01-01'),
         pnc: 1234567890123,
         vehiclesRegistered: 'Car, Truck',
         licenseValid: true,
@@ -171,6 +175,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-10'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -229,8 +235,8 @@ export class ParkingPlacesService {
       name: 'Parcare Centrală',
       owner: {
         id: 4,
-        firstname: 'Magda',
-        lastname: 'Paicu',
+        firstName: 'Magda',
+        lastName: 'Paicu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -253,12 +259,14 @@ export class ParkingPlacesService {
       isAgriculturalMachinery: true,
       isPublicTransport: true,
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date('2025-01-02'),
       isFree: false,
       isVideoSurveillance: false,
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -281,8 +289,8 @@ export class ParkingPlacesService {
       name: 'Parcare Aeroport',
       owner: {
         id: 0,
-        firstname: 'Magda',
-        lastname: 'Paicu',
+        firstName: 'Magda',
+        lastName: 'Paicu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -309,6 +317,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      dateAdded: new Date('2024-02-10'),
+      isVerifiedByAdmin: false,
       isFree: true,
       isVideoSurveillance: true,
       description:
@@ -333,8 +343,8 @@ export class ParkingPlacesService {
       name: 'Parcare Subterană',
       owner: {
         id: 5,
-        firstname: 'Ana',
-        lastname: 'Dinica',
+        firstName: 'Ana',
+        lastName: 'Dinica',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -363,6 +373,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -385,8 +397,8 @@ export class ParkingPlacesService {
       name: 'Parcare Centrală',
       owner: {
         id: 6,
-        firstname: 'Dan',
-        lastname: 'Ionescu',
+        firstName: 'Dan',
+        lastName: 'Ionescu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -415,6 +427,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -437,8 +451,8 @@ export class ParkingPlacesService {
       name: 'Parcare Aeroport',
       owner: {
         id: 7,
-        firstname: 'Andrei',
-        lastname: 'Vasilescu',
+        firstName: 'Andrei',
+        lastName: 'Vasilescu',
         email: 'magda@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -461,11 +475,13 @@ export class ParkingPlacesService {
       isAgriculturalMachinery: false,
       isPublicTransport: true,
       startDate: new Date('2024-12-31'),
-      endDate: new Date(),
+      endDate: new Date('2024-12-31'),
       isFree: false,
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       isVideoSurveillance: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -489,8 +505,8 @@ export class ParkingPlacesService {
       name: 'Parcare Subterană',
       owner: {
         id: 3,
-        firstname: 'Andrei',
-        lastname: 'Vasilescu',
+        firstName: 'Andrei',
+        lastName: 'Vasilescu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -519,6 +535,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -541,8 +559,8 @@ export class ParkingPlacesService {
       name: 'Parcare Centrală',
       owner: {
         id: 3,
-        firstname: 'Andrei',
-        lastname: 'Vasilescu',
+        firstName: 'Andrei',
+        lastName: 'Vasilescu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -571,6 +589,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -593,8 +613,8 @@ export class ParkingPlacesService {
       name: 'Parcare Subterană',
       owner: {
         id: 3,
-        firstname: 'Andrei',
-        lastname: 'Vasilescu',
+        firstName: 'Andrei',
+        lastName: 'Vasilescu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -623,6 +643,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -645,8 +667,8 @@ export class ParkingPlacesService {
       name: 'Parcare Centrală',
       owner: {
         id: 3,
-        firstname: 'Andrei',
-        lastname: 'Vasilescu',
+        firstName: 'Andrei',
+        lastName: 'Vasilescu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -675,6 +697,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -698,8 +722,8 @@ export class ParkingPlacesService {
       name: 'Parcare Centrală',
       owner: {
         id: 3,
-        firstname: 'Andrei',
-        lastname: 'Vasilescu',
+        firstName: 'Andrei',
+        lastName: 'Vasilescu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -722,11 +746,13 @@ export class ParkingPlacesService {
       isAgriculturalMachinery: true,
       isPublicTransport: true,
       startDate: new Date('2024-12-31'),
-      endDate: new Date(),
+      endDate: new Date('2025-01-02'),
       isFree: false,
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       isVideoSurveillance: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -750,8 +776,8 @@ export class ParkingPlacesService {
       name: 'Parcare Aeroport',
       owner: {
         id: 5,
-        firstname: 'Ana',
-        lastname: 'Dinica',
+        firstName: 'Ana',
+        lastName: 'Dinica',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -780,6 +806,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -802,8 +830,8 @@ export class ParkingPlacesService {
       name: 'Parcare Subterană',
       owner: {
         id: 5,
-        firstname: 'Ana',
-        lastname: 'Dinica',
+        firstName: 'Ana',
+        lastName: 'Dinica',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -832,6 +860,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -854,8 +884,8 @@ export class ParkingPlacesService {
       name: 'Parcare Centrală',
       owner: {
         id: 5,
-        firstname: 'Ana',
-        lastname: 'Dinica',
+        firstName: 'Ana',
+        lastName: 'Dinica',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -884,6 +914,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -909,8 +941,8 @@ export class ParkingPlacesService {
       name: 'Parcare Centrală',
       owner: {
         id: 5,
-        firstname: 'Ana',
-        lastname: 'Dinica',
+        firstName: 'Ana',
+        lastName: 'Dinica',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -937,6 +969,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       isFree: false,
       isVideoSurveillance: true,
       isDraft: true,
@@ -962,8 +996,8 @@ export class ParkingPlacesService {
       name: 'Parcare Aeroport',
       owner: {
         id: 1,
-        firstname: 'Ana',
-        lastname: 'Dinica',
+        firstName: 'Ana',
+        lastName: 'Dinica',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -992,6 +1026,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -1015,8 +1051,8 @@ export class ParkingPlacesService {
       name: 'Parcare Subterană',
       owner: {
         id: 2,
-        firstname: 'Dan',
-        lastname: 'Ionescu',
+        firstName: 'Dan',
+        lastName: 'Ionescu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -1045,6 +1081,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -1067,8 +1105,8 @@ export class ParkingPlacesService {
       name: 'Parcare Centrală',
       owner: {
         id: 1,
-        firstname: 'Ana',
-        lastname: 'Dinica',
+        firstName: 'Ana',
+        lastName: 'Dinica',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -1097,6 +1135,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -1120,8 +1160,8 @@ export class ParkingPlacesService {
       name: 'Parcare Aeroport',
       owner: {
         id: 0,
-        firstname: 'Magda',
-        lastname: 'Paicu',
+        firstName: 'Magda',
+        lastName: 'Paicu',
         email: 'john@example.com',
         role: Role.ADMIN,
         address: '123 Main St',
@@ -1150,6 +1190,8 @@ export class ParkingPlacesService {
       paymentPerHour: 10,
       paymentPerDay: 15,
       paymentForSubscription: 100,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
       isDraft: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',

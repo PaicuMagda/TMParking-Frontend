@@ -16,11 +16,15 @@ export class UsersService {
     return this.http.get<any>(`${this.baseUrl}`);
   }
 
+  updateUser(id: number, user: User): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/update-user/${id}`, user);
+  }
+
   users: User[] = [
     {
       id: 0,
-      firstname: 'Magda',
-      lastname: 'Paicu',
+      firstName: 'Magda',
+      lastName: 'Paicu',
       email: 'john@example.com',
       role: Role.USER,
       address: '123 Main St',
@@ -65,8 +69,8 @@ export class UsersService {
     },
     {
       id: 1,
-      firstname: 'Ana',
-      lastname: 'Dinica',
+      firstName: 'Ana',
+      lastName: 'Dinica',
       email: 'john@example.com',
       role: Role.ADMIN,
       address: '123 Main St',
@@ -102,8 +106,8 @@ export class UsersService {
     },
     {
       id: 2,
-      firstname: 'Dan',
-      lastname: 'Ionescu',
+      firstName: 'Dan',
+      lastName: 'Ionescu',
       email: 'john@example.com',
       role: Role.USER,
       address: '123 Main St',
@@ -139,8 +143,8 @@ export class UsersService {
     },
     {
       id: 3,
-      firstname: 'Andrei',
-      lastname: 'Vasilescu',
+      firstName: 'Andrei',
+      lastName: 'Vasilescu',
       email: 'john@example.com',
       role: Role.ADMIN,
       address: '123 Main St',
@@ -167,8 +171,8 @@ export class UsersService {
     },
     {
       id: 4,
-      firstname: 'Magda',
-      lastname: 'Paicu',
+      firstName: 'Magda',
+      lastName: 'Paicu',
       email: 'john@example.com',
       role: Role.ADMIN,
       address: '123 Main St',
@@ -195,8 +199,8 @@ export class UsersService {
     },
     {
       id: 5,
-      firstname: 'Ana',
-      lastname: 'Dinica',
+      firstName: 'Ana',
+      lastName: 'Dinica',
       email: 'john@example.com',
       role: Role.ADMIN,
       address: '123 Main St',
@@ -223,8 +227,8 @@ export class UsersService {
     },
     {
       id: 6,
-      firstname: 'Dan',
-      lastname: 'Ionescu',
+      firstName: 'Dan',
+      lastName: 'Ionescu',
       email: 'john@example.com',
       role: Role.ADMIN,
       address: '123 Main St',
@@ -251,8 +255,8 @@ export class UsersService {
     },
     {
       id: 7,
-      firstname: 'Andrei',
-      lastname: 'Vasilescu',
+      firstName: 'Andrei',
+      lastName: 'Vasilescu',
       email: 'magda@example.com',
       role: Role.ADMIN,
       address: '123 Main St',

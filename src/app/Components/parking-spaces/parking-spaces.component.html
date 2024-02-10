@@ -8,6 +8,17 @@
         ? 'parking-spaces__card__parkingSpaceIsExpired'
         : ''
     "
+    [matBadge]="
+      isParkingNew(parkingSpace) &&
+      !parkingSpace.isVerifiedByAdmin &&
+      !parkingSpaceIsExpired(parkingSpace.endDate) &&
+      role === 'Administrator'
+        ? 'N'
+        : null
+    "
+    matBadgePosition="after"
+    matBadgeColor="accent"
+    matBadgeSize="large"
   >
     <div class="parking-spaces__card__image">
       <img
