@@ -7,6 +7,8 @@ import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialo
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { Role } from 'src/app/enums/roles';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
   selector: 'app-users-admin',
@@ -20,11 +22,14 @@ export class UsersAdminComponent implements OnInit {
   userFormGroup: FormGroup[] = [];
   vehicles: Vehicle[] = [];
   roles: any[];
+  role: string = '';
 
   constructor(
     private usersService: UsersService,
     private dialog: MatDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService,
+    private userStore: UserStoreService
   ) {}
 
   editUser(index: number) {
@@ -113,6 +118,15 @@ export class UsersAdminComponent implements OnInit {
     });
   }
 
+  isUserNew(user: User): boolean {
+    const currentDate = new Date().getDate();
+    const dateAddedUser = user.dateAdded.getTime();
+    const differenceInDays = Math.floor(
+      (currentDate - dateAddedUser) / (1000 * 60 * 60 * 24)
+    );
+    return differenceInDays <= 3;
+  }
+
   ngOnInit() {
     this.roles = Object.keys(Role);
     this.usersService.getUsers().subscribe((users: User[]) => {
@@ -120,6 +134,10 @@ export class UsersAdminComponent implements OnInit {
       this.users.forEach((user) => {
         this.userFormGroup.push(this.createFormGroup(user));
       });
+    });
+    this.userStore.getRoleFromStore().subscribe((val) => {
+      const roleFromToken = this.authenticationService.getRoleFromToken();
+      this.role = val || roleFromToken;
     });
   }
 }

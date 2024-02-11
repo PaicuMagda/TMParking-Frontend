@@ -20,5 +20,7 @@ export interface User {
   licenseValid?: boolean;
   isEdit?: boolean;
   imageUrl?: string;
+  isVerifiedByAdmin: boolean;
+  dateAdded: Date;
   vehicles?: Vehicle[];
 }

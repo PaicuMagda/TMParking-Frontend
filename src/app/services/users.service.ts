@@ -37,6 +37,8 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user1.jpg',
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
           imageUrl: '../../../assets/images/vehicles/bmv.jpg',
@@ -89,6 +91,8 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user2.jpg',
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
           imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
@@ -130,6 +134,8 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: false,
       imageUrl: '../../../assets/images/users/user3.jpg',
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
           imageUrl: '../../../assets/images/vehicles/bmv.jpg',
@@ -171,6 +177,8 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user4.jpg',
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
           imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
@@ -201,6 +209,8 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: false,
       imageUrl: '../../../assets/images/users/user1.jpg',
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
           imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
@@ -231,6 +241,8 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user2.jpg',
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
           imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
@@ -261,6 +273,8 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: false,
       imageUrl: '../../../assets/images/users/user3.jpg',
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
           imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
@@ -291,6 +305,8 @@ export class UsersService {
       vehiclesRegistered: 'Car, Truck',
       licenseValid: true,
       imageUrl: '../../../assets/images/users/user4.jpg',
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
           imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
