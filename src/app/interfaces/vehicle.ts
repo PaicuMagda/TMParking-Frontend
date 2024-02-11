@@ -8,4 +8,6 @@ export interface Vehicle {
   vehicleIdentificationNumber?: number;
   isEdit?: boolean;
   vehicleRegistrationCertificate?: string;
+  isVerifiedByAdmin: boolean;
+  dateAdded: Date;
 }

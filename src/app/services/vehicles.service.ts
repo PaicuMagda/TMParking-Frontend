@@ -17,6 +17,8 @@ export class VehiclesService {
       year: 2001,
       ownerId: 0,
       vehicleIdentificationNumber: 1234543789,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-11'),
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
@@ -26,6 +28,8 @@ export class VehiclesService {
       year: 1874,
       ownerId: 1,
       vehicleIdentificationNumber: 4253659,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
     },
     {
       imageUrl: '../../../assets/images/vehicles/car-default.jpg',
@@ -35,6 +39,8 @@ export class VehiclesService {
       year: 2019,
       ownerId: 2,
       vehicleIdentificationNumber: 123456789,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
@@ -44,6 +50,8 @@ export class VehiclesService {
       year: 2019,
       ownerId: 3,
       vehicleIdentificationNumber: 123456789,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-11'),
     },
     {
       imageUrl: '../../../assets/images/vehicles/tractor.jpg',
@@ -53,6 +61,8 @@ export class VehiclesService {
       year: 2005,
       ownerId: 4,
       vehicleIdentificationNumber: 123456789,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-11'),
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmv.jpg',
@@ -62,6 +72,8 @@ export class VehiclesService {
       year: 2019,
       ownerId: 5,
       vehicleIdentificationNumber: 425345,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-11'),
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
@@ -71,6 +83,8 @@ export class VehiclesService {
       year: 1996,
       ownerId: 6,
       vehicleIdentificationNumber: 542524,
+      isVerifiedByAdmin: true,
+      dateAdded: new Date('1990-01-01'),
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
@@ -80,6 +94,8 @@ export class VehiclesService {
       year: 2023,
       ownerId: 7,
       vehicleIdentificationNumber: 96988963,
+      isVerifiedByAdmin: false,
+      dateAdded: new Date('2024-02-11'),
     },
   ];
 

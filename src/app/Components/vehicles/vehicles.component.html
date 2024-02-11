@@ -1,7 +1,19 @@
 <div class="vehicle">
   <div *ngFor="let vehicle of vehicles; let i = index">
     <form [formGroup]="vehicleForm[i]">
-      <div class="vehicle__card">
+      <div
+        class="vehicle__card"
+        [matBadge]="
+          isVehicleNew(vehicle) &&
+          !vehicle.isVerifiedByAdmin &&
+          role === 'Administrator'
+            ? 'N'
+            : null
+        "
+        matBadgePosition="after"
+        matBadgeColor="accent"
+        matBadgeSize="large"
+      >
         <div class="col-sm-1 vehicle__card__div1">
           <img src="{{ vehicle.imageUrl }}" />
         </div>
