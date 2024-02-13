@@ -39,7 +39,7 @@ import { ParkingSpaceTableComponent } from './Components/tables/parking-space-ta
 import { UsersTableComponent } from './Components/tables/users-table/users-table.component';
 import { VehiclesTableComponent } from './Components/tables/vehicles-table/vehicles-table.component';
 import { ConfirmationParkingSpaceExpiredDialogComponent } from './Components/dialogs/confirmation-parking-space-expired-dialog/confirmation-parking-space-expired-dialog.component';
-import { HoverElementDirective } from './Components/directives/hover-element.directive';
+import { HoverElementDirective } from './directives/hover-element.directive';
 import { LegendComponent } from './Components/legend/legend.component';
 import { HourFormatPipe } from './pipes/hour-format.pipe';
 import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';

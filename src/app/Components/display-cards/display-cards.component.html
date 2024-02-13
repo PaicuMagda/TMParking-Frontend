@@ -32,6 +32,7 @@
         <button
           class="display-cards__admin__buttons__tables"
           (click)="goToTables()"
+          appHoverElement
         >
           <img src="../../../assets/images/table.png" />
           <span>Tables</span>
@@ -51,6 +52,7 @@
           [(ngModel)]="toggleButtonValue"
           class="display-cards__admin__buttons__mat-toggle-buttons"
           (change)="sendToggleValueParkingSpaces()"
+          appHoverElement
         >
           <mat-button-toggle value="allParkingSpaces"
             >🚙 All Parking Spaces</mat-button-toggle
@@ -76,6 +78,7 @@
           class="display-cards__admin__buttons__add-new-park-space"
           mat-button
           (click)="openAddNewParkingDialogFunction()"
+          appHoverElement
         >
           ➕ ADD NEW PARKING SPACE
         </button>
@@ -84,6 +87,7 @@
           class="display-cards__admin__buttons__add-new-park-space"
           mat-button
           (click)="openAddNewVehicleDialogFunction()"
+          appHoverElement
         >
           ➕ ADD NEW VEHICLE
         </button>
@@ -93,6 +97,7 @@
           class="display-cards__admin__buttons__add-new-park-space"
           mat-button
           (click)="openAddNewUserDialog()"
+          appHoverElement
         >
           ➕ ADD NEW USER
         </button>
