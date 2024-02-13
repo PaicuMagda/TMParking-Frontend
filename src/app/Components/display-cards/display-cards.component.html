@@ -32,9 +32,19 @@
         <button
           class="display-cards__admin__buttons__tables"
           (click)="goToTables()"
+          appHoverElement
         >
           <img src="../../../assets/images/table.png" />
           <span>Tables</span>
+        </button>
+      </div>
+      <div *ngIf="role === 'User'">
+        <button
+          class="display-cards__admin__buttons__my-reservations"
+          (click)="goToMyReservations()"
+          appHoverElement
+        >
+          <span>My Reservations</span>
         </button>
       </div>
       <div>
@@ -43,6 +53,7 @@
           [(ngModel)]="toggleButtonValue"
           class="display-cards__admin__buttons__mat-toggle-buttons"
           (change)="sendToggleValueParkingSpaces()"
+          appHoverElement
         >
           <mat-button-toggle value="allParkingSpaces"
             >🚙 All Parking Spaces</mat-button-toggle
@@ -63,19 +74,12 @@
             *ngIf="role === 'Administrator'"
             >🚙All Vehicles</mat-button-toggle
           >
-          <mat-button-toggle value="myReservations" *ngIf="role === 'User'"
-            >📆 My reservations</mat-button-toggle
-          >
-          <mat-button-toggle
-            value="allReservations"
-            *ngIf="role === 'Administrator'"
-            >📆 All reservations</mat-button-toggle
-          >
         </mat-button-toggle-group>
         <button
           class="display-cards__admin__buttons__add-new-park-space"
           mat-button
           (click)="openAddNewParkingDialogFunction()"
+          appHoverElement
         >
           ➕ ADD NEW PARKING SPACE
         </button>
@@ -84,6 +88,7 @@
           class="display-cards__admin__buttons__add-new-park-space"
           mat-button
           (click)="openAddNewVehicleDialogFunction()"
+          appHoverElement
         >
           ➕ ADD NEW VEHICLE
         </button>
@@ -93,6 +98,7 @@
           class="display-cards__admin__buttons__add-new-park-space"
           mat-button
           (click)="openAddNewUserDialog()"
+          appHoverElement
         >
           ➕ ADD NEW USER
         </button>

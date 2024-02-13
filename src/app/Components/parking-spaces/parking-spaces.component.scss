@@ -5,7 +5,7 @@
   gap: 3%;
   max-height: 55.4rem;
   margin-top: 0.5rem;
-  margin-left: 3%;
+  margin-left: 2%;
   margin-top: 2%;
 
   &__card {
@@ -13,6 +13,17 @@
     height: 23vh;
     border-radius: 10px;
     border: 2px solid black;
+
+    span {
+      z-index: 10;
+    }
+
+    &__badge {
+      .mat-badge-content {
+        background: rgb(255, 230, 0);
+        color: black;
+      }
+    }
 
     &__parkingSpaceIsExpired {
       opacity: 0.5;

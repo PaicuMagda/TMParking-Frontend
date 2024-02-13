@@ -87,6 +87,10 @@ export class DisplayCardsComponent {
     this.router.navigate(['/tables']);
   }
 
+  goToMyReservations() {
+    this.router.navigate(['/my-reservations']);
+  }
+
   sendToggleValueParkingSpaces() {
     this.displayCardsService.sendToggleValue(this.toggleButtonValue);
   }

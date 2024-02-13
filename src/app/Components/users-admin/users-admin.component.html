@@ -1,148 +1,183 @@
-<form>
+<div>
   <div>
-    <div class="userCard" *ngFor="let user of users">
-      <div class="col-sm-1">
-        <img class="userCard__img" src="{{ user.imageUrl }}" />
-      </div>
+    <div *ngFor="let user of users; let i = index">
+      <form
+        class="userCard"
+        [formGroup]="userFormGroup[i]"
+        [matBadge]="
+          isUserNew(user) && !user.isVerifiedByAdmin && role === 'Administrator'
+            ? 'N'
+            : null
+        "
+        matBadgePosition="after"
+        matBadgeColor="accent"
+        matBadgeSize="large"
+      >
+        <div class="col-sm-1">
+          <img class="userCard__img" src="{{ user.imageUrl }}" />
+        </div>
 
-      <div *ngIf="user.isEdit" class="col-sm-4 userCard__div2">
-        <div class="col-sm-4 userCard__div2__name">
-          <label>Name</label>
-          <input type="text" />
-          <input type="text" />
+        <div *ngIf="user.isEdit" class="col-sm-4 userCard__div2">
+          <div class="col-sm-4 userCard__div2__name">
+            <label>Name</label>
+            <input type="text" formControlName="firstname" />
+            <input type="text" formControlName="lastname" />
+          </div>
+          <div>
+            <label>E-mail Address</label>
+            <input type="text" formControlName="emailAddress" />
+          </div>
+          <div class="userCard__div2__address">
+            <label>Address</label>
+            <input
+              type="text"
+              placeholder="Sreet or P.O Number"
+              formControlName="address"
+            />
+          </div>
+          <div class="userCard__div2__license">
+            <p>Valid driver license</p>
+            <mat-icon [svgIcon]="'file-pdf'"></mat-icon>
+          </div>
         </div>
-        <div>
-          <label>E-mail Address</label>
-          <input type="text" />
-        </div>
-        <div class="userCard__div2__address">
-          <label>Address</label>
-          <input type="text" placeholder="Sreet or P.O Number" />
-        </div>
-        <div class="userCard__div2__license">
-          <p>Valid driver license</p>
-          <mat-icon [svgIcon]="'file-pdf'"></mat-icon>
-        </div>
-      </div>
 
-      <div *ngIf="!user.isEdit" class="col-sm-4 userCard__div2__info">
-        <div class="userCard__div2__info__name">
-          <label>Name</label>
-          <span>{{ user.firstname }}{{ " " + user.lastname }}</span>
+        <div *ngIf="!user.isEdit" class="col-sm-3 userCard__div2__info">
+          <div class="row">
+            <label class="col">Name</label>
+            <span class="col"
+              >{{ user.firstName }}{{ " " + user.lastName }}</span
+            >
+          </div>
+          <div class="row">
+            <label class="col">E-mail Address</label>
+            <span class="col">{{ user.email }}</span>
+          </div>
+          <div class="row">
+            <label class="col">Address</label>
+            <span class="col">{{ user.address }}</span>
+          </div>
+          <div class="row">
+            <label class="col">Valid driver license</label>
+            <span class="col">{{ user.licenseValid }}</span>
+          </div>
         </div>
-        <div class="userCard__div2__info__email">
-          <label>E-mail Address</label>
-          <span>{{ user.email }}</span>
-        </div>
-        <div class="userCard__div2__info__address">
-          <label>Address</label>
-          <span>{{ user.address }}</span>
-        </div>
-        <div class="userCard__div2__info__license">
-          <label>Valid driver license</label>
-          <span>{{ user.licenseValid }}</span>
-        </div>
-      </div>
 
-      <div *ngIf="user.isEdit" class="col-sm-2 userCard__div3">
-        <div class="userCard__div3__role">
-          <label>Role</label>
-          <input type="text" />
+        <div *ngIf="user.isEdit" class="col-sm-2 userCard__div3">
+          <div class="userCard__div3__role">
+            <label>Role</label>
+            <select formControlName="role">
+              <option value="USER">USER</option>
+              <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+            </select>
+          </div>
+          <div class="userCard__div3__zip">
+            <label>Zip Code</label>
+            <input type="zipCode" formControlName="zipCode" />
+          </div>
+          <div class="userCard__div3__state">
+            <label>State</label> <input type="text" formControlName="state" />
+          </div>
+          <div class="userCard__div3__active">
+            <p>Active</p>
+            <select formControlName="isActive">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
         </div>
-        <div class="userCard__div3__zip">
-          <label>Zip Code</label> <input type="zipCode" />
-        </div>
-        <div class="userCard__div3__state">
-          <label>State</label> <input type="text" />
-        </div>
-        <div class="userCard__div3__active">
-          <p>Active</p>
-          <select>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
-        </div>
-      </div>
 
-      <div *ngIf="!user.isEdit" class="col-sm-2 userCard__div3__info">
-        <div class="userCard__div3__info__role">
-          <label>Role</label>
-          <span>{{ user.role }}</span>
+        <div *ngIf="!user.isEdit" class="col-sm-3 userCard__div3__info">
+          <div class="row">
+            <label class="col">Role</label>
+            <span class="col">{{ user.role }}</span>
+          </div>
+          <div class="row">
+            <label class="col">Zip Code</label>
+            <span class="col">{{ user.zipCode }}</span>
+          </div>
+          <div class="row">
+            <label class="col">State</label>
+            <span class="col">{{ user.state }}</span>
+          </div>
+          <div class="row">
+            <label class="col">Active</label>
+            <span class="col">{{ user.isActive ? "Yes" : "No" }}</span>
+          </div>
         </div>
-        <div class="userCard__div3__info__zip">
-          <label>Zip Code</label>
-          <span>{{ user.zipCode }}</span>
-        </div>
-        <div class="userCard__div3__info__state">
-          <label>State</label>
-          <span>{{ user.state }}</span>
-        </div>
-        <div class="userCard__div3__info__active">
-          <label>Active</label>
-          <span>{{ user.isActive }}</span>
-        </div>
-      </div>
 
-      <div *ngIf="user.isEdit" class="col-sm-4 userCard__div4">
-        <div class="userCard__div4__phone">
-          <label>Phone</label>
-          <input type="text" />
+        <div *ngIf="user.isEdit" class="col-sm-4 userCard__div4">
+          <div class="userCard__div4__phone">
+            <label>Phone</label>
+            <input type="text" formControlName="phone" />
+          </div>
+          <div class="userCard__div4__birth">
+            <label>Date Of Birth</label>
+            <input type="text" formControlName="dateOfBirth" />
+          </div>
+          <div class="userCard__div4__pnc">
+            <label>Personal Numerical Code</label>
+            <input type="text" formControlName="personalNumericalCode" />
+          </div>
+          <div class="userCard__div4__numbersRegistered">
+            <label>Number of Vehicles Registered </label>
+            <select formControlName="numberVehiclesRegistered">
+              <option *ngFor="let vehicle of user.vehicles">
+                {{ vehicle.vehicleIdentificationNumber }}
+              </option>
+            </select>
+          </div>
         </div>
-        <div class="userCard__div4__birth">
-          <label>Date Of Birth</label> <input type="text" />
-        </div>
-        <div class="userCard__div4__pnc">
-          <label>Personal Numerical Code</label> <input type="text" />
-        </div>
-        <div>
-          <label>Number of Vehicles Registered </label>
-          <input type="text" />
-        </div>
-      </div>
 
-      <div *ngIf="!user.isEdit" class="col-sm-4 userCard__div4__info">
-        <div class="userCard__div4__info__phone">
-          <label>Phone</label>
-          <span>{{ user.phone }}</span>
+        <div *ngIf="!user.isEdit" class="col-sm-4 userCard__div4__info">
+          <div class="row">
+            <label class="col">Phone</label>
+            <span class="col">{{ user.phone }}</span>
+          </div>
+          <div class="row">
+            <label class="col">Date Of Birth</label>
+            <span class="col">{{
+              user.dateOfBirth | date : "dd/MM/yyyy"
+            }}</span>
+          </div>
+          <div class="row">
+            <label class="col">Personal Numerical Code</label>
+            <span class="col">{{ user.pnc }}</span>
+          </div>
+          <div class="userCard__div4__info__numbersRegistered">
+            <label>Number of Vehicles Registered </label>
+            <select formControlName="numberVehiclesRegistered">
+              <option *ngFor="let vehicle of user.vehicles">
+                {{ vehicle.vehicleIdentificationNumber }}
+              </option>
+            </select>
+          </div>
         </div>
-        <div class="userCard__div4__info__birth">
-          <label>Date Of Birth</label>
-          <span>{{ user.dateOfBirth | date : "d MMMM y" }}</span>
-        </div>
-        <div class="userCard__div4__info__pnc">
-          <label>Personal Numerical Code</label>
-          <span>{{ user.pnc }}</span>
-        </div>
-        <div class="userCard__div4__info__vehicle">
-          <label>Number of Vehicles Registered </label>
-          <span>{{ user.vehiclesRegistered }}</span>
-        </div>
-      </div>
 
-      <div *ngIf="user.isEdit" class="userCard__div7 col-sm-1">
-        <button class="btn btn-danger" (click)="openDeleteConfirmDialog()">
-          <mat-icon svgIcon="delete-trash"></mat-icon>
-          <span>Delete</span>
-        </button>
-        <button
-          class="btn btn-warning"
-          (click)="openSaveChangesConfirmDialog()"
-        >
-          <mat-icon svgIcon="refresh"></mat-icon>
-          <span>Update</span>
-        </button>
-      </div>
+        <div *ngIf="user.isEdit" class="userCard__div7 col-sm-1">
+          <button class="btn btn-danger" (click)="openDeleteConfirmDialog()">
+            <mat-icon svgIcon="delete-trash"></mat-icon>
+            <span>Delete</span>
+          </button>
+          <button
+            class="btn btn-warning"
+            (click)="openSaveChangesConfirmDialog()"
+          >
+            <mat-icon svgIcon="refresh"></mat-icon>
+            <span>Update</span>
+          </button>
+        </div>
 
-      <div *ngIf="!user.isEdit" class="userCard__div7 col-sm-1">
-        <button class="btn btn-danger" (click)="openDeleteConfirmDialog()">
-          <mat-icon svgIcon="delete-trash"></mat-icon>
-          <span>Delete</span>
-        </button>
-        <button class="userCard__div7__edit-button" (click)="editUser(user)">
-          <mat-icon svgIcon="edit"></mat-icon>
-          <span>Edit</span>
-        </button>
-      </div>
+        <div *ngIf="!user.isEdit" class="userCard__div7 col-sm-1">
+          <button class="btn btn-danger" (click)="openDeleteConfirmDialog()">
+            <mat-icon svgIcon="delete-trash"></mat-icon>
+            <span>Delete</span>
+          </button>
+          <button class="userCard__div7__edit-button" (click)="editUser(i)">
+            <mat-icon svgIcon="edit"></mat-icon>
+            <span>Edit</span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-</form>
+</div>

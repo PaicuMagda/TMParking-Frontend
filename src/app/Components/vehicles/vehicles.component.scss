@@ -27,11 +27,11 @@ label {
 
   &__card {
     margin-top: 1rem;
-    width: 95%;
+    width: 90%;
     height: 7rem;
     box-shadow: 0px 0px 50px 0px rgba(101, 101, 101, 0.9);
     border-radius: 1rem;
-    margin-left: 1%;
+    margin-left: 5%;
     margin-top: 3%;
     display: flex;
 
@@ -41,6 +41,13 @@ label {
       border-radius: 50%;
       box-shadow: 0px 0px 50px 0px rgba(55, 0, 103, 0.9);
       margin-top: 0.5rem;
+    }
+
+    &__badge {
+      .mat-badge-content {
+        background: rgb(255, 230, 0);
+        color: black;
+      }
     }
 
     &__div1 {
@@ -64,14 +71,8 @@ label {
         @include flex(row, center, 21%);
       }
 
-      &__modelIsEdit {
-        @include flex(row, center, 8%);
-        align-items: center;
-      }
-
       input {
         border-radius: 4px;
-        width: 70%;
         height: 2.2rem;
       }
     }
@@ -115,7 +116,6 @@ label {
 
       input {
         border-radius: 4px;
-        width: 60%;
         height: 2.2rem;
       }
     }
@@ -132,9 +132,14 @@ label {
 
       button {
         @include flex(row, center, 8%);
-        width: 30%;
+        width: 45%;
         align-items: center;
       }
     }
   }
+}
+
+.mat-badge-content {
+  background: red;
+  color: white;
 }

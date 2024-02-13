@@ -50,6 +50,7 @@ export class TokenInterceptor implements HttpInterceptor {
     let tokenApi = new TokenApi();
     tokenApi.accessToken = this.auth.getToken()!;
     tokenApi.refreshToken = this.auth.getRefreshToken()!;
+
     return this.auth.renewToken(tokenApi).pipe(
       switchMap((data: TokenApi) => {
         this.auth.storeRefreshToken(data.refreshToken);
@@ -59,6 +60,7 @@ export class TokenInterceptor implements HttpInterceptor {
         });
         return next.handle(req);
       }),
+
       catchError((err) => {
         return throwError(() => {
           this.toast.warning({

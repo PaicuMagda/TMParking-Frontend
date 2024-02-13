@@ -9,6 +9,34 @@
         : ''
     "
   >
+    <span
+      [matBadge]="
+        isParkingNew(parkingSpace) &&
+        !parkingSpace.isVerifiedByAdmin &&
+        !parkingSpaceIsExpired(parkingSpace.endDate) &&
+        role === 'Administrator'
+          ? 'N'
+          : null
+      "
+      matBadgePosition="before"
+      matBadgeColor="warn"
+      matBadgeSize="large"
+    ></span>
+    <span
+      class="parking-spaces__card__badge"
+      [matBadge]="
+        parkingSpace.somethingIsWrong &&
+        toggleValue === 'myParkingSpaces' &&
+        !parkingSpaceIsExpired(parkingSpace.endDate) &&
+        role === 'User'
+          ? '!'
+          : null
+      "
+      matBadgePosition="before"
+      matBadgeColor="accent"
+      matBadgeSize="large"
+    ></span>
+
     <div class="parking-spaces__card__image">
       <img
         src="{{ parkingSpace.imageUrl }}"
@@ -19,6 +47,7 @@
             : openParkingSpaceExpiredConfirmDialog()
         "
       />
+
       <div
         class="parking-spaces__card__image__icons"
         *ngIf="role === 'Administrator' || toggleValue === 'myParkingSpaces'"
@@ -65,7 +94,7 @@
         <div
           class="parking-spaces__card__informations__ownerAddressDate__camera"
         >
-          <span>{{ parkingSpace.owner.firstname }}</span>
+          <span>{{ parkingSpace.owner.firstName }}</span>
           <img
             *ngIf="parkingSpace.isVideoSurveillance"
             src="../../../assets/images/camera.png"

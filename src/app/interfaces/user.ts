@@ -1,22 +1,26 @@
 import { Role } from '../enums/roles';
+import { Vehicle } from './vehicle';
 
 export interface User {
   id: number;
-  firstname: string;
-  lastname: string;
+  firstName?: string;
+  lastName?: string;
   username?: string;
-  email: string;
-  role: Role;
-  address: string;
-  zipCode: number;
-  state: string;
-  isActive: boolean;
-  phone: number;
-  dateOfBirth: Date;
-  pnc: number;
-  vehiclesRegistered: string;
+  email?: string;
+  role?: Role;
+  address?: string;
+  zipCode?: number;
+  state?: string;
+  isActive?: boolean;
+  phone?: number;
+  dateOfBirth?: Date;
+  pnc?: number;
+  vehiclesRegistered?: string;
   password?: string;
-  licenseValid: boolean;
+  licenseValid?: boolean;
   isEdit?: boolean;
   imageUrl?: string;
+  isVerifiedByAdmin: boolean;
+  dateAdded: Date;
+  vehicles?: Vehicle[];
 }

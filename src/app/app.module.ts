@@ -14,7 +14,6 @@ import { HomeComponent } from './Components/home/home/home.component';
 import { MaterialModule } from './shared/material/material.module';
 import { TmParkingInfoDialogComponent } from './Components/dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { AddNewParkingSpaceDialogComponent } from './Components/dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
-import { NavbarService } from './services/navbar.service';
 import { NgToastModule } from 'ng-angular-popup';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { LogoutDialogComponent } from './Components/dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
@@ -39,12 +38,13 @@ import { TablesComponent } from './Components/tables/tables.component';
 import { ParkingSpaceTableComponent } from './Components/tables/parking-space-table/parking-space-table.component';
 import { UsersTableComponent } from './Components/tables/users-table/users-table.component';
 import { VehiclesTableComponent } from './Components/tables/vehicles-table/vehicles-table.component';
-import { RentingParkingSpacesComponent } from './Components/tables/renting-parking-spaces/renting-parking-spaces.component';
 import { ConfirmationParkingSpaceExpiredDialogComponent } from './Components/dialogs/confirmation-parking-space-expired-dialog/confirmation-parking-space-expired-dialog.component';
-import { HoverElementDirective } from './Components/directives/hover-element.directive';
+import { HoverElementDirective } from './directives/hover-element.directive';
 import { LegendComponent } from './Components/legend/legend.component';
 import { HourFormatPipe } from './pipes/hour-format.pipe';
 import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';
+import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -77,12 +77,12 @@ import { ParkingReservationsComponent } from './Components/tables/parking-reserv
     ParkingSpaceTableComponent,
     UsersTableComponent,
     VehiclesTableComponent,
-    RentingParkingSpacesComponent,
     ConfirmationParkingSpaceExpiredDialogComponent,
     HoverElementDirective,
     LegendComponent,
     HourFormatPipe,
     ParkingReservationsComponent,
+    MyReservationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,7 +98,7 @@ import { ParkingReservationsComponent } from './Components/tables/parking-reserv
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    NavbarService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

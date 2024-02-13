@@ -22,5 +22,8 @@ export interface ParkingSpace {
   paymentPerHour: number;
   paymentPerDay: number;
   paymentForSubscription: number;
+  dateAdded: Date;
+  isVerifiedByAdmin: boolean;
+  somethingIsWrong: boolean;
   parkingSpots: ParkingSpot[];
 }
