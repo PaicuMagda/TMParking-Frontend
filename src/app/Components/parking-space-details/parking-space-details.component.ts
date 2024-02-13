@@ -7,6 +7,8 @@ import { ParkingSpaceBookingService } from 'src/app/services/parking-space-booki
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { PaymentMethods } from 'src/app/enums/payment-methods';
+import { LeavePageDialogComponent } from '../dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-parking-space-details',
@@ -33,7 +35,8 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     private router: ActivatedRoute,
     private parkingSpaceService: ParkingPlacesService,
     private bookingService: ParkingSpaceBookingService,
-    private vehicleService: VehiclesService
+    private vehicleService: VehiclesService,
+    private dialog: MatDialog
   ) {
     // this.filteredVehicles = this.vehiclesControl.valueChanges.pipe(
     //   startWith(''),
@@ -57,6 +60,16 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   populateHoursArray() {
     this.bookingService.getNumberArray().subscribe((values) => {
       this.hours = values;
+    });
+  }
+
+  openLeavePageDialog() {
+    this.dialog.open(LeavePageDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
     });
   }
 

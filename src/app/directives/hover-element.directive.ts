@@ -22,7 +22,7 @@ export class HoverElementDirective {
     this.renderer.setStyle(
       this.element.nativeElement,
       'box-shadow',
-      '7px 7px 7px 7px rgba(0,0,1,0.75)'
+      '7px 7px 7px 7px rgba(0.4,0.4,0.4,0.4)'
     );
   }
 

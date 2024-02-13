@@ -1,0 +1,14 @@
+<div class="icon-close" (click)="closeLeavePageDialog()">
+  <mat-icon svgIcon="icon-close"></mat-icon>
+</div>
+<mat-divider></mat-divider>
+
+<div class="save-changes">
+  <div>
+    <h2>Are you sure you want to leave this page ?</h2>
+  </div>
+  <div class="buttons">
+    <button class="button-save" (click)="confirmLeavePageDialog()">Yes</button>
+    <button class="discard-button" (click)="closeLeavePageDialog()">No</button>
+  </div>
+</div>
