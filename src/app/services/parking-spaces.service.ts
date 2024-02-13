@@ -67,6 +67,7 @@ export class ParkingPlacesService {
       paymentForSubscription: 100,
       dateAdded: new Date('2024-02-10'),
       isVerifiedByAdmin: false,
+      somethingIsWrong: true,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.        Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces         Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.        Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces         Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces ',
       parkingSpots: [
@@ -125,6 +126,7 @@ export class ParkingPlacesService {
       paymentForSubscription: 100,
       dateAdded: new Date('2024-02-10'),
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -182,6 +184,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: false,
+      somethingIsWrong: false,
       dateAdded: new Date('2024-02-10'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -274,6 +277,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: false,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -331,6 +335,7 @@ export class ParkingPlacesService {
       isVerifiedByAdmin: false,
       isFree: true,
       isVideoSurveillance: true,
+      somethingIsWrong: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -386,6 +391,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: false,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -442,6 +448,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: false,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -497,6 +504,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       isVideoSurveillance: false,
       description:
@@ -554,6 +562,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -610,6 +619,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: false,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -666,6 +676,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -722,6 +733,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       isDraft: true,
       description:
@@ -780,6 +792,7 @@ export class ParkingPlacesService {
       isVerifiedByAdmin: true,
       dateAdded: new Date('1990-01-01'),
       isVideoSurveillance: true,
+      somethingIsWrong: false,
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
       parkingSpots: [
@@ -835,6 +848,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: false,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -891,6 +905,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: false,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -947,6 +962,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -988,6 +1004,7 @@ export class ParkingPlacesService {
         licenseValid: true,
         imageUrl: '../../../assets/images/users/user2.jpg',
         isVerifiedByAdmin: false,
+
         dateAdded: new Date('2024-02-11'),
         vehicles: [],
       },
@@ -1004,6 +1021,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       isFree: false,
       isVideoSurveillance: true,
@@ -1063,6 +1081,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       isDraft: true,
       description:
@@ -1120,6 +1139,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       description:
         'Parking is the act of stopping and disengaging a vehicle and leaving it unoccupied. Parking on one or both sides of a road is often permitted, though sometimes with restrictions. Some buildings have parking facilities for use of the buildings users. Countries and local governments have rules[1] for design and use of parking spaces.',
@@ -1176,6 +1196,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       isDraft: true,
       description:
@@ -1233,6 +1254,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
+      somethingIsWrong: false,
       dateAdded: new Date('1990-01-01'),
       isDraft: true,
       description:
