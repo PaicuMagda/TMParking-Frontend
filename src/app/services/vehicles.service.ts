@@ -10,6 +10,7 @@ export class VehiclesService {
 
   vehicles: Vehicle[] = [
     {
+      idVehicle: 0,
       imageUrl: '../../../assets/images/vehicles/bmv.jpg',
       make: 'Toyota',
       model: 'Audi',
@@ -22,6 +23,7 @@ export class VehiclesService {
       somethingIsWrong: true,
     },
     {
+      idVehicle: 1,
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'kwgffetg',
       model: 'Corolla',
@@ -34,6 +36,7 @@ export class VehiclesService {
       somethingIsWrong: true,
     },
     {
+      idVehicle: 2,
       imageUrl: '../../../assets/images/vehicles/car-default.jpg',
       make: 'jfyuj',
       model: 'BMW',
@@ -46,6 +49,7 @@ export class VehiclesService {
       somethingIsWrong: true,
     },
     {
+      idVehicle: 3,
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'afdf',
       model: 'Corolla',
@@ -58,6 +62,7 @@ export class VehiclesService {
       somethingIsWrong: false,
     },
     {
+      idVehicle: 4,
       imageUrl: '../../../assets/images/vehicles/tractor.jpg',
       make: 'mymngch',
       model: 'ghdkh',
@@ -70,6 +75,7 @@ export class VehiclesService {
       somethingIsWrong: false,
     },
     {
+      idVehicle: 5,
       imageUrl: '../../../assets/images/vehicles/bmv.jpg',
       make: 'Toyota',
       model: 'pmbdgc',
@@ -82,6 +88,7 @@ export class VehiclesService {
       somethingIsWrong: false,
     },
     {
+      idVehicle: 6,
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'Toyota',
       model: 'mbfih',
@@ -94,6 +101,7 @@ export class VehiclesService {
       somethingIsWrong: false,
     },
     {
+      idVehicle: 7,
       imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
       make: 'Toyota',
       model: 'oyrfh',

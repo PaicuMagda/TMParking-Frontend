@@ -40,18 +40,27 @@ export class VehiclesComponent implements OnInit {
       vehicleRegistrationCertificate: vehicle.vehicleRegistrationCertificate,
     });
   }
+  openSaveChangesConfirmDialog(idVehicle: number) {
+    const vehicleData = this.vehicleForm[idVehicle].value;
 
-  openSaveChangesConfirmDialog() {
-    this.dialog.open(SaveChangesDialogComponent, {
+    const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
       position: {
         top: '5%',
       },
+      data: { vehicleData },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'save' || result === 'close') {
+        this.vehicles[idVehicle].isEdit = false;
+      }
+      console.log(idVehicle);
     });
   }
 
-  openDeleteConfirmDialog() {
+  openDeleteConfirmDialog(index: number) {
     this.dialog.open(DeleteConfirmationDialogComponent, {
       width: '23%',
       height: '20%',

@@ -14,12 +14,14 @@ export class SaveChangesDialogComponent implements OnInit {
   ) {}
 
   closeSaveChangesDialog() {
-    this.dialogRef.close();
+    this.dialogRef.close('close');
   }
 
   saveData() {
-    this.dialogRef.close();
+    this.dialogRef.close('save');
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.data);
+  }
 }

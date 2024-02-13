@@ -95,7 +95,10 @@
           </div>
         </div>
         <div class="col-sm-2 vehicle__card__div5">
-          <button class="btn btn-danger" (click)="openDeleteConfirmDialog()">
+          <button
+            class="btn btn-danger"
+            (click)="openDeleteConfirmDialog(vehicle.idVehicle)"
+          >
             <mat-icon svgIcon="delete-trash"></mat-icon>
             <span>Delete</span>
           </button>
@@ -111,7 +114,7 @@
           <button
             *ngIf="vehicle.isEdit"
             class="btn btn-warning"
-            (click)="openSaveChangesConfirmDialog()"
+            (click)="openSaveChangesConfirmDialog(vehicle.idVehicle)"
           >
             <mat-icon svgIcon="refresh"></mat-icon>
             <span>Update</span>
