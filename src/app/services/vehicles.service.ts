@@ -19,6 +19,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 1234543789,
       isVerifiedByAdmin: false,
       dateAdded: new Date('2024-02-11'),
+      somethingIsWrong: true,
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
@@ -30,6 +31,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 4253659,
       isVerifiedByAdmin: true,
       dateAdded: new Date('1990-01-01'),
+      somethingIsWrong: true,
     },
     {
       imageUrl: '../../../assets/images/vehicles/car-default.jpg',
@@ -41,6 +43,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
       isVerifiedByAdmin: true,
       dateAdded: new Date('1990-01-01'),
+      somethingIsWrong: true,
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
@@ -52,6 +55,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
       isVerifiedByAdmin: false,
       dateAdded: new Date('2024-02-11'),
+      somethingIsWrong: false,
     },
     {
       imageUrl: '../../../assets/images/vehicles/tractor.jpg',
@@ -63,6 +67,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 123456789,
       isVerifiedByAdmin: false,
       dateAdded: new Date('2024-02-11'),
+      somethingIsWrong: false,
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmv.jpg',
@@ -74,6 +79,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 425345,
       isVerifiedByAdmin: false,
       dateAdded: new Date('2024-02-11'),
+      somethingIsWrong: false,
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
@@ -85,6 +91,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 542524,
       isVerifiedByAdmin: true,
       dateAdded: new Date('1990-01-01'),
+      somethingIsWrong: false,
     },
     {
       imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
@@ -96,6 +103,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 96988963,
       isVerifiedByAdmin: false,
       dateAdded: new Date('2024-02-11'),
+      somethingIsWrong: false,
     },
   ];
 

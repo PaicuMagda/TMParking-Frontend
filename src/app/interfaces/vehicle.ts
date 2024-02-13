@@ -10,4 +10,5 @@ export interface Vehicle {
   vehicleRegistrationCertificate?: string;
   isVerifiedByAdmin: boolean;
   dateAdded: Date;
+  somethingIsWrong: boolean;
 }

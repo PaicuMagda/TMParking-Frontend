@@ -1,19 +1,26 @@
 <div class="vehicle">
   <div *ngFor="let vehicle of vehicles; let i = index">
     <form [formGroup]="vehicleForm[i]">
-      <div
-        class="vehicle__card"
-        [matBadge]="
-          isVehicleNew(vehicle) &&
-          !vehicle.isVerifiedByAdmin &&
-          role === 'Administrator'
-            ? 'N'
-            : null
-        "
-        matBadgePosition="after"
-        matBadgeColor="accent"
-        matBadgeSize="large"
-      >
+      <div class="vehicle__card">
+        <span
+          [matBadge]="
+            isVehicleNew(vehicle) &&
+            !vehicle.isVerifiedByAdmin &&
+            role === 'Administrator'
+              ? 'N'
+              : null
+          "
+          matBadgePosition="after"
+          matBadgeColor="accent"
+          matBadgeSize="large"
+        ></span>
+        <span
+          class="vehicle__card__badge"
+          [matBadge]="vehicle.somethingIsWrong && role === 'User' ? '!' : null"
+          matBadgePosition="before"
+          matBadgeColor="accent"
+          matBadgeSize="large"
+        ></span>
         <div class="col-sm-1 vehicle__card__div1">
           <img src="{{ vehicle.imageUrl }}" />
         </div>
