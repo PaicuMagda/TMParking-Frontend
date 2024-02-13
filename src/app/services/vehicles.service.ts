@@ -85,7 +85,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 425345,
       isVerifiedByAdmin: false,
       dateAdded: new Date('2024-02-11'),
-      somethingIsWrong: false,
+      somethingIsWrong: true,
     },
     {
       idVehicle: 6,
@@ -111,7 +111,7 @@ export class VehiclesService {
       vehicleIdentificationNumber: 96988963,
       isVerifiedByAdmin: false,
       dateAdded: new Date('2024-02-11'),
-      somethingIsWrong: false,
+      somethingIsWrong: true,
     },
   ];
 
