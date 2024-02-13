@@ -14,6 +14,17 @@
     border-radius: 10px;
     border: 2px solid black;
 
+    span {
+      z-index: 10;
+    }
+
+    &__badge {
+      .mat-badge-content {
+        background: rgb(255, 230, 0);
+        color: black;
+      }
+    }
+
     &__parkingSpaceIsExpired {
       opacity: 0.5;
     }
@@ -116,8 +127,4 @@
       }
     }
   }
-}
-.mat-badge-content {
-  background: red;
-  color: white;
 }

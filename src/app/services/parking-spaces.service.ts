@@ -1004,7 +1004,6 @@ export class ParkingPlacesService {
         licenseValid: true,
         imageUrl: '../../../assets/images/users/user2.jpg',
         isVerifiedByAdmin: false,
-
         dateAdded: new Date('2024-02-11'),
         vehicles: [],
       },
@@ -1021,7 +1020,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
-      somethingIsWrong: false,
+      somethingIsWrong: true,
       dateAdded: new Date('1990-01-01'),
       isFree: false,
       isVideoSurveillance: true,
@@ -1081,7 +1080,7 @@ export class ParkingPlacesService {
       paymentPerDay: 15,
       paymentForSubscription: 100,
       isVerifiedByAdmin: true,
-      somethingIsWrong: false,
+      somethingIsWrong: true,
       dateAdded: new Date('1990-01-01'),
       isDraft: true,
       description:
