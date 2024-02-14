@@ -26,6 +26,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
         return {
           ...user,
           fullname: user.lastName + ' ' + user.firstName,
+          numberOfVehciles: user.vehicles.length,
         };
       });
       this.dataSource.data = usersWithFullName;
