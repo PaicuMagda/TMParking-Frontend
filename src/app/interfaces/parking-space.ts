@@ -6,12 +6,12 @@ export interface ParkingSpace {
   name: string;
   owner: User;
   address: string;
-  locuriDisponibile: number;
+  availableParkingSpaces: number;
+  isCargoVehicleAccepted: boolean;
+  isPersonalVehicleAccepted: boolean;
+  isPublicTransportAccepted: boolean;
+  isAgriculturalMachineryAccepted: boolean;
   imageUrl: string;
-  isCargoVehicles: boolean;
-  isTruck: boolean;
-  isAgriculturalMachinery: boolean;
-  isPublicTransport: boolean;
   startDate: Date;
   endDate: Date;
   isFree: boolean;

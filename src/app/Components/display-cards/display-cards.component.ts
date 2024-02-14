@@ -9,6 +9,7 @@ import { AddNewVehicleDialogComponent } from '../dialogs/add-new-vehicle-dialog/
 import { AddNewUserDialogComponent } from '../dialogs/add-new-user-dialog/add-new-user-dialog.component';
 import { Router } from '@angular/router';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-display-cards',
@@ -29,7 +30,8 @@ export class DisplayCardsComponent {
     private userStore: UserStoreService,
     private auth: AuthenticationService,
     private router: Router,
-    private displayCardsService: DisplayCardsService
+    private displayCardsService: DisplayCardsService,
+    private navbarService: NavbarService
   ) {}
 
   openAddNewParkingDialogFunction() {
@@ -93,6 +95,17 @@ export class DisplayCardsComponent {
 
   sendToggleValueParkingSpaces() {
     this.displayCardsService.sendToggleValue(this.toggleButtonValue);
+    if (
+      this.toggleButtonValue === 'myParkingSpaces' ||
+      this.toggleButtonValue === 'allParkingSpaces'
+    ) {
+      this.navbarService.showSerachEmitValue(false);
+    } else {
+      this.navbarService.showSerachEmitValue(true);
+    }
+    this.navbarService.showSearch$.subscribe((val) => {
+      console.log(val);
+    });
   }
 
   ngOnInit() {
