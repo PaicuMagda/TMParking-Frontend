@@ -35,7 +35,6 @@ export class VehiclesComponent implements OnInit {
       model: vehicle.model,
       color: vehicle.color,
       year: vehicle.year,
-      ownerId: vehicle.ownerId,
       vehicleIdentificationNumber: vehicle.vehicleIdentificationNumber,
       vehicleRegistrationCertificate: vehicle.vehicleRegistrationCertificate,
     });
@@ -77,7 +76,6 @@ export class VehiclesComponent implements OnInit {
       model: [vehicle.model],
       color: [vehicle.color],
       year: [vehicle.year],
-      ownerId: [vehicle.ownerId],
       vehicleIdentificationNumber: [vehicle.vehicleIdentificationNumber],
       vehicleRegistrationCertificate: [vehicle.vehicleRegistrationCertificate],
     });

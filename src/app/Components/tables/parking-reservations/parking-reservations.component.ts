@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ParkingReservation } from 'src/app/enums/parking-reservation';
 
 export interface PeriodicElement {
   name: string;
@@ -25,7 +29,14 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './parking-reservations.component.html',
   styleUrls: ['./parking-reservations.component.scss'],
 })
-export class ParkingReservationsComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export class ParkingReservationsComponent implements AfterViewInit {
+  displayedColumns: string[] = Object.values(ParkingReservation);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 }
