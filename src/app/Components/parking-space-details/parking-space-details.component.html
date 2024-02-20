@@ -2,7 +2,7 @@
   <app-nav-bar [showSearch]="!showSearch"></app-nav-bar>
   <div class="parking-space-details__close">
     <span>Book a parking spot here</span>
-    <mat-icon svgIcon="icon-close"></mat-icon>
+    <mat-icon svgIcon="icon-close" (click)="openLeavePageDialog()"></mat-icon>
   </div>
   <mat-divider></mat-divider>
   <div class="parking-space-details__container">
@@ -453,13 +453,13 @@
       <div
         class="parking-space-details__container__left__informations__booking__button"
       >
-        <button>
+        <button appHoverElement>
           <mat-icon svgIcon="location-dot-solid"></mat-icon>
           Location
         </button>
 
-        <button>Paid</button>
-        <button>Book</button>
+        <button appHoverElement>Paid</button>
+        <button appHoverElement>Book</button>
       </div>
 
       <mat-divider></mat-divider>

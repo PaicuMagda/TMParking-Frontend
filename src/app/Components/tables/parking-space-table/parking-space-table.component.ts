@@ -35,9 +35,11 @@ export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(EnumParkingSpacesTable);
     this.parkingSpaceService.getParcari().subscribe((values) => {
       this.dataSource.data = values;
     });
+    console.log(this.parkingSpacesDisplayedColumns);
   }
 
   openEditParkingSpace(id: number) {

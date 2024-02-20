@@ -80,17 +80,26 @@ export class UsersAdminComponent implements OnInit {
   //   );
   // }
 
-  openSaveChangesConfirmDialog() {
-    this.dialog.open(SaveChangesDialogComponent, {
+  openSaveChangesConfirmDialog(idUser: number) {
+    const userData = this.userFormGroup[idUser].value;
+
+    const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
       position: {
         top: '5%',
       },
+      data: { userData },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'save' || result === 'close') {
+        this.users[idUser].isEdit = false;
+      }
     });
   }
 
-  openDeleteConfirmDialog() {
+  openDeleteConfirmDialog(idUser: number) {
     this.dialog.open(DeleteConfirmationDialogComponent, {
       width: '23%',
       height: '20%',

@@ -53,7 +53,14 @@ export class NavBarComponent implements OnInit {
     });
   }
 
+  changeShowSearch() {
+    this.sidenavService.showSearch$.subscribe((val) => {
+      this.showSearch = val;
+    });
+  }
+
   ngOnInit() {
+    this.changeShowSearch();
     this.isLogin = this.auth.isLoggedIn();
     this.userStore.getFullNameFromStore().subscribe((val) => {
       let fullNameFromToken = this.auth.getFullNameFromToken();

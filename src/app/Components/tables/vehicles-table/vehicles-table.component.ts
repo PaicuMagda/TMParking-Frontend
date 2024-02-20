@@ -21,7 +21,15 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
   constructor(private vehicleService: VehiclesService) {}
 
   ngOnInit() {
-    this.dataSource.data = this.vehicleService.vehicles;
+    this.vehicleService.getAllVehicle().subscribe((values) => {
+      const vehicleWithOwnerFullname = values.map((vehicle: Vehicle) => {
+        return {
+          ...vehicle,
+          fullnameOwner: vehicle.owner.firstName + ' ' + vehicle.owner.lastName,
+        };
+      });
+      this.dataSource.data = vehicleWithOwnerFullname;
+    });
   }
 
   ngAfterViewInit() {

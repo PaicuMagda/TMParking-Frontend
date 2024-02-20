@@ -1,10 +1,13 @@
+import { User } from './user';
+
 export interface Vehicle {
+  idVehicle: number;
   imageUrl?: string;
   make?: string;
   model?: string;
   color?: string;
   year?: number;
-  ownerId?: number;
+  owner: User;
   vehicleIdentificationNumber?: number;
   isEdit?: boolean;
   vehicleRegistrationCertificate?: string;

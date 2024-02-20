@@ -45,6 +45,7 @@ import { HourFormatPipe } from './pipes/hour-format.pipe';
 import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';
 import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
 import { AuthGuard } from './guards/auth.guard';
+import { LeavePageDialogComponent } from './Components/dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { AuthGuard } from './guards/auth.guard';
     HourFormatPipe,
     ParkingReservationsComponent,
     MyReservationsComponent,
+    LeavePageDialogComponent,
   ],
   imports: [
     BrowserModule,

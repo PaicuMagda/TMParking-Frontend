@@ -16,16 +16,20 @@
     <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="number of vehicles registered">
+  <ng-container matColumnDef="numberOfVehciles">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>
       Number Of Vehicles Registered
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.pnc }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.numberOfVehciles }}</td>
   </ng-container>
 
   <ng-container matColumnDef="licenseValid">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>License Valid</th>
-    <td mat-cell *matCellDef="let element">
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [ngClass]="element.licenseValid ? 'licenseValid-yes' : 'licenseValid-no'"
+    >
       {{ element.licenseValid ? "Yes" : "No" }}
     </td>
   </ng-container>
