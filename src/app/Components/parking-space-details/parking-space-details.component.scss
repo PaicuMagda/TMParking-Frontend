@@ -1,7 +1,7 @@
 @mixin button-back {
   font-weight: 500;
   width: 13%;
-  background-color: rgb(54 0 105);
+  background-color: rgb(0 10 255);
   color: white;
   border: none;
   height: 2.5rem;
@@ -54,7 +54,7 @@
   &__container {
     display: flex;
     height: 88.9%;
-    gap: 3%;
+    gap: 2%;
     flex-direction: row;
 
     &__left {
@@ -89,9 +89,14 @@
 
         &__booking {
           margin-top: 0.5%;
-          width: 30%;
+          width: 32%;
           display: flex;
           flex-direction: column;
+          padding: 1%;
+          background-color: rgb(42, 0, 81);
+          height: 95%;
+          border-radius: 2%;
+          color: white;
 
           .type {
             display: flex;
@@ -121,6 +126,7 @@
               flex-direction: row;
               align-items: center;
               justify-content: center;
+              margin-top: 10%;
 
               div {
                 width: 100%;
@@ -179,6 +185,7 @@
             flex-direction: row;
             justify-content: flex-end;
             gap: 5%;
+            margin-top: 5%;
 
             button:nth-child(1) {
               @include button-location();
@@ -329,10 +336,12 @@ mat-button-toggle-group {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 10%;
 
   img {
     width: 36%;
     height: 80%;
+    box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2),
+      0 6px 20px 0 rgba(255, 255, 255, 0.19);
+    border-radius: 1rem;
   }
 }

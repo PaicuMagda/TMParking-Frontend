@@ -7,5 +7,4 @@ export enum ParkingReservation {
   RESERVATION_TYPE = 'reservationType',
   START_DATE = 'startDate',
   END_DATE = 'endDate',
-  SETTINGS = 'settings',
 }
