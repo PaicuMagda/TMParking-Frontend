@@ -1,12 +1,19 @@
-.zone {
+.areas {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9em;
   width: 100%;
   margin-top: 1rem;
 
-  &__button {
+  &__button-clicked {
     background: #f1f2f3;
+    border-radius: 0.7em;
+    border: none;
+    height: 2rem;
+    text-transform: uppercase;
+  }
+  &__button-no-clicked {
+    background: #ffc400;
     border-radius: 0.7em;
     border: none;
     height: 2rem;

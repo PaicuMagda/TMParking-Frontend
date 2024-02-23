@@ -5,12 +5,23 @@ import { ParkingSpot } from '../interfaces/parking-spot';
 import { ParkingStatus } from '../enums/parking-status';
 import { Role } from '../enums/roles';
 import { PaymentMethodsMoney } from '../enums/payment-methods';
+import { environment } from 'src/environments/environment.development';
+import { TimisoaraAreas } from '../interfaces/timisoara-areas';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ParkingPlacesService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  baseUrl: string = environment.apiUrl;
+
+  getTimisoaraAreas(): Observable<TimisoaraAreas[]> {
+    return this.http.get<TimisoaraAreas[]>(
+      `${this.baseUrl + 'TimisoaraAreas'}`
+    );
+  }
 
   parkingSpotsMock: ParkingSpot[] = [
     { id: 1, spotNumber: '1A', isReserved: ParkingStatus.AVAILABLE },
