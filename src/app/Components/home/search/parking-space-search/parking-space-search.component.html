@@ -7,9 +7,17 @@
 </div>
 <div>
   <h1>Related Tags 🏬</h1>
-  <div class="zone">
-    <button *ngFor="let zona of zone" mat-button class="zone__button">
-      {{ "🚗" + zona }}
+  <div class="areas">
+    <button
+      *ngFor="let area of areas"
+      mat-button
+      class="areas__button"
+      (click)="isButtonAreaSelected(area)"
+      [ngClass]="
+        area.isSelected ? 'areas__button-no-clicked' : 'areas__button-clicked'
+      "
+    >
+      {{ "🚗" + area.name }}
     </button>
   </div>
 </div>

@@ -41,13 +41,13 @@ export class UsersService {
       dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
-          idVehicle: 0,
+          vehicleId: 0,
           imageUrl: '../../../assets/images/vehicles/bmv.jpg',
           make: 'Toyota',
           model: 'Audi',
           color: 'Silver',
           year: 2001,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -73,13 +73,13 @@ export class UsersService {
           dateAdded: new Date('1990-01-01'),
         },
         {
-          idVehicle: 1,
+          vehicleId: 1,
           imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
           make: 'kwgffetg',
           model: 'Corolla',
           color: 'Golden',
           year: 1874,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -105,13 +105,13 @@ export class UsersService {
           somethingIsWrong: false,
         },
         {
-          idVehicle: 2,
+          vehicleId: 2,
           imageUrl: '../../../assets/images/vehicles/car-default.jpg',
           make: 'jfyuj',
           model: 'BMW',
           color: 'Silver',
           year: 2019,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -163,7 +163,7 @@ export class UsersService {
           model: 'Corolla',
           color: 'Red',
           year: 2019,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -187,7 +187,7 @@ export class UsersService {
           isVerifiedByAdmin: true,
           dateAdded: new Date('1990-01-01'),
           somethingIsWrong: false,
-          idVehicle: 5,
+          vehicleId: 5,
         },
         {
           imageUrl: '../../../assets/images/vehicles/tractor.jpg',
@@ -195,7 +195,7 @@ export class UsersService {
           model: 'ghdkh',
           color: 'White',
           year: 2005,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -219,7 +219,7 @@ export class UsersService {
           isVerifiedByAdmin: true,
           dateAdded: new Date('1990-01-01'),
           somethingIsWrong: false,
-          idVehicle: 6,
+          vehicleId: 6,
         },
       ],
     },
@@ -248,7 +248,7 @@ export class UsersService {
           model: 'pmbdgc',
           color: 'Silver',
           year: 2019,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -272,7 +272,7 @@ export class UsersService {
           isVerifiedByAdmin: true,
           dateAdded: new Date('1990-01-01'),
           somethingIsWrong: false,
-          idVehicle: 6,
+          vehicleId: 6,
         },
         {
           imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
@@ -280,7 +280,7 @@ export class UsersService {
           model: 'mbfih',
           color: 'Black',
           year: 1996,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -304,7 +304,7 @@ export class UsersService {
           isVerifiedByAdmin: true,
           dateAdded: new Date('1990-01-01'),
           somethingIsWrong: false,
-          idVehicle: 7,
+          vehicleId: 7,
         },
       ],
     },
@@ -333,7 +333,7 @@ export class UsersService {
           model: 'oyrfh',
           color: 'Blue',
           year: 2023,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -357,7 +357,7 @@ export class UsersService {
           isVerifiedByAdmin: true,
           dateAdded: new Date('1990-01-01'),
           somethingIsWrong: false,
-          idVehicle: 8,
+          vehicleId: 8,
         },
       ],
     },
@@ -386,7 +386,7 @@ export class UsersService {
           model: 'oyrfh',
           color: 'Blue',
           year: 2023,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -410,7 +410,7 @@ export class UsersService {
           isVerifiedByAdmin: true,
           dateAdded: new Date('1990-01-01'),
           somethingIsWrong: false,
-          idVehicle: 9,
+          vehicleId: 9,
         },
       ],
     },
@@ -439,7 +439,7 @@ export class UsersService {
           model: 'oyrfh',
           color: 'Blue',
           year: 2023,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -463,7 +463,7 @@ export class UsersService {
           isVerifiedByAdmin: true,
           dateAdded: new Date('1990-01-01'),
           somethingIsWrong: false,
-          idVehicle: 10,
+          vehicleId: 10,
         },
       ],
     },
@@ -492,7 +492,7 @@ export class UsersService {
           model: 'oyrfh',
           color: 'Blue',
           year: 2023,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -516,7 +516,7 @@ export class UsersService {
           isVerifiedByAdmin: true,
           dateAdded: new Date('1990-01-01'),
           somethingIsWrong: false,
-          idVehicle: 11,
+          vehicleId: 11,
         },
       ],
     },
@@ -545,7 +545,7 @@ export class UsersService {
           model: 'oyrfh',
           color: 'Blue',
           year: 2023,
-          owner: {
+          vehicleOwner: {
             id: 0,
             firstName: 'Magda',
             lastName: 'Paicu',
@@ -569,7 +569,7 @@ export class UsersService {
           isVerifiedByAdmin: true,
           dateAdded: new Date('1990-01-01'),
           somethingIsWrong: false,
-          idVehicle: 12,
+          vehicleId: 12,
         },
       ],
     },
