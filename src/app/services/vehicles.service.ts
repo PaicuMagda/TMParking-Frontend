@@ -2,22 +2,29 @@ import { Injectable } from '@angular/core';
 import { Vehicle } from '../interfaces/vehicle';
 import { Observable, of } from 'rxjs';
 import { Role } from '../enums/roles';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VehiclesService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  baseUrl: string = environment.apiUrl;
+
+  getVehicles(): Observable<Vehicle[]> {
+    return this.http.get<Vehicle[]>(`https://localhost:7010/vehicles`);
+  }
 
   vehicles: Vehicle[] = [
     {
-      idVehicle: 0,
-      imageUrl: '../../../assets/images/vehicles/bmv.jpg',
+      vehicleId: 0,
       make: 'Toyota',
       model: 'Audi',
       color: 'Silver',
       year: 2001,
-      owner: {
+      vehicleOwner: {
         id: 0,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -43,13 +50,13 @@ export class VehiclesService {
       somethingIsWrong: true,
     },
     {
-      idVehicle: 1,
+      vehicleId: 1,
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'kwgffetg',
       model: 'Corolla',
       color: 'Golden',
       year: 1874,
-      owner: {
+      vehicleOwner: {
         id: 0,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -75,13 +82,13 @@ export class VehiclesService {
       somethingIsWrong: true,
     },
     {
-      idVehicle: 2,
+      vehicleId: 2,
       imageUrl: '../../../assets/images/vehicles/car-default.jpg',
       make: 'jfyuj',
       model: 'BMW',
       color: 'Silver',
       year: 2019,
-      owner: {
+      vehicleOwner: {
         id: 0,
         firstName: 'george',
         lastName: 'florica',
@@ -107,13 +114,13 @@ export class VehiclesService {
       somethingIsWrong: true,
     },
     {
-      idVehicle: 3,
+      vehicleId: 3,
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'afdf',
       model: 'Corolla',
       color: 'Red',
       year: 2019,
-      owner: {
+      vehicleOwner: {
         id: 0,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -139,13 +146,13 @@ export class VehiclesService {
       somethingIsWrong: false,
     },
     {
-      idVehicle: 4,
+      vehicleId: 4,
       imageUrl: '../../../assets/images/vehicles/tractor.jpg',
       make: 'mymngch',
       model: 'ghdkh',
       color: 'White',
       year: 2005,
-      owner: {
+      vehicleOwner: {
         id: 0,
         firstName: 'Marian',
         lastName: 'Popescu',
@@ -171,13 +178,13 @@ export class VehiclesService {
       somethingIsWrong: false,
     },
     {
-      idVehicle: 5,
+      vehicleId: 5,
       imageUrl: '../../../assets/images/vehicles/bmv.jpg',
       make: 'Toyota',
       model: 'pmbdgc',
       color: 'Silver',
       year: 2019,
-      owner: {
+      vehicleOwner: {
         id: 0,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -203,13 +210,13 @@ export class VehiclesService {
       somethingIsWrong: true,
     },
     {
-      idVehicle: 6,
+      vehicleId: 6,
       imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'Toyota',
       model: 'mbfih',
       color: 'Black',
       year: 1996,
-      owner: {
+      vehicleOwner: {
         id: 0,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -235,7 +242,7 @@ export class VehiclesService {
       somethingIsWrong: false,
     },
     {
-      idVehicle: 7,
+      vehicleId: 7,
       imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
       make: 'Toyota',
       model: 'oyrfh',
@@ -245,7 +252,7 @@ export class VehiclesService {
       isVerifiedByAdmin: false,
       dateAdded: new Date('2024-02-11'),
       somethingIsWrong: true,
-      owner: {
+      vehicleOwner: {
         id: 0,
         firstName: 'Flavius',
         lastName: 'Urzica',

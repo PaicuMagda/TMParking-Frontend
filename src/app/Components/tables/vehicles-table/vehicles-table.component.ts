@@ -25,7 +25,10 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
       const vehicleWithOwnerFullname = values.map((vehicle: Vehicle) => {
         return {
           ...vehicle,
-          fullnameOwner: vehicle.owner.firstName + ' ' + vehicle.owner.lastName,
+          fullnameOwner:
+            vehicle.vehicleOwner.firstName +
+            ' ' +
+            vehicle.vehicleOwner.lastName,
         };
       });
       this.dataSource.data = vehicleWithOwnerFullname;

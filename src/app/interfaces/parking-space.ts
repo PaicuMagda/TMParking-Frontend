@@ -4,7 +4,6 @@ import { User } from './user';
 export interface ParkingSpace {
   id: number;
   name: string;
-  owner: User;
   address: string;
   availableParkingSpaces: number;
   isCargoVehicleAccepted: boolean;
@@ -26,4 +25,5 @@ export interface ParkingSpace {
   isVerifiedByAdmin: boolean;
   somethingIsWrong: boolean;
   parkingSpots: ParkingSpot[];
+  owner: User;
 }
