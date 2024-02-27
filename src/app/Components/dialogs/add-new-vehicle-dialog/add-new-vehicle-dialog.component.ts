@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
+import { VehiclesService } from 'src/app/services/vehicles.service';
 
 @Component({
   selector: 'app-add-new-vehicle-dialog',
@@ -10,14 +11,17 @@ import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-clo
 })
 export class AddNewVehicleDialogComponent {
   addNewVehicleFormGroup: FormGroup;
-
+  image: string;
+  vehicleRegistrationCertificateBase64: string;
   isLinear = false;
-  file: string | ArrayBuffer | null = null;
+  certificateFileName: string | undefined;
+  imageProfileFileName: string | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddNewVehicleDialogComponent>,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private vehicleService: VehiclesService
   ) {}
 
   ngOnInit() {
@@ -33,24 +37,56 @@ export class AddNewVehicleDialogComponent {
     });
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
+  onFileSelectedImageProfile(event: any) {
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+    this.imageProfileFileName = file.name;
 
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      this.image = base64String;
+    };
+    reader.readAsDataURL(file);
+  }
 
-      if (file.type.match('image.*')) {
-        const reader = new FileReader();
+  onFileSelectedCertificate(event: any) {
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+    this.certificateFileName = file.name;
 
-        reader.onload = () => {
-          this.file = reader.result;
-        };
+    reader.onload = () => {
+      const vehicleRegistrationCertificateBase64 = reader.result as string;
+      this.vehicleRegistrationCertificateBase64 =
+        vehicleRegistrationCertificateBase64;
+    };
+    reader.readAsDataURL(file);
+  }
 
-        reader.readAsDataURL(file);
-      } else {
-        console.log('Fișierul încărcat nu este o imagine.');
+  registerVehicle() {
+    const formData = {
+      color: this.addNewVehicleFormGroup.get('color')?.value,
+      dateAdded: new Date(),
+      imageProfileBase64: this.image,
+      isVerifiedByAdmin: false,
+      make: this.addNewVehicleFormGroup.get('make')?.value,
+      model: this.addNewVehicleFormGroup.get('model')?.value,
+      somethingIsWrong: false,
+      vehicleIdentificationNumber:
+        this.addNewVehicleFormGroup.get('vin')?.value,
+      vehicleOwnerId: this.addNewVehicleFormGroup.get('owner')?.value,
+      vehicleRegistrationCertificateBase64:
+        this.vehicleRegistrationCertificateBase64,
+      year: this.addNewVehicleFormGroup.get('year')?.value,
+    };
+
+    this.vehicleService.registerVehicle(formData).subscribe(
+      (response) => {
+        console.log('Vehicul adaugat cu succes !');
+      },
+      (error) => {
+        console.log('Eroare la incarcarea vehiculului');
       }
-    }
+    );
   }
 
   closeAddNewVehicleDialogComponent() {

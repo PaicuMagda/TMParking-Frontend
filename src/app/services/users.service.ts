@@ -42,7 +42,7 @@ export class UsersService {
       vehicles: [
         {
           vehicleId: 0,
-          imageUrl: '../../../assets/images/vehicles/bmv.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmv.jpg',
           make: 'Toyota',
           model: 'Audi',
           color: 'Silver',
@@ -74,7 +74,7 @@ export class UsersService {
         },
         {
           vehicleId: 1,
-          imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmw2.jpg',
           make: 'kwgffetg',
           model: 'Corolla',
           color: 'Golden',
@@ -106,7 +106,7 @@ export class UsersService {
         },
         {
           vehicleId: 2,
-          imageUrl: '../../../assets/images/vehicles/car-default.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/car-default.jpg',
           make: 'jfyuj',
           model: 'BMW',
           color: 'Silver',
@@ -158,7 +158,7 @@ export class UsersService {
       dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
-          imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmw2.jpg',
           make: 'afdf',
           model: 'Corolla',
           color: 'Red',
@@ -190,7 +190,7 @@ export class UsersService {
           vehicleId: 5,
         },
         {
-          imageUrl: '../../../assets/images/vehicles/tractor.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/tractor.jpg',
           make: 'mymngch',
           model: 'ghdkh',
           color: 'White',
@@ -243,7 +243,7 @@ export class UsersService {
       dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
-          imageUrl: '../../../assets/images/vehicles/bmv.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmv.jpg',
           make: 'Toyota',
           model: 'pmbdgc',
           color: 'Silver',
@@ -275,7 +275,7 @@ export class UsersService {
           vehicleId: 6,
         },
         {
-          imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmw2.jpg',
           make: 'Toyota',
           model: 'mbfih',
           color: 'Black',
@@ -328,7 +328,7 @@ export class UsersService {
       dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
-          imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmv1.jpg',
           make: 'Toyota',
           model: 'oyrfh',
           color: 'Blue',
@@ -381,7 +381,7 @@ export class UsersService {
       dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
-          imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmv1.jpg',
           make: 'Toyota',
           model: 'oyrfh',
           color: 'Blue',
@@ -434,7 +434,7 @@ export class UsersService {
       dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
-          imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmv1.jpg',
           make: 'Toyota',
           model: 'oyrfh',
           color: 'Blue',
@@ -487,7 +487,7 @@ export class UsersService {
       dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
-          imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmv1.jpg',
           make: 'Toyota',
           model: 'oyrfh',
           color: 'Blue',
@@ -540,7 +540,7 @@ export class UsersService {
       dateAdded: new Date('2024-02-11'),
       vehicles: [
         {
-          imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
+          imageProfileBase64: '../../../assets/images/vehicles/bmv1.jpg',
           make: 'Toyota',
           model: 'oyrfh',
           color: 'Blue',

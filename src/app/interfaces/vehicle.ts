@@ -1,8 +1,8 @@
 import { User } from './user';
 
 export interface Vehicle {
-  vehicleId: number;
-  imageUrl?: string;
+  vehicleId?: number;
+  imageProfileBase64?: string;
   make?: string;
   model?: string;
   color?: string;
@@ -11,8 +11,8 @@ export interface Vehicle {
   vehicleIdentificationNumber?: number;
   isEdit?: boolean;
   vehicleRegistrationCertificate?: string;
-  isVerifiedByAdmin: boolean;
+  isVerifiedByAdmin?: boolean;
   dateAdded: Date;
-  somethingIsWrong: boolean;
+  somethingIsWrong?: boolean;
   vehicleOwnerFullName?: string;
 }

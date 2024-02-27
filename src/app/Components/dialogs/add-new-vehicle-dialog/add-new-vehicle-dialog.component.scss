@@ -101,6 +101,14 @@
           width: 60%;
         }
       }
+
+      &__upload {
+        margin-top: 3%;
+
+        p {
+          color: rgb(170, 170, 170);
+        }
+      }
     }
   }
 }
@@ -115,4 +123,10 @@ input[type="file"] {
 
 mat-form-field {
   width: 100%;
+}
+
+.upload-file {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

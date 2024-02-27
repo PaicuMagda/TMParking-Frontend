@@ -10,7 +10,8 @@
 
   <form [formGroup]="addNewVehicleFormGroup">
     <div class="add-new-vehicle__carousel">
-      <img src="../../../../assets/images/car-upload.jpg" />
+      <img *ngIf="!image" src="../../../../assets/images/car-upload.jpg" />
+      <img *ngIf="image" [src]="image" />
     </div>
     <div class="add-new-vehicle__form">
       <div>
@@ -96,45 +97,68 @@
             >
           </div>
 
-          <div>
-            <mat-form-field>
-              <ngx-mat-file-input
-                formControlName="licensePlate"
-                placeholder="Upload vehicle registration certificate."
-              ></ngx-mat-file-input>
-              <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
-              <mat-error
-                *ngIf="
-                  addNewVehicleFormGroup
-                    .get('licensePlate')
-                    ?.hasError('required')
-                "
-              >
-                License Plate is required.
-              </mat-error>
-            </mat-form-field>
+          <div class="add-new-vehicle__form__informations__upload">
+            <input
+              #certificateInput
+              accept="application/pdf"
+              type="file"
+              (change)="onFileSelectedCertificate($event)"
+              formControlName="licensePlate"
+            />
+            <div (click)="certificateInput.click()" class="upload-file">
+              <p *ngIf="!certificateFileName">
+                Upload vehicle registration certificate.
+              </p>
+              <p *ngIf="certificateFileName">{{ certificateFileName }}</p>
+              <mat-icon svgIcon="plus-solid"></mat-icon>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-hint>File format: .pdf</mat-hint>
+            <mat-error
+              *ngIf="
+                addNewVehicleFormGroup.get('licensePlate')?.hasError('required')
+              "
+            >
+              License Plate is required.
+            </mat-error>
           </div>
-          <div>
-            <mat-form-field>
-              <ngx-mat-file-input
-                formControlName="image"
-                placeholder="Upload image for your vehicle. "
-              ></ngx-mat-file-input>
-              <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
-              <mat-error
-                *ngIf="
-                  addNewVehicleFormGroup.get('image')?.hasError('required')
-                "
-              >
-                Upload image is required.
-              </mat-error>
-            </mat-form-field>
+          <div class="add-new-vehicle__form__informations__upload">
+            <input
+              type="file"
+              accept="application/pdf"
+              #imageProfileForVehicleInput
+              (change)="onFileSelectedImageProfile($event)"
+              formControlName="image"
+              placeholder="Upload image for your vehicle. "
+            />
+            <div
+              (click)="imageProfileForVehicleInput.click()"
+              class="upload-file"
+            >
+              <p *ngIf="!imageProfileFileName">
+                Upload image for vehicle's profile.
+              </p>
+              <p *ngIf="imageProfileFileName">{{ imageProfileFileName }}</p>
+              <mat-icon svgIcon="plus-solid"></mat-icon>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
+            <mat-error
+              *ngIf="addNewVehicleFormGroup.get('image')?.hasError('required')"
+            >
+              Upload image is required.
+            </mat-error>
           </div>
         </div>
       </div>
       <div class="add-new-vehicle__form__buttons">
         <button class="btn btn-warning">Save as Draft</button>
-        <button class="btn add-new-vehicle__form__buttons__send">Send</button>
+        <button
+          class="btn add-new-vehicle__form__buttons__send"
+          (click)="registerVehicle()"
+        >
+          Send
+        </button>
         <button
           class="btn btn-danger"
           (click)="closeAddNewVehicleDialogComponent()"

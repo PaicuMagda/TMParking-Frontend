@@ -14,7 +14,7 @@ import { map } from 'rxjs';
   templateUrl: './vehicles.component.html',
   styleUrls: ['./vehicles.component.scss'],
 })
-export class VehiclesComponent implements AfterViewInit {
+export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[] = [];
   vehicleForm: FormGroup[] = [];
   role: string = '';
@@ -74,7 +74,7 @@ export class VehiclesComponent implements AfterViewInit {
 
   createVehicleFormGroup(vehicle: Vehicle): FormGroup {
     return this.formBuilder.group({
-      image: [vehicle.imageUrl],
+      image: [vehicle.imageProfileBase64],
       make: [vehicle.make],
       model: [vehicle.model],
       color: [vehicle.color],
@@ -94,7 +94,7 @@ export class VehiclesComponent implements AfterViewInit {
     return differenceInDays <= 3;
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.vehicleService
       .getVehicles()
       .pipe(

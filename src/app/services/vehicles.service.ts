@@ -13,8 +13,15 @@ export class VehiclesService {
 
   baseUrl: string = environment.apiUrl;
 
+  registerVehicle(newVehicle: any): Observable<Vehicle> {
+    return this.http.post<any>(
+      `${this.baseUrl}Vehicle/register-vehicle`,
+      newVehicle
+    );
+  }
+
   getVehicles(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>(`https://localhost:7010/vehicles`);
+    return this.http.get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles`);
   }
 
   vehicles: Vehicle[] = [
@@ -51,7 +58,7 @@ export class VehiclesService {
     },
     {
       vehicleId: 1,
-      imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
+      imageProfileBase64: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'kwgffetg',
       model: 'Corolla',
       color: 'Golden',
@@ -83,7 +90,7 @@ export class VehiclesService {
     },
     {
       vehicleId: 2,
-      imageUrl: '../../../assets/images/vehicles/car-default.jpg',
+      imageProfileBase64: '../../../assets/images/vehicles/car-default.jpg',
       make: 'jfyuj',
       model: 'BMW',
       color: 'Silver',
@@ -115,7 +122,7 @@ export class VehiclesService {
     },
     {
       vehicleId: 3,
-      imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
+      imageProfileBase64: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'afdf',
       model: 'Corolla',
       color: 'Red',
@@ -147,7 +154,7 @@ export class VehiclesService {
     },
     {
       vehicleId: 4,
-      imageUrl: '../../../assets/images/vehicles/tractor.jpg',
+      imageProfileBase64: '../../../assets/images/vehicles/tractor.jpg',
       make: 'mymngch',
       model: 'ghdkh',
       color: 'White',
@@ -179,7 +186,7 @@ export class VehiclesService {
     },
     {
       vehicleId: 5,
-      imageUrl: '../../../assets/images/vehicles/bmv.jpg',
+      imageProfileBase64: '../../../assets/images/vehicles/bmv.jpg',
       make: 'Toyota',
       model: 'pmbdgc',
       color: 'Silver',
@@ -211,7 +218,7 @@ export class VehiclesService {
     },
     {
       vehicleId: 6,
-      imageUrl: '../../../assets/images/vehicles/bmw2.jpg',
+      imageProfileBase64: '../../../assets/images/vehicles/bmw2.jpg',
       make: 'Toyota',
       model: 'mbfih',
       color: 'Black',
@@ -243,7 +250,7 @@ export class VehiclesService {
     },
     {
       vehicleId: 7,
-      imageUrl: '../../../assets/images/vehicles/bmv1.jpg',
+      imageProfileBase64: '../../../assets/images/vehicles/bmv1.jpg',
       make: 'Toyota',
       model: 'oyrfh',
       color: 'Blue',
