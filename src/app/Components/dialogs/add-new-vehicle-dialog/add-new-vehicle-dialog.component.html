@@ -72,18 +72,6 @@
           </div>
           <div class="add-new-vehicle__form__informations__ownerVIN">
             <mat-form-field appearance="outline"
-              ><mat-label>Owner</mat-label
-              ><input matInput type="text" formControlName="owner" />
-              <mat-error
-                *ngIf="
-                  addNewVehicleFormGroup.get('owner')?.hasError('required') &&
-                  addNewVehicleFormGroup.get('owner')?.touched
-                "
-              >
-                Owner is required.
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline"
               ><mat-label>Vehicle Identification Number</mat-label
               ><input matInput type="text" formControlName="vin" />
               <mat-error
@@ -125,7 +113,7 @@
           <div class="add-new-vehicle__form__informations__upload">
             <input
               type="file"
-              accept="application/pdf"
+              accept="image/png, image/jpeg"
               #imageProfileForVehicleInput
               (change)="onFileSelectedImageProfile($event)"
               formControlName="image"

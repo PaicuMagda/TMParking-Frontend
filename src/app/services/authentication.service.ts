@@ -8,7 +8,7 @@ import { TokenApi } from '../interfaces/token-api';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private baseUrl: string = 'https://localhost:7010/api/User';
+  private baseUrl: string = 'https://localhost:7010/User';
   private userPayload: any;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -60,6 +60,10 @@ export class AuthenticationService {
 
   getRoleFromToken() {
     if (this.userPayload) return this.userPayload.role;
+  }
+
+  getUserIdFromToken() {
+    if (this.userPayload) return this.userPayload.nameid;
   }
 
   renewToken(tokenApi: TokenApi) {

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { VehiclesService } from 'src/app/services/vehicles.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-add-new-vehicle-dialog',
@@ -16,15 +18,30 @@ export class AddNewVehicleDialogComponent {
   isLinear = false;
   certificateFileName: string | undefined;
   imageProfileFileName: string | undefined;
+  idUserLogged: string = '';
+  userLoggedFullName: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddNewVehicleDialogComponent>,
     private dialog: MatDialog,
-    private vehicleService: VehiclesService
+    private vehicleService: VehiclesService,
+    private userStore: UserStoreService,
+    private auth: AuthenticationService
   ) {}
 
   ngOnInit() {
+    this.userStore.getIdUserFromStore().subscribe((val) => {
+      let userIdFromToken = this.auth.getUserIdFromToken();
+      this.idUserLogged = val || userIdFromToken;
+      console.log(this.idUserLogged);
+    });
+
+    this.userStore.getFullNameFromStore().subscribe((val) => {
+      this.userLoggedFullName = val;
+      console.log(this.userLoggedFullName);
+    });
+
     this.addNewVehicleFormGroup = this.formBuilder.group({
       image: ['', Validators.required],
       make: ['', Validators.required],
@@ -41,7 +58,6 @@ export class AddNewVehicleDialogComponent {
     const file: File = event.target.files[0];
     const reader = new FileReader();
     this.imageProfileFileName = file.name;
-
     reader.onload = () => {
       const base64String = reader.result as string;
       this.image = base64String;
@@ -53,7 +69,6 @@ export class AddNewVehicleDialogComponent {
     const file: File = event.target.files[0];
     const reader = new FileReader();
     this.certificateFileName = file.name;
-
     reader.onload = () => {
       const vehicleRegistrationCertificateBase64 = reader.result as string;
       this.vehicleRegistrationCertificateBase64 =
@@ -73,7 +88,7 @@ export class AddNewVehicleDialogComponent {
       somethingIsWrong: false,
       vehicleIdentificationNumber:
         this.addNewVehicleFormGroup.get('vin')?.value,
-      vehicleOwnerId: this.addNewVehicleFormGroup.get('owner')?.value,
+      vehicleOwnerId: this.idUserLogged,
       vehicleRegistrationCertificateBase64:
         this.vehicleRegistrationCertificateBase64,
       year: this.addNewVehicleFormGroup.get('year')?.value,

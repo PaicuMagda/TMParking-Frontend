@@ -103,9 +103,6 @@ export class DisplayCardsComponent {
     } else {
       this.navbarService.showSerachEmitValue(true);
     }
-    this.navbarService.showSearch$.subscribe((val) => {
-      console.log(val);
-    });
   }
 
   ngOnInit() {
