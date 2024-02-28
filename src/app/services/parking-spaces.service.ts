@@ -23,6 +23,13 @@ export class ParkingPlacesService {
     );
   }
 
+  registerParkingSpaces(newParkingSpaces: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}ParkingSpaces`,
+      newParkingSpaces
+    );
+  }
+
   parkingSpotsMock: ParkingSpot[] = [
     { id: 1, spotNumber: '1A', isReserved: ParkingStatus.AVAILABLE },
     { id: 2, spotNumber: '2A', isReserved: ParkingStatus.OCCUPIED },

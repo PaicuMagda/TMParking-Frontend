@@ -109,42 +109,63 @@
           <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
       </div>
-      <div>
-        <mat-form-field>
-          <ngx-mat-file-input
-            formControlName="imageFileUpload"
-            placeholder="Upload a significant image for your parking lot"
-          ></ngx-mat-file-input>
-          <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
-          <mat-error
-            *ngIf="
-              addNewParkingSpaceFormGroup
-                .get('imageFileUpload')
-                ?.hasError('required')
-            "
-          >
-            If no significant image is uploaded for your parking, a default
-            image will be added.
-          </mat-error>
-        </mat-form-field>
+      <div class="upload-file">
+        <input
+          #profileImageInput
+          (change)="onFileSelectedImageProfile($event)"
+          type="file"
+          formControlName="imageFileUpload"
+          placeholder="Upload a significant image for your parking lot"
+        />
+        <div
+          (click)="profileImageInput.click()"
+          class="upload-file__placeholder"
+        >
+          <p *ngIf="!imageProfileFileName">
+            Upload image for parking spaces's profile.
+          </p>
+          <p *ngIf="imageProfileFileName">{{ imageProfileFileName }}</p>
+          <mat-icon svgIcon="plus-solid"></mat-icon>
+        </div>
+
+        <mat-divider></mat-divider>
+        <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
+        <mat-error
+          *ngIf="
+            addNewParkingSpaceFormGroup
+              .get('imageFileUpload')
+              ?.hasError('required')
+          "
+        >
+          If no significant image is uploaded for your parking, a default image
+          will be added.
+        </mat-error>
       </div>
-      <div>
-        <mat-form-field>
-          <ngx-mat-file-input
-            formControlName="leasePermit"
-            placeholder="Upload a lease permit."
-          ></ngx-mat-file-input>
-          <mat-hint>File format: image(.img, .jpg, .jpeg) or .pdf</mat-hint>
-          <mat-error
-            *ngIf="
-              addNewParkingSpaceFormGroup
-                .get('leasePermit')
-                ?.hasError('required')
-            "
-          >
-            Lease permit upload is required !
-          </mat-error>
-        </mat-form-field>
+      <div class="upload-file">
+        <input
+          (change)="onFileSelectedLeasePermit($event)"
+          #leasePermitInput
+          type="file"
+          formControlName="leasePermit"
+          placeholder="Upload a lease permit."
+        />
+        <div
+          (click)="leasePermitInput.click()"
+          class="upload-file__placeholder"
+        >
+          <p *ngIf="!leasePermitFileName">Upload lease permit.</p>
+          <p *ngIf="leasePermitFileName">{{ leasePermitFileName }}</p>
+          <mat-icon svgIcon="plus-solid"></mat-icon>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-hint>File format: image(.img, .jpg, .jpeg) or .pdf</mat-hint>
+        <mat-error
+          *ngIf="
+            addNewParkingSpaceFormGroup.get('leasePermit')?.hasError('required')
+          "
+        >
+          Lease permit upload is required !
+        </mat-error>
       </div>
       <div class="add_new_parking__form__details__buttons">
         <div class="add_new_parking__form__details__buttons__toggle-group">
@@ -229,8 +250,14 @@
       <div class="add_new_parking__form__create-card__card-full">
         <div class="add_new_parking__form__create-card__card-full__image">
           <img
+            *ngIf="!imageProfile"
             class="add_new_parking__form__create-card__card-full__image__img"
             src="./../../../../assets/images/parking-spaces/default-parcare.png"
+          />
+          <img
+            *ngIf="imageProfile"
+            [src]="imageProfile"
+            class="add_new_parking__form__create-card__card-full__image__img"
           />
           <div
             class="add_new_parking__form__create-card__card-full__image__img__div"
@@ -266,7 +293,7 @@
             <p
               class="add_new_parking__form__create-card__card-full__informations__p__author"
             >
-              Added by {{ userAuthenticated }}
+              Added by {{ userLoggedFullName }}
             </p>
             <p
               class="add_new_parking__form__create-card__card-full__informations__p__address"
@@ -321,7 +348,12 @@
   </div>
   <div class="add_new_parking__buttons">
     <button class="btn btn-warning">Save as Draft</button>
-    <button class="btn add_new_parking__buttons__send">Send</button>
+    <button
+      class="btn add_new_parking__buttons__send"
+      (click)="registerParkingSpace()"
+    >
+      Send
+    </button>
     <button class="btn btn-danger" (click)="closeAddNewParkingSpaceDialog()">
       Discard
     </button>

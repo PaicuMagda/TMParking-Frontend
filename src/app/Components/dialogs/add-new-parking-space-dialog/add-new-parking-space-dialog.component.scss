@@ -241,3 +241,21 @@
 ::ng-deep.mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: white;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+.upload-file {
+  margin-top: 5%;
+
+  &__placeholder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    p {
+      color: rgb(170, 170, 170);
+    }
+  }
+}

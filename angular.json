@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["ngx-csv/ngx-csv"],
             "outputPath": "dist/tmparking-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",

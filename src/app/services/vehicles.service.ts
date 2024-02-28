@@ -13,7 +13,7 @@ export class VehiclesService {
 
   baseUrl: string = environment.apiUrl;
 
-  registerVehicle(newVehicle: any): Observable<Vehicle> {
+  registerVehicle(newVehicle: any): Observable<any> {
     return this.http.post<any>(
       `${this.baseUrl}Vehicle/register-vehicle`,
       newVehicle
