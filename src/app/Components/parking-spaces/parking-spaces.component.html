@@ -39,7 +39,7 @@
 
     <div class="parking-spaces__card__image">
       <img
-        src="{{ parkingSpace.imageUrl }}"
+        [src]="parkingSpace.imageProfile"
         (click)="
           !parkingSpaceIsExpired(parkingSpace.endDate) ||
           toggleValue === 'myParkingSpaces'
@@ -94,9 +94,13 @@
         <div
           class="parking-spaces__card__informations__ownerAddressDate__camera"
         >
-          <span>{{ parkingSpace.owner.firstName }}</span>
+          <span>{{
+            parkingSpace.parkingSpacesOwner.firstName +
+              " " +
+              parkingSpace.parkingSpacesOwner.lastName
+          }}</span>
           <img
-            *ngIf="parkingSpace.isVideoSurveillance"
+            *ngIf="parkingSpace.isVideoSurveilance"
             src="../../../assets/images/camera.png"
           />
         </div>
@@ -146,7 +150,7 @@
         <div
           class="parking-spaces__card__informations__typesOfVehicleNumberOfParkingSpaces__numberOfParkingSpaces"
         >
-          {{ parkingSpace.parkingSpots.length }}
+          {{ parkingSpace.availableParkingSpaces }}
         </div>
       </div>
     </div>

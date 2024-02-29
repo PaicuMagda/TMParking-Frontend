@@ -96,7 +96,7 @@ export class ParkingSpacesComponent implements OnInit {
           this.toggleValue = value;
         }
         if (value === 'allParkingSpaces') {
-          this.parkingSpacesService.getParcari().subscribe((values) => {
+          this.parkingSpacesService.getParkingSpaces().subscribe((values) => {
             this.parkingSpaces = values;
           });
           this.toggleValue = value;
@@ -105,12 +105,13 @@ export class ParkingSpacesComponent implements OnInit {
   }
 
   isParkingNew(parkingSpace: ParkingSpace): boolean {
-    const currentDate = new Date().getDate();
-    const dateAddedParkingSpace = parkingSpace.dateAdded.getTime();
-    const differenceInDays = Math.floor(
-      (currentDate - dateAddedParkingSpace) / (1000 * 60 * 60 * 24)
-    );
-    return differenceInDays <= 3;
+    // const currentDate = new Date().getDate();
+    // const dateAddedParkingSpace = parkingSpace.dateAdded.getTime();
+    // const differenceInDays = Math.floor(
+    //   (currentDate - dateAddedParkingSpace) / (1000 * 60 * 60 * 24)
+    // );
+    // return differenceInDays <= 3;
+    return true;
   }
 
   ngOnDestroy(): void {

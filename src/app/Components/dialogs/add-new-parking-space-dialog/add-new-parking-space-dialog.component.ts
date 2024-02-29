@@ -125,6 +125,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       isPersonalVehicleAccepted: this.isPersonalVehicleAccepted,
       isPublicTransportAccepted: this.isCargoVehicleAccepted,
       isAgriculturalMachineryAccepted: this.agricultural,
+      isVideoSurveilance: this.videoSurveillance,
       imageProfile: this.imageProfile,
       leasePermit: this.leasePermitFile,
       startDate: this.addNewParkingSpaceFormGroup.get('startDate')?.value,

@@ -10,7 +10,7 @@ export interface ParkingSpace {
   isPersonalVehicleAccepted: boolean;
   isPublicTransportAccepted: boolean;
   isAgriculturalMachineryAccepted: boolean;
-  imageUrl: string;
+  imageProfile: string;
   startDate: Date;
   endDate: Date;
   isFree: boolean;
@@ -25,5 +25,5 @@ export interface ParkingSpace {
   isVerifiedByAdmin: boolean;
   somethingIsWrong: boolean;
   parkingSpots: ParkingSpot[];
-  owner: User;
+  parkingSpacesOwner: User;
 }

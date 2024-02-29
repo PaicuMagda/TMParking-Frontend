@@ -30,6 +30,10 @@ export class ParkingPlacesService {
     );
   }
 
+  getParkingSpaces(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}ParkingSpaces`);
+  }
+
   parkingSpotsMock: ParkingSpot[] = [
     { id: 1, spotNumber: '1A', isReserved: ParkingStatus.AVAILABLE },
     { id: 2, spotNumber: '2A', isReserved: ParkingStatus.OCCUPIED },
@@ -49,7 +53,7 @@ export class ParkingPlacesService {
     {
       id: 0,
       name: 'Parcare Centrală',
-      owner: {
+      parkingSpacesOwner: {
         id: 0,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -71,7 +75,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 100,
-      imageUrl: '../../../assets/images/parking-spaces/parcare3.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare3.jpg',
       isCargoVehicleAccepted: false,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -107,7 +111,7 @@ export class ParkingPlacesService {
     {
       id: 1,
       name: 'Parcare Aeroport',
-      owner: {
+      parkingSpacesOwner: {
         id: 0,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -129,7 +133,7 @@ export class ParkingPlacesService {
       },
       address: 'Aeroport internațional',
       availableParkingSpaces: 500,
-      imageUrl: '../../../assets/images/parking-spaces/parcare2.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare2.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: true,
@@ -166,7 +170,7 @@ export class ParkingPlacesService {
     {
       id: 2,
       name: 'Parcare Subterană',
-      owner: {
+      parkingSpacesOwner: {
         id: 3,
         firstName: 'Andrei',
         lastName: 'Vasilescu',
@@ -188,7 +192,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 200,
-      imageUrl: '../../../assets/images/parking-spaces/parcare1.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare1.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: true,
       isPublicTransportAccepted: true,
@@ -260,7 +264,7 @@ export class ParkingPlacesService {
     {
       id: 3,
       name: 'Parcare Centrală',
-      owner: {
+      parkingSpacesOwner: {
         id: 4,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -282,7 +286,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 15,
-      imageUrl: '../../../assets/images/parking-spaces/parcare4.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare4.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: true,
       isPublicTransportAccepted: false,
@@ -317,7 +321,7 @@ export class ParkingPlacesService {
     {
       id: 4,
       name: 'Parcare Aeroport',
-      owner: {
+      parkingSpacesOwner: {
         id: 0,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -339,7 +343,7 @@ export class ParkingPlacesService {
       },
       address: 'Aeroport internațional',
       availableParkingSpaces: 500,
-      imageUrl: '../../../assets/images/parking-spaces/parcare-etaj.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare-etaj.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -374,7 +378,7 @@ export class ParkingPlacesService {
     {
       id: 5,
       name: 'Parcare Subterană',
-      owner: {
+      parkingSpacesOwner: {
         id: 5,
         firstName: 'Ana',
         lastName: 'Dinica',
@@ -396,7 +400,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 20,
-      imageUrl: '../../../assets/images/parking-spaces/parcare5.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare5.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: true,
@@ -431,7 +435,7 @@ export class ParkingPlacesService {
     {
       id: 6,
       name: 'Parcare Centrală',
-      owner: {
+      parkingSpacesOwner: {
         id: 6,
         firstName: 'Dan',
         lastName: 'Ionescu',
@@ -453,7 +457,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 100,
-      imageUrl: '../../../assets/images/parking-spaces/parcare3.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare3.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -488,7 +492,7 @@ export class ParkingPlacesService {
     {
       id: 7,
       name: 'Parcare Aeroport',
-      owner: {
+      parkingSpacesOwner: {
         id: 7,
         firstName: 'Andrei',
         lastName: 'Vasilescu',
@@ -510,7 +514,7 @@ export class ParkingPlacesService {
       },
       address: 'Aeroport internațional',
       availableParkingSpaces: 500,
-      imageUrl: '../../../assets/images/parking-spaces/parcare2.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare2.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: true,
       isPublicTransportAccepted: false,
@@ -545,7 +549,7 @@ export class ParkingPlacesService {
     {
       id: 7,
       name: 'Parcare Subterană',
-      owner: {
+      parkingSpacesOwner: {
         id: 3,
         firstName: 'Andrei',
         lastName: 'Vasilescu',
@@ -567,7 +571,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 200,
-      imageUrl: '../../../assets/images/parking-spaces/parcare1.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare1.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: true,
@@ -602,7 +606,7 @@ export class ParkingPlacesService {
     {
       id: 8,
       name: 'Parcare Centrală',
-      owner: {
+      parkingSpacesOwner: {
         id: 3,
         firstName: 'Andrei',
         lastName: 'Vasilescu',
@@ -624,7 +628,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 15,
-      imageUrl: '../../../assets/images/parking-spaces/parcare4.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare4.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -659,7 +663,7 @@ export class ParkingPlacesService {
     {
       id: 9,
       name: 'Parcare Subterană',
-      owner: {
+      parkingSpacesOwner: {
         id: 3,
         firstName: 'Andrei',
         lastName: 'Vasilescu',
@@ -681,7 +685,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 200,
-      imageUrl: '../../../assets/images/parking-spaces/parcare1.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare1.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -716,7 +720,7 @@ export class ParkingPlacesService {
     {
       id: 10,
       name: 'Parcare Centrală',
-      owner: {
+      parkingSpacesOwner: {
         id: 3,
         firstName: 'Andrei',
         lastName: 'Vasilescu',
@@ -738,7 +742,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 15,
-      imageUrl: '../../../assets/images/parking-spaces/parcare4.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare4.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -774,7 +778,7 @@ export class ParkingPlacesService {
     {
       id: 11,
       name: 'Parcare Centrală',
-      owner: {
+      parkingSpacesOwner: {
         id: 3,
         firstName: 'Andrei',
         lastName: 'Vasilescu',
@@ -796,7 +800,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 100,
-      imageUrl: '../../../assets/images/parking-spaces/parcare3.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare3.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -831,7 +835,7 @@ export class ParkingPlacesService {
     {
       id: 12,
       name: 'Parcare Aeroport',
-      owner: {
+      parkingSpacesOwner: {
         id: 5,
         firstName: 'Ana',
         lastName: 'Dinica',
@@ -853,7 +857,7 @@ export class ParkingPlacesService {
       },
       address: 'Aeroport internațional',
       availableParkingSpaces: 500,
-      imageUrl: '../../../assets/images/parking-spaces/parcare2.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare2.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -888,7 +892,7 @@ export class ParkingPlacesService {
     {
       id: 13,
       name: 'Parcare Subterană',
-      owner: {
+      parkingSpacesOwner: {
         id: 5,
         firstName: 'Ana',
         lastName: 'Dinica',
@@ -910,7 +914,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 200,
-      imageUrl: '../../../assets/images/parking-spaces/parcare1.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare1.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -945,7 +949,7 @@ export class ParkingPlacesService {
     {
       id: 14,
       name: 'Parcare Centrală',
-      owner: {
+      parkingSpacesOwner: {
         id: 5,
         firstName: 'Ana',
         lastName: 'Dinica',
@@ -967,7 +971,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 15,
-      imageUrl: '../../../assets/images/parking-spaces/parcare4.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare4.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -1005,7 +1009,7 @@ export class ParkingPlacesService {
     {
       id: 0,
       name: 'Parcare Centrală',
-      owner: {
+      parkingSpacesOwner: {
         id: 5,
         firstName: 'Ana',
         lastName: 'Dinica',
@@ -1027,7 +1031,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 100,
-      imageUrl: '../../../assets/images/parking-spaces/parcare3.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare3.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -1063,7 +1067,7 @@ export class ParkingPlacesService {
     {
       id: 1,
       name: 'Parcare Aeroport',
-      owner: {
+      parkingSpacesOwner: {
         id: 1,
         firstName: 'Ana',
         lastName: 'Dinica',
@@ -1085,7 +1089,7 @@ export class ParkingPlacesService {
       },
       address: 'Aeroport internațional',
       availableParkingSpaces: 500,
-      imageUrl: '../../../assets/images/parking-spaces/parcare2.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare2.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -1121,7 +1125,7 @@ export class ParkingPlacesService {
     {
       id: 2,
       name: 'Parcare Subterană',
-      owner: {
+      parkingSpacesOwner: {
         id: 2,
         firstName: 'Dan',
         lastName: 'Ionescu',
@@ -1143,7 +1147,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 200,
-      imageUrl: '../../../assets/images/parking-spaces/parcare1.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare1.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -1178,7 +1182,7 @@ export class ParkingPlacesService {
     {
       id: 3,
       name: 'Parcare Centrală',
-      owner: {
+      parkingSpacesOwner: {
         id: 1,
         firstName: 'Ana',
         lastName: 'Dinica',
@@ -1200,7 +1204,7 @@ export class ParkingPlacesService {
       },
       address: 'Centru oraș',
       availableParkingSpaces: 15,
-      imageUrl: '../../../assets/images/parking-spaces/parcare4.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare4.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
@@ -1236,7 +1240,7 @@ export class ParkingPlacesService {
     {
       id: 4,
       name: 'Parcare Aeroport',
-      owner: {
+      parkingSpacesOwner: {
         id: 0,
         firstName: 'Magda',
         lastName: 'Paicu',
@@ -1258,7 +1262,7 @@ export class ParkingPlacesService {
       },
       address: 'Aeroport internațional',
       availableParkingSpaces: 500,
-      imageUrl: '../../../assets/images/parking-spaces/parcare-etaj.jpg',
+      imageProfile: '../../../assets/images/parking-spaces/parcare-etaj.jpg',
       isCargoVehicleAccepted: true,
       isPersonalVehicleAccepted: false,
       isPublicTransportAccepted: false,
