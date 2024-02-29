@@ -16,14 +16,22 @@
       </div>
       <div>
         <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" [(ngModel)]="name" required />
+          <mat-error
+            *ngIf="
+              this.addNewParkingSpaceFormGroup
+                .get('address')
+                ?.hasError('required')
+            "
+            >Address is required!
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
           <mat-label>Location *(street and number)</mat-label>
-          <input
-            matInput
-            formControlName="address"
-            required
-            [(ngModel)]="address"
-            required
-          />
+          <input matInput formControlName="address" required />
           <mat-error
             *ngIf="
               this.addNewParkingSpaceFormGroup
@@ -49,14 +57,14 @@
           <mat-label>Parking Spaces (number)</mat-label>
           <input
             matInput
-            formControlName="numberSpaces"
+            formControlName="availableParkingSpaces"
             required
             [(ngModel)]="numberOfParkingSpaces"
           />
           <mat-error
             *ngIf="
               this.addNewParkingSpaceFormGroup
-                .get('numberSpaces')
+                .get('availableParkingSpaces')
                 ?.hasError('required')
             "
             >Number spaces is required!
@@ -64,7 +72,7 @@
           <mat-error
             *ngIf="
               this.addNewParkingSpaceFormGroup
-                .get('numberSpaces')
+                .get('availableParkingSpaces')
                 ?.hasError('maxlength')
             "
             >Limit is set to 3 numbers.</mat-error
@@ -215,15 +223,15 @@
         <mat-checkbox
           name="automobile"
           color="primary"
-          [(ngModel)]="automobile"
-          (change)="(isAutomobile)"
+          [(ngModel)]="isPersonalVehicleAccepted"
+          (change)="(hasPersonalVehicleAccept)"
           formControlName="isAutomobile"
           >Automobil</mat-checkbox
         >
         <mat-checkbox
           color="primary"
-          [(ngModel)]="truck"
-          (change)="(isTruck)"
+          [(ngModel)]="isCargoVehicleAccepted"
+          (change)="(hasCargoVehicleAccept)"
           formControlName="isTruck"
           name="truck"
           >Truck</mat-checkbox
@@ -232,15 +240,15 @@
           name="agricultural"
           color="primary"
           [(ngModel)]="agricultural"
-          (change)="(isAgricultural)"
+          (change)="(hasAgriculturalMachineryAccept)"
           formControlName="isAgriculturalMachinery"
           >Agricultural machinery</mat-checkbox
         >
         <mat-checkbox
           name="publicTransportationVehicle"
           color="primary"
-          [(ngModel)]="publicTransportationVehicle"
-          (change)="(publicTransportationVehicle)"
+          [(ngModel)]="isPublicTransportAccepted"
+          (change)="(isPublicTransportAccepted)"
           formControlName="isPublicTransportationVehicle"
           >Public transportation vehicle</mat-checkbox
         >
@@ -298,7 +306,7 @@
             <p
               class="add_new_parking__form__create-card__card-full__informations__p__address"
             >
-              {{ address }}
+              {{ name }}
             </p>
             <p
               class="add_new_parking__form__create-card__card-full__informations__p__date"
@@ -313,12 +321,12 @@
           >
             <div>
               <img
-                *ngIf="automobile"
+                *ngIf="isPersonalVehicleAccepted"
                 class="add_new_parking__form__create-card__card-full__informations__div__img-car"
                 src="../../../../assets/images/img-auto.png"
               />
               <img
-                *ngIf="truck"
+                *ngIf="isCargoVehicleAccepted"
                 src="../../../../assets/images/truck-image.png"
                 class="add_new_parking__form__create-card__card-full__informations__div__img-truck"
               />
@@ -328,7 +336,7 @@
                 class="add_new_parking__form__create-card__card-full__informations__div__img-agr"
               />
               <img
-                *ngIf="publicTransportationVehicle"
+                *ngIf="isPublicTransportAccepted"
                 src="../../../../assets/images/bus.jpg"
                 class="add_new_parking__form__create-card__card-full__informations__div__img-bus"
               />

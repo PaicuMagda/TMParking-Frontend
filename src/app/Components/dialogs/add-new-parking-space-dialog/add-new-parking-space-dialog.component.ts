@@ -33,14 +33,15 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   ) {}
 
   toggleButtonValue: boolean = false;
-  address: string = '';
+  name: string = '';
   numberOfParkingSpaces: number = 0;
   paidParking: string = '';
   videoSurveillance: string = '';
-  automobile: boolean = false;
-  truck: boolean = false;
+  isPersonalVehicleAccepted: boolean = false;
+  isPublicTransportAccepted: boolean = false;
+  isCargoVehicleAccepted: boolean = false;
+  isAgriculturalMachineryAccepted: boolean = false;
   agricultural: boolean = false;
-  publicTransportationVehicle = false;
   startDate: Date | null = null;
   endDate: Date | null = null;
   imageUrl: string | ArrayBuffer | null = null;
@@ -58,15 +59,15 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  isAutomobile() {
-    this.automobile = !this.automobile;
+  hasPersonalVehicleAccept() {
+    this.isPersonalVehicleAccepted = !this.isPersonalVehicleAccepted;
   }
 
-  isTruck() {
-    this.truck = !this.truck;
+  hasCargoVehicleAccept() {
+    this.isCargoVehicleAccepted = !this.isCargoVehicleAccepted;
   }
 
-  isAgricultural() {
+  hasAgriculturalMachineryAccept() {
     this.agricultural = !this.agricultural;
   }
 
@@ -94,11 +95,6 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-
   closeAddNewParkingSpaceDialog(): void {
     this.dialog
       .open(ConfirmCloseDialogComponent, {
@@ -120,22 +116,23 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
 
   registerParkingSpace() {
     const formData = {
-      name: this.addNewParkingSpaceFormGroup.get('address')?.value,
+      name: this.addNewParkingSpaceFormGroup.get('name')?.value,
       address: this.addNewParkingSpaceFormGroup.get('address')?.value,
-      availableParkingSpaces:
-        this.addNewParkingSpaceFormGroup.get('numberSpaces')?.value,
-      isCargoVehicleAccepted: this.publicTransportationVehicle,
-      isPersonalVehicleAccepted: this.automobile,
-      isPublicTransportAccepted: this.publicTransportationVehicle,
+      availableParkingSpaces: this.addNewParkingSpaceFormGroup.get(
+        'availableParkingSpaces'
+      )?.value,
+      isCargoVehicleAccepted: this.isCargoVehicleAccepted,
+      isPersonalVehicleAccepted: this.isPersonalVehicleAccepted,
+      isPublicTransportAccepted: this.isCargoVehicleAccepted,
       isAgriculturalMachineryAccepted: this.agricultural,
-      imageUrl: this.imageProfile,
+      imageProfile: this.imageProfile,
+      leasePermit: this.leasePermitFile,
       startDate: this.addNewParkingSpaceFormGroup.get('startDate')?.value,
       endDate: this.addNewParkingSpaceFormGroup.get('endDate')?.value,
       addedDate: new Date(),
       isFree: this.addNewParkingSpaceFormGroup.get('videoSurveillance')?.value,
       description:
         this.addNewParkingSpaceFormGroup.get('descriptionParking')?.value,
-      paidParking: false,
       isDraft: false,
       paymentPerHour: 10,
       paymentPerDay: 80,
@@ -154,9 +151,13 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
 
   ngOnInit() {
     this.addNewParkingSpaceFormGroup = this.formBuilder.group({
+      name: ['', Validators.required],
       address: ['', Validators.required],
       descriptionParking: [''],
-      numberSpaces: ['', [Validators.required, Validators.maxLength(3)]],
+      availableParkingSpaces: [
+        '',
+        [Validators.required, Validators.maxLength(3)],
+      ],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       undergroundParkingLots: ['', Validators.required],
