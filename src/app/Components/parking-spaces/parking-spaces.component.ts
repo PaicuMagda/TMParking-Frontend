@@ -32,6 +32,7 @@ export class ParkingSpacesComponent implements OnInit {
   role: string = '';
   toggleValue: string;
   private destroy$: Subject<void> = new Subject<void>();
+  idUserLogged: string = '';
 
   openDeleteConfirmDialog() {
     this.dialog.open(DeleteConfirmationDialogComponent, {
@@ -90,9 +91,11 @@ export class ParkingSpacesComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         if (value === 'myParkingSpaces') {
-          this.parkingSpacesService.getMyParkingSpace().subscribe((values) => {
-            this.parkingSpaces = values;
-          });
+          this.parkingSpacesService
+            .getMyParkingSpaces(this.idUserLogged)
+            .subscribe((values) => {
+              this.parkingSpaces = values;
+            });
           this.toggleValue = value;
         }
         if (value === 'allParkingSpaces') {
@@ -120,11 +123,19 @@ export class ParkingSpacesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getParkingSpaces();
     this.isLogin = this.authenticationService.isLoggedIn();
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.authenticationService.getRoleFromToken();
       this.role = val || roleFromToken;
     });
+
+    this.userStore.getIdUserFromStore().subscribe((val) => {
+      let userIdFromToken = this.authenticationService.getUserIdFromToken();
+      this.idUserLogged = val || userIdFromToken;
+      console.log(this.idUserLogged);
+    });
+
+    this.getParkingSpaces();
+    console.log('User id : ' + this.idUserLogged);
   }
 }

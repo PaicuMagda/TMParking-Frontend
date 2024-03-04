@@ -34,6 +34,12 @@ export class ParkingPlacesService {
     return this.http.get<any>(`${this.baseUrl}ParkingSpaces`);
   }
 
+  getMyParkingSpaces(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.baseUrl}ParkingSpaces/${userId}/parking-spaces`
+    );
+  }
+
   parkingSpotsMock: ParkingSpot[] = [
     { id: 1, spotNumber: '1A', isReserved: ParkingStatus.AVAILABLE },
     { id: 2, spotNumber: '2A', isReserved: ParkingStatus.OCCUPIED },
