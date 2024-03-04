@@ -96,7 +96,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       }
     });
 
-    this.vehicleService.getAllVehicle().subscribe((vehicles) => {
+    this.vehicleService.getAllVehicles().subscribe((vehicles) => {
       this.vehicles = vehicles;
     });
   }

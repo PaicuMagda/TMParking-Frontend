@@ -7,7 +7,8 @@ import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialo
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
-import { map } from 'rxjs';
+import { Subject, map, takeUntil } from 'rxjs';
+import { DisplayCardsService } from 'src/app/services/display-cards.service';
 
 @Component({
   selector: 'app-vehicles',
@@ -15,17 +16,20 @@ import { map } from 'rxjs';
   styleUrls: ['./vehicles.component.scss'],
 })
 export class VehiclesComponent implements OnInit {
-  vehicles: Vehicle[] = [];
-  vehicleForm: FormGroup[] = [];
-  role: string = '';
-
   constructor(
     private vehicleService: VehiclesService,
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private userStore: UserStoreService
+    private userStore: UserStoreService,
+    private displayCardsService: DisplayCardsService
   ) {}
+
+  private destroy$: Subject<void> = new Subject<void>();
+  vehicles: Vehicle[] = [];
+  vehicleForm: FormGroup[] = [];
+  role: string = '';
+  idUserLogged: string = '';
 
   editVehicle(index: number) {
     const vehicle = this.vehicles[index];
@@ -94,31 +98,58 @@ export class VehiclesComponent implements OnInit {
     return differenceInDays <= 3;
   }
 
-  ngOnInit() {
-    this.vehicleService
-      .getVehicles()
-      .pipe(
-        map((vehicles) => {
-          vehicles.forEach((vehicle) => {
-            vehicle.isEdit = false;
-            vehicle.vehicleOwnerFullName =
-              vehicle.vehicleOwner.firstName +
-              ' ' +
-              vehicle.vehicleOwner.lastName;
+  getVehicles() {
+    this.displayCardsService.toggleValueSubjectObservable
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        if (value === 'allVehicles') {
+          this.vehicleService.getAllVehicles().subscribe((values) => {
+            this.vehicles = values;
           });
-          return vehicles;
-        })
-      )
-      .subscribe((vehicles) => {
-        this.vehicles = vehicles;
-        vehicles.forEach((vehicle) => {
-          this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
-        });
+        }
+        if (value === 'myVehicles') {
+          this.vehicleService
+            .getVehicleById(this.idUserLogged)
+            .subscribe((values) => {
+              this.vehicles = values;
+            });
+        }
       });
+  }
+
+  ngOnInit() {
+    // this.vehicleService
+    //   .getAllVehicles()
+    //   .pipe(
+    //     map((vehicles) => {
+    //       vehicles.forEach((vehicle) => {
+    //         vehicle.isEdit = false;
+    //         vehicle.vehicleOwnerFullName =
+    //           vehicle.vehicleOwner.firstName +
+    //           ' ' +
+    //           vehicle.vehicleOwner.lastName;
+    //       });
+    //       return vehicles;
+    //     })
+    //   )
+    //   .subscribe((vehicles) => {
+    //     this.vehicles = vehicles;
+    //     vehicles.forEach((vehicle) => {
+    //       this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
+    //     });
+    //   });
 
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.authenticationService.getRoleFromToken();
       this.role = val || roleFromToken;
     });
+
+    this.userStore.getIdUserFromStore().subscribe((val) => {
+      let userIdFromToken = this.authenticationService.getUserIdFromToken();
+      this.idUserLogged = val || userIdFromToken;
+      console.log(this.idUserLogged);
+    });
+
+    this.getVehicles();
   }
 }

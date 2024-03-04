@@ -21,7 +21,7 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
   constructor(private vehicleService: VehiclesService) {}
 
   ngOnInit() {
-    this.vehicleService.getAllVehicle().subscribe((values) => {
+    this.vehicleService.getAllVehicles().subscribe((values) => {
       const vehicleWithOwnerFullname = values.map((vehicle: Vehicle) => {
         return {
           ...vehicle,

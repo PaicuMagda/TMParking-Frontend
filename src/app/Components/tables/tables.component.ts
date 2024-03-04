@@ -85,18 +85,20 @@ export class TablesComponent implements OnInit {
   }
 
   private exportVehiclesCsvFile() {
-    const data: Vehicle[] = this.vehiclesService.vehicles;
-    const formula: string = 'vehicles';
-    var options = {
-      fieldSeparator: ';',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: false,
-      noDownload: false,
-      showTitle: false,
-      useBom: false,
-    };
-    const fileInfo = new ngxCsv(data, formula, options);
+    this.vehiclesService.getAllVehicles().subscribe((values) => {
+      const data: Vehicle[] = values;
+      const formula: string = 'vehicles';
+      var options = {
+        fieldSeparator: ';',
+        quoteStrings: '"',
+        decimalseparator: '.',
+        showLabels: false,
+        noDownload: false,
+        showTitle: false,
+        useBom: false,
+      };
+      const fileInfo = new ngxCsv(data, formula, options);
+    });
   }
 
   ngOnInit() {
