@@ -23,7 +23,9 @@ export class VehiclesService {
     return this.http.get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles`);
   }
 
-  getVehicleById(idUser: any): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}Vehicle/${idUser}/vehicles`);
+  getVehicleById(idUser: any): Observable<Vehicle[]> {
+    return this.http.get<Vehicle[]>(
+      `${this.baseUrl}Vehicle/${idUser}/vehicles`
+    );
   }
 }

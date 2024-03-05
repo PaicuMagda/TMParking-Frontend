@@ -34,12 +34,10 @@ export class AddNewVehicleDialogComponent {
     this.userStore.getIdUserFromStore().subscribe((val) => {
       let userIdFromToken = this.auth.getUserIdFromToken();
       this.idUserLogged = val || userIdFromToken;
-      console.log(this.idUserLogged);
     });
 
     this.userStore.getFullNameFromStore().subscribe((val) => {
       this.userLoggedFullName = val;
-      console.log(this.userLoggedFullName);
     });
 
     this.addNewVehicleFormGroup = this.formBuilder.group({

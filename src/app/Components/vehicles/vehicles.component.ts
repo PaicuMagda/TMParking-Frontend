@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { VehiclesService } from 'src/app/services/vehicles.service';
@@ -127,8 +127,23 @@ export class VehiclesComponent implements OnInit {
         if (value === 'myVehicles') {
           this.vehicleService
             .getVehicleById(this.idUserLogged)
+            .pipe(
+              map((vehicles) => {
+                vehicles.forEach((vehicle) => {
+                  vehicle.isEdit = false;
+                  vehicle.vehicleOwnerFullName =
+                    vehicle.vehicleOwner.firstName +
+                    ' ' +
+                    vehicle.vehicleOwner.lastName;
+                });
+                return vehicles;
+              })
+            )
             .subscribe((values) => {
               this.vehicles = values;
+              values.forEach((vehicle) => {
+                this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
+              });
             });
         }
       });
@@ -143,7 +158,6 @@ export class VehiclesComponent implements OnInit {
     this.userStore.getIdUserFromStore().subscribe((val) => {
       let userIdFromToken = this.authenticationService.getUserIdFromToken();
       this.idUserLogged = val || userIdFromToken;
-      console.log(this.idUserLogged);
     });
 
     this.getVehicles();
