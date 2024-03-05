@@ -26,7 +26,7 @@ export class VehiclesComponent implements OnInit {
   ) {}
 
   private destroy$: Subject<void> = new Subject<void>();
-  vehicles: Vehicle[] = [];
+  vehicles: any[] = [];
   vehicleForm: FormGroup[] = [];
   role: string = '';
   idUserLogged: string = '';
@@ -43,7 +43,7 @@ export class VehiclesComponent implements OnInit {
       year: vehicle.year,
       vehicleIdentificationNumber: vehicle.vehicleIdentificationNumber,
       vehicleRegistrationCertificate: vehicle.vehicleRegistrationCertificate,
-      ownerName: vehicle.vehicleOwner.firstName,
+      ownerName: vehicle.vehicleOwnerFullName,
     });
   }
 
@@ -103,9 +103,26 @@ export class VehiclesComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         if (value === 'allVehicles') {
-          this.vehicleService.getAllVehicles().subscribe((values) => {
-            this.vehicles = values;
-          });
+          this.vehicleService
+            .getAllVehicles()
+            .pipe(
+              map((vehicles) => {
+                vehicles.forEach((vehicle) => {
+                  vehicle.isEdit = false;
+                  vehicle.vehicleOwnerFullName =
+                    vehicle.vehicleOwner.firstName +
+                    ' ' +
+                    vehicle.vehicleOwner.lastName;
+                });
+                return vehicles;
+              })
+            )
+            .subscribe((values) => {
+              this.vehicles = values;
+              values.forEach((vehicle) => {
+                this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
+              });
+            });
         }
         if (value === 'myVehicles') {
           this.vehicleService
@@ -118,27 +135,6 @@ export class VehiclesComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.vehicleService
-    //   .getAllVehicles()
-    //   .pipe(
-    //     map((vehicles) => {
-    //       vehicles.forEach((vehicle) => {
-    //         vehicle.isEdit = false;
-    //         vehicle.vehicleOwnerFullName =
-    //           vehicle.vehicleOwner.firstName +
-    //           ' ' +
-    //           vehicle.vehicleOwner.lastName;
-    //       });
-    //       return vehicles;
-    //     })
-    //   )
-    //   .subscribe((vehicles) => {
-    //     this.vehicles = vehicles;
-    //     vehicles.forEach((vehicle) => {
-    //       this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
-    //     });
-    //   });
-
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.authenticationService.getRoleFromToken();
       this.role = val || roleFromToken;
