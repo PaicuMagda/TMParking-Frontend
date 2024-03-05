@@ -12,12 +12,12 @@ import { UsersService } from 'src/app/services/users.service';
   providedIn: 'root',
 })
 export class TablesResolverService implements Resolve<Observable<User[]>> {
-  constructor(private service: UsersService) {}
+  constructor(private userService: UsersService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<User[]> {
-    return this.service.getUsers();
+    return this.userService.getAllUsers();
   }
 }

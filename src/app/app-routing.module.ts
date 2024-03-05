@@ -7,7 +7,7 @@ import { HomeComponent } from './Components/home/home/home.component';
 import { ResetPasswordComponent } from './Components/login-register-components/reset-password/reset-password.component';
 import { ParkingSpaceDetailsComponent } from './Components/parking-space-details/parking-space-details.component';
 import { TablesComponent } from './Components/tables/tables.component';
-import { TablesResolverService } from './Components/resolvers/tables-resolver.service';
+import { TablesResolverService } from './Components/resolvers/table-users.service';
 import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
 import { AuthGuard } from './guards/auth.guard';
 

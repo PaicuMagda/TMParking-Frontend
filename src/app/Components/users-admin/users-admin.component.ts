@@ -128,17 +128,18 @@ export class UsersAdminComponent implements OnInit {
   }
 
   isUserNew(user: User): boolean {
-    const currentDate = new Date().getDate();
-    const dateAddedUser = user.dateAdded.getTime();
-    const differenceInDays = Math.floor(
-      (currentDate - dateAddedUser) / (1000 * 60 * 60 * 24)
-    );
-    return differenceInDays <= 3;
+    // const currentDate = new Date().getDate();
+    // const dateAddedUser = user.dateAdded.getTime();
+    // const differenceInDays = Math.floor(
+    //   (currentDate - dateAddedUser) / (1000 * 60 * 60 * 24)
+    // );
+    // return differenceInDays <= 3;
+    return true;
   }
 
   ngOnInit() {
     this.roles = Object.keys(Role);
-    this.usersService.getUsers().subscribe((users: User[]) => {
+    this.usersService.getAllUsers().subscribe((users: User[]) => {
       this.users = users;
       this.users.forEach((user) => {
         this.userFormGroup.push(this.createFormGroup(user));

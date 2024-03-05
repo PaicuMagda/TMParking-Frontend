@@ -68,7 +68,7 @@ export class TablesComponent implements OnInit {
   }
 
   private exportCsvUsersFile() {
-    this.usersService.getUsers().subscribe((values) => {
+    this.usersService.getAllUsers().subscribe((values) => {
       const formula: string = 'users';
       const data: User[] = values;
       var options = {
