@@ -127,3 +127,17 @@ input[type="file"] {
 h2 {
   margin-bottom: 0%;
 }
+
+.upload-file {
+  margin-top: 5%;
+
+  &__placeholder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    p {
+      color: rgb(170, 170, 170);
+    }
+  }
+}

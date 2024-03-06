@@ -9,7 +9,11 @@
   <mat-divider></mat-divider>
   <form [formGroup]="imageFormGroup" class="my-profile__image-upload">
     <div class="my-profile__image-upload__image-div">
-      <img src="../../../../assets/images/my-profile-image.jpg" />
+      <img
+        *ngIf="!imageProfile"
+        src="../../../../assets/images/my-profile-image.jpg"
+      />
+      <img *ngIf="imageProfile" [src]="imageProfile" />
     </div>
     <div class="my-profile__image-upload__image-button"></div>
   </form>
@@ -252,43 +256,32 @@
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="vehicleRegisteredFormGroup">
-        <form [formGroup]="vehicleRegisteredFormGroup">
-          <ng-template matStepLabel>Vehicle Registered</ng-template>
-          <div class="stepper__vehicle-registered">
-            <mat-form-field appearance="outline">
-              <input
-                matInput
-                placeholder="Vehicle Registered"
-                formControlName="vehiclesRegistered"
-              />
-            </mat-form-field>
-            <p>
-              To reserve a parking space, at least one registered vehicle is
-              required. Without a registered vehicle, you won't be able to
-              proceed with the booking for a parking spot.
-            </p>
-          </div>
-
-          <div>
-            <button mat-button matStepperPrevious class="button-back">
-              Back
-            </button>
-            <button mat-button matStepperNext class="button-next">Next</button>
-          </div>
-        </form>
-      </mat-step>
 
       <mat-step [stepControl]="imageFormGroup">
         <form [formGroup]="imageFormGroup">
           <ng-template matStepLabel>Upload Image Profile</ng-template>
-          <mat-form-field>
-            <ngx-mat-file-input
-              formControlName="image"
+          <div class="upload-file">
+            <input
+              #profileImageInput
+              (change)="onFileSelectedImageProfile($event)"
+              type="file"
+              formControlName="imageFileUpload"
               placeholder="Upload a significant image for your profile"
-            ></ngx-mat-file-input>
+            />
+            <div
+              (click)="profileImageInput.click()"
+              class="upload-file__placeholder"
+            >
+              <p *ngIf="!imageProfileFileName">
+                Upload image for parking spaces's profile.
+              </p>
+              <p *ngIf="imageProfileFileName">{{ imageProfileFileName }}</p>
+              <mat-icon svgIcon="plus-solid"></mat-icon>
+            </div>
+
+            <mat-divider></mat-divider>
             <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
-          </mat-form-field>
+          </div>
           <div class="stepper__file-upload-button">
             <button mat-button matStepperPrevious class="button-back">
               Back
@@ -355,7 +348,7 @@
           <button
             mat-button
             class="button-saveChanges"
-            (click)="openSaveChangesConfirmDialog()"
+            (click)="registerNewUser()"
           >
             Save Changes
           </button>

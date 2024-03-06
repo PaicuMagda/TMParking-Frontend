@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-add-new-user-dialog',
@@ -20,20 +21,22 @@ export class AddNewUserDialogComponent {
   phoneFormGroup: FormGroup;
   dateBirthFormGroup: FormGroup;
   stateZipCodeFormGroup: FormGroup;
-  vehicleRegisteredFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
   imageUrl: string | ArrayBuffer | null = null;
   showIsNotDigitMessage: boolean;
+  imageProfileFileName: string | undefined;
+  imageProfile: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
+    private userService: UsersService,
     private dialogRef: MatDialogRef<AddNewUserDialogComponent>
   ) {}
 
   ngOnInit() {
     this.imageFormGroup = this.formBuilder.group({
-      image: [''],
+      imageFileUpload: [''],
     });
     this.nameFormGroup = this.formBuilder.group({
       firstname: ['', Validators.required],
@@ -61,33 +64,22 @@ export class AddNewUserDialogComponent {
       zip: ['', Validators.required],
       state: ['', Validators.required],
     });
-    this.vehicleRegisteredFormGroup = this.formBuilder.group({
-      vehiclesRegistered: [''],
-    });
     this.passwordFormGroup = this.formBuilder.group({
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     });
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-
-      if (file.type.match('image.*')) {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-          this.imageUrl = reader.result;
-        };
-
-        reader.readAsDataURL(file);
-      } else {
-        console.log('Fișierul încărcat nu este o imagine.');
-      }
-    }
+  onFileSelectedImageProfile(event: any) {
+    const file: File = event.target.files[0];
+    this.imageProfileFileName = file.name;
+    const reader = new FileReader();
+    this.imageProfileFileName = file.name;
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      this.imageProfile = base64String;
+    };
+    reader.readAsDataURL(file);
   }
 
   openSaveChangesConfirmDialog() {
@@ -108,10 +100,31 @@ export class AddNewUserDialogComponent {
           ...this.pncFormGroup.value,
           ...this.dateBirthFormGroup.value,
           ...this.stateZipCodeFormGroup.value,
-          ...this.vehicleRegisteredFormGroup.value,
           ...this.passwordFormGroup.value,
         },
       },
+    });
+  }
+
+  registerNewUser() {
+    const formData = {
+      email: this.emailFormGroup.get('email')?.value,
+      username: this.usernameFormGroup.get('username')?.value,
+      firstName: this.nameFormGroup.get('firstname')?.value,
+      lastName: this.nameFormGroup.get('lastname')?.value,
+      password: this.passwordFormGroup.get('password')?.value,
+      address: this.addressFormGroup.get('address')?.value,
+      zipCode: this.stateZipCodeFormGroup.get('zip')?.value,
+      state: this.stateZipCodeFormGroup.get('state')?.value,
+      isActive: true,
+      phone: this.phoneFormGroup.get('phone')?.value,
+      dateOfBirth: this.dateBirthFormGroup.get('dateBirth')?.value,
+      pnc: this.pncFormGroup.get('pnc')?.value,
+      licenseValid: true,
+      imageUrl: this.imageProfile,
+    };
+    this.userService.registerNewUser(formData).subscribe((user) => {
+      console.log(formData);
     });
   }
 
