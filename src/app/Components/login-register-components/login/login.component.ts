@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
         this.userStore.setFullNameFromStore(tokenPayload.unique_name);
         this.userStore.setRoleFromStore(tokenPayload.role);
         this.userStore.setIdUserFromStore(tokenPayload.nameid);
-        console.log(tokenPayload);
-
         setTimeout(() => {
           this.router.navigate(['/home']);
         }, 500);

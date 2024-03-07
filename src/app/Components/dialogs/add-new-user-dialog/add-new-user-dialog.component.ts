@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { UsersService } from 'src/app/services/users.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-add-new-user-dialog',
@@ -31,6 +32,7 @@ export class AddNewUserDialogComponent {
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private userService: UsersService,
+    private toast: NgToastService,
     private dialogRef: MatDialogRef<AddNewUserDialogComponent>
   ) {}
 
@@ -123,8 +125,21 @@ export class AddNewUserDialogComponent {
       licenseValid: true,
       imageUrl: this.imageProfile,
     };
-    this.userService.registerNewUser(formData).subscribe((user) => {
-      console.log(formData);
+    this.userService.registerNewUser(formData).subscribe({
+      next: (resp) => {
+        this.toast.info({
+          detail: 'Info Message',
+          summary: resp.message,
+          duration: 3000,
+        });
+      },
+      error: (err) => {
+        this.toast.error({
+          detail: 'Error Message',
+          summary: err.error.message,
+          duration: 5000,
+        });
+      },
     });
   }
 

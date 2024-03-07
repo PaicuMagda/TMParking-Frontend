@@ -1,10 +1,5 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -14,6 +9,7 @@ import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-clo
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-add-new-parking-space-dialog',
@@ -29,6 +25,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     private userStore: UserStoreService,
     private auth: AuthenticationService,
     private parkingSpacesService: ParkingPlacesService,
+    private toast: NgToastService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -143,11 +140,22 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       parkingSpacesOwnerId: this.parkingSpacesOwnerId,
     };
 
-    this.parkingSpacesService
-      .registerParkingSpaces(formData)
-      .subscribe((val) => {
-        console.log(val);
-      });
+    this.parkingSpacesService.registerParkingSpaces(formData).subscribe({
+      next: (resp) => {
+        this.toast.info({
+          detail: 'Info Message',
+          summary: resp.message,
+          duration: 3000,
+        });
+      },
+      error: (err) => {
+        this.toast.error({
+          detail: 'Error Message',
+          summary: err.error.message,
+          duration: 5000,
+        });
+      },
+    });
   }
 
   ngOnInit() {
