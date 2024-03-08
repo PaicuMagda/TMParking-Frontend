@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
-import { NavbarService } from 'src/app/services/navbar.service';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
+import { UsersService } from 'src/app/services/users.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-my-profile-dialog',
@@ -22,15 +24,78 @@ export class MyProfileDialogComponent implements OnInit {
   vehicleRegisteredFormGroup: FormGroup;
   changePasswordFormGroup: FormGroup;
   imageProfileFormGroup: FormGroup;
-  driverLicenseFormGroup: FormGroup;
+  userId: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
-    private navbarService: NavbarService
+    private userService: UsersService,
+    private userStore: UserStoreService,
+    private auth: AuthenticationService
   ) {}
 
+  getMyAccount() {
+    this.userService.getMyAccount(this.userId).subscribe((user) => {
+      console.log(user);
+      this.nameFormGroup.patchValue({
+        firstname: user.firstName,
+        lastname: user.lastName,
+      });
+      this.addressFormGroup.patchValue({
+        address: user.address,
+      });
+      this.emailFormGroup.patchValue({
+        email: user.email,
+      });
+      this.pncFormGroup.patchValue({
+        pnc: user.pnc,
+      });
+      this.phoneFormGroup.patchValue({
+        phone: user.phone,
+      });
+      this.dateBirthFormGroup.patchValue({
+        dateBirth: user.dateOfBirth,
+      });
+      this.stateZipCode.patchValue({
+        zip: user.zipCode,
+        state: user.state,
+      });
+      this.imageProfileFormGroup.patchValue({
+        imageProfile: user.imageUrl,
+      });
+    });
+  }
+
+  openSaveChangesConfirmDialog() {
+    this.dialog.open(SaveChangesDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
+  }
+
+  openCloseConfirmSidenav() {
+    this.dialog.open(ConfirmCloseDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
+  }
+
+  closeSidenavMyProfile() {
+    this.openCloseConfirmSidenav();
+  }
+
   ngOnInit() {
+    this.userStore.getIdUserFromStore().subscribe((val) => {
+      let userIdFromToken = this.auth.getUserIdFromToken();
+      this.userId = userIdFromToken || val;
+    });
+
     this.nameFormGroup = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -57,9 +122,6 @@ export class MyProfileDialogComponent implements OnInit {
     this.vehicleRegisteredFormGroup = this.formBuilder.group({
       vehiclesRegistered: [''],
     });
-    this.driverLicenseFormGroup = this.formBuilder.group({
-      driverLicense: ['', Validators.required],
-    });
     this.imageProfileFormGroup = this.formBuilder.group({
       imageProfile: [''],
     });
@@ -68,29 +130,7 @@ export class MyProfileDialogComponent implements OnInit {
       newPassword: ['', Validators.required],
       repeatPassword: ['', Validators.required],
     });
-  }
 
-  openSaveChangesConfirmDialog() {
-    this.dialog.open(SaveChangesDialogComponent, {
-      width: '23%',
-      height: '20%',
-      position: {
-        top: '5%',
-      },
-    });
-  }
-
-  openCloseConfirmSidenav() {
-    this.dialog.open(ConfirmCloseDialogComponent, {
-      width: '23%',
-      height: '20%',
-      position: {
-        top: '5%',
-      },
-    });
-  }
-
-  closeSidenavMyProfile() {
-    this.openCloseConfirmSidenav();
+    this.getMyAccount();
   }
 }

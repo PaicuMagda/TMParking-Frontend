@@ -10,8 +10,21 @@
   </div>
   <mat-divider></mat-divider>
   <div class="my-profile__image-upload">
-    <div class="my-profile__image-upload__image-div">
-      <img src="../../../../assets/images/my-profile-image.jpg" />
+    <div
+      [ngClass]="
+        !imageProfileFormGroup.get('imageProfile')?.value
+          ? 'my-profile__image-upload__image-default'
+          : 'my-profile__image-upload__image-profile'
+      "
+    >
+      <img
+        *ngIf="imageProfileFormGroup.get('imageProfile')?.value"
+        [src]="imageProfileFormGroup.get('imageProfile')?.value"
+      />
+      <img
+        *ngIf="!imageProfileFormGroup.get('imageProfile')?.value"
+        src="../../../../assets/images/my-profile-image.jpg"
+      />
     </div>
   </div>
   <div class="stepper">
@@ -185,33 +198,7 @@
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="driverLicenseFormGroup">
-        <form [formGroup]="driverLicenseFormGroup">
-          <ng-template matStepLabel>Driver License<span>*</span></ng-template>
-          <mat-form-field>
-            <ngx-mat-file-input
-              formControlName="driverLicense"
-              placeholder="Upload a driver licence."
-            ></ngx-mat-file-input>
-            <mat-hint>File format: image(.img, .jpg, .jpeg) or .pdf</mat-hint>
-            <mat-error
-              *ngIf="
-                driverLicenseFormGroup
-                  .get('driverLicense')
-                  ?.hasError('required')
-              "
-            >
-              Driver license upload is required !
-            </mat-error>
-          </mat-form-field>
-          <div class="stepper__file-upload-button">
-            <button mat-button matStepperPrevious class="button-back">
-              Back
-            </button>
-            <button mat-button matStepperNext class="button-next">Next</button>
-          </div>
-        </form>
-      </mat-step>
+
       <mat-step [stepControl]="imageProfileFormGroup">
         <form [formGroup]="imageProfileFormGroup">
           <ng-template matStepLabel>Upload Image Profile</ng-template>

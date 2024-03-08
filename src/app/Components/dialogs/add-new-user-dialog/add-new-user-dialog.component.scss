@@ -34,14 +34,28 @@
     display: flex;
     flex-direction: column;
 
-    &__image-div {
+    &__image-default {
       display: flex;
       flex-direction: row;
       justify-content: center;
 
       img {
         height: 20%;
-        width: 20%;
+        width: 30%;
+        border-radius: 100%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+    }
+
+    &__image-profile {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      img {
+        height: 24vh;
+        width: 30%;
         border-radius: 100%;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -85,7 +99,7 @@ mat-form-field {
 }
 
 .stepper {
-  height: 77vh;
+  height: 69vh;
 
   &__vehicle-registered {
     display: flex;

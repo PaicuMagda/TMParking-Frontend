@@ -8,7 +8,13 @@
   </div>
   <mat-divider></mat-divider>
   <form [formGroup]="imageFormGroup" class="my-profile__image-upload">
-    <div class="my-profile__image-upload__image-div">
+    <div
+      [ngClass]="
+        !imageProfile
+          ? 'my-profile__image-upload__image-default'
+          : 'my-profile__image-upload__image-profile'
+      "
+    >
       <img
         *ngIf="!imageProfile"
         src="../../../../assets/images/my-profile-image.jpg"

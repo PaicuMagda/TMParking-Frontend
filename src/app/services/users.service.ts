@@ -20,6 +20,10 @@ export class UsersService {
     return this.http.post<any>(`${this.baseUrl}User/register`, user);
   }
 
+  getMyAccount(userId: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}User/${userId}/user-account`);
+  }
+
   updateUser(id: number, user: User): Observable<User> {
     return this.http.put<User>(`${this.baseUrl}User/update-user/${id}`, user);
   }

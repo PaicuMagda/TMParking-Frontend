@@ -28,14 +28,28 @@
     display: flex;
     flex-direction: column;
 
-    &__image-div {
+    &__image-default {
       display: flex;
       flex-direction: row;
       justify-content: center;
 
       img {
         height: 20%;
-        width: 25%;
+        width: 30%;
+        border-radius: 100%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+    }
+
+    &__image-profile {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      img {
+        height: 23vh;
+        width: 35%;
         border-radius: 100%;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -85,7 +99,7 @@ mat-form-field {
 }
 
 .stepper {
-  height: 70vh;
+  height: 65vh;
 
   &__file-upload-button {
     margin-top: 6%;
