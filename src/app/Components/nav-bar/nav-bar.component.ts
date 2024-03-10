@@ -6,6 +6,7 @@ import { NavbarService } from 'src/app/services/navbar.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LogoutDialogComponent } from '../dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,6 +17,8 @@ export class NavBarComponent implements OnInit {
   isLogin: boolean = false;
   fullName: string = '';
   role: string = '';
+  userId: string;
+  userLogged: any;
   @Input() showSearch: boolean = false;
 
   constructor(
@@ -23,7 +26,8 @@ export class NavBarComponent implements OnInit {
     private dialog: MatDialog,
     private auth: AuthenticationService,
     private userStore: UserStoreService,
-    private sidenavService: NavbarService
+    private sidenavService: NavbarService,
+    private userService: UsersService
   ) {}
 
   goToLogin() {
@@ -69,6 +73,13 @@ export class NavBarComponent implements OnInit {
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.auth.getRoleFromToken();
       this.role = val || roleFromToken;
+    });
+    this.userStore.getIdUserFromStore().subscribe((val) => {
+      let userIdFromToken = this.auth.getUserIdFromToken();
+      this.userId = userIdFromToken || val;
+    });
+    this.userService.getMyAccount(this.userId).subscribe((values) => {
+      this.userLogged = values;
     });
   }
 }

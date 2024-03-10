@@ -50,7 +50,7 @@ export class TablesComponent implements OnInit {
   }
 
   private exportCsvParkingSpacesFile() {
-    this.parkingSpacesService.getParcari().subscribe((values) => {
+    this.parkingSpacesService.getParkingSpaces().subscribe((values) => {
       const data: any[] = values;
       const formula: string = 'parking-spaces';
 

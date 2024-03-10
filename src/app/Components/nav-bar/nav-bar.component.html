@@ -7,6 +7,7 @@
     />
     <div class="toolbar__user-login" *ngIf="isLogin === true">
       <img src="../../../../assets/images/user-image.png" />
+      <!-- <img [src]="userLogged.imageUrl" /> -->
       <p>{{ fullName | uppercase }}</p>
     </div>
     <div *ngIf="!isLogin">You are not logged in ...</div>

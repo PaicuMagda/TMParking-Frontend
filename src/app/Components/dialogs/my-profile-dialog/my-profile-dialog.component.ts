@@ -36,7 +36,6 @@ export class MyProfileDialogComponent implements OnInit {
 
   getMyAccount() {
     this.userService.getMyAccount(this.userId).subscribe((user) => {
-      console.log(user);
       this.nameFormGroup.patchValue({
         firstname: user.firstName,
         lastname: user.lastName,
