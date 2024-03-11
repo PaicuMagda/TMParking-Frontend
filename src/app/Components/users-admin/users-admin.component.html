@@ -152,16 +152,13 @@
         </div>
 
         <div *ngIf="user.isEdit" class="userCard__div7 col-sm-1">
-          <button
-            class="btn btn-danger"
-            (click)="openDeleteConfirmDialog(user.id)"
-          >
+          <button class="btn btn-danger" (click)="deleteUser(user.userId)">
             <mat-icon svgIcon="delete-trash"></mat-icon>
             <span>Delete</span>
           </button>
           <button
             class="btn btn-warning"
-            (click)="openSaveChangesConfirmDialog(user.id)"
+            (click)="openSaveChangesConfirmDialog(user.userId)"
           >
             <mat-icon svgIcon="refresh"></mat-icon>
             <span>Update</span>
@@ -169,10 +166,7 @@
         </div>
 
         <div *ngIf="!user.isEdit" class="userCard__div7 col-sm-1">
-          <button
-            class="btn btn-danger"
-            (click)="openDeleteConfirmDialog(user.id)"
-          >
+          <button class="btn btn-danger" (click)="deleteUser(user.userId)">
             <mat-icon svgIcon="delete-trash"></mat-icon>
             <span>Delete</span>
           </button>

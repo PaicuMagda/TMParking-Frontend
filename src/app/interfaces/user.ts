@@ -2,7 +2,7 @@ import { Role } from '../enums/roles';
 import { Vehicle } from './vehicle';
 
 export interface User {
-  id: number;
+  userId: number;
   firstName: string;
   lastName: string;
   username?: string;

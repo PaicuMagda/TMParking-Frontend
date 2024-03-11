@@ -137,6 +137,12 @@ export class UsersAdminComponent implements OnInit {
     return true;
   }
 
+  deleteUser(userId: number) {
+    this.usersService.deleteUser(userId).subscribe((val) => {
+      console.log('User delete successfully !');
+    });
+  }
+
   ngOnInit() {
     this.roles = Object.keys(Role);
     this.usersService.getAllUsers().subscribe((users: User[]) => {
