@@ -31,6 +31,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
 
   toggleButtonValue: boolean = false;
   name: string = '';
+  addressParkingSpace: string = '';
   numberOfParkingSpaces: number = 0;
   paidParking: string = '';
   videoSurveillance: string = '';
@@ -52,7 +53,6 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
 
   changeToggleButtonValue(event: boolean) {
     this.toggleButtonValue = event;
-    console.log(this.toggleButtonValue);
     this.cdr.detectChanges();
   }
 
@@ -159,7 +159,6 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
     this.addNewParkingSpaceFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
@@ -181,6 +180,9 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       imageFileUpload: [null, Validators.required],
       leasePermit: [null, Validators.required],
     });
+
+    if (this.data) {
+    }
 
     this.userStore.getFullNameFromStore().subscribe((val) => {
       let fullNameFromToken = this.auth.getFullNameFromToken();

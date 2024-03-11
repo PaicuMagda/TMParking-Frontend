@@ -98,6 +98,12 @@ export class VehiclesComponent implements OnInit {
     return differenceInDays <= 3;
   }
 
+  deleteVehicleById(idVehicle: number) {
+    this.vehicleService.deletVehicleById(idVehicle).subscribe((val) => {
+      console.log('S-a sters vehiculul !');
+    });
+  }
+
   getVehicles() {
     this.displayCardsService.toggleValueSubjectObservable
       .pipe(takeUntil(this.destroy$))

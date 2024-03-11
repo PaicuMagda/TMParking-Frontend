@@ -28,4 +28,8 @@ export class VehiclesService {
       `${this.baseUrl}Vehicle/${idUser}/vehicles`
     );
   }
+
+  deletVehicleById(vehicleId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}Vehicle/${vehicleId}`);
+  }
 }

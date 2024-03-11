@@ -43,7 +43,7 @@
         (click)="
           !parkingSpaceIsExpired(parkingSpace.endDate) ||
           toggleValue === 'myParkingSpaces'
-            ? goToParkingSpaceDetails(parkingSpace.id)
+            ? goToParkingSpaceDetails(parkingSpace.parkingSpacesId)
             : openParkingSpaceExpiredConfirmDialog()
         "
       />
@@ -57,7 +57,7 @@
           (click)="
             !parkingSpaceIsExpired(parkingSpace.endDate) ||
             toggleValue === 'myParkingSpaces'
-              ? openDeleteConfirmDialog()
+              ? deleteParkingSpacesById(parkingSpace.parkingSpacesId)
               : openParkingSpaceExpiredConfirmDialog()
           "
         >
@@ -86,7 +86,7 @@
       class="parking-spaces__card__informations"
       (click)="
         !parkingSpaceIsExpired(parkingSpace.endDate)
-          ? goToParkingSpaceDetails(parkingSpace.id)
+          ? goToParkingSpaceDetails(parkingSpace.parkingSpacesId)
           : openParkingSpaceExpiredConfirmDialog()
       "
     >

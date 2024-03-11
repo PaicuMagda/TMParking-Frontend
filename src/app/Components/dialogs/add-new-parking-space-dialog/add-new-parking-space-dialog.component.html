@@ -17,12 +17,7 @@
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
-          <input
-            matInput
-            formControlName="name"
-            [(ngModel)]="data.data.name"
-            required
-          />
+          <input matInput formControlName="name" [(ngModel)]="name" required />
           <mat-error
             *ngIf="
               this.addNewParkingSpaceFormGroup.get('name')?.hasError('name')
@@ -38,7 +33,7 @@
             matInput
             formControlName="address"
             required
-            [(ngModel)]="data.data.address"
+            [(ngModel)]="addressParkingSpace"
           />
           <mat-error
             *ngIf="
@@ -67,7 +62,7 @@
             matInput
             formControlName="availableParkingSpaces"
             required
-            [(ngModel)]="data.datanumberOfParkingSpaces"
+            [(ngModel)]="numberOfParkingSpaces"
           />
           <mat-error
             *ngIf="
@@ -91,7 +86,7 @@
         <mat-form-field>
           <mat-date-range-input [rangePicker]="picker">
             <input
-              [(ngModel)]="data.data.startDate"
+              [(ngModel)]="startDate"
               matStartDate
               placeholder="Start date"
               (focus)="picker.open()"
@@ -99,7 +94,7 @@
               required
             />
             <input
-              [(ngModel)]="data.data.endDate"
+              [(ngModel)]="endDate"
               matEndDate
               placeholder="End date"
               (focus)="picker.open()"
@@ -203,7 +198,7 @@
           <mat-button-toggle-group
             formControlName="videoSurveillance"
             #toggleGroup="matButtonToggleGroup"
-            [(ngModel)]="data.data.videoSurveillance"
+            [(ngModel)]="videoSurveillance"
             (change)="changeToggleButtonValue(toggleGroup.value)"
           >
             <mat-button-toggle value="true">Yes</mat-button-toggle>
@@ -215,7 +210,7 @@
           <mat-button-toggle-group
             formControlName="paidParking"
             #toggleGroupPaid="matButtonToggleGroup"
-            [(ngModel)]="data.data.paidParking"
+            [(ngModel)]="paidParking"
             (change)="changeToggleButtonValue(toggleGroupPaid.value)"
           >
             <mat-button-toggle value="true">Yes</mat-button-toggle>
@@ -231,14 +226,14 @@
         <mat-checkbox
           name="automobile"
           color="primary"
-          [(ngModel)]="data.data.isPersonalVehicleAccepted"
+          [(ngModel)]="isPersonalVehicleAccepted"
           (change)="(hasPersonalVehicleAccept)"
           formControlName="isAutomobile"
           >Automobil</mat-checkbox
         >
         <mat-checkbox
           color="primary"
-          [(ngModel)]="data.data.isCargoVehicleAccepted"
+          [(ngModel)]="isCargoVehicleAccepted"
           (change)="(hasCargoVehicleAccept)"
           formControlName="isTruck"
           name="truck"
@@ -247,7 +242,7 @@
         <mat-checkbox
           name="agricultural"
           color="primary"
-          [(ngModel)]="data.data.agricultural"
+          [(ngModel)]="agricultural"
           (change)="(hasAgriculturalMachineryAccept)"
           formControlName="isAgriculturalMachinery"
           >Agricultural machinery</mat-checkbox
@@ -255,7 +250,7 @@
         <mat-checkbox
           name="publicTransportationVehicle"
           color="primary"
-          [(ngModel)]="data.data.isPublicTransportAccepted"
+          [(ngModel)]="isPublicTransportAccepted"
           (change)="(isPublicTransportAccepted)"
           formControlName="isPublicTransportationVehicle"
           >Public transportation vehicle</mat-checkbox

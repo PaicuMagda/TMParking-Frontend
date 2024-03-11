@@ -117,6 +117,14 @@ export class ParkingSpacesComponent implements OnInit {
     return true;
   }
 
+  deleteParkingSpacesById(parkingSpacesId: number) {
+    this.parkingSpacesService
+      .deleteParkingSpacesById(parkingSpacesId)
+      .subscribe((val) => {
+        console.log('S-a sters !');
+      });
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

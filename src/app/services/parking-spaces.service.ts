@@ -40,4 +40,8 @@ export class ParkingPlacesService {
       `${this.baseUrl}ParkingSpaces/${parkingSpacesId}/parkingSpaces`
     );
   }
+
+  deleteParkingSpacesById(parkingSpacesId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}ParkingSpaces/${parkingSpacesId}`);
+  }
 }
