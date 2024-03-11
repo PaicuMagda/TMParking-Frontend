@@ -159,6 +159,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.data);
     this.addNewParkingSpaceFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
       address: ['', Validators.required],

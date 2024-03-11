@@ -42,7 +42,7 @@ export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
   }
 
   openEditParkingSpace(id: number) {
-    this.parkingSpaceService.getParkingPlaceById(id).subscribe((value) => {
+    this.parkingSpaceService.getParkingSpacesById(id).subscribe((value) => {
       this.dialog.open(AddNewParkingSpaceDialogComponent, {
         width: '100%',
         height: '85%',

@@ -90,7 +90,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       const idString = paramMap.get('id');
       if (idString != null) {
         const id = parseInt(idString, 10);
-        this.parkingSpaceService.getParkingPlaceById(id).subscribe((value) => {
+        this.parkingSpaceService.getParkingSpacesById(id).subscribe((value) => {
           this.parkingPlace = value;
         });
       }

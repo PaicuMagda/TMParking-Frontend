@@ -137,7 +137,10 @@
         [matMenuTriggerFor]="menu"
       ></mat-icon>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="openEditParkingSpace(element.id)">
+        <button
+          mat-menu-item
+          (click)="openEditParkingSpace(element.parkingSpacesId)"
+        >
           Edit
         </button>
         <button mat-menu-item>Delete</button>

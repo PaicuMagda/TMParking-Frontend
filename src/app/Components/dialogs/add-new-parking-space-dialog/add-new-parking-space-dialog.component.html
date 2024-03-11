@@ -17,21 +17,29 @@
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
-          <input matInput formControlName="name" [(ngModel)]="name" required />
+          <input
+            matInput
+            formControlName="name"
+            [(ngModel)]="data.data.name"
+            required
+          />
           <mat-error
             *ngIf="
-              this.addNewParkingSpaceFormGroup
-                .get('address')
-                ?.hasError('required')
+              this.addNewParkingSpaceFormGroup.get('name')?.hasError('name')
             "
-            >Address is required!
+            >Name is required!
           </mat-error>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Location *(street and number)</mat-label>
-          <input matInput formControlName="address" required />
+          <input
+            matInput
+            formControlName="address"
+            required
+            [(ngModel)]="data.data.address"
+          />
           <mat-error
             *ngIf="
               this.addNewParkingSpaceFormGroup
@@ -59,7 +67,7 @@
             matInput
             formControlName="availableParkingSpaces"
             required
-            [(ngModel)]="numberOfParkingSpaces"
+            [(ngModel)]="data.datanumberOfParkingSpaces"
           />
           <mat-error
             *ngIf="
@@ -83,7 +91,7 @@
         <mat-form-field>
           <mat-date-range-input [rangePicker]="picker">
             <input
-              [(ngModel)]="startDate"
+              [(ngModel)]="data.data.startDate"
               matStartDate
               placeholder="Start date"
               (focus)="picker.open()"
@@ -91,7 +99,7 @@
               required
             />
             <input
-              [(ngModel)]="endDate"
+              [(ngModel)]="data.data.endDate"
               matEndDate
               placeholder="End date"
               (focus)="picker.open()"
@@ -195,7 +203,7 @@
           <mat-button-toggle-group
             formControlName="videoSurveillance"
             #toggleGroup="matButtonToggleGroup"
-            [(ngModel)]="videoSurveillance"
+            [(ngModel)]="data.data.videoSurveillance"
             (change)="changeToggleButtonValue(toggleGroup.value)"
           >
             <mat-button-toggle value="true">Yes</mat-button-toggle>
@@ -207,7 +215,7 @@
           <mat-button-toggle-group
             formControlName="paidParking"
             #toggleGroupPaid="matButtonToggleGroup"
-            [(ngModel)]="paidParking"
+            [(ngModel)]="data.data.paidParking"
             (change)="changeToggleButtonValue(toggleGroupPaid.value)"
           >
             <mat-button-toggle value="true">Yes</mat-button-toggle>
@@ -223,14 +231,14 @@
         <mat-checkbox
           name="automobile"
           color="primary"
-          [(ngModel)]="isPersonalVehicleAccepted"
+          [(ngModel)]="data.data.isPersonalVehicleAccepted"
           (change)="(hasPersonalVehicleAccept)"
           formControlName="isAutomobile"
           >Automobil</mat-checkbox
         >
         <mat-checkbox
           color="primary"
-          [(ngModel)]="isCargoVehicleAccepted"
+          [(ngModel)]="data.data.isCargoVehicleAccepted"
           (change)="(hasCargoVehicleAccept)"
           formControlName="isTruck"
           name="truck"
@@ -239,7 +247,7 @@
         <mat-checkbox
           name="agricultural"
           color="primary"
-          [(ngModel)]="agricultural"
+          [(ngModel)]="data.data.agricultural"
           (change)="(hasAgriculturalMachineryAccept)"
           formControlName="isAgriculturalMachinery"
           >Agricultural machinery</mat-checkbox
@@ -247,7 +255,7 @@
         <mat-checkbox
           name="publicTransportationVehicle"
           color="primary"
-          [(ngModel)]="isPublicTransportAccepted"
+          [(ngModel)]="data.data.isPublicTransportAccepted"
           (change)="(isPublicTransportAccepted)"
           formControlName="isPublicTransportationVehicle"
           >Public transportation vehicle</mat-checkbox
