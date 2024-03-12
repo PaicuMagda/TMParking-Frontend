@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
-import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { Subject, map, takeUntil } from 'rxjs';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
+import { NgToastService } from 'ng-angular-popup';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-vehicles',
@@ -16,20 +17,22 @@ import { DisplayCardsService } from 'src/app/services/display-cards.service';
   styleUrls: ['./vehicles.component.scss'],
 })
 export class VehiclesComponent implements OnInit {
+  private destroy$: Subject<void> = new Subject<void>();
+  vehicles: any[] = [];
+  vehicleForm: FormGroup[] = [];
+  role: string = '';
+  idUserLogged: string = '';
+
   constructor(
     private vehicleService: VehiclesService,
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private userStore: UserStoreService,
-    private displayCardsService: DisplayCardsService
+    private displayCardsService: DisplayCardsService,
+    private toast: NgToastService,
+    private dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>
   ) {}
-
-  private destroy$: Subject<void> = new Subject<void>();
-  vehicles: any[] = [];
-  vehicleForm: FormGroup[] = [];
-  role: string = '';
-  idUserLogged: string = '';
 
   editVehicle(index: number) {
     const vehicle = this.vehicles[index];
@@ -49,7 +52,6 @@ export class VehiclesComponent implements OnInit {
 
   openSaveChangesConfirmDialog(vehicleId: number) {
     const vehicleData = this.vehicleForm[vehicleId].value;
-
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
@@ -58,7 +60,6 @@ export class VehiclesComponent implements OnInit {
       },
       data: { vehicleData },
     });
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'save' || result === 'close') {
         this.vehicles[vehicleId].isEdit = false;
@@ -74,7 +75,8 @@ export class VehiclesComponent implements OnInit {
         top: '5%',
       },
       data: {
-        idVehicle: idVehicle,
+        message: 'Are you sure you want to delete this vehicle ?',
+        vehicleId: idVehicle,
       },
     });
   }
@@ -99,12 +101,6 @@ export class VehiclesComponent implements OnInit {
       (currentDate - dateAddedVehicle) / (1000 * 60 * 60 * 24)
     );
     return differenceInDays <= 3;
-  }
-
-  deleteVehicleById(idVehicle: number) {
-    this.vehicleService.deletVehicleById(idVehicle).subscribe((val) => {
-      console.log('S-a sters vehiculul !');
-    });
   }
 
   getVehicles() {
@@ -163,12 +159,10 @@ export class VehiclesComponent implements OnInit {
       const roleFromToken = this.authenticationService.getRoleFromToken();
       this.role = val || roleFromToken;
     });
-
     this.userStore.getIdUserFromStore().subscribe((val) => {
       let userIdFromToken = this.authenticationService.getUserIdFromToken();
       this.idUserLogged = val || userIdFromToken;
     });
-
     this.getVehicles();
   }
 }

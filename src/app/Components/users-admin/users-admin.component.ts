@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/interfaces/user';
 import { UsersService } from 'src/app/services/users.service';
 import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
-import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { Role } from 'src/app/enums/roles';

@@ -29,7 +29,7 @@ import { VehiclesComponent } from './Components/vehicles/vehicles.component';
 import { ParkingSpaceSearchComponent } from './Components/home/search/parking-space-search/parking-space-search.component';
 import { VehicleSearchComponent } from './Components/home/search/vehicle-search/vehicle-search.component';
 import { ParkingSpacesComponent } from './Components/parking-spaces/parking-spaces.component';
-import { DeleteConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { DeleteConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 import { ConfirmCloseDialogComponent } from './Components/dialogs/confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { DisplayCardsComponent } from './Components/display-cards/display-cards.component';
 import { ParkingSpaceDetailsComponent } from './Components/parking-space-details/parking-space-details.component';
@@ -46,6 +46,8 @@ import { ParkingReservationsComponent } from './Components/tables/parking-reserv
 import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LeavePageDialogComponent } from './Components/dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
+import { MatDialogRef } from '@angular/material/dialog';
+import { DeleteParkingSpacesConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,7 @@ import { LeavePageDialogComponent } from './Components/dialogs/confirmation-dial
     ParkingReservationsComponent,
     MyReservationsComponent,
     LeavePageDialogComponent,
+    DeleteParkingSpacesConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +104,10 @@ import { LeavePageDialogComponent } from './Components/dialogs/confirmation-dial
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     AuthGuard,
+    {
+      provide: MatDialogRef,
+      useValue: {},
+    },
   ],
   bootstrap: [AppComponent],
 })

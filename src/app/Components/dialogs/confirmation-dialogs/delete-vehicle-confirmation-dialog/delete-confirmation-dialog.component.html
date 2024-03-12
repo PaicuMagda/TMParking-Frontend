@@ -1,0 +1,16 @@
+<div class="icon-close" (click)="closeDeleteDialogConfirmation()">
+  <mat-icon svgIcon="icon-close"></mat-icon>
+</div>
+<mat-divider></mat-divider>
+
+<div class="delete-dialog">
+  <div>
+    <h3>{{ data.message }}</h3>
+  </div>
+  <div class="buttons">
+    <button class="button-delete" (click)="deleteVehicleById()">Delete</button>
+    <button class="discard-button" (click)="closeDeleteDialogConfirmation()">
+      Discard
+    </button>
+  </div>
+</div>

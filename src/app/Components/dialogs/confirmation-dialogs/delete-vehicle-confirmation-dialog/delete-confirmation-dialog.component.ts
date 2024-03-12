@@ -21,7 +21,7 @@ export class DeleteConfirmationDialogComponent implements OnInit {
   }
 
   deleteVehicleById() {
-    this.vehicleService.deletVehicleById(this.data.idVehicle).subscribe({
+    this.vehicleService.deletVehicleById(this.data.vehicleId).subscribe({
       next: (resp) => {
         this.toast.info({
           detail: 'Info Message',
@@ -33,7 +33,7 @@ export class DeleteConfirmationDialogComponent implements OnInit {
       error: (err) => {
         this.toast.error({
           detail: 'Error Message',
-          summary: err.message,
+          summary: err.title,
           duration: 3000,
         });
         this.dialogRef.close();
@@ -41,7 +41,5 @@ export class DeleteConfirmationDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log(this.data);
-  }
+  ngOnInit() {}
 }

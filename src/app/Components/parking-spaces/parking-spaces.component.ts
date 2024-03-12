@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
-import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 import { Router } from '@angular/router';
 import { AddNewParkingSpaceDialogComponent } from '../dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -11,6 +11,7 @@ import { LoginRequiredDialogComponent } from '../dialogs/confirmation-dialogs/lo
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ParkingSpace } from 'src/app/interfaces/parking-space';
+import { DeleteParkingSpacesConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog.component';
 
 @Component({
   selector: 'app-parking-spaces',
@@ -34,12 +35,16 @@ export class ParkingSpacesComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
   idUserLogged: string = '';
 
-  openDeleteConfirmDialog() {
-    this.dialog.open(DeleteConfirmationDialogComponent, {
+  openDeleteConfirmDialog(parkingSpacesId: number) {
+    this.dialog.open(DeleteParkingSpacesConfirmationDialogComponent, {
       width: '23%',
       height: '20%',
       position: {
         top: '5%',
+      },
+      data: {
+        message: 'Are you sure you want to delete this parking spaces ?',
+        parkingSpacesId: parkingSpacesId,
       },
     });
   }
@@ -115,14 +120,6 @@ export class ParkingSpacesComponent implements OnInit {
     // );
     // return differenceInDays <= 3;
     return true;
-  }
-
-  deleteParkingSpacesById(parkingSpacesId: number) {
-    this.parkingSpacesService
-      .deleteParkingSpacesById(parkingSpacesId)
-      .subscribe((val) => {
-        console.log('S-a sters !');
-      });
   }
 
   ngOnDestroy(): void {

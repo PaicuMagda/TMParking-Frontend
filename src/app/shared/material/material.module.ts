@@ -53,6 +53,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatAutocompleteModule,
     MatTooltipModule,
     MatBadgeModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}
