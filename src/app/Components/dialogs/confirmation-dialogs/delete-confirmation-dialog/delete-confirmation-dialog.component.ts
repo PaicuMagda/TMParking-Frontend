@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NgToastService } from 'ng-angular-popup';
+import { VehiclesService } from 'src/app/services/vehicles.service';
 
 @Component({
   selector: 'app-delete-confirmation-dialog',
@@ -8,13 +10,38 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class DeleteConfirmationDialogComponent implements OnInit {
   constructor(
+    private vehicleService: VehiclesService,
     private dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private toast: NgToastService
   ) {}
 
   closeDeleteDialogConfirmation() {
     this.dialogRef.close();
   }
 
-  ngOnInit() {}
+  deleteVehicleById() {
+    this.vehicleService.deletVehicleById(this.data.idVehicle).subscribe({
+      next: (resp) => {
+        this.toast.info({
+          detail: 'Info Message',
+          summary: resp.message,
+          duration: 3000,
+        });
+        this.dialogRef.close();
+      },
+      error: (err) => {
+        this.toast.error({
+          detail: 'Error Message',
+          summary: err.message,
+          duration: 3000,
+        });
+        this.dialogRef.close();
+      },
+    });
+  }
+
+  ngOnInit() {
+    console.log(this.data);
+  }
 }

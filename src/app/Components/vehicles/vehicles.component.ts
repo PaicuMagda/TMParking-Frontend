@@ -66,12 +66,15 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
-  openDeleteConfirmDialog(index: number) {
+  openDeleteConfirmDialog(idVehicle: number) {
     this.dialog.open(DeleteConfirmationDialogComponent, {
       width: '23%',
       height: '20%',
       position: {
         top: '5%',
+      },
+      data: {
+        idVehicle: idVehicle,
       },
     });
   }
