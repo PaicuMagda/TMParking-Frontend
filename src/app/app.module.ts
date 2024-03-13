@@ -48,6 +48,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { LeavePageDialogComponent } from './Components/dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DeleteParkingSpacesConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog.component';
+import { DeleteUserAccountConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-user-account-confirmation-dialog/delete-user-account-confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { DeleteParkingSpacesConfirmationDialogComponent } from './Components/dia
     MyReservationsComponent,
     LeavePageDialogComponent,
     DeleteParkingSpacesConfirmationDialogComponent,
+    DeleteUserAccountConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,

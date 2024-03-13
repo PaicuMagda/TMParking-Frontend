@@ -9,6 +9,7 @@ import { Vehicle } from 'src/app/interfaces/vehicle';
 import { Role } from 'src/app/enums/roles';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { DeleteUserAccountConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-user-account-confirmation-dialog/delete-user-account-confirmation-dialog.component';
 
 @Component({
   selector: 'app-users-admin',
@@ -82,7 +83,6 @@ export class UsersAdminComponent implements OnInit {
 
   openSaveChangesConfirmDialog(idUser: number) {
     const userData = this.userFormGroup[idUser].value;
-
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
@@ -91,7 +91,6 @@ export class UsersAdminComponent implements OnInit {
       },
       data: { userData },
     });
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'save' || result === 'close') {
         this.users[idUser].isEdit = false;
@@ -100,11 +99,15 @@ export class UsersAdminComponent implements OnInit {
   }
 
   openDeleteConfirmDialog(idUser: number) {
-    this.dialog.open(DeleteConfirmationDialogComponent, {
+    this.dialog.open(DeleteUserAccountConfirmationDialogComponent, {
       width: '23%',
       height: '20%',
       position: {
         top: '5%',
+      },
+      data: {
+        message: 'Are you sure you want to delete this user account ?',
+        idUser: idUser,
       },
     });
   }
@@ -135,12 +138,6 @@ export class UsersAdminComponent implements OnInit {
     // );
     // return differenceInDays <= 3;
     return true;
-  }
-
-  deleteUser(userId: number) {
-    this.usersService.deleteUser(userId).subscribe((val) => {
-      console.log('User delete successfully !');
-    });
   }
 
   ngOnInit() {
