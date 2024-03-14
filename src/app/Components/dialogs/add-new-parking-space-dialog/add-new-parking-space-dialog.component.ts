@@ -147,6 +147,9 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
           summary: resp.message,
           duration: 3000,
         });
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000);
       },
       error: (err) => {
         this.toast.error({

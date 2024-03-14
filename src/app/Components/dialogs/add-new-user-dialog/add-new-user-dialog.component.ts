@@ -129,6 +129,7 @@ export class AddNewUserDialogComponent {
       licenseValid: true,
       imageUrl: this.imageProfile,
     };
+
     this.userService.registerNewUser(formData).subscribe({
       next: (resp) => {
         this.toast.info({
@@ -136,6 +137,9 @@ export class AddNewUserDialogComponent {
           summary: resp.message,
           duration: 3000,
         });
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000);
       },
       error: (err) => {
         this.toast.error({

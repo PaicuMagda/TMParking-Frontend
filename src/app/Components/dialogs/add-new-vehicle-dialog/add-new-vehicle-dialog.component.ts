@@ -5,6 +5,7 @@ import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-clo
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-add-new-vehicle-dialog',
@@ -27,7 +28,8 @@ export class AddNewVehicleDialogComponent {
     private dialog: MatDialog,
     private vehicleService: VehiclesService,
     private userStore: UserStoreService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private toast: NgToastService
   ) {}
 
   ngOnInit() {
@@ -92,14 +94,23 @@ export class AddNewVehicleDialogComponent {
       year: this.addNewVehicleFormGroup.get('year')?.value,
     };
 
-    this.vehicleService.registerVehicle(formData).subscribe(
-      (response) => {
-        console.log('Vehicul adaugat cu succes !');
+    this.vehicleService.registerVehicle(formData).subscribe({
+      next: (resp) => {
+        this.toast.info({
+          detail: 'Info Message',
+          summary: resp.message,
+          duration: 3000,
+        });
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000);
       },
-      (error) => {
-        console.log('Eroare la incarcarea vehiculului');
-      }
-    );
+      error: (err) => ({
+        summary: err.message,
+        duration: 3000,
+        detail: 'Error Message',
+      }),
+    });
   }
 
   closeAddNewVehicleDialogComponent() {

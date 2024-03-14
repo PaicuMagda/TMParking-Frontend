@@ -43,46 +43,49 @@
               </mat-error>
             </mat-form-field>
           </div>
-
-          <div class="add-new-vehicle__form__informations__colorYear">
-            <mat-form-field appearance="outline"
-              ><mat-label>Color</mat-label
-              ><input matInput type="text" formControlName="color" />
-              <mat-error
-                *ngIf="
-                  addNewVehicleFormGroup.get('color')?.hasError('required') &&
-                  addNewVehicleFormGroup.get('color')?.touched
-                "
-              >
-                Color is required.
-              </mat-error></mat-form-field
+          <div class="add-new-vehicle__form__informations__colorYearVIN">
+            <div
+              class="add-new-vehicle__form__informations__colorYearVIN__colorYear"
             >
-            <mat-form-field appearance="outline"
-              ><mat-label>Year</mat-label
-              ><input matInput type="text" formControlName="year" />
-              <mat-error
-                *ngIf="
-                  addNewVehicleFormGroup.get('year')?.hasError('required') &&
-                  addNewVehicleFormGroup.get('year')?.touched
-                "
+              <mat-form-field appearance="outline"
+                ><mat-label>Color</mat-label
+                ><input matInput type="text" formControlName="color" />
+                <mat-error
+                  *ngIf="
+                    addNewVehicleFormGroup.get('color')?.hasError('required') &&
+                    addNewVehicleFormGroup.get('color')?.touched
+                  "
+                >
+                  Color is required.
+                </mat-error></mat-form-field
               >
-                Year is required.
-              </mat-error></mat-form-field
-            >
-          </div>
-          <div class="add-new-vehicle__form__informations__ownerVIN">
-            <mat-form-field appearance="outline"
-              ><mat-label>Vehicle Identification Number</mat-label
-              ><input matInput type="text" formControlName="vin" />
-              <mat-error
-                *ngIf="
-                  addNewVehicleFormGroup.get('vin')?.hasError('required') &&
-                  addNewVehicleFormGroup.get('vin')?.touched
-                "
+              <mat-form-field appearance="outline"
+                ><mat-label>Year</mat-label
+                ><input matInput type="text" formControlName="year" />
+                <mat-error
+                  *ngIf="
+                    addNewVehicleFormGroup.get('year')?.hasError('required') &&
+                    addNewVehicleFormGroup.get('year')?.touched
+                  "
+                >
+                  Year is required.
+                </mat-error></mat-form-field
               >
-                Vehicle Identificatoion Number is required.
-              </mat-error></mat-form-field
-            >
+            </div>
+            <div class="add-new-vehicle__form__informations__ownerVIN">
+              <mat-form-field appearance="outline"
+                ><mat-label>Vehicle Identification Number</mat-label
+                ><input matInput type="text" formControlName="vin" />
+                <mat-error
+                  *ngIf="
+                    addNewVehicleFormGroup.get('vin')?.hasError('required') &&
+                    addNewVehicleFormGroup.get('vin')?.touched
+                  "
+                >
+                  Vehicle Identificatoion Number is required.
+                </mat-error></mat-form-field
+              >
+            </div>
           </div>
 
           <div class="add-new-vehicle__form__informations__upload">
@@ -107,7 +110,7 @@
                 addNewVehicleFormGroup.get('licensePlate')?.hasError('required')
               "
             >
-              License Plate is required.
+              Vehicle registration certficate is required.
             </mat-error>
           </div>
           <div class="add-new-vehicle__form__informations__upload">
