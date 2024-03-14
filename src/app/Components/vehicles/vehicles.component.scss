@@ -79,6 +79,7 @@ label {
 
     &__div3 {
       @include flex(column);
+      align-items: center;
 
       &__color {
         @include flex(row, center);
@@ -97,6 +98,7 @@ label {
 
     &__div4 {
       @include flex(column);
+      margin-left: 1%;
 
       &__owner {
         @include flex(row, center, 54%);

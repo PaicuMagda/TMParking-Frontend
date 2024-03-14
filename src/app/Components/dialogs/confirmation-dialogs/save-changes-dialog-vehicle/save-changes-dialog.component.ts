@@ -21,23 +21,27 @@ export class SaveChangesDialogComponent implements OnInit {
     this.dialogRef.close('close');
   }
 
+  // saveData() {
+  //   this.userService.registerNewUser(this.data).subscribe({
+  //     next: (resp) => {
+  //       this.toast.info({
+  //         detail: 'Info Message',
+  //         summary: resp.message,
+  //         duration: 3000,
+  //       });
+  //     },
+  //     error: (err) => {
+  //       this.toast.error({
+  //         detail: 'Error Message',
+  //         summary: err.error.message,
+  //         duration: 5000,
+  //       });
+  //     },
+  //   });
+  //   this.dialogRef.close('save');
+  // }
+
   saveData() {
-    this.userService.registerNewUser(this.data).subscribe({
-      next: (resp) => {
-        this.toast.info({
-          detail: 'Info Message',
-          summary: resp.message,
-          duration: 3000,
-        });
-      },
-      error: (err) => {
-        this.toast.error({
-          detail: 'Error Message',
-          summary: err.error.message,
-          duration: 5000,
-        });
-      },
-    });
     this.dialogRef.close('save');
   }
 

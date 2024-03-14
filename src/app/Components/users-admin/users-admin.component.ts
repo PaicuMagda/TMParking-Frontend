@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/interfaces/user';
 import { UsersService } from 'src/app/services/users.service';
-import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
+import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save-changes-dialog-vehicle/save-changes-dialog.component';
 import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Vehicle } from 'src/app/interfaces/vehicle';
@@ -52,34 +52,33 @@ export class UsersAdminComponent implements OnInit {
     });
   }
 
-  // updateUser(index: number) {
-  //   const user = this.users[index];
-  //   const userForm = this.userFormGroup[index];
+  updateUser(index: number) {
+    const user = this.users[index];
+    const userForm = this.userFormGroup[index];
 
-  //   const updatedUser: User = {
-  //     id: index,
-  //     firstName: userForm.value.firstname,
-  //     lastName: userForm.value.lastname,
-  //     email: userForm.value.emailAddress,
-  //     address: userForm.value.address,
-  //     role: userForm.value.role,
-  //     zipCode: userForm.value.zipCode,
-  //     state: userForm.value.state,
-  //     isActive: userForm.value.isActive,
-  //     phone: userForm.value.phone,
-  //     dateOfBirth: userForm.value.dateOfBirth,
-  //     vehiclesRegistered: userForm.value.numberVehiclesRegistered,
-  //   };
+    const updatedUser: any = {
+      firstName: userForm.value.firstname,
+      lastName: userForm.value.lastname,
+      email: userForm.value.emailAddress,
+      address: userForm.value.address,
+      role: userForm.value.role,
+      zipCode: userForm.value.zipCode,
+      state: userForm.value.state,
+      isActive: userForm.value.isActive,
+      phone: userForm.value.phone,
+      dateOfBirth: userForm.value.dateOfBirth,
+      vehiclesRegistered: userForm.value.numberVehiclesRegistered,
+    };
 
-  //   this.usersService.updateUser(user.id, updatedUser).subscribe(
-  //     (response) => {
-  //       console.log('Utilizatorul a fost actualizat cu succes:', response);
-  //     },
-  //     (error) => {
-  //       console.error('Eroare la actualizarea utilizatorului:', error);
-  //     }
-  //   );
-  // }
+    this.usersService.updateUser(index, updatedUser).subscribe(
+      (response) => {
+        console.log('Utilizatorul a fost actualizat cu succes:', response);
+      },
+      (error) => {
+        console.error('Eroare la actualizarea utilizatorului:', error);
+      }
+    );
+  }
 
   openSaveChangesConfirmDialog(idUser: number) {
     const userData = this.userFormGroup[idUser].value;

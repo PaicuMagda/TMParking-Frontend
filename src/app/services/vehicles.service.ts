@@ -32,4 +32,11 @@ export class VehiclesService {
   deletVehicleById(vehicleId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}Vehicle/${vehicleId}`);
   }
+
+  updateVehicle(idVehicle: number, vehicle: any): Observable<any> {
+    return this.http.put<any>(
+      `${this.baseUrl}Vehicle/update-vehicle/${idVehicle}`,
+      vehicle
+    );
+  }
 }

@@ -159,10 +159,7 @@
             <mat-icon svgIcon="delete-trash"></mat-icon>
             <span>Delete</span>
           </button>
-          <button
-            class="btn btn-warning"
-            (click)="openSaveChangesConfirmDialog(user.userId)"
-          >
+          <button class="btn btn-warning" (click)="updateUser(user.userId)">
             <mat-icon svgIcon="refresh"></mat-icon>
             <span>Update</span>
           </button>

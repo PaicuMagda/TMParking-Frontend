@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
+import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog-vehicle/save-changes-dialog.component';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { UsersService } from 'src/app/services/users.service';
 import { UserStoreService } from 'src/app/services/user-store.service';

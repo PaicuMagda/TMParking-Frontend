@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { VehiclesService } from 'src/app/services/vehicles.service';
-import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
+import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save-changes-dialog-vehicle/save-changes-dialog.component';
 import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -50,19 +50,38 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
-  openSaveChangesConfirmDialog(vehicleId: number) {
-    const vehicleData = this.vehicleForm[vehicleId].value;
+  openSaveChangesConfirmDialog(idVehicle: number, index: number) {
+    const vehicleData = this.vehicleForm[index].value;
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
       position: {
         top: '5%',
       },
-      data: { vehicleData },
     });
+
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'save' || result === 'close') {
-        this.vehicles[vehicleId].isEdit = false;
+      if (result === 'save') {
+        this.vehicleService.updateVehicle(idVehicle, vehicleData).subscribe({
+          next: (resp) => {
+            this.toast.info({
+              detail: 'Info Message',
+              summary: resp.message,
+              duration: 3000,
+            });
+          },
+          error: (err) => {
+            this.toast.error({
+              detail: 'Error Message',
+              summary: err.error.message,
+              duration: 5000,
+            });
+          },
+        });
+        this.vehicles[index].isEdit = false;
+      } else if (result === 'close') {
+        this.vehicles[index].isEdit = false;
+        this.dialogRef.close();
       }
     });
   }
@@ -83,7 +102,6 @@ export class VehiclesComponent implements OnInit {
 
   createVehicleFormGroup(vehicle: Vehicle): FormGroup {
     return this.formBuilder.group({
-      image: [vehicle.imageProfileBase64],
       make: [vehicle.make],
       model: [vehicle.model],
       color: [vehicle.color],

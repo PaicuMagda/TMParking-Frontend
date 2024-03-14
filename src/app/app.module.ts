@@ -24,7 +24,7 @@ import { MyProfileDialogComponent } from './Components/dialogs/my-profile-dialog
 import { AddNewUserDialogComponent } from './Components/dialogs/add-new-user-dialog/add-new-user-dialog.component';
 import { UsersAdminComponent } from './Components/users-admin/users-admin.component';
 import { UserSearchComponent } from './Components/home/search/user-search/user-search.component';
-import { SaveChangesDialogComponent } from './Components/dialogs/confirmation-dialogs/save-changes-dialog/save-changes-dialog.component';
+import { SaveChangesDialogComponent } from './Components/dialogs/confirmation-dialogs/save-changes-dialog-vehicle/save-changes-dialog.component';
 import { VehiclesComponent } from './Components/vehicles/vehicles.component';
 import { ParkingSpaceSearchComponent } from './Components/home/search/parking-space-search/parking-space-search.component';
 import { VehicleSearchComponent } from './Components/home/search/vehicle-search/vehicle-search.component';
