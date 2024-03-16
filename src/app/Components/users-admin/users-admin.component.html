@@ -25,7 +25,7 @@
           </div>
           <div>
             <label>E-mail Address</label>
-            <input type="text" formControlName="emailAddress" />
+            <input type="text" formControlName="email" />
           </div>
           <div class="userCard__div2__address">
             <label>Address</label>
@@ -116,7 +116,7 @@
           </div>
           <div class="userCard__div4__pnc">
             <label>Personal Numerical Code</label>
-            <input type="text" formControlName="personalNumericalCode" />
+            <input type="text" formControlName="pnc" />
           </div>
           <div class="userCard__div4__numbersRegistered">
             <label>Number of Vehicles Registered </label>
@@ -159,7 +159,10 @@
             <mat-icon svgIcon="delete-trash"></mat-icon>
             <span>Delete</span>
           </button>
-          <button class="btn btn-warning" (click)="updateUser(user.userId)">
+          <button
+            class="btn btn-warning"
+            (click)="openSaveChangesConfirmDialog(user.userId, i)"
+          >
             <mat-icon svgIcon="refresh"></mat-icon>
             <span>Update</span>
           </button>

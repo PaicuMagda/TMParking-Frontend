@@ -3,13 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/interfaces/user';
 import { UsersService } from 'src/app/services/users.service';
 import { SaveChangesDialogComponent } from '../dialogs/confirmation-dialogs/save-changes-dialog-vehicle/save-changes-dialog.component';
-import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { Role } from 'src/app/enums/roles';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { DeleteUserAccountConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-user-account-confirmation-dialog/delete-user-account-confirmation-dialog.component';
+import { NgToastService } from 'ng-angular-popup';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-users-admin',
@@ -30,17 +31,19 @@ export class UsersAdminComponent implements OnInit {
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private userStore: UserStoreService
+    private userStore: UserStoreService,
+    private toast: NgToastService
   ) {}
 
   editUser(index: number) {
     const user = this.users[index];
     user.isEdit = !user.isEdit;
+
     const userForm = this.userFormGroup[index];
     userForm.patchValue({
       firstname: user.firstName,
       lastname: user.lastName,
-      emailAddress: user.email,
+      email: user.email,
       address: user.address,
       role: user.role,
       zipCode: user.zipCode,
@@ -48,40 +51,11 @@ export class UsersAdminComponent implements OnInit {
       isActive: user.isActive,
       phone: user.phone,
       dateOfBirth: user.dateOfBirth,
-      numberVehiclesRegistered: user.vehicles,
     });
   }
 
-  updateUser(index: number) {
-    const user = this.users[index];
-    const userForm = this.userFormGroup[index];
-
-    const updatedUser: any = {
-      firstName: userForm.value.firstname,
-      lastName: userForm.value.lastname,
-      email: userForm.value.emailAddress,
-      address: userForm.value.address,
-      role: userForm.value.role,
-      zipCode: userForm.value.zipCode,
-      state: userForm.value.state,
-      isActive: userForm.value.isActive,
-      phone: userForm.value.phone,
-      dateOfBirth: userForm.value.dateOfBirth,
-      vehiclesRegistered: userForm.value.numberVehiclesRegistered,
-    };
-
-    this.usersService.updateUser(index, updatedUser).subscribe(
-      (response) => {
-        console.log('Utilizatorul a fost actualizat cu succes:', response);
-      },
-      (error) => {
-        console.error('Eroare la actualizarea utilizatorului:', error);
-      }
-    );
-  }
-
-  openSaveChangesConfirmDialog(idUser: number) {
-    const userData = this.userFormGroup[idUser].value;
+  openSaveChangesConfirmDialog(idUser: number, index: number) {
+    const userData = this.userFormGroup[index].value;
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
@@ -90,9 +64,29 @@ export class UsersAdminComponent implements OnInit {
       },
       data: { userData },
     });
+
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'save' || result === 'close') {
-        this.users[idUser].isEdit = false;
+      if (result === 'save') {
+        this.usersService.updateUser(idUser, userData).subscribe({
+          next: (resp) => {
+            this.toast.info({
+              detail: 'Info Message',
+              summary: resp.message,
+              duration: 3000,
+            });
+          },
+          error: (err) => {
+            this.toast.error({
+              detail: 'Error Message',
+              summary: err.error.message,
+              duration: 5000,
+            });
+          },
+        });
+        this.users[index].isEdit = false;
+      } else if (result === 'close') {
+        this.users[index].isEdit = false;
+        dialogRef.close();
       }
     });
   }
@@ -115,7 +109,7 @@ export class UsersAdminComponent implements OnInit {
     return this.formBuilder.group({
       firstname: [user.firstName],
       lastname: [user.lastName],
-      emailAddress: [user.email],
+      email: [user.email],
       address: [user.address],
       validDriverLicense: [user.licenseValid],
       role: [user.role],
@@ -124,8 +118,9 @@ export class UsersAdminComponent implements OnInit {
       isActive: [user.isActive],
       phone: [user.phone],
       dateOfBirth: [user.dateOfBirth],
-      personalNumericalCode: [user.pnc],
+      pnc: [user.pnc],
       numberVehiclesRegistered: [[]],
+      imageUrl: [user.imageUrl],
     });
   }
 
@@ -141,12 +136,23 @@ export class UsersAdminComponent implements OnInit {
 
   ngOnInit() {
     this.roles = Object.keys(Role);
-    this.usersService.getAllUsers().subscribe((users: User[]) => {
-      this.users = users;
-      this.users.forEach((user) => {
-        this.userFormGroup.push(this.createFormGroup(user));
+    this.usersService
+      .getAllUsers()
+      .pipe(
+        map((users) => {
+          users.forEach((user) => {
+            user.isEdit = false;
+          });
+          return users;
+        })
+      )
+      .subscribe((users: User[]) => {
+        this.users = users;
+        this.users.forEach((user) => {
+          this.userFormGroup.push(this.createFormGroup(user));
+        });
+        console.log(users);
       });
-    });
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.authenticationService.getRoleFromToken();
       this.role = val || roleFromToken;

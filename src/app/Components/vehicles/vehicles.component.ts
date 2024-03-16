@@ -9,7 +9,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { Subject, map, takeUntil } from 'rxjs';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { NgToastService } from 'ng-angular-popup';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-vehicles',
@@ -30,8 +30,7 @@ export class VehiclesComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private userStore: UserStoreService,
     private displayCardsService: DisplayCardsService,
-    private toast: NgToastService,
-    private dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>
+    private toast: NgToastService
   ) {}
 
   editVehicle(index: number) {
@@ -81,7 +80,7 @@ export class VehiclesComponent implements OnInit {
         this.vehicles[index].isEdit = false;
       } else if (result === 'close') {
         this.vehicles[index].isEdit = false;
-        this.dialogRef.close();
+        dialogRef.close();
       }
     });
   }
@@ -109,6 +108,7 @@ export class VehiclesComponent implements OnInit {
       vehicleIdentificationNumber: [vehicle.vehicleIdentificationNumber],
       vehicleRegistrationCertificate: [vehicle.vehicleRegistrationCertificate],
       ownerName: [vehicle.vehicleOwnerFullName],
+      imageProfileBase64: [vehicle.imageProfileBase64],
     });
   }
 
