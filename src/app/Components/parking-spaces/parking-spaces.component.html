@@ -74,7 +74,7 @@
           (click)="
             !parkingSpaceIsExpired(parkingSpace.endDate) ||
             toggleValue === 'myParkingSpaces'
-              ? openEditParkingSpaceDialog()
+              ? openEditDialog(parkingSpace.parkingSpacesId)
               : openParkingSpaceExpiredConfirmDialog()
           "
         >

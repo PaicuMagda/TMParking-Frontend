@@ -1,0 +1,397 @@
+<div class="add_new_parking">
+  <div class="add_new_parking__form">
+    <form
+      class="add_new_parking__form__details"
+      [formGroup]="addNewParkingSpaceFormGroup"
+    >
+      <div>
+        <div class="add_new_parking__form__details__title">
+          <span>Add New Parking Space</span>
+          <mat-icon
+            svgIcon="icon-close"
+            (click)="closeAddNewParkingSpaceDialog()"
+          ></mat-icon>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            formControlName="name"
+            [(ngModel)]="data.name"
+            required
+          />
+          <mat-error
+            *ngIf="
+              this.addNewParkingSpaceFormGroup.get('name')?.hasError('name')
+            "
+            >Name is required!
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Location *(street and number)</mat-label>
+          <input
+            matInput
+            formControlName="address"
+            required
+            [(ngModel)]="data.address"
+          />
+          <mat-error
+            *ngIf="
+              this.addNewParkingSpaceFormGroup
+                .get('address')
+                ?.hasError('required')
+            "
+            >Address is required!
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <textarea
+            matInput
+            formControlName="descriptionParking"
+            rows="3"
+            placeholder="Description about parking"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="add_new_parking__form__details__parkingSpaces">
+        <mat-form-field appearance="outline">
+          <mat-label>Parking Spaces (number)</mat-label>
+          <input
+            matInput
+            formControlName="availableParkingSpaces"
+            required
+            [(ngModel)]="data.availableParkingSpaces"
+          />
+          <mat-error
+            *ngIf="
+              this.addNewParkingSpaceFormGroup
+                .get('availableParkingSpaces')
+                ?.hasError('required')
+            "
+            >Number spaces is required!
+          </mat-error>
+          <mat-error
+            *ngIf="
+              this.addNewParkingSpaceFormGroup
+                .get('availableParkingSpaces')
+                ?.hasError('maxlength')
+            "
+            >Limit is set to 3 numbers.</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-date-range-input [rangePicker]="picker">
+            <input
+              [(ngModel)]="data.startDate"
+              matStartDate
+              placeholder="Start date"
+              (focus)="picker.open()"
+              formControlName="startDate"
+              required
+            />
+            <input
+              [(ngModel)]="data.endDate"
+              matEndDate
+              placeholder="End date"
+              (focus)="picker.open()"
+              formControlName="endDate"
+              required
+            />
+          </mat-date-range-input>
+          <mat-error
+            *ngIf="
+              this.addNewParkingSpaceFormGroup
+                .get('startDate')
+                ?.hasError('required') &&
+              this.addNewParkingSpaceFormGroup
+                .get('endDate')
+                ?.hasError('required')
+            "
+            >Start date and end date is required !</mat-error
+          >
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+      <div class="upload-file">
+        <input
+          #profileImageInput
+          (change)="onFileSelectedImageProfile($event)"
+          type="file"
+          formControlName="imageFileUpload"
+          placeholder="Upload a significant image for your parking lot"
+        />
+        <div
+          (click)="profileImageInput.click()"
+          class="upload-file__placeholder"
+        >
+          <p *ngIf="!imageProfileFileName">
+            Upload image for parking spaces's profile.
+          </p>
+          <p *ngIf="imageProfileFileName">{{ imageProfileFileName }}</p>
+          <mat-icon svgIcon="plus-solid"></mat-icon>
+        </div>
+
+        <mat-divider></mat-divider>
+        <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
+        <mat-error
+          *ngIf="
+            addNewParkingSpaceFormGroup
+              .get('imageFileUpload')
+              ?.hasError('required')
+          "
+        >
+          If no significant image is uploaded for your parking, a default image
+          will be added.
+        </mat-error>
+      </div>
+      <div class="upload-file">
+        <input
+          (change)="onFileSelectedLeasePermit($event)"
+          #leasePermitInput
+          type="file"
+          formControlName="leasePermit"
+          placeholder="Upload a lease permit."
+        />
+        <div
+          (click)="leasePermitInput.click()"
+          class="upload-file__placeholder"
+        >
+          <p *ngIf="!leasePermitFileName">Upload lease permit.</p>
+          <p *ngIf="leasePermitFileName">{{ leasePermitFileName }}</p>
+          <mat-icon svgIcon="plus-solid"></mat-icon>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-hint>File format: image(.img, .jpg, .jpeg) or .pdf</mat-hint>
+        <mat-error
+          *ngIf="
+            addNewParkingSpaceFormGroup.get('leasePermit')?.hasError('required')
+          "
+        >
+          Lease permit upload is required !
+        </mat-error>
+      </div>
+      <div class="add_new_parking__form__details__buttons">
+        <div class="add_new_parking__form__details__buttons__toggle-group">
+          <label>Underground parking lots*</label>
+          <mat-button-toggle-group
+            [(ngModel)]="data.undergroundParkingLots"
+            formControlName="undergroundParkingLots"
+            #toggleGroupUndergroundLots="matButtonToggleGroup"
+            (change)="
+              changeUndergroundParkingLotsToggleButtonValue(
+                toggleGroupUndergroundLots.value
+              )
+            "
+          >
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="add_new_parking__form__details__buttons__toggle-group">
+          <label>Multistorey car park*</label>
+          <mat-button-toggle-group
+            formControlName="multistoreyCarPark"
+            [(ngModel)]="data.multistoreyCarPark"
+            #toggleGroup="matButtonToggleGroup"
+            (change)="
+              changeMultistoreyCarParkToggleButtonValue(toggleGroup.value)
+            "
+          >
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="add_new_parking__form__details__buttons__toggle-group">
+          <label>Video surveillance area*</label>
+          <mat-button-toggle-group
+            formControlName="isVideoSurveillance"
+            #toggleGroupVideoSurveillance="matButtonToggleGroup"
+            [(ngModel)]="data.isVideoSurveilance"
+            (change)="
+              changeVideoSurveillanceToggleButtonValue(
+                toggleGroupVideoSurveillance.value
+              )
+            "
+          >
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="add_new_parking__form__details__buttons__toggle-group">
+          <label>Paid parking*</label>
+          <mat-button-toggle-group
+            formControlName="paidParking"
+            #toggleGroupPaid="matButtonToggleGroup"
+            [(ngModel)]="data.isFree"
+            (change)="changePaidParkingToggleButtonValue(toggleGroupPaid.value)"
+          >
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+
+      <div class="add_new_parking__form__details__check-box">
+        <label
+          >Choose one or more types of vehicles that can be parked* :</label
+        >
+        <mat-checkbox
+          name="automobile"
+          color="primary"
+          [(ngModel)]="data.isPersonalVehicleAccepted"
+          (change)="(hasPersonalVehicleAccept)"
+          formControlName="isPersonalVehicleAccepted"
+          >Automobil</mat-checkbox
+        >
+        <mat-checkbox
+          color="primary"
+          (change)="(hasCargoVehicleAccept)"
+          [(ngModel)]="data.isCargoVehicleAccepted"
+          formControlName="isCargoVehicleAccepted"
+          name="truck"
+          >Truck</mat-checkbox
+        >
+        <mat-checkbox
+          name="agricultural"
+          color="primary"
+          [(ngModel)]="data.isAgriculturalMachineryAccepted"
+          (change)="(hasAgriculturalMachineryAccept)"
+          formControlName="isAgriculturalMachineryAccepted"
+          >Agricultural machinery</mat-checkbox
+        >
+        <mat-checkbox
+          name="publicTransportationVehicle"
+          color="primary"
+          [(ngModel)]="data.isPublicTransportAccepted"
+          (change)="(hasPublicVehicleAccept)"
+          formControlName="isPublicTransportAccepted"
+          >Public transportation vehicle</mat-checkbox
+        >
+      </div>
+    </form>
+    <div class="add_new_parking__form__create-card">
+      <div class="add_new_parking__form__create-card__card-full">
+        <div class="add_new_parking__form__create-card__card-full__image">
+          <img
+            *ngIf="!data.imageProfile"
+            class="add_new_parking__form__create-card__card-full__image__img"
+            src="./../../../../assets/images/parking-spaces/default-parcare.png"
+          />
+          <img
+            *ngIf="data.imageProfile"
+            [src]="data.imageProfile"
+            class="add_new_parking__form__create-card__card-full__image__img"
+          />
+          <div
+            class="add_new_parking__form__create-card__card-full__image__img__div"
+          >
+            <div
+              *ngIf="data.isVideoSurveilance"
+              class="add_new_parking__form__create-card__card-full__image__img__div__camera"
+            >
+              <img src="../../../../assets/images/camera.png" />
+            </div>
+
+            <div
+              *ngIf="data.paidParking || !data.paidParking"
+              class="add_new_parking__form__create-card__card-full__image__img__div__paid"
+            >
+              <img
+                *ngIf="data.paidParking"
+                src="../../../../assets/images/paid.png"
+              />
+              <img
+                *ngIf="!data.paidParking"
+                src="../../../../assets/images/no-paid.png"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="add_new_parking__form__create-card__card-full__informations"
+        >
+          <div
+            class="add_new_parking__form__create-card__card-full__informations__p"
+          >
+            <p
+              class="add_new_parking__form__create-card__card-full__informations__p__author"
+            >
+              Added by {{ userLoggedFullName }}
+            </p>
+            <p
+              class="add_new_parking__form__create-card__card-full__informations__p__address"
+            >
+              {{ data.name }}
+            </p>
+            <p
+              class="add_new_parking__form__create-card__card-full__informations__p__date"
+            >
+              {{ "DATE :" }}
+              {{ data.startDate | date : "dd-MM-yyyy" }} -
+              {{ data.endDate | date : "dd-MM-yyyy" }}
+            </p>
+          </div>
+          <div
+            class="add_new_parking__form__create-card__card-full__informations__div"
+          >
+            <div>
+              <img
+                *ngIf="data.isPersonalVehicleAccepted"
+                class="add_new_parking__form__create-card__card-full__informations__div__img-car"
+                src="../../../../assets/images/img-auto.png"
+              />
+              <img
+                *ngIf="data.isCargoVehicleAccepted"
+                src="../../../../assets/images/truck-image.png"
+                class="add_new_parking__form__create-card__card-full__informations__div__img-truck"
+              />
+              <img
+                *ngIf="data.isAgriculturalMachineryAccepted"
+                src="../../../../assets/images/tractor.png"
+                class="add_new_parking__form__create-card__card-full__informations__div__img-agr"
+              />
+              <img
+                *ngIf="data.isPublicTransportAccepted"
+                src="../../../../assets/images/bus.jpg"
+                class="add_new_parking__form__create-card__card-full__informations__div__img-bus"
+              />
+            </div>
+
+            <div>
+              <p
+                class="add_new_parking__form__create-card__card-full__informations__div__number"
+              >
+                {{ data.availableParkingSpaces }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="add_new_parking__buttons">
+    <button class="btn btn-warning">Save as Draft</button>
+    <button
+      class="btn add_new_parking__buttons__send"
+      (click)="registerParkingSpace()"
+    >
+      Send
+    </button>
+    <button class="btn btn-danger" (click)="closeAddNewParkingSpaceDialog()">
+      Discard
+    </button>
+  </div>
+</div>

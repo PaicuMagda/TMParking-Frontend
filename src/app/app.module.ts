@@ -49,6 +49,7 @@ import { LeavePageDialogComponent } from './Components/dialogs/confirmation-dial
 import { MatDialogRef } from '@angular/material/dialog';
 import { DeleteParkingSpacesConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog.component';
 import { DeleteUserAccountConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-user-account-confirmation-dialog/delete-user-account-confirmation-dialog.component';
+import { ParkingSpacesDialogEditComponent } from './Components/dialogs/parking-spaces-dialog-edit/parking-spaces-dialog-edit.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { DeleteUserAccountConfirmationDialogComponent } from './Components/dialo
     LeavePageDialogComponent,
     DeleteParkingSpacesConfirmationDialogComponent,
     DeleteUserAccountConfirmationDialogComponent,
+    ParkingSpacesDialogEditComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ParkingSpace } from 'src/app/interfaces/parking-space';
 import { DeleteParkingSpacesConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog.component';
+import { ParkingSpacesDialogEditComponent } from '../dialogs/parking-spaces-dialog-edit/parking-spaces-dialog-edit.component';
 
 @Component({
   selector: 'app-parking-spaces',
@@ -49,11 +50,19 @@ export class ParkingSpacesComponent implements OnInit {
     });
   }
 
-  openEditParkingSpaceDialog() {
-    this.dialog.open(AddNewParkingSpaceDialogComponent, {
-      width: '100%',
-      height: '85%',
-    });
+  openEditDialog(idParkingSpace: number) {
+    this.parkingSpacesService
+      .getParkingSpacesById(idParkingSpace)
+      .subscribe((values) => {
+        this.dialog.open(ParkingSpacesDialogEditComponent, {
+          width: '100%',
+          height: '85%',
+          position: {
+            top: '5%',
+          },
+          data: values,
+        });
+      });
   }
 
   openParkingSpaceExpiredConfirmDialog() {
