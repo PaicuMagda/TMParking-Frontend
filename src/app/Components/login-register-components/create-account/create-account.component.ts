@@ -51,7 +51,6 @@ export class CreateAccountComponent {
           summary: resp.message,
           duration: 5000,
         });
-        console.log(resp);
       },
       error: (err) => {
         this.toast.error({

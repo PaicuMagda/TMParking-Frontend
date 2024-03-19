@@ -151,7 +151,6 @@ export class UsersAdminComponent implements OnInit {
         this.users.forEach((user) => {
           this.userFormGroup.push(this.createFormGroup(user));
         });
-        console.log(users);
       });
     this.userStore.getRoleFromStore().subscribe((val) => {
       const roleFromToken = this.authenticationService.getRoleFromToken();

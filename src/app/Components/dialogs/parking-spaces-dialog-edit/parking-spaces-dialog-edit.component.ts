@@ -140,9 +140,13 @@ export class ParkingSpacesDialogEditComponent {
       descriptionParking:
         this.addNewParkingSpaceFormGroup.get('descriptionParking')?.value,
       isDraft: false,
-      paymentPerHour: 10,
-      paymentPerDay: 80,
-      paymentForSubscription: 500,
+      paymentPerHour:
+        this.addNewParkingSpaceFormGroup.get('paymentPerHour')?.value,
+      paymentPerDay:
+        this.addNewParkingSpaceFormGroup.get('paymentPerDay')?.value,
+      paymentForSubscription: this.addNewParkingSpaceFormGroup.get(
+        'paymentForSubscription'
+      )?.value,
       isVerifiedByAdmin: false,
       somethingIsWrong: false,
       parkingSpacesOwnerId: this.parkingSpacesOwnerId,
@@ -197,9 +201,11 @@ export class ParkingSpacesDialogEditComponent {
       ],
       imageFileUpload: ['', Validators.required],
       leasePermit: ['', Validators.required],
+      paymentPerDay: ['', Validators.required],
+      paymentPerHour: ['', Validators.required],
+      paymentForSubscription: ['', Validators.required],
     });
     console.log(this.data);
-
     this.userStore.getFullNameFromStore().subscribe((val) => {
       let fullNameFromToken = this.auth.getFullNameFromToken();
       this.userLoggedFullName = fullNameFromToken || val;

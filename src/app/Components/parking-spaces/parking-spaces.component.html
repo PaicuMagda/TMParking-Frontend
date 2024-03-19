@@ -39,7 +39,18 @@
 
     <div class="parking-spaces__card__image">
       <img
+        *ngIf="parkingSpace.imageProfile"
         [src]="parkingSpace.imageProfile"
+        (click)="
+          !parkingSpaceIsExpired(parkingSpace.endDate) ||
+          toggleValue === 'myParkingSpaces'
+            ? goToParkingSpaceDetails(parkingSpace.parkingSpacesId)
+            : openParkingSpaceExpiredConfirmDialog()
+        "
+      />
+      <img
+        *ngIf="!parkingSpace.imageProfile"
+        src="./../../../assets/images/parking-spaces/default-parcare.png"
         (click)="
           !parkingSpaceIsExpired(parkingSpace.endDate) ||
           toggleValue === 'myParkingSpaces'

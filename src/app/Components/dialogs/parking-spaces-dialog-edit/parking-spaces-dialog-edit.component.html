@@ -146,16 +146,6 @@
 
         <mat-divider></mat-divider>
         <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
-        <mat-error
-          *ngIf="
-            addNewParkingSpaceFormGroup
-              .get('imageFileUpload')
-              ?.hasError('required')
-          "
-        >
-          If no significant image is uploaded for your parking, a default image
-          will be added.
-        </mat-error>
       </div>
       <div class="upload-file">
         <input
@@ -175,13 +165,6 @@
         </div>
         <mat-divider></mat-divider>
         <mat-hint>File format: image(.img, .jpg, .jpeg) or .pdf</mat-hint>
-        <mat-error
-          *ngIf="
-            addNewParkingSpaceFormGroup.get('leasePermit')?.hasError('required')
-          "
-        >
-          Lease permit upload is required !
-        </mat-error>
       </div>
       <div class="add_new_parking__form__details__buttons">
         <div class="add_new_parking__form__details__buttons__toggle-group">
@@ -235,12 +218,79 @@
           <mat-button-toggle-group
             formControlName="paidParking"
             #toggleGroupPaid="matButtonToggleGroup"
-            [(ngModel)]="data.isFree"
+            [(ngModel)]="data.paidParking"
             (change)="changePaidParkingToggleButtonValue(toggleGroupPaid.value)"
           >
             <mat-button-toggle [value]="true">Yes</mat-button-toggle>
             <mat-button-toggle [value]="false">No</mat-button-toggle>
           </mat-button-toggle-group>
+        </div>
+
+        <div
+          *ngIf="data.paidParking"
+          class="add_new_parking__form__details__buttons__paid-parking-options"
+        >
+          <div class="row">
+            <label class="col-md-6">Payment per hour</label>
+            <input
+              class="col-md-6"
+              type="text"
+              placeholder="Lei"
+              formControlName="paymentPerHour"
+              [(ngModel)]="data.paymentPerHour"
+            />
+            <mat-error
+              *ngIf="
+                addNewParkingSpaceFormGroup
+                  .get('paymentPerHour')
+                  ?.hasError('required') &&
+                addNewParkingSpaceFormGroup.get('paymentPerHour')?.touched
+              "
+            >
+              This field is required!
+            </mat-error>
+          </div>
+          <div class="row">
+            <label class="col-md-6">Payment per day</label>
+            <input
+              class="col-md-6"
+              type="text"
+              placeholder="Lei"
+              formControlName="paymentPerDay"
+              [(ngModel)]="data.paymentPerDay"
+            />
+            <mat-error
+              *ngIf="
+                addNewParkingSpaceFormGroup
+                  .get('paymentPerDay')
+                  ?.hasError('required') &&
+                addNewParkingSpaceFormGroup.get('paymentPerDay')?.touched
+              "
+            >
+              This field is required!
+            </mat-error>
+          </div>
+          <div class="row">
+            <label class="col-md-6">Payment for subscription</label>
+            <input
+              class="col-md-6"
+              type="text"
+              placeholder="Lei"
+              formControlName="paymentForSubscription"
+              [(ngModel)]="data.paymentForSubscription"
+            />
+            <mat-error
+              *ngIf="
+                addNewParkingSpaceFormGroup
+                  .get('paymentForSubscription')
+                  ?.hasError('required') &&
+                addNewParkingSpaceFormGroup.get('paymentForSubscription')
+                  ?.touched
+              "
+            >
+              This field is required!
+            </mat-error>
+          </div>
         </div>
       </div>
 
@@ -291,8 +341,13 @@
             src="./../../../../assets/images/parking-spaces/default-parcare.png"
           />
           <img
-            *ngIf="data.imageProfile"
+            *ngIf="data.imageProfile && !imageProfile"
             [src]="data.imageProfile"
+            class="add_new_parking__form__create-card__card-full__image__img"
+          />
+          <img
+            *ngIf="imageProfile"
+            [src]="imageProfile"
             class="add_new_parking__form__create-card__card-full__image__img"
           />
           <div
@@ -383,12 +438,11 @@
     </div>
   </div>
   <div class="add_new_parking__buttons">
-    <button class="btn btn-warning">Save as Draft</button>
     <button
-      class="btn add_new_parking__buttons__send"
+      class="btn add_new_parking btn-warning"
       (click)="registerParkingSpace()"
     >
-      Send
+      Update
     </button>
     <button class="btn btn-danger" (click)="closeAddNewParkingSpaceDialog()">
       Discard
