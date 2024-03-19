@@ -44,4 +44,14 @@ export class ParkingPlacesService {
   deleteParkingSpacesById(parkingSpacesId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}ParkingSpaces/${parkingSpacesId}`);
   }
+
+  updateParkingSpaces(
+    idParkingSpaces: number,
+    parkingSpaces: any
+  ): Observable<any> {
+    return this.http.put(
+      `${this.baseUrl}ParkingSpaces/update-parking-spaces/${idParkingSpaces}`,
+      parkingSpaces
+    );
+  }
 }

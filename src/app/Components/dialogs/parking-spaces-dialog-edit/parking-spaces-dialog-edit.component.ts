@@ -33,7 +33,7 @@ export class ParkingSpacesDialogEditComponent {
   imageUrl: string | ArrayBuffer | null = null;
   userLoggedFullName: string;
   addNewParkingSpaceFormGroup: FormGroup;
-  imageProfile: string;
+  imageProfile: string = this.data.imageProfile;
   leasePermitFile: string;
   imageProfileFileName: string | undefined;
   leasePermitFileName: string | undefined;
@@ -118,61 +118,53 @@ export class ParkingSpacesDialogEditComponent {
       });
   }
 
-  registerParkingSpace() {
+  updateParkingSpaces(parkingSpacesId: number) {
     const formData = {
       name: this.addNewParkingSpaceFormGroup.get('name')?.value,
       address: this.addNewParkingSpaceFormGroup.get('address')?.value,
+      description:
+        this.addNewParkingSpaceFormGroup.get('descriptionParking')?.value,
       availableParkingSpaces: this.addNewParkingSpaceFormGroup.get(
         'availableParkingSpaces'
       )?.value,
-      isCargoVehicleAccepted: this.data.isCargoVehicleAccepted,
-      isPersonalVehicleAccepted: this.data.isPersonalVehicleAccepted,
-      isPublicTransportAccepted: this.data.isCargoVehicleAccepted,
-      isAgriculturalMachineryAccepted:
-        this.data.isAgriculturalMachineryAccepted,
-      isVideoSurveilance: this.data.isVideoSurveillance,
-      imageProfile: this.imageProfile,
-      leasePermit: this.leasePermitFile,
       startDate: this.addNewParkingSpaceFormGroup.get('startDate')?.value,
       endDate: this.addNewParkingSpaceFormGroup.get('endDate')?.value,
-      addedDate: new Date(),
-      isFree: this.addNewParkingSpaceFormGroup.get('videoSurveillance')?.value,
-      descriptionParking:
-        this.addNewParkingSpaceFormGroup.get('descriptionParking')?.value,
-      isDraft: false,
-      paymentPerHour:
-        this.addNewParkingSpaceFormGroup.get('paymentPerHour')?.value,
-      paymentPerDay:
-        this.addNewParkingSpaceFormGroup.get('paymentPerDay')?.value,
-      paymentForSubscription: this.addNewParkingSpaceFormGroup.get(
-        'paymentForSubscription'
+      undergroundParkingLots: this.addNewParkingSpaceFormGroup.get(
+        'undergroundParkingLots'
       )?.value,
-      isVerifiedByAdmin: false,
-      somethingIsWrong: false,
-      parkingSpacesOwnerId: this.parkingSpacesOwnerId,
-      multistoreyCarPark: this.data.multistoreyCarPark,
-      undergroundParkingLots: this.data.undergroundParkingLots,
+      multistoreyCarPark:
+        this.addNewParkingSpaceFormGroup.get('multistoreyCarPark')?.value,
+      paidParking: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
+      isVideoSurveilance: this.addNewParkingSpaceFormGroup.get(
+        'isVideoSurveillance'
+      )?.value,
+      paymentPerDay: this.data.paymentPerDay,
+      paymentPerHour: this.data.paymentPerHour,
+      paymentForSubscription: this.data.paymentForSubscription,
+      imageProfile: this.imageProfile,
     };
 
-    this.parkingSpacesService.registerParkingSpaces(formData).subscribe({
-      next: (resp) => {
-        this.toast.info({
-          detail: 'Info Message',
-          summary: resp.message,
-          duration: 3000,
-        });
-        setTimeout(() => {
-          this.dialogRef.close();
-        }, 1000);
-      },
-      error: (err) => {
-        this.toast.error({
-          detail: 'Error Message',
-          summary: err.error.message,
-          duration: 5000,
-        });
-      },
-    });
+    this.parkingSpacesService
+      .updateParkingSpaces(parkingSpacesId, formData)
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 1000);
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
   }
 
   ngOnInit() {
