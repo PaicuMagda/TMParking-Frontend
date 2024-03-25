@@ -22,6 +22,8 @@ export class VehiclesComponent implements OnInit {
   vehicleForm: FormGroup[] = [];
   role: string = '';
   idUserLogged: string = '';
+  imageProfileFileName: string | undefined;
+  imageProfile: string;
 
   constructor(
     private vehicleService: VehiclesService,
@@ -46,7 +48,21 @@ export class VehiclesComponent implements OnInit {
       vehicleIdentificationNumber: vehicle.vehicleIdentificationNumber,
       vehicleRegistrationCertificate: vehicle.vehicleRegistrationCertificate,
       ownerName: vehicle.vehicleOwnerFullName,
+      imageProfile: this.imageProfile,
     });
+  }
+
+  onFileSelectedImageProfile(event: any, index: number) {
+    const vehicle = this.vehicles[index];
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      this.imageProfile = base64String;
+      vehicle.imageProfileBase64 = base64String;
+    };
+    reader.readAsDataURL(file);
   }
 
   openSaveChangesConfirmDialog(idVehicle: number, index: number) {

@@ -42,7 +42,7 @@
             />
           </div>
         </div>
-        <div class="col-sm-3 vehicle__card__div3 row">
+        <div class="col-sm-2 vehicle__card__div3 row">
           <div class="row">
             <label class="col">Color</label>
             <span *ngIf="!vehicle.isEdit" class="col">{{ vehicle.color }}</span>
@@ -64,7 +64,7 @@
             />
           </div>
         </div>
-        <div class="col-sm-4 vehicle__card__div4">
+        <div class="col-sm-3 vehicle__card__div4">
           <div class="row">
             <label class="col">Owner</label>
             <span class="col">{{ vehicle.vehicleOwnerFullName }}</span>
@@ -82,7 +82,26 @@
             />
           </div>
         </div>
-        <div class="col-sm-2 vehicle__card__div5">
+        <div class="col-sm-3 vehicle__card__div5">
+          <div>
+            <input
+              #profileImageInput
+              (change)="onFileSelectedImageProfile($event, i)"
+              type="file"
+              formControlName="imageProfileBase64"
+              placeholder="Upload a significant image for your parking lot"
+            />
+            <div (click)="profileImageInput.click()" class="row">
+              <label class="col">Upload new image profile</label>
+              <mat-icon class="col" svgIcon="plus-solid"></mat-icon>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col">Vehicle registration certificate </label>
+            <mat-icon class="col" svgIcon="show-password"></mat-icon>
+          </div>
+        </div>
+        <div class="col-sm-1 vehicle__card__div6">
           <button
             class="btn btn-danger"
             (click)="openDeleteConfirmDialog(vehicle.vehicleId)"
@@ -93,7 +112,7 @@
           <button
             *ngIf="!vehicle.isEdit"
             (click)="editVehicle(i)"
-            class="vehicle__card__div5__edit-button"
+            class="vehicle__card__div6__edit-button"
           >
             <mat-icon svgIcon="edit"></mat-icon>
             <span>Edit</span>

@@ -124,6 +124,11 @@ label {
 
     &__div5 {
       @include flex(column);
+      margin-left: 1%;
+    }
+
+    &__div6 {
+      @include flex(column);
       justify-content: center;
       align-items: center;
       gap: 5%;
@@ -134,7 +139,7 @@ label {
 
       button {
         @include flex(row, center, 8%);
-        width: 45%;
+        width: 100%;
         align-items: center;
       }
     }
@@ -144,4 +149,8 @@ label {
 .mat-badge-content {
   background: red;
   color: white;
+}
+
+input[type="file"] {
+  display: none;
 }
