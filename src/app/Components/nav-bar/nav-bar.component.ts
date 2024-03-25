@@ -81,5 +81,6 @@ export class NavBarComponent implements OnInit {
     this.userService.getMyAccount(this.userId).subscribe((values) => {
       this.userLogged = values;
     });
+    console.log('User Id from navbar:' + this.userId);
   }
 }

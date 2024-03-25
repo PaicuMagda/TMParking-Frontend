@@ -23,7 +23,7 @@
   <div class="display-cards__admin">
     <div
       [ngClass]="
-        role === 'Administrator'
+        isLogin == true
           ? 'display-cards__admin__buttons'
           : 'display-cards__admin__buttons-user'
       "
