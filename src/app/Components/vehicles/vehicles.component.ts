@@ -24,6 +24,7 @@ export class VehiclesComponent implements OnInit {
   idUserLogged: string = '';
   imageProfileFileName: string | undefined;
   imageProfile: string;
+  showPdfViewer: boolean = false;
 
   constructor(
     private vehicleService: VehiclesService,
@@ -34,6 +35,11 @@ export class VehiclesComponent implements OnInit {
     private displayCardsService: DisplayCardsService,
     private toast: NgToastService
   ) {}
+
+  showPdf(index: number) {
+    const vehicle = this.vehicles[index];
+    vehicle.showPdfViewer = !vehicle.showPdfViewer;
+  }
 
   editVehicle(index: number) {
     const vehicle = this.vehicles[index];
@@ -124,7 +130,7 @@ export class VehiclesComponent implements OnInit {
       vehicleIdentificationNumber: [vehicle.vehicleIdentificationNumber],
       vehicleRegistrationCertificate: [vehicle.vehicleRegistrationCertificate],
       ownerName: [vehicle.vehicleOwnerFullName],
-      imageProfileBase64: [vehicle.imageProfileBase64],
+      imageProfileBase64: [],
     });
   }
 
@@ -152,6 +158,7 @@ export class VehiclesComponent implements OnInit {
                     vehicle.vehicleOwner.firstName +
                     ' ' +
                     vehicle.vehicleOwner.lastName;
+                  vehicle.showPdfViewer = false;
                 });
                 return vehicles;
               })

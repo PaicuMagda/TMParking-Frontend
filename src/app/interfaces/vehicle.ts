@@ -1,6 +1,7 @@
 import { User } from './user';
 
 export interface Vehicle {
+  showPdfViewer?: boolean;
   vehicleId?: number;
   imageProfileBase64?: string;
   make?: string;

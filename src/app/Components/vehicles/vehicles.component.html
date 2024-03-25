@@ -1,131 +1,160 @@
 <div class="vehicle">
   <div *ngFor="let vehicle of vehicles; let i = index">
     <form [formGroup]="vehicleForm[i]">
-      <div class="vehicle__card">
-        <span
-          [matBadge]="
-            !vehicle.isVerifiedByAdmin && role === 'Administrator' ? 'N' : null
-          "
-          matBadgePosition="after"
-          matBadgeColor="accent"
-          matBadgeSize="large"
-        ></span>
-        <span
-          class="vehicle__card__badge"
-          [matBadge]="vehicle.somethingIsWrong && role === 'User' ? '!' : null"
-          matBadgePosition="before"
-          matBadgeColor="accent"
-          matBadgeSize="large"
-        ></span>
-        <div class="col-sm-1 vehicle__card__div1">
-          <img [src]="vehicle.imageProfileBase64" />
-        </div>
-        <div class="col-sm-2 vehicle__card__div2 row">
-          <div class="row">
-            <label class="col">Make</label>
-            <span *ngIf="!vehicle.isEdit" class="col">{{ vehicle.make }}</span>
-            <input
-              *ngIf="vehicle.isEdit"
-              formControlName="make"
-              type="text"
-              class="col"
-            />
+      <div class="form">
+        <div class="vehicle__card">
+          <span
+            [matBadge]="
+              !vehicle.isVerifiedByAdmin && role === 'Administrator'
+                ? 'N'
+                : null
+            "
+            matBadgePosition="after"
+            matBadgeColor="accent"
+            matBadgeSize="large"
+          ></span>
+          <span
+            class="vehicle__card__badge"
+            [matBadge]="
+              vehicle.somethingIsWrong && role === 'User' ? '!' : null
+            "
+            matBadgePosition="before"
+            matBadgeColor="accent"
+            matBadgeSize="large"
+          ></span>
+          <div class="col-sm-1 vehicle__card__div1">
+            <img [src]="vehicle.imageProfileBase64" />
           </div>
-          <div class="row">
-            <label class="col">Model</label>
-            <span *ngIf="!vehicle.isEdit" class="col">{{ vehicle.model }}</span>
-            <input
-              *ngIf="vehicle.isEdit"
-              type="text"
-              class="col"
-              formControlName="model"
-            />
-          </div>
-        </div>
-        <div class="col-sm-2 vehicle__card__div3 row">
-          <div class="row">
-            <label class="col">Color</label>
-            <span *ngIf="!vehicle.isEdit" class="col">{{ vehicle.color }}</span>
-            <input
-              *ngIf="vehicle.isEdit"
-              formControlName="color"
-              type="text"
-              class="col"
-            />
-          </div>
-          <div class="row">
-            <label class="col">Year</label>
-            <span class="col" *ngIf="!vehicle.isEdit">{{ vehicle.year }}</span>
-            <input
-              class="col"
-              *ngIf="vehicle.isEdit"
-              formControlName="year"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="col-sm-3 vehicle__card__div4">
-          <div class="row">
-            <label class="col">Owner</label>
-            <span class="col">{{ vehicle.vehicleOwnerFullName }}</span>
-          </div>
-          <div class="row">
-            <label class="col"> Vehicle Identification Number </label>
-            <span class="col" *ngIf="!vehicle.isEdit">
-              {{ vehicle.vehicleIdentificationNumber }}</span
-            >
-            <input
-              class="col"
-              *ngIf="vehicle.isEdit"
-              formControlName="vehicleIdentificationNumber"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="col-sm-3 vehicle__card__div5">
-          <div>
-            <input
-              #profileImageInput
-              (change)="onFileSelectedImageProfile($event, i)"
-              type="file"
-              formControlName="imageProfileBase64"
-              placeholder="Upload a significant image for your parking lot"
-            />
-            <div (click)="profileImageInput.click()" class="row">
-              <label class="col">Upload new image profile</label>
-              <mat-icon class="col" svgIcon="plus-solid"></mat-icon>
+          <div class="col-sm-2 vehicle__card__div2 row">
+            <div class="row">
+              <label class="col">Make</label>
+              <span *ngIf="!vehicle.isEdit" class="col">{{
+                vehicle.make
+              }}</span>
+              <input
+                *ngIf="vehicle.isEdit"
+                formControlName="make"
+                type="text"
+                class="col"
+              />
+            </div>
+            <div class="row">
+              <label class="col">Model</label>
+              <span *ngIf="!vehicle.isEdit" class="col">{{
+                vehicle.model
+              }}</span>
+              <input
+                *ngIf="vehicle.isEdit"
+                type="text"
+                class="col"
+                formControlName="model"
+              />
             </div>
           </div>
-          <div class="row">
-            <label class="col">Vehicle registration certificate </label>
-            <mat-icon class="col" svgIcon="show-password"></mat-icon>
+          <div class="col-sm-2 vehicle__card__div3 row">
+            <div class="row">
+              <label class="col">Color</label>
+              <span *ngIf="!vehicle.isEdit" class="col">{{
+                vehicle.color
+              }}</span>
+              <input
+                *ngIf="vehicle.isEdit"
+                formControlName="color"
+                type="text"
+                class="col"
+              />
+            </div>
+            <div class="row">
+              <label class="col">Year</label>
+              <span class="col" *ngIf="!vehicle.isEdit">{{
+                vehicle.year
+              }}</span>
+              <input
+                class="col"
+                *ngIf="vehicle.isEdit"
+                formControlName="year"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="col-sm-3 vehicle__card__div4">
+            <div class="row">
+              <label class="col">Owner</label>
+              <span class="col">{{ vehicle.vehicleOwnerFullName }}</span>
+            </div>
+            <div class="row">
+              <label class="col"> Vehicle Identification Number </label>
+              <span class="col" *ngIf="!vehicle.isEdit">
+                {{ vehicle.vehicleIdentificationNumber }}</span
+              >
+              <input
+                class="col"
+                *ngIf="vehicle.isEdit"
+                formControlName="vehicleIdentificationNumber"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="col-sm-3 vehicle__card__div5">
+            <div>
+              <input
+                #profileImageInput
+                (change)="onFileSelectedImageProfile($event, i)"
+                type="file"
+                formControlName="imageProfileBase64"
+                placeholder="Upload a significant image for your parking lot"
+              />
+              <div (click)="profileImageInput.click()" class="row">
+                <label class="col">Upload new image profile</label>
+                <mat-icon class="col" svgIcon="plus-solid"></mat-icon>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col">Vehicle registration certificate </label>
+              <mat-icon
+                class="col"
+                [svgIcon]="
+                  vehicle.showPdfViewer ? 'show-password' : 'hide password'
+                "
+                (click)="showPdf(i)"
+              ></mat-icon>
+            </div>
+          </div>
+          <div class="col-sm-1 vehicle__card__div6">
+            <button
+              class="btn btn-danger"
+              (click)="openDeleteConfirmDialog(vehicle.vehicleId)"
+            >
+              <mat-icon svgIcon="delete-trash"></mat-icon>
+              <span>Delete</span>
+            </button>
+            <button
+              *ngIf="!vehicle.isEdit"
+              (click)="editVehicle(i)"
+              class="vehicle__card__div6__edit-button"
+            >
+              <mat-icon svgIcon="edit"></mat-icon>
+              <span>Edit</span>
+            </button>
+
+            <button
+              *ngIf="vehicle.isEdit"
+              class="btn btn-warning"
+              (click)="openSaveChangesConfirmDialog(vehicle.vehicleId, i)"
+            >
+              <mat-icon svgIcon="refresh"></mat-icon>
+              <span>Update</span>
+            </button>
           </div>
         </div>
-        <div class="col-sm-1 vehicle__card__div6">
-          <button
-            class="btn btn-danger"
-            (click)="openDeleteConfirmDialog(vehicle.vehicleId)"
-          >
-            <mat-icon svgIcon="delete-trash"></mat-icon>
-            <span>Delete</span>
-          </button>
-          <button
-            *ngIf="!vehicle.isEdit"
-            (click)="editVehicle(i)"
-            class="vehicle__card__div6__edit-button"
-          >
-            <mat-icon svgIcon="edit"></mat-icon>
-            <span>Edit</span>
-          </button>
-
-          <button
-            *ngIf="vehicle.isEdit"
-            class="btn btn-warning"
-            (click)="openSaveChangesConfirmDialog(vehicle.vehicleId, i)"
-          >
-            <mat-icon svgIcon="refresh"></mat-icon>
-            <span>Update</span>
-          </button>
+        <div>
+          <pdf-viewer
+            *ngIf="vehicle.showPdfViewer"
+            [src]="vehicle.vehicleRegistrationCertificateBase64"
+            [render-text]="true"
+            [original-size]="false"
+            style="width: 800px; height: 600px"
+          ></pdf-viewer>
         </div>
       </div>
     </form>

@@ -147,6 +147,7 @@ export class ParkingSpacesDialogEditComponent {
       paymentPerHour: this.data.paymentPerHour,
       paymentForSubscription: this.data.paymentForSubscription,
       imageProfile: this.imageProfile,
+      leasePermit: this.leasePermitFile,
     };
 
     this.parkingSpacesService
