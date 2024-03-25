@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [],
@@ -54,6 +55,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatTooltipModule,
     MatBadgeModule,
     MatDialogModule,
+    PdfViewerModule,
   ],
 })
 export class MaterialModule {}

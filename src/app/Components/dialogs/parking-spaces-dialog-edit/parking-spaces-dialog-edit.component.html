@@ -147,6 +147,29 @@
         <mat-divider></mat-divider>
         <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
       </div>
+
+      <div (click)="showPdf()" class="add_new_parking__form__details__pdf">
+        <p
+          *ngIf="!showPdfViewer"
+          class="add_new_parking__form__details__pdf__open"
+        >
+          Click here to see lease permit
+        </p>
+        <p
+          *ngIf="showPdfViewer"
+          class="add_new_parking__form__details__pdf__close"
+        >
+          Click here to close lease permit
+        </p>
+        <pdf-viewer
+          *ngIf="showPdfViewer"
+          [src]="data.leasePermit"
+          [render-text]="true"
+          [original-size]="false"
+          style="width: 600px; height: 900px"
+        ></pdf-viewer>
+      </div>
+
       <div class="upload-file">
         <input
           (change)="onFileSelectedLeasePermit($event)"
@@ -156,6 +179,7 @@
           placeholder="Upload a lease permit."
         />
         <div
+          class=""
           (click)="leasePermitInput.click()"
           class="upload-file__placeholder"
         >
@@ -166,6 +190,7 @@
         <mat-divider></mat-divider>
         <mat-hint>File format: image(.img, .jpg, .jpeg) or .pdf</mat-hint>
       </div>
+
       <div class="add_new_parking__form__details__buttons">
         <div class="add_new_parking__form__details__buttons__toggle-group">
           <label>Underground parking lots*</label>

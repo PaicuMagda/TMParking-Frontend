@@ -38,6 +38,7 @@ export class ParkingSpacesDialogEditComponent {
   imageProfileFileName: string | undefined;
   leasePermitFileName: string | undefined;
   parkingSpacesOwnerId: string;
+  showPdfViewer: boolean = false;
 
   changeVideoSurveillanceToggleButtonValue(event: boolean) {
     this.data.isVideoSurveilance = event;
@@ -73,6 +74,10 @@ export class ParkingSpacesDialogEditComponent {
 
   hasPublicVehicleAccept() {
     this.data.isPublicTransportAccepted = !this.data.isPublicTransportAccepted;
+  }
+
+  showPdf() {
+    this.showPdfViewer = !this.showPdfViewer;
   }
 
   onFileSelectedImageProfile(event: any) {
