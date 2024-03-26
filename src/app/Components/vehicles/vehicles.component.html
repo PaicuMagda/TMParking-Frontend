@@ -98,10 +98,10 @@
           <div class="col-sm-3 vehicle__card__div5">
             <div>
               <input
+                formControlName="imageProfileBase64"
                 #profileImageInput
                 (change)="onFileSelectedImageProfile($event, i)"
                 type="file"
-                formControlName="imageProfileBase64"
                 placeholder="Upload a significant image for your parking lot"
               />
               <div (click)="profileImageInput.click()" class="row">
@@ -111,13 +111,27 @@
             </div>
             <div class="row">
               <label class="col">Vehicle registration certificate </label>
-              <mat-icon
-                class="col"
-                [svgIcon]="
-                  vehicle.showPdfViewer ? 'show-password' : 'hide password'
-                "
-                (click)="showPdf(i)"
-              ></mat-icon>
+              <div class="col vehicle-registration">
+                <input
+                  formControlName="vehicleRegistrationCertificateBase64"
+                  #certificateInput
+                  (change)="
+                    onFileSelectedVehicleRegistrationCertificate($event, i)
+                  "
+                  type="file"
+                  placeholder="Upload a significant image for your parking lot"
+                />
+                <mat-icon
+                  [svgIcon]="
+                    vehicle.showPdfViewer ? 'show-password' : 'hide password'
+                  "
+                  (click)="showPdf(i)"
+                ></mat-icon>
+                <mat-icon
+                  svgIcon="plus-solid"
+                  (click)="certificateInput.click()"
+                ></mat-icon>
+              </div>
             </div>
           </div>
           <div class="col-sm-1 vehicle__card__div6">

@@ -50,7 +50,7 @@ export class AddNewVehicleDialogComponent {
       year: ['', Validators.required],
       owner: ['', Validators.required],
       vin: ['', Validators.required],
-      licensePlate: ['', Validators.required],
+      vehicleRegistrationCertificate: ['', Validators.required],
     });
   }
 

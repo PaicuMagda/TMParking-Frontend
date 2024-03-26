@@ -24,6 +24,7 @@ export class VehiclesComponent implements OnInit {
   idUserLogged: string = '';
   imageProfileFileName: string | undefined;
   imageProfile: string;
+  vehicleRegistrationCertificate: string;
   showPdfViewer: boolean = false;
 
   constructor(
@@ -52,9 +53,7 @@ export class VehiclesComponent implements OnInit {
       color: vehicle.color,
       year: vehicle.year,
       vehicleIdentificationNumber: vehicle.vehicleIdentificationNumber,
-      vehicleRegistrationCertificate: vehicle.vehicleRegistrationCertificate,
       ownerName: vehicle.vehicleOwnerFullName,
-      imageProfile: this.imageProfile,
     });
   }
 
@@ -62,11 +61,22 @@ export class VehiclesComponent implements OnInit {
     const vehicle = this.vehicles[index];
     const file: File = event.target.files[0];
     const reader = new FileReader();
-
     reader.onload = () => {
       const base64String = reader.result as string;
       this.imageProfile = base64String;
       vehicle.imageProfileBase64 = base64String;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  onFileSelectedVehicleRegistrationCertificate(event: any, index: number) {
+    const vehicle = this.vehicles[index];
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      vehicle.vehicleRegistrationCertificate = base64String;
     };
     reader.readAsDataURL(file);
   }
@@ -90,6 +100,7 @@ export class VehiclesComponent implements OnInit {
               summary: resp.message,
               duration: 3000,
             });
+            console.log(vehicleData);
           },
           error: (err) => {
             this.toast.error({
@@ -128,9 +139,9 @@ export class VehiclesComponent implements OnInit {
       color: [vehicle.color],
       year: [vehicle.year],
       vehicleIdentificationNumber: [vehicle.vehicleIdentificationNumber],
-      vehicleRegistrationCertificate: [vehicle.vehicleRegistrationCertificate],
+      vehicleRegistrationCertificateBase64: [''],
       ownerName: [vehicle.vehicleOwnerFullName],
-      imageProfileBase64: [],
+      imageProfileBase64: [''],
     });
   }
 

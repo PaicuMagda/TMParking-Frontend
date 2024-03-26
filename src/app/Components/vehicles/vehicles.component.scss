@@ -160,3 +160,11 @@ input[type="file"] {
   align-items: center;
   gap: 2vh;
 }
+
+.vehicle-registration {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 26%;
+}

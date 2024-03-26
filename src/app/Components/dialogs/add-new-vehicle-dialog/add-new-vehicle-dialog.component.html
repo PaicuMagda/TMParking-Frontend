@@ -94,7 +94,7 @@
               accept="application/pdf"
               type="file"
               (change)="onFileSelectedCertificate($event)"
-              formControlName="licensePlate"
+              formControlName="vehicleRegistrationCertificate"
             />
             <div (click)="certificateInput.click()" class="upload-file">
               <p *ngIf="!certificateFileName">
@@ -107,7 +107,9 @@
             <mat-hint>File format: .pdf</mat-hint>
             <mat-error
               *ngIf="
-                addNewVehicleFormGroup.get('licensePlate')?.hasError('required')
+                addNewVehicleFormGroup
+                  .get('vehicleRegistrationCertificate')
+                  ?.hasError('required')
               "
             >
               Vehicle registration certficate is required.

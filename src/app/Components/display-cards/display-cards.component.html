@@ -38,13 +38,22 @@
           <span>Tables</span>
         </button>
       </div>
-      <div *ngIf="role === 'User'">
+      <div *ngIf="role === 'User' && isLogin">
         <button
           class="display-cards__admin__buttons__my-reservations"
           (click)="goToMyReservations()"
           appHoverElement
         >
           <span>My Reservations</span>
+        </button>
+      </div>
+      <div *ngIf="role === 'Administrator' && isLogin">
+        <button
+          class="display-cards__admin__buttons__charts"
+          (click)="goToMyReservations()"
+          appHoverElement
+        >
+          <span>📈Charts</span>
         </button>
       </div>
       <div>

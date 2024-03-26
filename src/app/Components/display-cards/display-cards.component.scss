@@ -80,6 +80,18 @@
         margin-left: 20%;
       }
 
+      &__charts {
+        border-radius: 8px;
+        background-color: rgb(42, 0, 81);
+        color: white;
+        height: 2.5rem;
+        width: 5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: -28%;
+      }
+
       &__mat-toggle-buttons {
         border-radius: 20px;
         height: 2.5rem;
@@ -92,7 +104,7 @@
         border-radius: 8px;
         background-color: rgb(42, 0, 81);
         color: white;
-        margin-left: 4rem;
+        margin-left: 2rem;
       }
 
       &__greeting {
