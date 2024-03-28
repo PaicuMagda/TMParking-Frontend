@@ -35,10 +35,6 @@
               formControlName="address"
             />
           </div>
-          <div class="userCard__div2__license">
-            <p>Valid driver license</p>
-            <mat-icon [svgIcon]="'file-pdf'"></mat-icon>
-          </div>
         </div>
 
         <div *ngIf="!user.isEdit" class="col-sm-3 userCard__div2__info">
@@ -55,10 +51,6 @@
           <div class="row">
             <label class="col">Address</label>
             <span class="col">{{ user.address }}</span>
-          </div>
-          <div class="row">
-            <label class="col">Valid driver license</label>
-            <span class="col">{{ user.licenseValid }}</span>
           </div>
         </div>
 
@@ -86,7 +78,7 @@
           </div>
         </div>
 
-        <div *ngIf="!user.isEdit" class="col-sm-3 userCard__div3__info">
+        <div *ngIf="!user.isEdit" class="col userCard__div3__info">
           <div class="row">
             <label class="col">Role</label>
             <span class="col">{{ user.role }}</span>

@@ -43,7 +43,6 @@ export class TablesComponent implements OnInit {
       case 2:
         this.exportVehiclesCsvFile();
         break;
-
       default:
         break;
     }

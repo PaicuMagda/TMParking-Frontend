@@ -13,6 +13,7 @@ import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { AddNewParkingSpaceDialogComponent } from '../../dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ParkingSpace } from 'src/app/interfaces/parking-space';
+import { ParkingSpacesDialogEditComponent } from '../../dialogs/parking-spaces-dialog-edit/parking-spaces-dialog-edit.component';
 
 @Component({
   selector: 'app-parking-space-table',
@@ -30,26 +31,29 @@ export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
   @ViewChild('tableRef', { static: false }) tableRef!: ElementRef;
 
   constructor(
-    private parkingSpaceService: ParkingPlacesService,
+    private parkingSpacesService: ParkingPlacesService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.parkingSpaceService.getParkingSpaces().subscribe((values) => {
+    this.parkingSpacesService.getParkingSpaces().subscribe((values) => {
       this.dataSource.data = values;
     });
   }
 
-  openEditParkingSpace(id: number) {
-    this.parkingSpaceService.getParkingSpacesById(id).subscribe((value) => {
-      this.dialog.open(AddNewParkingSpaceDialogComponent, {
-        width: '100%',
-        height: '85%',
-        data: {
-          data: value,
-        },
+  openEditParkingSpace(idParkingSpace: number) {
+    this.parkingSpacesService
+      .getParkingSpacesById(idParkingSpace)
+      .subscribe((values) => {
+        this.dialog.open(ParkingSpacesDialogEditComponent, {
+          width: '100%',
+          height: '85%',
+          position: {
+            top: '5%',
+          },
+          data: values,
+        });
       });
-    });
   }
 
   ngAfterViewInit(): void {
