@@ -48,11 +48,8 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
   openEditVehicle(idVehicle: number) {
     this.vehicleService.getVehicleById(idVehicle).subscribe((values) => {
       this.dialog.open(VehicleEditDialogComponent, {
-        width: '100%',
-        height: '85%',
-        position: {
-          top: '5%',
-        },
+        width: '40%',
+        height: '98%',
         data: values,
       });
     });

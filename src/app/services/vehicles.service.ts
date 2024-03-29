@@ -29,8 +29,8 @@ export class VehiclesService {
     );
   }
 
-  getVehicleById(idVehicle: number): Observable<any> {
-    return this.http.get<any>(``);
+  getVehicleById(idVehicle: number): Observable<Vehicle> {
+    return this.http.get<Vehicle>(`${this.baseUrl}Vehicle/${idVehicle}`);
   }
 
   deletVehicleById(vehicleId: number): Observable<any> {

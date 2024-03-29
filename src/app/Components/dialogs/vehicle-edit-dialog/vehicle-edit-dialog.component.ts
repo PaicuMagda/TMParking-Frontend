@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddNewVehicleDialogComponent } from '../add-new-vehicle-dialog/add-new-vehicle-dialog.component';
 import { VehiclesService } from 'src/app/services/vehicles.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NgToastService } from 'ng-angular-popup';
@@ -15,13 +19,15 @@ import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-clo
 })
 export class VehicleEditDialogComponent {
   addNewVehicleFormGroup: FormGroup;
-  image: string;
-  vehicleRegistrationCertificateBase64: string;
+  image: string = this.data.imageProfileBase64;
+  vehicleRegistrationCertificateBase64: string =
+    this.data.vehicleRegistrationCertificateBase64;
   isLinear = false;
   certificateFileName: string | undefined;
   imageProfileFileName: string | undefined;
   idUserLogged: string = '';
   userLoggedFullName: string = '';
+  showPdfViewer: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +36,8 @@ export class VehicleEditDialogComponent {
     private vehicleService: VehiclesService,
     private userStore: UserStoreService,
     private auth: AuthenticationService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit() {
@@ -38,21 +45,23 @@ export class VehicleEditDialogComponent {
       let userIdFromToken = this.auth.getUserIdFromToken();
       this.idUserLogged = val || userIdFromToken;
     });
-
     this.userStore.getFullNameFromStore().subscribe((val) => {
       this.userLoggedFullName = val;
     });
 
     this.addNewVehicleFormGroup = this.formBuilder.group({
       image: ['', Validators.required],
-      make: ['', Validators.required],
-      model: ['', Validators.required],
-      color: ['', Validators.required],
-      year: ['', Validators.required],
-      owner: ['', Validators.required],
-      vin: ['', Validators.required],
+      make: [this.data.make, Validators.required],
+      model: [this.data.model, Validators.required],
+      color: [this.data.color, Validators.required],
+      year: [this.data.year, Validators.required],
+      vin: [this.data.vehicleIdentificationNumber, Validators.required],
       vehicleRegistrationCertificate: ['', Validators.required],
     });
+  }
+
+  showPdf() {
+    this.showPdfViewer = !this.showPdfViewer;
   }
 
   onFileSelectedImageProfile(event: any) {
@@ -76,12 +85,12 @@ export class VehicleEditDialogComponent {
         vehicleRegistrationCertificateBase64;
     };
     reader.readAsDataURL(file);
+    console.log('Uita-te aici' + this.vehicleRegistrationCertificateBase64);
   }
 
-  registerVehicle() {
+  updateVehicle(idVehicle: number) {
     const formData = {
       color: this.addNewVehicleFormGroup.get('color')?.value,
-      dateAdded: new Date(),
       imageProfileBase64: this.image,
       isVerifiedByAdmin: false,
       make: this.addNewVehicleFormGroup.get('make')?.value,
@@ -89,13 +98,12 @@ export class VehicleEditDialogComponent {
       somethingIsWrong: false,
       vehicleIdentificationNumber:
         this.addNewVehicleFormGroup.get('vin')?.value,
-      vehicleOwnerId: this.idUserLogged,
       vehicleRegistrationCertificateBase64:
         this.vehicleRegistrationCertificateBase64,
       year: this.addNewVehicleFormGroup.get('year')?.value,
     };
 
-    this.vehicleService.registerVehicle(formData).subscribe({
+    this.vehicleService.updateVehicle(idVehicle, formData).subscribe({
       next: (resp) => {
         this.toast.info({
           detail: 'Info Message',
