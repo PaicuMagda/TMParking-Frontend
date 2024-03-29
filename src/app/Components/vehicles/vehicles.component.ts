@@ -57,18 +57,6 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
-  onFileSelectedImageProfile(event: any, index: number) {
-    const vehicle = this.vehicles[index];
-    const file: File = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64String = reader.result as string;
-      this.imageProfile = base64String;
-      vehicle.imageProfileBase64 = base64String;
-    };
-    reader.readAsDataURL(file);
-  }
-
   onFileSelectedVehicleRegistrationCertificate(event: any, index: number) {
     const vehicle = this.vehicles[index];
     const file: File = event.target.files[0];

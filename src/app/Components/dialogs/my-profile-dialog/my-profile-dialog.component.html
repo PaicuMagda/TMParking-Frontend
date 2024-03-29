@@ -12,19 +12,16 @@
   <div class="my-profile__image-upload">
     <div
       [ngClass]="
-        !imageProfileFormGroup.get('imageProfile')?.value
+        !imageProfile
           ? 'my-profile__image-upload__image-default'
           : 'my-profile__image-upload__image-profile'
       "
     >
-      <img
-        *ngIf="imageProfileFormGroup.get('imageProfile')?.value"
-        [src]="imageProfileFormGroup.get('imageProfile')?.value"
-      />
-      <img
+      <img [src]="imageProfile" />
+      <!-- <img
         *ngIf="!imageProfileFormGroup.get('imageProfile')?.value"
         src="../../../../assets/images/my-profile-image.jpg"
-      />
+      /> -->
     </div>
   </div>
   <div class="stepper">
@@ -49,6 +46,25 @@
             />
           </mat-form-field>
           <div>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="usernameFormGroup">
+        <form [formGroup]="usernameFormGroup">
+          <ng-template matStepLabel>Username</ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Username"
+              formControlName="username"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
             <button mat-button matStepperNext class="button-next">Next</button>
           </div>
         </form>
@@ -179,36 +195,36 @@
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="vehicleRegisteredFormGroup">
-        <form [formGroup]="vehicleRegisteredFormGroup">
-          <ng-template matStepLabel>Vehicle Registered</ng-template>
-          <mat-form-field appearance="outline">
-            <input
-              matInput
-              placeholder="Vehicle Registered"
-              formControlName="vehiclesRegistered"
-              required
-            />
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious class="button-back">
-              Back
-            </button>
-            <button mat-button matStepperNext class="button-next">Next</button>
-          </div>
-        </form>
-      </mat-step>
 
       <mat-step [stepControl]="imageProfileFormGroup">
         <form [formGroup]="imageProfileFormGroup">
           <ng-template matStepLabel>Upload Image Profile</ng-template>
-          <mat-form-field>
-            <ngx-mat-file-input
+          <div>
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              #imageProfile
+              (change)="onFileSelectedImageProfile($event)"
               formControlName="imageProfile"
-              placeholder="Upload a significant image for your profile"
-            ></ngx-mat-file-input>
+              placeholder="Upload image for your profile. "
+            />
+            <div (click)="imageProfile.click()" class="upload-file">
+              <div>
+                <p *ngIf="!imageProfileFileName">
+                  Upload image for vehicle's profile.
+                </p>
+                <p *ngIf="imageProfileFileName">{{ imageProfileFileName }}</p>
+              </div>
+              <mat-icon svgIcon="plus-solid"></mat-icon>
+            </div>
+            <mat-divider></mat-divider>
             <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
-          </mat-form-field>
+            <!-- <mat-error
+              *ngIf="imageProfileFormGroup.get('image')?.hasError('required')"
+            >
+              Upload image is required.
+            </mat-error> -->
+          </div>
           <div class="stepper__file-upload-button">
             <button mat-button matStepperPrevious class="button-back">
               Back
@@ -261,7 +277,7 @@
           <button
             mat-button
             class="button-saveChanges"
-            (click)="openSaveChangesConfirmDialog()"
+            (click)="openSaveChangesConfirmDialog(userId)"
           >
             Save Changes
           </button>

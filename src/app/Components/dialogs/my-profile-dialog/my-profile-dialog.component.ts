@@ -6,6 +6,7 @@ import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-clo
 import { UsersService } from 'src/app/services/users.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-my-profile-dialog',
@@ -21,17 +22,20 @@ export class MyProfileDialogComponent implements OnInit {
   phoneFormGroup: FormGroup;
   dateBirthFormGroup: FormGroup;
   stateZipCode: FormGroup;
-  vehicleRegisteredFormGroup: FormGroup;
+  usernameFormGroup: FormGroup;
   changePasswordFormGroup: FormGroup;
   imageProfileFormGroup: FormGroup;
-  userId: string;
+  userId: any;
+  imageProfile: string = '';
+  imageProfileFileName: string | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private userService: UsersService,
     private userStore: UserStoreService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private toast: NgToastService
   ) {}
 
   getMyAccount() {
@@ -59,19 +63,6 @@ export class MyProfileDialogComponent implements OnInit {
         zip: user.zipCode,
         state: user.state,
       });
-      this.imageProfileFormGroup.patchValue({
-        imageProfile: user.imageUrl,
-      });
-    });
-  }
-
-  openSaveChangesConfirmDialog() {
-    this.dialog.open(SaveChangesDialogComponent, {
-      width: '23%',
-      height: '20%',
-      position: {
-        top: '5%',
-      },
     });
   }
 
@@ -87,6 +78,66 @@ export class MyProfileDialogComponent implements OnInit {
 
   closeSidenavMyProfile() {
     this.openCloseConfirmSidenav();
+  }
+
+  onFileSelectedImageProfile(event: any) {
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+    this.imageProfileFileName = file.name;
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      this.imageProfile = base64String;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  openSaveChangesConfirmDialog(idUser: number) {
+    const formData = {
+      firstName: this.nameFormGroup.get('firstname')?.value,
+      lastName: this.nameFormGroup.get('lastname')?.value,
+      address: this.addressFormGroup.get('address')?.value,
+      email: this.emailFormGroup.get('email')?.value,
+      pnc: this.pncFormGroup.get('pnc')?.value,
+      phone: this.phoneFormGroup.get('phone')?.value,
+      password: this.changePasswordFormGroup.get('repeatPassword')?.value,
+      zipCode: this.stateZipCode.get('zip')?.value,
+      state: this.stateZipCode.get('state')?.value,
+      dateOfBirth: this.dateBirthFormGroup.get('dateBirth')?.value,
+      // imageUrl: this.imageProfile,
+      username: this.usernameFormGroup.get('username')?.value,
+    };
+
+    const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'save') {
+        this.userService.updateUser(this.userId, formData).subscribe({
+          next: (resp) => {
+            this.toast.info({
+              detail: 'Info Message',
+              summary: resp.message,
+              duration: 3000,
+            });
+            console.log(formData);
+          },
+          error: (err) => {
+            this.toast.error({
+              detail: 'Error Message',
+              summary: err.error.message,
+              duration: 5000,
+            });
+          },
+        });
+      } else if (result === 'close') {
+        dialogRef.close();
+      }
+    });
   }
 
   ngOnInit() {
@@ -118,8 +169,8 @@ export class MyProfileDialogComponent implements OnInit {
       zip: ['', Validators.required],
       state: ['', Validators.required],
     });
-    this.vehicleRegisteredFormGroup = this.formBuilder.group({
-      vehiclesRegistered: [''],
+    this.usernameFormGroup = this.formBuilder.group({
+      username: [''],
     });
     this.imageProfileFormGroup = this.formBuilder.group({
       imageProfile: [''],

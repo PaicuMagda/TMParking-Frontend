@@ -6,8 +6,8 @@
       src="../../../assets/images/logo-TMParking.png"
     />
     <div class="toolbar__user-login" *ngIf="isLogin === true">
-      <img src="../../../../assets/images/user-image.png" />
-      <!-- <img [src]="userLogged.imageUrl" /> -->
+      <img *ngIf="!image" src="../../../../assets/images/user-image.png" />
+      <img *ngIf="image" [src]="image" />
       <p>{{ fullName | uppercase }}</p>
     </div>
     <div *ngIf="!isLogin">You are not logged in ...</div>

@@ -20,6 +20,7 @@ export class NavBarComponent implements OnInit {
   userId: string;
   userLogged: any;
   @Input() showSearch: boolean = false;
+  image: string = '';
 
   constructor(
     private router: Router,
@@ -63,6 +64,12 @@ export class NavBarComponent implements OnInit {
     });
   }
 
+  getImage() {
+    this.userService
+      .getMyAccount(this.userId)
+      .subscribe((val) => (this.image = val.imageUrl));
+  }
+
   ngOnInit() {
     this.changeShowSearch();
     this.isLogin = this.auth.isLoggedIn();
@@ -82,5 +89,7 @@ export class NavBarComponent implements OnInit {
       this.userLogged = values;
     });
     console.log('User Id from navbar:' + this.userId);
+    console.log('Name from navbar ' + this.fullName);
+    this.getImage();
   }
 }
