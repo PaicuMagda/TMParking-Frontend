@@ -51,6 +51,8 @@ import { DeleteParkingSpacesConfirmationDialogComponent } from './Components/dia
 import { DeleteUserAccountConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-user-account-confirmation-dialog/delete-user-account-confirmation-dialog.component';
 import { ParkingSpacesDialogEditComponent } from './Components/dialogs/parking-spaces-dialog-edit/parking-spaces-dialog-edit.component';
 import { VehicleEditDialogComponent } from './Components/dialogs/vehicle-edit-dialog/vehicle-edit-dialog.component';
+import { UserEditDialogComponent } from './Components/dialogs/user-edit-dialog/user-edit-dialog.component';
+import { ChartsComponent } from './Components/charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import { VehicleEditDialogComponent } from './Components/dialogs/vehicle-edit-di
     DeleteUserAccountConfirmationDialogComponent,
     ParkingSpacesDialogEditComponent,
     VehicleEditDialogComponent,
+    UserEditDialogComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,

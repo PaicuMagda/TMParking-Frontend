@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { EnumUsersTable } from 'src/app/enums/enum-users-table';
 import { User } from 'src/app/interfaces/user';
+import { UserEditDialogComponent } from '../../dialogs/user-edit-dialog/user-edit-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users-table',
@@ -18,7 +20,10 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   data: User[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((values: any) => {
@@ -36,5 +41,12 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  openEditUserDialog() {
+    this.dialog.open(UserEditDialogComponent, {
+      width: '40%',
+      height: '98%',
+    });
   }
 }

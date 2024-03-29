@@ -10,6 +10,7 @@ import { TablesComponent } from './Components/tables/tables.component';
 import { TablesResolverService } from './Components/resolvers/table-users.service';
 import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ChartsComponent } from './Components/charts/charts.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -50,6 +51,10 @@ const routes: Routes = [
   {
     path: 'my-reservations',
     component: MyReservationsComponent,
+  },
+  {
+    path: 'charts',
+    component: ChartsComponent,
   },
 ];
 

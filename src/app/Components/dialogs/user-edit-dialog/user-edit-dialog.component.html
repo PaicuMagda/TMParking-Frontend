@@ -1,0 +1,365 @@
+<div class="my-profile">
+  <div class="my-profile__close">
+    <h2>Add New User</h2>
+    <mat-icon
+      svgIcon="icon-close"
+      (click)="openConfirmCloseDialog()"
+    ></mat-icon>
+  </div>
+  <mat-divider></mat-divider>
+  <form [formGroup]="imageFormGroup" class="my-profile__image-upload">
+    <div
+      [ngClass]="
+        !imageProfile
+          ? 'my-profile__image-upload__image-default'
+          : 'my-profile__image-upload__image-profile'
+      "
+    >
+      <img
+        *ngIf="!imageProfile"
+        src="../../../../assets/images/my-profile-image.jpg"
+      />
+      <img *ngIf="imageProfile" [src]="imageProfile" />
+    </div>
+    <div class="my-profile__image-upload__image-button"></div>
+  </form>
+  <div class="stepper">
+    <mat-vertical-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="nameFormGroup">
+        <form [formGroup]="nameFormGroup">
+          <ng-template matStepLabel>Name <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="First name"
+              formControlName="firstname"
+              required
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              nameFormGroup.get('firstname')?.hasError('required') &&
+              nameFormGroup.get('firstname')?.touched
+            "
+            >First name is required.</mat-error
+          >
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Last name"
+              formControlName="lastname"
+              required
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              nameFormGroup.get('lastname')?.hasError('required') &&
+              nameFormGroup.get('lastname')?.touched
+            "
+            >Last name is required.</mat-error
+          >
+          <div>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="usernameFormGroup">
+        <form [formGroup]="usernameFormGroup">
+          <ng-template matStepLabel>Username <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Username"
+              formControlName="username"
+              required
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              usernameFormGroup.get('username')?.hasError('required') &&
+              usernameFormGroup.get('username')?.touched
+            "
+            >Username is required.</mat-error
+          >
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="addressFormGroup">
+        <form [formGroup]="addressFormGroup">
+          <ng-template matStepLabel>Address <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Address"
+              formControlName="address"
+              required
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              addressFormGroup.get('address')?.hasError('required') &&
+              addressFormGroup.get('address')?.touched
+            "
+            >Address is required.</mat-error
+          >
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="emailFormGroup">
+        <form [formGroup]="emailFormGroup">
+          <ng-template matStepLabel>E-mail Address <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="E-mail Address"
+              formControlName="email"
+              required
+            />
+          </mat-form-field>
+          <div
+            *ngIf="
+              emailFormGroup.get('email')?.errors &&
+              (emailFormGroup.get('email')?.touched ||
+                emailFormGroup.get('email')?.dirty)
+            "
+          >
+            <mat-error *ngIf="emailFormGroup.get('email')?.hasError('required')"
+              >Email is required.</mat-error
+            >
+            <mat-error *ngIf="emailFormGroup.get('email')?.hasError('email')"
+              >Please enter a valid email.
+            </mat-error>
+          </div>
+
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="pncFormGroup">
+        <form [formGroup]="pncFormGroup">
+          <ng-template matStepLabel>Personal Numerical Code</ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Personal Numerical Code"
+              formControlName="pnc"
+              (keypress)="onKeyPress($event)"
+            />
+          </mat-form-field>
+          <mat-error *ngIf="showIsNotDigitMessage"
+            >Only numbers are allowed.</mat-error
+          >
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="phoneFormGroup">
+        <form [formGroup]="phoneFormGroup">
+          <ng-template matStepLabel>Phone <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Phone"
+              formControlName="phone"
+              required
+              (keypress)="onKeyPress($event)"
+            />
+          </mat-form-field>
+          <mat-error *ngIf="showIsNotDigitMessage"
+            >Only numbers are allowed.</mat-error
+          >
+          <mat-error
+            *ngIf="
+              phoneFormGroup.get('phone')?.hasError('required') &&
+              phoneFormGroup.get('phone')?.touched
+            "
+            >Number phone is required.</mat-error
+          >
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="dateBirthFormGroup">
+        <form [formGroup]="dateBirthFormGroup">
+          <ng-template matStepLabel>Date of Birth</ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Date of Birth"
+              formControlName="dateBirth"
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="stateZipCodeFormGroup">
+        <form [formGroup]="stateZipCodeFormGroup">
+          <ng-template matStepLabel
+            >State & Zip Code <span>*</span></ng-template
+          >
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="State"
+              formControlName="state"
+              required
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              stateZipCodeFormGroup.get('state')?.hasError('required') &&
+              stateZipCodeFormGroup.get('state')?.touched
+            "
+            >State is required.</mat-error
+          >
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              placeholder="Zip Code"
+              formControlName="zip"
+              required
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              stateZipCodeFormGroup.get('zip')?.hasError('required') &&
+              stateZipCodeFormGroup.get('zip')?.touched
+            "
+            >Zip Code is required.</mat-error
+          >
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="imageFormGroup">
+        <form [formGroup]="imageFormGroup">
+          <ng-template matStepLabel>Upload Image Profile</ng-template>
+          <div class="upload-file">
+            <input
+              #profileImageInput
+              (change)="onFileSelectedImageProfile($event)"
+              type="file"
+              formControlName="imageFileUpload"
+              placeholder="Upload a significant image for your profile"
+            />
+            <div
+              (click)="profileImageInput.click()"
+              class="upload-file__placeholder"
+            >
+              <p *ngIf="!imageProfileFileName">
+                Upload image for parking spaces's profile.
+              </p>
+              <p *ngIf="imageProfileFileName">{{ imageProfileFileName }}</p>
+              <mat-icon svgIcon="plus-solid"></mat-icon>
+            </div>
+
+            <mat-divider></mat-divider>
+            <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
+          </div>
+          <div class="stepper__file-upload-button">
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="passwordFormGroup">
+        <form [formGroup]="passwordFormGroup">
+          <ng-template matStepLabel>Password <span>*</span></ng-template>
+          <mat-form-field appearance="outline">
+            <input
+              type="password"
+              matInput
+              placeholder="Password"
+              formControlName="password"
+              required
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              passwordFormGroup.get('password')?.hasError('required') &&
+              passwordFormGroup.get('password')?.touched
+            "
+            >Password is required.</mat-error
+          >
+          <mat-form-field appearance="outline">
+            <input
+              type="password"
+              matInput
+              placeholder="Confirm Password"
+              formControlName="confirmPassword"
+              required
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              passwordFormGroup.get('confirmPassword')?.hasError('required') &&
+              passwordFormGroup.get('confirmPassword')?.touched
+            "
+            >Confirm password is required.</mat-error
+          >
+          <mat-error *ngIf="!matchPassword()"
+            >Passwords do not match!</mat-error
+          >
+          <div>
+            <button mat-button matStepperPrevious class="button-back">
+              Back
+            </button>
+            <button mat-button matStepperNext class="button-next">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Save Changes</ng-template>
+        <div class="buttons">
+          <button mat-button matStepperPrevious class="button-back">
+            Back
+          </button>
+          <button mat-button (click)="stepper.reset()" class="button-next">
+            Reset
+          </button>
+          <button
+            mat-button
+            class="button-saveChanges"
+            (click)="registerNewUser()"
+          >
+            Save Changes
+          </button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+</div>
