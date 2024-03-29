@@ -183,7 +183,7 @@ export class VehiclesComponent implements OnInit {
         }
         if (value === 'myVehicles') {
           this.vehicleService
-            .getVehicleById(this.idUserLogged)
+            .getVehicleByUserId(this.idUserLogged)
             .pipe(
               map((vehicles) => {
                 vehicles.forEach((vehicle) => {

@@ -1,0 +1,164 @@
+<div class="add-new-vehicle">
+  <div class="add-new-vehicle__close-icon">
+    <span>Add New Vehicle</span>
+    <mat-icon
+      svgIcon="icon-close"
+      (click)="closeAddNewVehicleDialogComponent()"
+    ></mat-icon>
+  </div>
+  <mat-divider></mat-divider>
+
+  <form [formGroup]="addNewVehicleFormGroup">
+    <div class="add-new-vehicle__carousel">
+      <img *ngIf="!image" src="../../../../assets/images/car-upload.jpg" />
+      <img *ngIf="image" [src]="image" />
+    </div>
+    <div class="add-new-vehicle__form">
+      <div>
+        <div class="add-new-vehicle__form__informations">
+          <div class="add-new-vehicle__form__informations__makeModel">
+            <mat-form-field appearance="outline">
+              <mat-label>Make</mat-label>
+              <input matInput type="text" formControlName="make" />
+              <mat-error
+                *ngIf="
+                  addNewVehicleFormGroup.get('make')?.hasError('required') &&
+                  addNewVehicleFormGroup.get('make')?.touched
+                "
+              >
+                Make is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Model</mat-label
+              ><input matInput type="text" formControlName="model" />
+              <mat-error
+                *ngIf="
+                  addNewVehicleFormGroup.get('model')?.hasError('required') &&
+                  addNewVehicleFormGroup.get('model')?.touched
+                "
+              >
+                Model is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="add-new-vehicle__form__informations__colorYearVIN">
+            <div
+              class="add-new-vehicle__form__informations__colorYearVIN__colorYear"
+            >
+              <mat-form-field appearance="outline"
+                ><mat-label>Color</mat-label
+                ><input matInput type="text" formControlName="color" />
+                <mat-error
+                  *ngIf="
+                    addNewVehicleFormGroup.get('color')?.hasError('required') &&
+                    addNewVehicleFormGroup.get('color')?.touched
+                  "
+                >
+                  Color is required.
+                </mat-error></mat-form-field
+              >
+              <mat-form-field appearance="outline"
+                ><mat-label>Year</mat-label
+                ><input matInput type="text" formControlName="year" />
+                <mat-error
+                  *ngIf="
+                    addNewVehicleFormGroup.get('year')?.hasError('required') &&
+                    addNewVehicleFormGroup.get('year')?.touched
+                  "
+                >
+                  Year is required.
+                </mat-error></mat-form-field
+              >
+            </div>
+            <div class="add-new-vehicle__form__informations__ownerVIN">
+              <mat-form-field appearance="outline"
+                ><mat-label>Vehicle Identification Number</mat-label
+                ><input matInput type="text" formControlName="vin" />
+                <mat-error
+                  *ngIf="
+                    addNewVehicleFormGroup.get('vin')?.hasError('required') &&
+                    addNewVehicleFormGroup.get('vin')?.touched
+                  "
+                >
+                  Vehicle Identificatoion Number is required.
+                </mat-error></mat-form-field
+              >
+            </div>
+          </div>
+
+          <div class="add-new-vehicle__form__informations__upload">
+            <input
+              #certificateInput
+              accept="application/pdf"
+              type="file"
+              (change)="onFileSelectedCertificate($event)"
+              formControlName="vehicleRegistrationCertificate"
+            />
+            <div (click)="certificateInput.click()" class="upload-file">
+              <p *ngIf="!certificateFileName">
+                Upload vehicle registration certificate.
+              </p>
+              <p *ngIf="certificateFileName">{{ certificateFileName }}</p>
+              <mat-icon svgIcon="plus-solid"></mat-icon>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-hint>File format: .pdf</mat-hint>
+            <mat-error
+              *ngIf="
+                addNewVehicleFormGroup
+                  .get('vehicleRegistrationCertificate')
+                  ?.hasError('required')
+              "
+            >
+              Vehicle registration certficate is required.
+            </mat-error>
+          </div>
+          <div class="add-new-vehicle__form__informations__upload">
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              #imageProfileForVehicleInput
+              (change)="onFileSelectedImageProfile($event)"
+              formControlName="image"
+              placeholder="Upload image for your vehicle. "
+            />
+            <div
+              (click)="imageProfileForVehicleInput.click()"
+              class="upload-file"
+            >
+              <p *ngIf="!imageProfileFileName">
+                Upload image for vehicle's profile.
+              </p>
+              <p *ngIf="imageProfileFileName">{{ imageProfileFileName }}</p>
+              <mat-icon svgIcon="plus-solid"></mat-icon>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
+            <mat-error
+              *ngIf="addNewVehicleFormGroup.get('image')?.hasError('required')"
+            >
+              Upload image is required.
+            </mat-error>
+          </div>
+        </div>
+      </div>
+      <div class="add-new-vehicle__form__buttons">
+        <button class="btn btn-warning">Save as Draft</button>
+        <button
+          class="btn add-new-vehicle__form__buttons__send"
+          (click)="registerVehicle()"
+        >
+          Send
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="closeAddNewVehicleDialogComponent()"
+        >
+          Discard
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

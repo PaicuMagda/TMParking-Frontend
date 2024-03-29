@@ -50,6 +50,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { DeleteParkingSpacesConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog.component';
 import { DeleteUserAccountConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-user-account-confirmation-dialog/delete-user-account-confirmation-dialog.component';
 import { ParkingSpacesDialogEditComponent } from './Components/dialogs/parking-spaces-dialog-edit/parking-spaces-dialog-edit.component';
+import { VehicleEditDialogComponent } from './Components/dialogs/vehicle-edit-dialog/vehicle-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { ParkingSpacesDialogEditComponent } from './Components/dialogs/parking-s
     DeleteParkingSpacesConfirmationDialogComponent,
     DeleteUserAccountConfirmationDialogComponent,
     ParkingSpacesDialogEditComponent,
+    VehicleEditDialogComponent,
   ],
   imports: [
     BrowserModule,

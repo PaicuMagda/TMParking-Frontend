@@ -1,0 +1,136 @@
+@mixin button-save {
+  font-weight: 500;
+  width: auto;
+  background-color: rgb(54 0 105);
+  color: white;
+  border: none;
+  height: 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add-new-vehicle {
+  height: 100%;
+
+  &__close-icon {
+    span {
+      font-weight: 500;
+      font-size: 2vh;
+    }
+
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5%;
+  }
+
+  &__carousel {
+    height: 45%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+      margin-top: 4%;
+      width: 50%;
+      height: 80%;
+      border-radius: 1rem;
+      box-shadow: 0px 0px 50px 0px rgba(55, 0, 103, 0.9);
+    }
+
+    &__upload-button {
+      font-weight: 500;
+      width: auto;
+      background-color: white;
+      color: rgb(0, 0, 0);
+      border: none;
+      height: 2.5rem;
+      border-radius: 6px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      margin-top: 1rem;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+    padding: 2%;
+
+    &__buttons {
+      &__send {
+        @include button-save();
+      }
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      gap: 1%;
+    }
+
+    &__informations {
+      display: flex;
+      flex-direction: column;
+
+      &__makeModel {
+        display: flex;
+        flex-direction: row;
+        gap: 3%;
+        margin-top: 5%;
+
+        mat-form-field {
+          width: 50%;
+        }
+      }
+
+      &__colorYearVIN {
+        display: flex;
+        flex-direction: row;
+        gap: 3%;
+        margin-top: 5%;
+
+        &__colorYear {
+          width: 49%;
+          display: flex;
+          flex-direction: row;
+          gap: 3%;
+        }
+      }
+
+      &__ownerVIN {
+        display: flex;
+        flex-direction: row;
+        gap: 3%;
+        width: 100%;
+      }
+
+      &__upload {
+        margin-top: 5%;
+
+        p {
+          color: rgb(170, 170, 170);
+        }
+      }
+    }
+  }
+}
+
+input[type="file"] {
+  display: none;
+}
+
+::ng-deep.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.upload-file {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
