@@ -9,7 +9,7 @@
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div class="my-profile__image-upload">
+  <form [formGroup]="imageProfileFormGroup" class="my-profile__image-upload">
     <div
       [ngClass]="
         !imageProfile
@@ -17,13 +17,13 @@
           : 'my-profile__image-upload__image-profile'
       "
     >
-      <img [src]="imageProfile" />
-      <!-- <img
-        *ngIf="!imageProfileFormGroup.get('imageProfile')?.value"
+      <img
+        *ngIf="!imageProfile"
         src="../../../../assets/images/my-profile-image.jpg"
-      /> -->
+      />
+      <img *ngIf="imageProfile" [src]="imageProfile" />
     </div>
-  </div>
+  </form>
   <div class="stepper">
     <mat-vertical-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="nameFormGroup">
@@ -199,31 +199,27 @@
       <mat-step [stepControl]="imageProfileFormGroup">
         <form [formGroup]="imageProfileFormGroup">
           <ng-template matStepLabel>Upload Image Profile</ng-template>
-          <div>
+          <div class="upload-file">
             <input
-              type="file"
-              accept="image/png, image/jpeg"
-              #imageProfile
+              #profileImageInput
               (change)="onFileSelectedImageProfile($event)"
+              type="file"
               formControlName="imageProfile"
-              placeholder="Upload image for your profile. "
+              placeholder="Upload a significant image for your profile"
             />
-            <div (click)="imageProfile.click()" class="upload-file">
-              <div>
-                <p *ngIf="!imageProfileFileName">
-                  Upload image for vehicle's profile.
-                </p>
-                <p *ngIf="imageProfileFileName">{{ imageProfileFileName }}</p>
-              </div>
+            <div
+              (click)="profileImageInput.click()"
+              class="upload-file__placeholder"
+            >
+              <p *ngIf="!imageProfileFileName">
+                Upload image for parking spaces's profile.
+              </p>
+              <p *ngIf="imageProfileFileName">{{ imageProfileFileName }}</p>
               <mat-icon svgIcon="plus-solid"></mat-icon>
             </div>
+
             <mat-divider></mat-divider>
             <mat-hint>File format: image(.img, .jpg, .jpeg)</mat-hint>
-            <!-- <mat-error
-              *ngIf="imageProfileFormGroup.get('image')?.hasError('required')"
-            >
-              Upload image is required.
-            </mat-error> -->
           </div>
           <div class="stepper__file-upload-button">
             <button mat-button matStepperPrevious class="button-back">
@@ -238,6 +234,7 @@
           <ng-template matStepLabel>Change Password</ng-template>
           <mat-form-field appearance="outline">
             <input
+              type="password"
               matInput
               placeholder="Old Password"
               formControlName="oldPassword"
@@ -245,6 +242,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <input
+              type="password"
               matInput
               placeholder="New Password"
               formControlName="newPassword"
@@ -252,11 +250,25 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <input
+              type="password"
               matInput
-              placeholder="Repeat New Password"
+              placeholder="Confirm Password"
               formControlName="repeatPassword"
+              required
             />
           </mat-form-field>
+          <mat-error
+            *ngIf="
+              changePasswordFormGroup
+                .get('confirmPassword')
+                ?.hasError('required') &&
+              changePasswordFormGroup.get('confirmPassword')?.touched
+            "
+            >Confirm password is required.</mat-error
+          >
+          <mat-error *ngIf="!matchPassword()"
+            >Passwords do not match!</mat-error
+          >
           <div>
             <button mat-button matStepperPrevious class="button-back">
               Back

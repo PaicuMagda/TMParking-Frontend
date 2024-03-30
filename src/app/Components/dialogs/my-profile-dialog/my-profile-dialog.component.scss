@@ -135,7 +135,15 @@ input[type="file"] {
 }
 
 .upload-file {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  margin-top: 5%;
+
+  &__placeholder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    p {
+      color: rgb(170, 170, 170);
+    }
+  }
 }

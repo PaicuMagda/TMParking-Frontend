@@ -28,6 +28,7 @@ export class MyProfileDialogComponent implements OnInit {
   userId: any;
   imageProfile: string = '';
   imageProfileFileName: string | undefined;
+  showIsNotDigitMessage: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -104,10 +105,9 @@ export class MyProfileDialogComponent implements OnInit {
       zipCode: this.stateZipCode.get('zip')?.value,
       state: this.stateZipCode.get('state')?.value,
       dateOfBirth: this.dateBirthFormGroup.get('dateBirth')?.value,
-      imageUrl: this.imageProfileFormGroup.get('imageProfile')?.value,
+      imageUrl: this.imageProfile,
       username: this.usernameFormGroup.get('username')?.value,
     };
-
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
@@ -141,14 +141,30 @@ export class MyProfileDialogComponent implements OnInit {
     });
   }
 
+  onKeyPress(event: KeyboardEvent) {
+    const char = event.key;
+    const pattern = /^[0-9]*$/;
+    if (!pattern.test(char)) {
+      event.preventDefault();
+      this.showIsNotDigitMessage = true;
+    } else {
+      this.showIsNotDigitMessage = false;
+    }
+  }
+
+  matchPassword(): boolean {
+    return (
+      this.changePasswordFormGroup.get('newPassword')?.value ===
+      this.changePasswordFormGroup.get('repeatPassword')?.value
+    );
+  }
+
   ngOnInit() {
     this.userStore.getIdUserFromStore().subscribe((val) => {
       let userIdFromToken = this.auth.getUserIdFromToken();
       this.userId = userIdFromToken || val;
       this.getMyAccount(this.userId);
     });
-
-    console.log('Image profile' + this.imageProfile);
 
     this.nameFormGroup = this.formBuilder.group({
       firstname: ['', Validators.required],
