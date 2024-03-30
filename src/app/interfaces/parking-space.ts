@@ -14,9 +14,9 @@ export interface ParkingSpace {
   startDate: Date;
   endDate: Date;
   isFree: boolean;
-  isVideoSurveillance: boolean;
+  isVideoSurveilance: boolean;
   description: string;
-  paidParking?: boolean;
+  paidParking: boolean;
   isDraft?: boolean;
   paymentPerHour: number;
   paymentPerDay: number;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { ParkingSpaceBookingService } from 'src/app/services/parking-space-booking.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
@@ -30,6 +30,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   calculatedPrice: number;
   months: number[] = [];
   month: number;
+  idParkingSpaces: number;
 
   constructor(
     private router: ActivatedRoute,
@@ -80,22 +81,18 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   // }
 
   ngOnInit() {
+    this.idParkingSpaces = this.router.snapshot.params['id'];
+    this.parkingSpaceService
+      .getParkingSpacesById(this.idParkingSpaces)
+      .subscribe((value) => {
+        this.parkingPlace = value;
+        console.log(this.parkingPlace);
+      });
     this.populateHoursArray();
     this.paymentMethods = Object.values(PaymentMethods);
     this.bookingService.getMonthNumber().subscribe((values) => {
       this.months = values;
     });
-
-    this.router.paramMap.subscribe((paramMap) => {
-      const idString = paramMap.get('id');
-      if (idString != null) {
-        const id = parseInt(idString, 10);
-        this.parkingSpaceService.getParkingSpacesById(id).subscribe((value) => {
-          this.parkingPlace = value;
-        });
-      }
-    });
-
     this.vehicleService.getAllVehicles().subscribe((vehicles) => {
       this.vehicles = vehicles;
     });

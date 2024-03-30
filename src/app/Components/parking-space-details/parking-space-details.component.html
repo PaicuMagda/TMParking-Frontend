@@ -7,7 +7,10 @@
   <mat-divider></mat-divider>
   <div class="parking-space-details__container">
     <div class="parking-space-details__container__left">
-      <div class="parking-space-details__container__left__informations">
+      <div
+        class="parking-space-details__container__left__informations"
+        *ngIf="parkingPlace"
+      >
         <div
           class="parking-space-details__container__left__informations__parking-lot"
         >
@@ -18,15 +21,15 @@
           </div>
           <div class="row">
             <p class="col-lg">Locuri disponibile</p>
-            <p class="col-sm">{{ parkingPlace.locuriDisponibile }}</p>
+            <p class="col-sm">{{ parkingPlace.availableParkingSpaces }}</p>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <p class="col-lg">Owner</p>
             <p class="col-sm">
               {{ parkingPlace.owner.firstname }}
               {{ parkingPlace.owner.lastname }}
             </p>
-          </div>
+          </div> -->
           <div class="row">
             <p class="col-lg">Start Date</p>
             <p class="col-sm">{{ parkingPlace.startDate | date }}</p>
@@ -56,12 +59,12 @@
               class="col-sm"
               [ngClass]="{
                 'parking-space-details__container__left__informations__parking-lot__yes':
-                  parkingPlace.isVideoSurveillance,
+                  parkingPlace.isVideoSurveilance,
                 'parking-space-details__container__left__informations__parking-lot__no':
-                  !parkingPlace.isVideoSurveillance
+                  !parkingPlace.isVideoSurveilance
               }"
             >
-              {{ parkingPlace.isVideoSurveillance ? "Yes" : "No" }}
+              {{ parkingPlace.isVideoSurveilance ? "Yes" : "No" }}
             </p>
           </div>
           <div class="row">
@@ -70,12 +73,12 @@
               class="col-sm"
               [ngClass]="{
                 'parking-space-details__container__left__informations__parking-lot__yes':
-                  parkingPlace.isAgriculturalMachinery,
+                  parkingPlace.isAgriculturalMachineryAccepted,
                 'parking-space-details__container__left__informations__parking-lot__no':
-                  !parkingPlace.isAgriculturalMachinery
+                  !parkingPlace.isAgriculturalMachineryAccepted
               }"
             >
-              {{ parkingPlace.isAgriculturalMachinery ? "Yes" : "No" }}
+              {{ parkingPlace.isAgriculturalMachineryAccepted ? "Yes" : "No" }}
             </p>
           </div>
           <div class="row">
@@ -84,12 +87,12 @@
               class="col-sm"
               [ngClass]="{
                 'parking-space-details__container__left__informations__parking-lot__yes':
-                  parkingPlace.isPublicTransport,
+                  parkingPlace.isPublicTransportAccepted,
                 'parking-space-details__container__left__informations__parking-lot__no':
-                  !parkingPlace.isPublicTransport
+                  !parkingPlace.isPublicTransportAccepted
               }"
             >
-              {{ parkingPlace.isPublicTransport ? "Yes" : "No" }}
+              {{ parkingPlace.isPublicTransportAccepted ? "Yes" : "No" }}
             </p>
           </div>
           <div class="row">
@@ -98,18 +101,18 @@
               class="col-sm"
               [ngClass]="{
                 'parking-space-details__container__left__informations__parking-lot__yes':
-                  parkingPlace.isTruck,
+                  parkingPlace.isPublicTransportAccepted,
                 'parking-space-details__container__left__informations__parking-lot__no':
-                  !parkingPlace.isTruck
+                  !parkingPlace.isPublicTransportAccepted
               }"
             >
-              {{ parkingPlace.isTruck ? "Yes" : "No" }}
+              {{ parkingPlace.isPublicTransportAccepted ? "Yes" : "No" }}
             </p>
           </div>
         </div>
         <div class="parking-space-details__container__right">
           <div class="parking-space-details__container__right__image">
-            <img src="{{ parkingPlace.imageUrl }}" />
+            <img src="{{ parkingPlace.imageProfile }}" />
           </div>
           <textarea
             readonly
@@ -123,7 +126,7 @@
       <div class="parking-space-details__container__left__all-spots">
         <app-legend></app-legend>
         <div class="parking-space-details__container__left__all-spots__cards">
-          <div
+          <!-- <div
             class="parking-space-details__container__left__all-spots__cards__spot"
             *ngFor="let spot of parkingPlace.parkingSpots"
           >
@@ -143,7 +146,7 @@
             <div>
               <p>{{ spot.spotNumber }}</p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -238,7 +241,7 @@
               </mat-form-field>
             </div>
           </div>
-          <div
+          <!-- <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"
           >
             <div>Name of parking spot</div>
@@ -259,7 +262,7 @@
                 </mat-autocomplete>
               </mat-form-field>
             </div>
-          </div>
+          </div> -->
 
           <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"
