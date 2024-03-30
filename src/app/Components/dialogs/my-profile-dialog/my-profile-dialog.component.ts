@@ -38,8 +38,8 @@ export class MyProfileDialogComponent implements OnInit {
     private toast: NgToastService
   ) {}
 
-  getMyAccount() {
-    this.userService.getMyAccount(this.userId).subscribe((user) => {
+  getMyAccount(userId: number) {
+    this.userService.getMyAccount(userId).subscribe((user) => {
       this.nameFormGroup.patchValue({
         firstname: user.firstName,
         lastname: user.lastName,
@@ -63,6 +63,7 @@ export class MyProfileDialogComponent implements OnInit {
         zip: user.zipCode,
         state: user.state,
       });
+      this.imageProfile = user.imageUrl;
     });
   }
 
@@ -103,7 +104,7 @@ export class MyProfileDialogComponent implements OnInit {
       zipCode: this.stateZipCode.get('zip')?.value,
       state: this.stateZipCode.get('state')?.value,
       dateOfBirth: this.dateBirthFormGroup.get('dateBirth')?.value,
-      // imageUrl: this.imageProfile,
+      imageUrl: this.imageProfileFormGroup.get('imageProfile')?.value,
       username: this.usernameFormGroup.get('username')?.value,
     };
 
@@ -144,7 +145,10 @@ export class MyProfileDialogComponent implements OnInit {
     this.userStore.getIdUserFromStore().subscribe((val) => {
       let userIdFromToken = this.auth.getUserIdFromToken();
       this.userId = userIdFromToken || val;
+      this.getMyAccount(this.userId);
     });
+
+    console.log('Image profile' + this.imageProfile);
 
     this.nameFormGroup = this.formBuilder.group({
       firstname: ['', Validators.required],
@@ -180,7 +184,5 @@ export class MyProfileDialogComponent implements OnInit {
       newPassword: ['', Validators.required],
       repeatPassword: ['', Validators.required],
     });
-
-    this.getMyAccount();
   }
 }
