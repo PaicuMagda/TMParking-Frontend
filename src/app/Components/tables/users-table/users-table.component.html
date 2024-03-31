@@ -42,7 +42,9 @@
         [matMenuTriggerFor]="menu"
       ></mat-icon>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="openEditUserDialog()">Edit</button>
+        <button mat-menu-item (click)="openEditUserDialog(element.userId)">
+          Edit
+        </button>
         <button mat-menu-item>Delete</button>
       </mat-menu>
     </td>

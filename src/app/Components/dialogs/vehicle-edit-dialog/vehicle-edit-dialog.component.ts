@@ -85,7 +85,6 @@ export class VehicleEditDialogComponent {
         vehicleRegistrationCertificateBase64;
     };
     reader.readAsDataURL(file);
-    console.log('Uita-te aici' + this.vehicleRegistrationCertificateBase64);
   }
 
   updateVehicle(idVehicle: number) {

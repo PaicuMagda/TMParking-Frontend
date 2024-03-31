@@ -203,7 +203,7 @@ export class ParkingSpacesDialogEditComponent {
       paymentPerHour: ['', Validators.required],
       paymentForSubscription: ['', Validators.required],
     });
-    console.log(this.data);
+
     this.userStore.getFullNameFromStore().subscribe((val) => {
       let fullNameFromToken = this.auth.getFullNameFromToken();
       this.userLoggedFullName = fullNameFromToken || val;

@@ -146,7 +146,5 @@ export class ParkingSpacesComponent implements OnInit {
       this.idUserLogged = val || userIdFromToken;
     });
     this.getParkingSpaces();
-
-    console.log(this.idUserLogged);
   }
 }

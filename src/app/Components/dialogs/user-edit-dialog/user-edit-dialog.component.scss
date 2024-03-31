@@ -24,12 +24,6 @@
   padding: 1%;
   overflow: hidden;
 
-  &__close {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
   &__image-upload {
     display: flex;
     flex-direction: column;
@@ -54,8 +48,8 @@
       justify-content: center;
 
       img {
-        height: 24vh;
-        width: 30%;
+        height: 23vh;
+        width: 35%;
         border-radius: 100%;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
           0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -72,6 +66,13 @@
         margin-top: 1rem;
       }
     }
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 81%;
   }
 }
 
@@ -90,7 +91,6 @@ mat-form-field {
   width: 4rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  margin-top: 1rem;
 }
 
 .button-back {
@@ -99,16 +99,16 @@ mat-form-field {
 }
 
 .stepper {
-  height: 69vh;
+  height: 65vh;
 
-  &__vehicle-registered {
+  &__file-upload-button {
+    margin-top: 6%;
+  }
+
+  &__image-upload {
     display: flex;
-    flex-direction: column;
-
-    p {
-      width: 83%;
-      color: red;
-    }
+    flex-direction: row;
+    justify-content: flex-end;
   }
 }
 
@@ -130,16 +130,8 @@ span {
   margin-top: 1rem;
 }
 
-mat-error {
-  margin-left: 1rem;
-}
-
 input[type="file"] {
   display: none;
-}
-
-h2 {
-  margin-bottom: 0%;
 }
 
 .upload-file {

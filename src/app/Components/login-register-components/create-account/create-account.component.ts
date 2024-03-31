@@ -58,7 +58,6 @@ export class CreateAccountComponent {
           summary: err?.error.message,
           duration: 5000,
         });
-        console.log(err.message);
       },
     });
   }

@@ -86,7 +86,6 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       .getParkingSpacesById(this.idParkingSpaces)
       .subscribe((value) => {
         this.parkingPlace = value;
-        console.log(this.parkingPlace);
       });
     this.populateHoursArray();
     this.paymentMethods = Object.values(PaymentMethods);

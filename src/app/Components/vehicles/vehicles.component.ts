@@ -88,7 +88,6 @@ export class VehiclesComponent implements OnInit {
               summary: resp.message,
               duration: 3000,
             });
-            console.log(vehicleData);
           },
           error: (err) => {
             this.toast.error({

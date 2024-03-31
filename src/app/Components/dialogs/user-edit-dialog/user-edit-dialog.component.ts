@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { UsersService } from 'src/app/services/users.service';
-import { AddNewUserDialogComponent } from '../add-new-user-dialog/add-new-user-dialog.component';
 import { NgToastService } from 'ng-angular-popup';
 import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog-vehicle/save-changes-dialog.component';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
   selector: 'app-user-edit-dialog',
@@ -14,68 +15,44 @@ import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes
 })
 export class UserEditDialogComponent {
   isLinear = false;
-  imageFormGroup: FormGroup;
   nameFormGroup: FormGroup;
   addressFormGroup: FormGroup;
-  usernameFormGroup: FormGroup;
   emailFormGroup: FormGroup;
   pncFormGroup: FormGroup;
   phoneFormGroup: FormGroup;
   dateBirthFormGroup: FormGroup;
-  stateZipCodeFormGroup: FormGroup;
-  passwordFormGroup: FormGroup;
-  imageUrl: string | ArrayBuffer | null = null;
-  showIsNotDigitMessage: boolean;
+  stateZipCode: FormGroup;
+  usernameFormGroup: FormGroup;
+  changePasswordFormGroup: FormGroup;
+  imageProfileFormGroup: FormGroup;
+  imageProfile: string = '';
   imageProfileFileName: string | undefined;
-  imageProfile: string;
+  showIsNotDigitMessage: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private userService: UsersService,
     private toast: NgToastService,
-    private dialogRef: MatDialogRef<AddNewUserDialogComponent>
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit() {
-    this.imageFormGroup = this.formBuilder.group({
-      imageFileUpload: [''],
+  openCloseConfirmSidenav() {
+    this.dialog.open(ConfirmCloseDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
     });
-    this.nameFormGroup = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-    });
-    this.addressFormGroup = this.formBuilder.group({
-      address: ['', Validators.required],
-    });
-    this.usernameFormGroup = this.formBuilder.group({
-      username: ['', Validators.required],
-    });
-    this.emailFormGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-    });
-    this.pncFormGroup = this.formBuilder.group({
-      pnc: ['', Validators.required],
-    });
-    this.phoneFormGroup = this.formBuilder.group({
-      phone: ['', Validators.required],
-    });
-    this.dateBirthFormGroup = this.formBuilder.group({
-      dateBirth: [''],
-    });
-    this.stateZipCodeFormGroup = this.formBuilder.group({
-      zip: ['', Validators.required],
-      state: ['', Validators.required],
-    });
-    this.passwordFormGroup = this.formBuilder.group({
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-    });
+  }
+
+  closeSidenavMyProfile() {
+    this.openCloseConfirmSidenav();
   }
 
   onFileSelectedImageProfile(event: any) {
     const file: File = event.target.files[0];
-    this.imageProfileFileName = file.name;
     const reader = new FileReader();
     this.imageProfileFileName = file.name;
     reader.onload = () => {
@@ -85,94 +62,51 @@ export class UserEditDialogComponent {
     reader.readAsDataURL(file);
   }
 
-  openSaveChangesConfirmDialog() {
-    this.dialog.open(SaveChangesDialogComponent, {
+  openSaveChangesConfirmDialog(idUser: number) {
+    const formData = {
+      firstName: this.nameFormGroup.get('firstname')?.value,
+      lastName: this.nameFormGroup.get('lastname')?.value,
+      address: this.addressFormGroup.get('address')?.value,
+      email: this.emailFormGroup.get('email')?.value,
+      pnc: this.pncFormGroup.get('pnc')?.value,
+      phone: this.phoneFormGroup.get('phone')?.value,
+      password: this.changePasswordFormGroup.get('repeatPassword')?.value,
+      zipCode: this.stateZipCode.get('zip')?.value,
+      state: this.stateZipCode.get('state')?.value,
+      dateOfBirth: this.dateBirthFormGroup.get('dateBirth')?.value,
+      imageUrl: this.imageProfile,
+      username: this.usernameFormGroup.get('username')?.value,
+    };
+    const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
       position: {
         top: '5%',
       },
-      data: {
-        formData: {
-          email: this.emailFormGroup.get('email')?.value,
-          username: this.usernameFormGroup.get('username')?.value,
-          firstName: this.nameFormGroup.get('firstname')?.value,
-          lastName: this.nameFormGroup.get('lastname')?.value,
-          password: this.passwordFormGroup.get('password')?.value,
-          address: this.addressFormGroup.get('address')?.value,
-          zipCode: this.stateZipCodeFormGroup.get('zip')?.value,
-          state: this.stateZipCodeFormGroup.get('state')?.value,
-          isActive: true,
-          phone: this.phoneFormGroup.get('phone')?.value,
-          dateOfBirth: this.dateBirthFormGroup.get('dateBirth')?.value,
-          pnc: this.pncFormGroup.get('pnc')?.value,
-          licenseValid: true,
-          imageUrl: this.imageProfile,
-        },
-      },
     });
-  }
 
-  registerNewUser() {
-    const formData = {
-      email: this.emailFormGroup.get('email')?.value,
-      username: this.usernameFormGroup.get('username')?.value,
-      firstName: this.nameFormGroup.get('firstname')?.value,
-      lastName: this.nameFormGroup.get('lastname')?.value,
-      password: this.passwordFormGroup.get('password')?.value,
-      address: this.addressFormGroup.get('address')?.value,
-      zipCode: this.stateZipCodeFormGroup.get('zip')?.value,
-      state: this.stateZipCodeFormGroup.get('state')?.value,
-      isActive: true,
-      phone: this.phoneFormGroup.get('phone')?.value,
-      dateOfBirth: this.dateBirthFormGroup.get('dateBirth')?.value,
-      pnc: this.pncFormGroup.get('pnc')?.value,
-      licenseValid: true,
-      imageUrl: this.imageProfile,
-    };
-
-    this.userService.registerNewUser(formData).subscribe({
-      next: (resp) => {
-        this.toast.info({
-          detail: 'Info Message',
-          summary: resp.message,
-          duration: 3000,
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'save') {
+        this.userService.updateUser(idUser, formData).subscribe({
+          next: (resp) => {
+            this.toast.info({
+              detail: 'Info Message',
+              summary: resp.message,
+              duration: 3000,
+            });
+          },
+          error: (err) => {
+            this.toast.error({
+              detail: 'Error Message',
+              summary: err.error.message,
+              duration: 5000,
+            });
+          },
         });
-        setTimeout(() => {
-          this.dialogRef.close();
-        }, 1000);
-      },
-      error: (err) => {
-        this.toast.error({
-          detail: 'Error Message',
-          summary: err.error.message,
-          duration: 5000,
-        });
-      },
+      } else if (result === 'close') {
+        dialogRef.close();
+      }
     });
-  }
-
-  closeAddNewUserDialog() {
-    this.dialogRef.close();
-  }
-
-  openConfirmCloseDialog() {
-    this.dialog
-      .open(ConfirmCloseDialogComponent, {
-        width: '23%',
-        height: '20%',
-        position: {
-          top: '5%',
-        },
-      })
-      .afterClosed()
-      .subscribe((result) => {
-        if (result === 'yes') {
-          setTimeout(() => {
-            this.dialogRef.close();
-          }, 300);
-        }
-      });
   }
 
   onKeyPress(event: KeyboardEvent) {
@@ -188,8 +122,46 @@ export class UserEditDialogComponent {
 
   matchPassword(): boolean {
     return (
-      this.passwordFormGroup.get('password')?.value ===
-      this.passwordFormGroup.get('confirmPassword')?.value
+      this.changePasswordFormGroup.get('newPassword')?.value ===
+      this.changePasswordFormGroup.get('repeatPassword')?.value
     );
+  }
+
+  ngOnInit() {
+    this.nameFormGroup = this.formBuilder.group({
+      firstname: [this.data.firstName, Validators.required],
+      lastname: [this.data.lastName, Validators.required],
+    });
+    this.addressFormGroup = this.formBuilder.group({
+      address: [this.data.address, Validators.required],
+    });
+    this.emailFormGroup = this.formBuilder.group({
+      email: [this.data.email, Validators.required],
+    });
+    this.pncFormGroup = this.formBuilder.group({
+      pnc: [this.data.pnc, Validators.required],
+    });
+    this.phoneFormGroup = this.formBuilder.group({
+      phone: [this.data.phone, Validators.required],
+    });
+    this.dateBirthFormGroup = this.formBuilder.group({
+      dateBirth: [this.data.dateOfBirth],
+    });
+    this.stateZipCode = this.formBuilder.group({
+      zip: [this.data.zipCode, Validators.required],
+      state: [this.data.state, Validators.required],
+    });
+    this.usernameFormGroup = this.formBuilder.group({
+      username: [this.data.username],
+    });
+    this.imageProfileFormGroup = this.formBuilder.group({
+      imageProfile: [''],
+    });
+    this.imageProfile = this.data.imageUrl;
+    this.changePasswordFormGroup = this.formBuilder.group({
+      oldPassword: ['', Validators.required],
+      newPassword: ['', Validators.required],
+      repeatPassword: ['', Validators.required],
+    });
   }
 }

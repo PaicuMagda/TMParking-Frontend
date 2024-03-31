@@ -19,7 +19,5 @@ export class LegendComponent implements OnInit {
     return this.parkingStatusColors[status];
   }
 
-  ngOnInit() {
-    console.log(this.parkingStatus);
-  }
+  ngOnInit() {}
 }

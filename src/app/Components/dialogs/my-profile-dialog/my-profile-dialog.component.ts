@@ -125,7 +125,6 @@ export class MyProfileDialogComponent implements OnInit {
               summary: resp.message,
               duration: 3000,
             });
-            console.log(formData);
           },
           error: (err) => {
             this.toast.error({
