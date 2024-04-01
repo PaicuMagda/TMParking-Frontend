@@ -1,13 +1,15 @@
 import { Component, Inject } from '@angular/core';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { UsersService } from 'src/app/services/users.service';
 import { NgToastService } from 'ng-angular-popup';
 import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes-dialog-vehicle/save-changes-dialog.component';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { UserStoreService } from 'src/app/services/user-store.service';
-
+import { Subject, from, switchMap, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-user-edit-dialog',
   templateUrl: './user-edit-dialog.component.html',
@@ -28,13 +30,15 @@ export class UserEditDialogComponent {
   imageProfile: string = '';
   imageProfileFileName: string | undefined;
   showIsNotDigitMessage: boolean;
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private userService: UsersService,
     private toast: NgToastService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<UserEditDialogComponent>
   ) {}
 
   openCloseConfirmSidenav() {
@@ -77,6 +81,7 @@ export class UserEditDialogComponent {
       imageUrl: this.imageProfile,
       username: this.usernameFormGroup.get('username')?.value,
     };
+
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
@@ -85,28 +90,55 @@ export class UserEditDialogComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'save') {
-        this.userService.updateUser(idUser, formData).subscribe({
-          next: (resp) => {
-            this.toast.info({
-              detail: 'Info Message',
-              summary: resp.message,
-              duration: 3000,
-            });
-          },
-          error: (err) => {
-            this.toast.error({
-              detail: 'Error Message',
-              summary: err.error.message,
-              duration: 5000,
-            });
-          },
-        });
-      } else if (result === 'close') {
-        dialogRef.close();
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(
+        switchMap((result: string) => {
+          console.log(result);
+          if (result === 'save') {
+            return this.userService.updateUser(idUser, formData);
+          } else {
+            return from([]);
+          }
+        })
+      )
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          this.dialogRef.close();
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
+  }
+
+  closeEditDialogComponent() {
+    this.dialog
+      .open(ConfirmCloseDialogComponent, {
+        width: '23%',
+        height: '20%',
+        position: {
+          top: '5%',
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result === 'yes') {
+          setTimeout(() => {
+            this.dialogRef.close();
+          }),
+            300;
+        }
+      });
   }
 
   onKeyPress(event: KeyboardEvent) {
@@ -125,6 +157,11 @@ export class UserEditDialogComponent {
       this.changePasswordFormGroup.get('newPassword')?.value ===
       this.changePasswordFormGroup.get('repeatPassword')?.value
     );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit() {
