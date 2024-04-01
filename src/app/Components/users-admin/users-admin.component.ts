@@ -10,7 +10,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { DeleteUserAccountConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-user-account-confirmation-dialog/delete-user-account-confirmation-dialog.component';
 import { NgToastService } from 'ng-angular-popup';
-import { map } from 'rxjs';
+import { Subject, map, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-users-admin',
@@ -25,6 +25,7 @@ export class UsersAdminComponent implements OnInit {
   vehicles: Vehicle[] = [];
   roles: any[];
   role: string = '';
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private usersService: UsersService,
@@ -67,22 +68,25 @@ export class UsersAdminComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'save') {
-        this.usersService.updateUser(idUser, userData).subscribe({
-          next: (resp) => {
-            this.toast.info({
-              detail: 'Info Message',
-              summary: resp.message,
-              duration: 3000,
-            });
-          },
-          error: (err) => {
-            this.toast.error({
-              detail: 'Error Message',
-              summary: err.error.message,
-              duration: 5000,
-            });
-          },
-        });
+        this.usersService
+          .updateUser(idUser, userData)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: (resp) => {
+              this.toast.info({
+                detail: 'Info Message',
+                summary: resp.message,
+                duration: 3000,
+              });
+            },
+            error: (err) => {
+              this.toast.error({
+                detail: 'Error Message',
+                summary: err.error.message,
+                duration: 5000,
+              });
+            },
+          });
         this.users[index].isEdit = false;
       } else if (result === 'close') {
         this.users[index].isEdit = false;
@@ -139,6 +143,7 @@ export class UsersAdminComponent implements OnInit {
     this.usersService
       .getAllUsers()
       .pipe(
+        takeUntil(this.destroy$),
         map((users) => {
           users.forEach((user) => {
             user.isEdit = false;
@@ -146,15 +151,24 @@ export class UsersAdminComponent implements OnInit {
           return users;
         })
       )
+      .pipe(takeUntil(this.destroy$))
       .subscribe((users: User[]) => {
         this.users = users;
         this.users.forEach((user) => {
           this.userFormGroup.push(this.createFormGroup(user));
         });
       });
-    this.userStore.getRoleFromStore().subscribe((val) => {
-      const roleFromToken = this.authenticationService.getRoleFromToken();
-      this.role = val || roleFromToken;
-    });
+    this.userStore
+      .getRoleFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        const roleFromToken = this.authenticationService.getRoleFromToken();
+        this.role = val || roleFromToken;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

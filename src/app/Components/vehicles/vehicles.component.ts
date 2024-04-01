@@ -6,7 +6,7 @@ import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialo
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
-import { Subject, map, takeUntil } from 'rxjs';
+import { Subject, from, map, switchMap, takeUntil } from 'rxjs';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { NgToastService } from 'ng-angular-popup';
 import { MatDialog } from '@angular/material/dialog';
@@ -79,30 +79,37 @@ export class VehiclesComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'save') {
-        this.vehicleService.updateVehicle(idVehicle, vehicleData).subscribe({
-          next: (resp) => {
-            this.toast.info({
-              detail: 'Info Message',
-              summary: resp.message,
-              duration: 3000,
-            });
-          },
-          error: (err) => {
-            this.toast.error({
-              detail: 'Error Message',
-              summary: err.error.message,
-              duration: 5000,
-            });
-          },
-        });
-        this.vehicles[index].isEdit = false;
-      } else if (result === 'close') {
-        this.vehicles[index].isEdit = false;
-        dialogRef.close();
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((result: string) => {
+          if (result === 'save') {
+            this.vehicles[index].isEdit = false;
+            return this.vehicleService.updateVehicle(idVehicle, vehicleData);
+          } else {
+            dialogRef.close();
+            this.vehicles[index].isEdit = false;
+            return from([]);
+          }
+        })
+      )
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
   }
 
   openDeleteConfirmDialog(idVehicle: number) {
@@ -161,6 +168,7 @@ export class VehiclesComponent implements OnInit {
                 return vehicles;
               })
             )
+            .pipe(takeUntil(this.destroy$))
             .subscribe((values) => {
               this.vehicles = values;
               values.forEach((vehicle) => {
@@ -172,6 +180,7 @@ export class VehiclesComponent implements OnInit {
           this.vehicleService
             .getVehicleByUserId(this.idUserLogged)
             .pipe(
+              takeUntil(this.destroy$),
               map((vehicles) => {
                 vehicles.forEach((vehicle) => {
                   vehicle.isEdit = false;
@@ -183,6 +192,7 @@ export class VehiclesComponent implements OnInit {
                 return vehicles;
               })
             )
+            .pipe(takeUntil(this.destroy$))
             .subscribe((values) => {
               this.vehicles = values;
               values.forEach((vehicle) => {
@@ -193,15 +203,26 @@ export class VehiclesComponent implements OnInit {
       });
   }
 
+  ngOnSestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   ngOnInit() {
-    this.userStore.getRoleFromStore().subscribe((val) => {
-      const roleFromToken = this.authenticationService.getRoleFromToken();
-      this.role = val || roleFromToken;
-    });
-    this.userStore.getIdUserFromStore().subscribe((val) => {
-      let userIdFromToken = this.authenticationService.getUserIdFromToken();
-      this.idUserLogged = val || userIdFromToken;
-    });
+    this.userStore
+      .getRoleFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        const roleFromToken = this.authenticationService.getRoleFromToken();
+        this.role = val || roleFromToken;
+      });
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.authenticationService.getUserIdFromToken();
+        this.idUserLogged = val || userIdFromToken;
+      });
     this.getVehicles();
   }
 }
