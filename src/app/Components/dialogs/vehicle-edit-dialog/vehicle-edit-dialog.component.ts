@@ -11,6 +11,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NgToastService } from 'ng-angular-popup';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-vehicle-edit-dialog',
@@ -28,6 +29,7 @@ export class VehicleEditDialogComponent {
   idUserLogged: string = '';
   userLoggedFullName: string = '';
   showPdfViewer: boolean = false;
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,14 +43,19 @@ export class VehicleEditDialogComponent {
   ) {}
 
   ngOnInit() {
-    this.userStore.getIdUserFromStore().subscribe((val) => {
-      let userIdFromToken = this.auth.getUserIdFromToken();
-      this.idUserLogged = val || userIdFromToken;
-    });
-    this.userStore.getFullNameFromStore().subscribe((val) => {
-      this.userLoggedFullName = val;
-    });
-
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIdFromToken();
+        this.idUserLogged = val || userIdFromToken;
+      });
+    this.userStore
+      .getFullNameFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        this.userLoggedFullName = val;
+      });
     this.addNewVehicleFormGroup = this.formBuilder.group({
       image: ['', Validators.required],
       make: [this.data.make, Validators.required],
@@ -102,26 +109,29 @@ export class VehicleEditDialogComponent {
       year: this.addNewVehicleFormGroup.get('year')?.value,
     };
 
-    this.vehicleService.updateVehicle(idVehicle, formData).subscribe({
-      next: (resp) => {
-        this.toast.info({
-          detail: 'Info Message',
-          summary: resp.message,
+    this.vehicleService
+      .updateVehicle(idVehicle, formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 1000);
+        },
+        error: (err) => ({
+          summary: err.message,
           duration: 3000,
-        });
-        setTimeout(() => {
-          this.dialogRef.close();
-        }, 1000);
-      },
-      error: (err) => ({
-        summary: err.message,
-        duration: 3000,
-        detail: 'Error Message',
-      }),
-    });
+          detail: 'Error Message',
+        }),
+      });
   }
 
-  closeAddNewVehicleDialogComponent() {
+  closeEditVehicleDialogComponent() {
     this.dialog
       .open(ConfirmCloseDialogComponent, {
         width: '23%',
@@ -131,6 +141,7 @@ export class VehicleEditDialogComponent {
         },
       })
       .afterClosed()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((result) => {
         if (result === 'yes') {
           setTimeout(() => {
@@ -138,5 +149,10 @@ export class VehicleEditDialogComponent {
           }, 300);
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

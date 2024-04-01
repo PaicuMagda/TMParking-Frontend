@@ -51,6 +51,7 @@ export class ParkingSpacesComponent implements OnInit {
   openEditDialog(idParkingSpace: number) {
     this.parkingSpacesService
       .getParkingSpacesById(idParkingSpace)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         this.dialog.open(ParkingSpacesDialogEditComponent, {
           width: '100%',
@@ -105,6 +106,7 @@ export class ParkingSpacesComponent implements OnInit {
         if (value === 'myParkingSpaces') {
           this.parkingSpacesService
             .getMyParkingSpaces(this.idUserLogged)
+            .pipe(takeUntil(this.destroy$))
             .subscribe((values) => {
               this.parkingSpaces = values;
             });
@@ -136,15 +138,21 @@ export class ParkingSpacesComponent implements OnInit {
 
   ngOnInit() {
     this.isLogin = this.authenticationService.isLoggedIn();
-    this.userStore.getRoleFromStore().subscribe((val) => {
-      const roleFromToken = this.authenticationService.getRoleFromToken();
-      this.role = val || roleFromToken;
-    });
+    this.userStore
+      .getRoleFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        const roleFromToken = this.authenticationService.getRoleFromToken();
+        this.role = val || roleFromToken;
+      });
 
-    this.userStore.getIdUserFromStore().subscribe((val) => {
-      let userIdFromToken = this.authenticationService.getUserIdFromToken();
-      this.idUserLogged = val || userIdFromToken;
-    });
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.authenticationService.getUserIdFromToken();
+        this.idUserLogged = val || userIdFromToken;
+      });
     this.getParkingSpaces();
   }
 }

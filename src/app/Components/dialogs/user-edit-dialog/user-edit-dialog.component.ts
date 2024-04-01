@@ -93,8 +93,8 @@ export class UserEditDialogComponent {
     dialogRef
       .afterClosed()
       .pipe(
+        takeUntil(this.destroy$),
         switchMap((result: string) => {
-          console.log(result);
           if (result === 'save') {
             return this.userService.updateUser(idUser, formData);
           } else {
@@ -131,6 +131,7 @@ export class UserEditDialogComponent {
         },
       })
       .afterClosed()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((result) => {
         if (result === 'yes') {
           setTimeout(() => {
