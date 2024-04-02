@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { VehicleEditDialogComponent } from '../../dialogs/vehicle-edit-dialog/vehicle-edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-vehicles-table',
@@ -16,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class VehiclesTableComponent implements OnInit, AfterViewInit {
   displayedColumnsVehicleTable: string[] = Object.values(EnumVehiclesTables);
   dataSource = new MatTableDataSource<Vehicle>();
+  private destroy$: Subject<void> = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -26,18 +28,21 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.vehicleService.getAllVehicles().subscribe((values) => {
-      const vehicleWithOwnerFullname = values.map((vehicle: Vehicle) => {
-        return {
-          ...vehicle,
-          fullnameOwner:
-            vehicle.vehicleOwner.firstName +
-            ' ' +
-            vehicle.vehicleOwner.lastName,
-        };
+    this.vehicleService
+      .getAllVehicles()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        const vehicleWithOwnerFullname = values.map((vehicle: Vehicle) => {
+          return {
+            ...vehicle,
+            fullnameOwner:
+              vehicle.vehicleOwner.firstName +
+              ' ' +
+              vehicle.vehicleOwner.lastName,
+          };
+        });
+        this.dataSource.data = vehicleWithOwnerFullname;
       });
-      this.dataSource.data = vehicleWithOwnerFullname;
-    });
   }
 
   ngAfterViewInit() {
@@ -46,12 +51,20 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
   }
 
   openEditVehicle(idVehicle: number) {
-    this.vehicleService.getVehicleById(idVehicle).subscribe((values) => {
-      this.dialog.open(VehicleEditDialogComponent, {
-        width: '40%',
-        height: '98%',
-        data: values,
+    this.vehicleService
+      .getVehicleById(idVehicle)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        this.dialog.open(VehicleEditDialogComponent, {
+          width: '40%',
+          height: '98%',
+          data: values,
+        });
       });
-    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

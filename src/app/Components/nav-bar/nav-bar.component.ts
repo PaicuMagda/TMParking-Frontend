@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LogoutDialogComponent } from '../dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { UsersService } from 'src/app/services/users.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,6 +15,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
+  private destroy$: Subject<void> = new Subject<void>();
   isLogin: boolean = false;
   fullName: string = '';
   role: string = '';
@@ -59,35 +61,55 @@ export class NavBarComponent implements OnInit {
   }
 
   changeShowSearch() {
-    this.sidenavService.showSearch$.subscribe((val) => {
-      this.showSearch = val;
-    });
+    this.sidenavService.showSearch$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        this.showSearch = val;
+      });
   }
 
   getImage() {
     this.userService
       .getMyAccount(this.userId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((val) => (this.image = val.imageUrl));
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit() {
     this.changeShowSearch();
     this.isLogin = this.auth.isLoggedIn();
-    this.userStore.getFullNameFromStore().subscribe((val) => {
-      let fullNameFromToken = this.auth.getFullNameFromToken();
-      this.fullName = val || fullNameFromToken;
-    });
-    this.userStore.getRoleFromStore().subscribe((val) => {
-      const roleFromToken = this.auth.getRoleFromToken();
-      this.role = val || roleFromToken;
-    });
-    this.userStore.getIdUserFromStore().subscribe((val) => {
-      let userIdFromToken = this.auth.getUserIdFromToken();
-      this.userId = userIdFromToken || val;
-    });
-    this.userService.getMyAccount(this.userId).subscribe((values) => {
-      this.userLogged = values;
-    });
+    this.userStore
+      .getFullNameFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let fullNameFromToken = this.auth.getFullNameFromToken();
+        this.fullName = val || fullNameFromToken;
+      });
+    this.userStore
+      .getRoleFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        const roleFromToken = this.auth.getRoleFromToken();
+        this.role = val || roleFromToken;
+      });
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIdFromToken();
+        this.userId = userIdFromToken || val;
+      });
+    this.userService
+      .getMyAccount(this.userId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        this.userLogged = values;
+      });
 
     this.getImage();
   }

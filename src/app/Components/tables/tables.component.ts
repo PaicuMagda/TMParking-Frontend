@@ -6,6 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { User } from 'src/app/interfaces/user';
 import { Vehicle } from 'src/app/interfaces/vehicle';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tables',
@@ -13,9 +14,9 @@ import { Vehicle } from 'src/app/interfaces/vehicle';
   styleUrls: ['./tables.component.scss'],
 })
 export class TablesComponent implements OnInit {
+  private destroy$: Subject<void> = new Subject<void>();
   activeTable: string[] = [];
   activeTabIndex: number = 0;
-
   @ViewChild('matTabGroup') matTabGroup!: ElementRef;
 
   constructor(
@@ -49,60 +50,72 @@ export class TablesComponent implements OnInit {
   }
 
   private exportCsvParkingSpacesFile() {
-    this.parkingSpacesService.getParkingSpaces().subscribe((values) => {
-      const data: any[] = values;
-      const formula: string = 'parking-spaces';
+    this.parkingSpacesService
+      .getParkingSpaces()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        const data: any[] = values;
+        const formula: string = 'parking-spaces';
 
-      var options = {
-        fieldSeparator: ';',
-        quoteStrings: '"',
-        decimalseparator: '.',
-        showLabels: false,
-        noDownload: false,
-        showTitle: false,
-        useBom: false,
-      };
-      const fileInfo = new ngxCsv(data, formula, options);
-    });
+        var options = {
+          fieldSeparator: ';',
+          quoteStrings: '"',
+          decimalseparator: '.',
+          showLabels: false,
+          noDownload: false,
+          showTitle: false,
+          useBom: false,
+        };
+        const fileInfo = new ngxCsv(data, formula, options);
+      });
   }
 
   private exportCsvUsersFile() {
-    this.usersService.getAllUsers().subscribe((values) => {
-      const formula: string = 'users';
-      const data: User[] = values;
-      var options = {
-        fieldSeparator: ';',
-        quoteStrings: '"',
-        decimalseparator: '.',
-        showLabels: false,
-        noDownload: false,
-        showTitle: false,
-        useBom: false,
-      };
-      const fileInfo = new ngxCsv(data, formula, options);
-    });
+    this.usersService
+      .getAllUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        const formula: string = 'users';
+        const data: User[] = values;
+        var options = {
+          fieldSeparator: ';',
+          quoteStrings: '"',
+          decimalseparator: '.',
+          showLabels: false,
+          noDownload: false,
+          showTitle: false,
+          useBom: false,
+        };
+        const fileInfo = new ngxCsv(data, formula, options);
+      });
   }
 
   private exportVehiclesCsvFile() {
-    this.vehiclesService.getAllVehicles().subscribe((values) => {
-      const data: Vehicle[] = values;
-      const formula: string = 'vehicles';
-      var options = {
-        fieldSeparator: ';',
-        quoteStrings: '"',
-        decimalseparator: '.',
-        showLabels: false,
-        noDownload: false,
-        showTitle: false,
-        useBom: false,
-      };
-      const fileInfo = new ngxCsv(data, formula, options);
-    });
+    this.vehiclesService
+      .getAllVehicles()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        const data: Vehicle[] = values;
+        const formula: string = 'vehicles';
+        var options = {
+          fieldSeparator: ';',
+          quoteStrings: '"',
+          decimalseparator: '.',
+          showLabels: false,
+          noDownload: false,
+          showTitle: false,
+          useBom: false,
+        };
+        const fileInfo = new ngxCsv(data, formula, options);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit() {
     this.activeTable = this.parseEnumToArray(TabTitle);
   }
-
-  ngAfterViewInit() {}
 }

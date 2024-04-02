@@ -7,6 +7,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NgToastService } from 'ng-angular-popup';
+import { Subject, from, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-my-profile-dialog',
@@ -14,6 +15,7 @@ import { NgToastService } from 'ng-angular-popup';
   styleUrls: ['./my-profile-dialog.component.scss'],
 })
 export class MyProfileDialogComponent implements OnInit {
+  private destroy$: Subject<void> = new Subject<void>();
   isLinear = false;
   nameFormGroup: FormGroup;
   addressFormGroup: FormGroup;
@@ -40,32 +42,38 @@ export class MyProfileDialogComponent implements OnInit {
   ) {}
 
   getMyAccount(userId: number) {
-    this.userService.getMyAccount(userId).subscribe((user) => {
-      this.nameFormGroup.patchValue({
-        firstname: user.firstName,
-        lastname: user.lastName,
+    this.userService
+      .getMyAccount(userId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
+        this.nameFormGroup.patchValue({
+          firstname: user.firstName,
+          lastname: user.lastName,
+        });
+        this.usernameFormGroup.patchValue({
+          username: user.username,
+        });
+        this.addressFormGroup.patchValue({
+          address: user.address,
+        });
+        this.emailFormGroup.patchValue({
+          email: user.email,
+        });
+        this.pncFormGroup.patchValue({
+          pnc: user.pnc,
+        });
+        this.phoneFormGroup.patchValue({
+          phone: user.phone,
+        });
+        this.dateBirthFormGroup.patchValue({
+          dateBirth: user.dateOfBirth,
+        });
+        this.stateZipCode.patchValue({
+          zip: user.zipCode,
+          state: user.state,
+        });
+        this.imageProfile = user.imageUrl;
       });
-      this.addressFormGroup.patchValue({
-        address: user.address,
-      });
-      this.emailFormGroup.patchValue({
-        email: user.email,
-      });
-      this.pncFormGroup.patchValue({
-        pnc: user.pnc,
-      });
-      this.phoneFormGroup.patchValue({
-        phone: user.phone,
-      });
-      this.dateBirthFormGroup.patchValue({
-        dateBirth: user.dateOfBirth,
-      });
-      this.stateZipCode.patchValue({
-        zip: user.zipCode,
-        state: user.state,
-      });
-      this.imageProfile = user.imageUrl;
-    });
   }
 
   openCloseConfirmSidenav() {
@@ -93,7 +101,7 @@ export class MyProfileDialogComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  openSaveChangesConfirmDialog(idUser: number) {
+  openSaveChangesConfirmDialog() {
     const formData = {
       firstName: this.nameFormGroup.get('firstname')?.value,
       lastName: this.nameFormGroup.get('lastname')?.value,
@@ -116,28 +124,35 @@ export class MyProfileDialogComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'save') {
-        this.userService.updateUser(this.userId, formData).subscribe({
-          next: (resp) => {
-            this.toast.info({
-              detail: 'Info Message',
-              summary: resp.message,
-              duration: 3000,
-            });
-          },
-          error: (err) => {
-            this.toast.error({
-              detail: 'Error Message',
-              summary: err.error.message,
-              duration: 5000,
-            });
-          },
-        });
-      } else if (result === 'close') {
-        dialogRef.close();
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((result) => {
+          if (result === 'save') {
+            return this.userService.updateUser(this.userId, formData);
+          } else {
+            return from([]);
+          }
+        })
+      )
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          dialogRef.close();
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
   }
 
   onKeyPress(event: KeyboardEvent) {
@@ -159,11 +174,14 @@ export class MyProfileDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userStore.getIdUserFromStore().subscribe((val) => {
-      let userIdFromToken = this.auth.getUserIdFromToken();
-      this.userId = userIdFromToken || val;
-      this.getMyAccount(this.userId);
-    });
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIdFromToken();
+        this.userId = userIdFromToken || val;
+        this.getMyAccount(this.userId);
+      });
 
     this.nameFormGroup = this.formBuilder.group({
       firstname: ['', Validators.required],
@@ -199,5 +217,10 @@ export class MyProfileDialogComponent implements OnInit {
       newPassword: ['', Validators.required],
       repeatPassword: ['', Validators.required],
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

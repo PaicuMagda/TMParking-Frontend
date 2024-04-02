@@ -10,6 +10,7 @@ import { AddNewUserDialogComponent } from '../dialogs/add-new-user-dialog/add-ne
 import { Router } from '@angular/router';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-display-cards',
@@ -17,6 +18,7 @@ import { NavbarService } from 'src/app/services/navbar.service';
   styleUrls: ['./display-cards.component.scss'],
 })
 export class DisplayCardsComponent {
+  private destroy$: Subject<void> = new Subject<void>();
   role: string = '';
   toggleButtonValue: string = '';
   isLogin: boolean = false;
@@ -110,13 +112,23 @@ export class DisplayCardsComponent {
   }
 
   ngOnInit() {
-    this.displayCardsService.toggleValueSubjectObservable.subscribe((value) => {
-      this.toggleButtonValue = value;
-    });
+    this.displayCardsService.toggleValueSubjectObservable
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.toggleButtonValue = value;
+      });
     this.isLogin = this.auth.isLoggedIn();
-    this.userStore.getRoleFromStore().subscribe((val) => {
-      const roleFromToken = this.auth.getRoleFromToken();
-      this.role = val || roleFromToken;
-    });
+    this.userStore
+      .getRoleFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        const roleFromToken = this.auth.getRoleFromToken();
+        this.role = val || roleFromToken;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

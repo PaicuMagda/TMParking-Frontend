@@ -10,10 +10,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EnumParkingSpacesTable } from 'src/app/enums/enum-parking-spaces-table';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
-import { AddNewParkingSpaceDialogComponent } from '../../dialogs/add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ParkingSpace } from 'src/app/interfaces/parking-space';
 import { ParkingSpacesDialogEditComponent } from '../../dialogs/parking-spaces-dialog-edit/parking-spaces-dialog-edit.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-parking-space-table',
@@ -22,6 +22,7 @@ import { ParkingSpacesDialogEditComponent } from '../../dialogs/parking-spaces-d
 })
 export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<ParkingSpace>();
+  private destroy$: Subject<void> = new Subject<void>();
   parkingSpacesDisplayedColumns: string[] = Object.values(
     EnumParkingSpacesTable
   );
@@ -36,14 +37,18 @@ export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.parkingSpacesService.getParkingSpaces().subscribe((values) => {
-      this.dataSource.data = values;
-    });
+    this.parkingSpacesService
+      .getParkingSpaces()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        this.dataSource.data = values;
+      });
   }
 
   openEditParkingSpace(idParkingSpace: number) {
     this.parkingSpacesService
       .getParkingSpacesById(idParkingSpace)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         this.dialog.open(ParkingSpacesDialogEditComponent, {
           width: '100%',
@@ -54,6 +59,11 @@ export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
           data: values,
         });
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngAfterViewInit(): void {

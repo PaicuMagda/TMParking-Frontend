@@ -21,5 +21,7 @@ export class SaveChangesDialogComponent implements OnInit {
     this.dialogRef.close('save');
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.data);
+  }
 }

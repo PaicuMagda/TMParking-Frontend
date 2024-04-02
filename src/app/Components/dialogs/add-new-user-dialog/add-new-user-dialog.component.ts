@@ -5,6 +5,7 @@ import { SaveChangesDialogComponent } from '../confirmation-dialogs/save-changes
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { UsersService } from 'src/app/services/users.service';
 import { NgToastService } from 'ng-angular-popup';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add-new-user-dialog',
@@ -27,6 +28,7 @@ export class AddNewUserDialogComponent {
   showIsNotDigitMessage: boolean;
   imageProfileFileName: string | undefined;
   imageProfile: string;
+  private destroy$: Subject<void> = new Subject();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -91,24 +93,6 @@ export class AddNewUserDialogComponent {
       position: {
         top: '5%',
       },
-      data: {
-        formData: {
-          email: this.emailFormGroup.get('email')?.value,
-          username: this.usernameFormGroup.get('username')?.value,
-          firstName: this.nameFormGroup.get('firstname')?.value,
-          lastName: this.nameFormGroup.get('lastname')?.value,
-          password: this.passwordFormGroup.get('password')?.value,
-          address: this.addressFormGroup.get('address')?.value,
-          zipCode: this.stateZipCodeFormGroup.get('zip')?.value,
-          state: this.stateZipCodeFormGroup.get('state')?.value,
-          isActive: true,
-          phone: this.phoneFormGroup.get('phone')?.value,
-          dateOfBirth: this.dateBirthFormGroup.get('dateBirth')?.value,
-          pnc: this.pncFormGroup.get('pnc')?.value,
-          licenseValid: true,
-          imageUrl: this.imageProfile,
-        },
-      },
     });
   }
 
@@ -130,25 +114,28 @@ export class AddNewUserDialogComponent {
       imageUrl: this.imageProfile,
     };
 
-    this.userService.registerNewUser(formData).subscribe({
-      next: (resp) => {
-        this.toast.info({
-          detail: 'Info Message',
-          summary: resp.message,
-          duration: 3000,
-        });
-        setTimeout(() => {
-          this.dialogRef.close();
-        }, 1000);
-      },
-      error: (err) => {
-        this.toast.error({
-          detail: 'Error Message',
-          summary: err.error.message,
-          duration: 5000,
-        });
-      },
-    });
+    this.userService
+      .registerNewUser(formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 1000);
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
   }
 
   closeAddNewUserDialog() {
@@ -165,6 +152,7 @@ export class AddNewUserDialogComponent {
         },
       })
       .afterClosed()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((result) => {
         if (result === 'yes') {
           setTimeout(() => {
@@ -190,5 +178,10 @@ export class AddNewUserDialogComponent {
       this.passwordFormGroup.get('password')?.value ===
       this.passwordFormGroup.get('confirmPassword')?.value
     );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

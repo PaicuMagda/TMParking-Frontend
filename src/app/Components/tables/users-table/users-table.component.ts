@@ -8,6 +8,7 @@ import { User } from 'src/app/interfaces/user';
 import { UserEditDialogComponent } from '../../dialogs/user-edit-dialog/user-edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from 'src/app/services/users.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-users-table',
@@ -20,6 +21,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   data: User[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -28,16 +30,18 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe((values: any) => {
-      const usersWithFullName = values.users.map((user: any) => {
-        return {
-          ...user,
-          fullname: user.lastName + ' ' + user.firstName,
-          numberOfVehciles: user.vehicles.length,
-        };
+    this.activatedRoute.data
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values: any) => {
+        const usersWithFullName = values.users.map((user: any) => {
+          return {
+            ...user,
+            fullname: user.lastName + ' ' + user.firstName,
+            numberOfVehciles: user.vehicles.length,
+          };
+        });
+        this.dataSource.data = usersWithFullName;
       });
-      this.dataSource.data = usersWithFullName;
-    });
   }
 
   ngAfterViewInit(): void {
@@ -46,12 +50,20 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
   }
 
   openEditUserDialog(userId: number) {
-    this.usersService.getMyAccount(userId).subscribe((user) => {
-      this.dialog.open(UserEditDialogComponent, {
-        width: '40%',
-        height: '98%',
-        data: user,
+    this.usersService
+      .getMyAccount(userId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
+        this.dialog.open(UserEditDialogComponent, {
+          width: '40%',
+          height: '98%',
+          data: user,
+        });
       });
-    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

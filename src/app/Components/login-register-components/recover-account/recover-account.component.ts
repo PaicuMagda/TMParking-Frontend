@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
+import { Subject, takeUntil } from 'rxjs';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { ResetPasswordService } from 'src/app/services/reset-password.service';
   styleUrls: ['./recover-account.component.scss'],
 })
 export class RecoverAccountComponent implements OnInit {
+  private destroy$: Subject<void> = new Subject<void>();
   email: string = '';
   emailFormGroup: FormGroup;
 
@@ -21,6 +23,7 @@ export class RecoverAccountComponent implements OnInit {
   sendEmail() {
     this.resetPassword
       .sendResetPasswordLink(this.emailFormGroup.get('email')?.value)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (resp) => {
           this.toast.success({
@@ -44,5 +47,10 @@ export class RecoverAccountComponent implements OnInit {
     this.emailFormGroup = this.formBuilder.group({
       email: [''],
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

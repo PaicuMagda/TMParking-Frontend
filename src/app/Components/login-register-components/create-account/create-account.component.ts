@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./create-account.component.scss'],
 })
 export class CreateAccountComponent {
+  private destroy$: Subject<void> = new Subject<void>();
   createAccountForm: FormGroup;
   isPasswordValid: boolean = false;
   isMinLengthValid: boolean = false;
@@ -44,21 +46,29 @@ export class CreateAccountComponent {
   }
 
   register() {
-    this.authentication.registerUser(this.createAccountForm.value).subscribe({
-      next: (resp) => {
-        this.toast.info({
-          detail: 'Info Message',
-          summary: resp.message,
-          duration: 5000,
-        });
-      },
-      error: (err) => {
-        this.toast.error({
-          detail: 'Error Message',
-          summary: err?.error.message,
-          duration: 5000,
-        });
-      },
-    });
+    this.authentication
+      .registerUser(this.createAccountForm.value)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 5000,
+          });
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err?.error.message,
+            duration: 5000,
+          });
+        },
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -10,6 +10,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { NgToastService } from 'ng-angular-popup';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add-new-parking-space-dialog',
@@ -29,6 +30,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
+  private destroy$: Subject<void> = new Subject<any>();
   toggleButtonValue: boolean = false;
   name: string = '';
   addressParkingSpace: string = '';
@@ -102,6 +104,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
         },
       })
       .afterClosed()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((result) => {
         if (result === 'yes') {
           setTimeout(() => {
@@ -140,25 +143,28 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       parkingSpacesOwnerId: this.parkingSpacesOwnerId,
     };
 
-    this.parkingSpacesService.registerParkingSpaces(formData).subscribe({
-      next: (resp) => {
-        this.toast.info({
-          detail: 'Info Message',
-          summary: resp.message,
-          duration: 3000,
-        });
-        setTimeout(() => {
-          this.dialogRef.close();
-        }, 1000);
-      },
-      error: (err) => {
-        this.toast.error({
-          detail: 'Error Message',
-          summary: err.error.message,
-          duration: 5000,
-        });
-      },
-    });
+    this.parkingSpacesService
+      .registerParkingSpaces(formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 1000);
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
   }
 
   ngOnInit() {
@@ -187,14 +193,25 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     if (this.data) {
     }
 
-    this.userStore.getFullNameFromStore().subscribe((val) => {
-      let fullNameFromToken = this.auth.getFullNameFromToken();
-      this.userLoggedFullName = fullNameFromToken || val;
-    });
+    this.userStore
+      .getFullNameFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let fullNameFromToken = this.auth.getFullNameFromToken();
+        this.userLoggedFullName = fullNameFromToken || val;
+      });
 
-    this.userStore.getIdUserFromStore().subscribe((val) => {
-      let userIdFromToken = this.auth.getUserIdFromToken();
-      this.parkingSpacesOwnerId = userIdFromToken || val;
-    });
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIdFromToken();
+        this.parkingSpacesOwnerId = userIdFromToken || val;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

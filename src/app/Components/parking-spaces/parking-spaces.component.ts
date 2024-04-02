@@ -113,9 +113,12 @@ export class ParkingSpacesComponent implements OnInit {
           this.toggleValue = value;
         }
         if (value === 'allParkingSpaces') {
-          this.parkingSpacesService.getParkingSpaces().subscribe((values) => {
-            this.parkingSpaces = values;
-          });
+          this.parkingSpacesService
+            .getParkingSpaces()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((values) => {
+              this.parkingSpaces = values;
+            });
           this.toggleValue = value;
         }
       });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { ParkingSpaceBookingService } from 'src/app/services/parking-space-booking.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./parking-space-details.component.scss'],
 })
 export class ParkingSpaceDetailsComponent implements OnInit {
+  private destroy$: Subject<void> = new Subject<void>();
   showSearch: boolean = false;
   parkingPlace: any;
   bookingType: string = 'day';
@@ -59,9 +60,12 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   }
 
   populateHoursArray() {
-    this.bookingService.getNumberArray().subscribe((values) => {
-      this.hours = values;
-    });
+    this.bookingService
+      .getNumberArray()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        this.hours = values;
+      });
   }
 
   openLeavePageDialog() {
@@ -74,6 +78,11 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   // checkEndHourIsSmaller() {
   //   // return this.endHour <= this.startHour;
   //   console.log(this.startHour);
@@ -84,16 +93,23 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     this.idParkingSpaces = this.router.snapshot.params['id'];
     this.parkingSpaceService
       .getParkingSpacesById(this.idParkingSpaces)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.parkingPlace = value;
       });
     this.populateHoursArray();
     this.paymentMethods = Object.values(PaymentMethods);
-    this.bookingService.getMonthNumber().subscribe((values) => {
-      this.months = values;
-    });
-    this.vehicleService.getAllVehicles().subscribe((vehicles) => {
-      this.vehicles = vehicles;
-    });
+    this.bookingService
+      .getMonthNumber()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        this.months = values;
+      });
+    this.vehicleService
+      .getAllVehicles()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((vehicles) => {
+        this.vehicles = vehicles;
+      });
   }
 }

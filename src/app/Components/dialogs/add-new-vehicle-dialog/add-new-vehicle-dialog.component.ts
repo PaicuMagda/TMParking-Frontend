@@ -6,6 +6,7 @@ import { VehiclesService } from 'src/app/services/vehicles.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NgToastService } from 'ng-angular-popup';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add-new-vehicle-dialog',
@@ -21,6 +22,7 @@ export class AddNewVehicleDialogComponent {
   imageProfileFileName: string | undefined;
   idUserLogged: string = '';
   userLoggedFullName: string = '';
+  private destroy$: Subject<void> = new Subject();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,14 +35,20 @@ export class AddNewVehicleDialogComponent {
   ) {}
 
   ngOnInit() {
-    this.userStore.getIdUserFromStore().subscribe((val) => {
-      let userIdFromToken = this.auth.getUserIdFromToken();
-      this.idUserLogged = val || userIdFromToken;
-    });
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIdFromToken();
+        this.idUserLogged = val || userIdFromToken;
+      });
 
-    this.userStore.getFullNameFromStore().subscribe((val) => {
-      this.userLoggedFullName = val;
-    });
+    this.userStore
+      .getFullNameFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        this.userLoggedFullName = val;
+      });
 
     this.addNewVehicleFormGroup = this.formBuilder.group({
       image: ['', Validators.required],
@@ -94,23 +102,26 @@ export class AddNewVehicleDialogComponent {
       year: this.addNewVehicleFormGroup.get('year')?.value,
     };
 
-    this.vehicleService.registerVehicle(formData).subscribe({
-      next: (resp) => {
-        this.toast.info({
-          detail: 'Info Message',
-          summary: resp.message,
+    this.vehicleService
+      .registerVehicle(formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 1000);
+        },
+        error: (err) => ({
+          summary: err.message,
           duration: 3000,
-        });
-        setTimeout(() => {
-          this.dialogRef.close();
-        }, 1000);
-      },
-      error: (err) => ({
-        summary: err.message,
-        duration: 3000,
-        detail: 'Error Message',
-      }),
-    });
+          detail: 'Error Message',
+        }),
+      });
   }
 
   closeAddNewVehicleDialogComponent() {
@@ -123,6 +134,7 @@ export class AddNewVehicleDialogComponent {
         },
       })
       .afterClosed()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((result) => {
         if (result === 'yes') {
           setTimeout(() => {
@@ -130,5 +142,10 @@ export class AddNewVehicleDialogComponent {
           }, 300);
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
