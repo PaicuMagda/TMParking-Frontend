@@ -25,6 +25,7 @@ export class UsersAdminComponent implements OnInit {
   vehicles: Vehicle[] = [];
   roles: any[];
   role: string = '';
+  isLoading: boolean = true;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -147,6 +148,7 @@ export class UsersAdminComponent implements OnInit {
         map((users) => {
           users.forEach((user) => {
             user.isEdit = false;
+            this.isLoading = false;
           });
           return users;
         })

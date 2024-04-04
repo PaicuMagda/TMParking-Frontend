@@ -26,6 +26,7 @@ export class VehiclesComponent implements OnInit {
   imageProfile: string;
   vehicleRegistrationCertificate: string;
   showPdfViewer: boolean = false;
+  isLoading: boolean = true;
 
   constructor(
     private vehicleService: VehiclesService,
@@ -159,6 +160,7 @@ export class VehiclesComponent implements OnInit {
               map((vehicles) => {
                 vehicles.forEach((vehicle) => {
                   vehicle.isEdit = false;
+                  this.isLoading = false;
                   vehicle.vehicleOwnerFullName =
                     vehicle.vehicleOwner.firstName +
                     ' ' +
@@ -184,6 +186,7 @@ export class VehiclesComponent implements OnInit {
               map((vehicles) => {
                 vehicles.forEach((vehicle) => {
                   vehicle.isEdit = false;
+                  this.isLoading = false;
                   vehicle.vehicleOwnerFullName =
                     vehicle.vehicleOwner.firstName +
                     ' ' +
@@ -195,6 +198,7 @@ export class VehiclesComponent implements OnInit {
             .pipe(takeUntil(this.destroy$))
             .subscribe((values) => {
               this.vehicles = values;
+
               values.forEach((vehicle) => {
                 this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
               });
@@ -223,6 +227,7 @@ export class VehiclesComponent implements OnInit {
         let userIdFromToken = this.authenticationService.getUserIdFromToken();
         this.idUserLogged = val || userIdFromToken;
       });
+
     this.getVehicles();
   }
 }
