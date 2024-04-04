@@ -1,7 +1,10 @@
 <div>
   <div>
-    <div *ngFor="let user of users; let i = index">
+    <div
+      *ngFor="let user of users; let i = index; first as first; last as isLast"
+    >
       <form
+        *ngIf="isLast"
         class="userCard"
         [formGroup]="userFormGroup[i]"
         [matBadge]="

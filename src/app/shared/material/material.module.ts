@@ -25,6 +25,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -56,6 +57,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     MatBadgeModule,
     MatDialogModule,
     PdfViewerModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class MaterialModule {}

@@ -33,6 +33,7 @@ export class ParkingSpacesComponent implements OnInit {
   toggleValue: string;
   private destroy$: Subject<void> = new Subject<void>();
   idUserLogged: string = '';
+  isLoading: boolean = true;
 
   openDeleteConfirmDialog(parkingSpacesId: number) {
     this.dialog.open(DeleteParkingSpacesConfirmationDialogComponent, {
@@ -109,6 +110,7 @@ export class ParkingSpacesComponent implements OnInit {
             .pipe(takeUntil(this.destroy$))
             .subscribe((values) => {
               this.parkingSpaces = values;
+              this.isLoading = false;
             });
           this.toggleValue = value;
         }
@@ -118,6 +120,7 @@ export class ParkingSpacesComponent implements OnInit {
             .pipe(takeUntil(this.destroy$))
             .subscribe((values) => {
               this.parkingSpaces = values;
+              this.isLoading = false;
             });
           this.toggleValue = value;
         }
