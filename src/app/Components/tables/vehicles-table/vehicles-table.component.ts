@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { VehicleEditDialogComponent } from '../../dialogs/vehicle-edit-dialog/vehicle-edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vehicles-table',
@@ -24,23 +25,25 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
 
   constructor(
     private vehicleService: VehiclesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.vehicleService
-      .getAllVehicles()
+    this.activatedRoute.data
       .pipe(takeUntil(this.destroy$))
-      .subscribe((values) => {
-        const vehicleWithOwnerFullname = values.map((vehicle: Vehicle) => {
-          return {
-            ...vehicle,
-            fullnameOwner:
-              vehicle.vehicleOwner.firstName +
-              ' ' +
-              vehicle.vehicleOwner.lastName,
-          };
-        });
+      .subscribe((values: any) => {
+        const vehicleWithOwnerFullname = values.vehicles.map(
+          (vehicle: Vehicle) => {
+            return {
+              ...vehicle,
+              fullnameOwner:
+                vehicle.vehicleOwner.firstName +
+                ' ' +
+                vehicle.vehicleOwner.lastName,
+            };
+          }
+        );
         this.dataSource.data = vehicleWithOwnerFullname;
       });
   }

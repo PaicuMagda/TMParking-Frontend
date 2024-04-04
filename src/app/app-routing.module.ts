@@ -11,6 +11,8 @@ import { TablesResolverService } from './Components/resolvers/table-users.servic
 import { MyReservationsComponent } from './Components/tables/my-reservations/my-reservations.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ChartsComponent } from './Components/charts/charts.component';
+import { ParkingSpacesService } from './Components/resolvers/parking-spaces.service';
+import { VehiclesResolverService } from './Components/resolvers/vehicles-resolver.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -46,6 +48,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: {
       users: TablesResolverService,
+      parkingSpaces: ParkingSpacesService,
+      vehicles: VehiclesResolverService,
     },
   },
   {

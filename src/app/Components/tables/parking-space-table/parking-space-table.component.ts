@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ParkingSpace } from 'src/app/interfaces/parking-space';
 import { ParkingSpacesDialogEditComponent } from '../../dialogs/parking-spaces-dialog-edit/parking-spaces-dialog-edit.component';
 import { Subject, takeUntil } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-parking-space-table',
@@ -33,15 +34,15 @@ export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
 
   constructor(
     private parkingSpacesService: ParkingPlacesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.parkingSpacesService
-      .getParkingSpaces()
+    this.activatedRoute.data
       .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
-        this.dataSource.data = values;
+        this.dataSource.data = values['parkingSpaces'];
       });
   }
 
