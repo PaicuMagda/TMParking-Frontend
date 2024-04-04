@@ -134,9 +134,10 @@ export class VehiclesComponent implements OnInit {
       color: [vehicle.color],
       year: [vehicle.year],
       vehicleIdentificationNumber: [vehicle.vehicleIdentificationNumber],
-      vehicleRegistrationCertificateBase64: [''],
       ownerName: [vehicle.vehicleOwnerFullName],
-      imageProfileBase64: [''],
+      imageProfileBase64: vehicle.imageProfileBase64,
+      vehicleRegistrationCertificateBase64:
+        vehicle.vehicleRegistrationCertificateBase64,
     });
   }
 

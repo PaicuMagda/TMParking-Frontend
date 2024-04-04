@@ -11,7 +11,7 @@ export interface Vehicle {
   vehicleOwner: User;
   vehicleIdentificationNumber?: number;
   isEdit?: boolean;
-  vehicleRegistrationCertificate?: string;
+  vehicleRegistrationCertificateBase64?: string;
   isVerifiedByAdmin?: boolean;
   dateAdded: Date;
   somethingIsWrong?: boolean;
