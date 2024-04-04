@@ -11,6 +11,7 @@ import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AddNewParkingSpaceDialogComponent } from '../add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-parking-spaces-dialog-edit',
@@ -39,6 +40,7 @@ export class ParkingSpacesDialogEditComponent {
   leasePermitFileName: string | undefined;
   parkingSpacesOwnerId: string;
   showPdfViewer: boolean = false;
+  private destroy$: Subject<void> = new Subject<void>();
 
   changeVideoSurveillanceToggleButtonValue(event: boolean) {
     this.data.isVideoSurveilance = event;
@@ -114,6 +116,7 @@ export class ParkingSpacesDialogEditComponent {
         },
       })
       .afterClosed()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((result) => {
         if (result === 'yes') {
           setTimeout(() => {
@@ -152,6 +155,7 @@ export class ParkingSpacesDialogEditComponent {
 
     this.parkingSpacesService
       .updateParkingSpaces(parkingSpacesId, formData)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (resp) => {
           this.toast.info({
@@ -204,14 +208,25 @@ export class ParkingSpacesDialogEditComponent {
       paymentForSubscription: ['', Validators.required],
     });
 
-    this.userStore.getFullNameFromStore().subscribe((val) => {
-      let fullNameFromToken = this.auth.getFullNameFromToken();
-      this.userLoggedFullName = fullNameFromToken || val;
-    });
+    this.userStore
+      .getFullNameFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let fullNameFromToken = this.auth.getFullNameFromToken();
+        this.userLoggedFullName = fullNameFromToken || val;
+      });
 
-    this.userStore.getIdUserFromStore().subscribe((val) => {
-      let userIdFromToken = this.auth.getUserIdFromToken();
-      this.parkingSpacesOwnerId = userIdFromToken || val;
-    });
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIdFromToken();
+        this.parkingSpacesOwnerId = userIdFromToken || val;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
