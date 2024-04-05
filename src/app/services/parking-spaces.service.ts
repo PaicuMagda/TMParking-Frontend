@@ -35,7 +35,7 @@ export class ParkingPlacesService {
     );
   }
 
-  getParkingSpacesById(parkingSpacesId: number): Observable<any> {
+  getParkingSpacesById(parkingSpacesId: any): Observable<any> {
     return this.http.get<any>(
       `${this.baseUrl}ParkingSpaces/${parkingSpacesId}/parkingSpaces`
     );

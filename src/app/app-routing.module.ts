@@ -13,6 +13,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ChartsComponent } from './Components/charts/charts.component';
 import { ParkingSpacesService } from './resolvers/parking-spaces.service';
 import { VehiclesResolverService } from './resolvers/vehicles-resolver.service';
+import { ParkingSpaceIdResolverService } from './resolvers/parking-space-id-resolver.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -41,6 +42,9 @@ const routes: Routes = [
   {
     path: 'parking-space-details/:id',
     component: ParkingSpaceDetailsComponent,
+    resolve: {
+      parkingSpacesDetails: ParkingSpaceIdResolverService,
+    },
   },
   {
     path: 'tables',

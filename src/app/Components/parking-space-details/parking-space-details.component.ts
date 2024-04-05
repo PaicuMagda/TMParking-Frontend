@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { ParkingSpaceBookingService } from 'src/app/services/parking-space-booking.service';
-import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { PaymentMethods } from 'src/app/enums/payment-methods';
 import { LeavePageDialogComponent } from '../dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
@@ -32,10 +31,11 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   months: number[] = [];
   month: number;
   idParkingSpaces: number;
+  activatedRouter: any;
 
   constructor(
     private router: ActivatedRoute,
-    private parkingSpaceService: ParkingPlacesService,
+    private activatedRoute: ActivatedRoute,
     private bookingService: ParkingSpaceBookingService,
     private vehicleService: VehiclesService,
     private dialog: MatDialog
@@ -91,11 +91,11 @@ export class ParkingSpaceDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.idParkingSpaces = this.router.snapshot.params['id'];
-    this.parkingSpaceService
-      .getParkingSpacesById(this.idParkingSpaces)
+    this.activatedRoute.data
       .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        this.parkingPlace = value;
+      .subscribe((value: any) => {
+        this.parkingPlace = value.parkingSpacesDetails;
+        console.log(this.parkingPlace);
       });
     this.populateHoursArray();
     this.paymentMethods = Object.values(PaymentMethods);
