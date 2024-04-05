@@ -8,6 +8,7 @@ import { VehiclesService } from 'src/app/services/vehicles.service';
 import { PaymentMethods } from 'src/app/enums/payment-methods';
 import { LeavePageDialogComponent } from '../dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { GoogleMapsComponent } from '../google-maps/google-maps.component';
 
 @Component({
   selector: 'app-parking-space-details',
@@ -75,6 +76,13 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       position: {
         top: '5%',
       },
+    });
+  }
+
+  openLocationDialog() {
+    this.dialog.open(GoogleMapsComponent, {
+      width: '50%',
+      height: '60%',
     });
   }
 

@@ -53,6 +53,8 @@ import { ParkingSpacesDialogEditComponent } from './Components/dialogs/parking-s
 import { VehicleEditDialogComponent } from './Components/dialogs/vehicle-edit-dialog/vehicle-edit-dialog.component';
 import { UserEditDialogComponent } from './Components/dialogs/user-edit-dialog/user-edit-dialog.component';
 import { ChartsComponent } from './Components/charts/charts.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapsComponent } from './Components/google-maps/google-maps.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +100,7 @@ import { ChartsComponent } from './Components/charts/charts.component';
     VehicleEditDialogComponent,
     UserEditDialogComponent,
     ChartsComponent,
+    GoogleMapsComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +112,7 @@ import { ChartsComponent } from './Components/charts/charts.component';
     MaterialModule,
     NgToastModule,
     NgxMatFileInputModule,
+    GoogleMapsModule,
   ],
 
   providers: [
