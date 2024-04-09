@@ -63,12 +63,7 @@
       <div class="add_new_parking__form__details__parkingSpaces">
         <mat-form-field appearance="outline">
           <mat-label>Parking Spaces (number)</mat-label>
-          <input
-            matInput
-            formControlName="availableParkingSpaces"
-            required
-            [(ngModel)]="data.availableParkingSpaces"
-          />
+          <input matInput formControlName="availableParkingSpaces" required />
           <mat-error
             *ngIf="
               this.addNewParkingSpaceFormGroup
@@ -463,9 +458,7 @@
             <div>
               <p
                 class="add_new_parking__form__create-card__card-full__informations__div__number"
-              >
-                {{ data.availableParkingSpaces }}
-              </p>
+              ></p>
             </div>
           </div>
         </div>

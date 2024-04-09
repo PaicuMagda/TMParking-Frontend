@@ -9,6 +9,7 @@ import { PaymentMethods } from 'src/app/enums/payment-methods';
 import { LeavePageDialogComponent } from '../dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { GoogleMapsComponent } from '../google-maps/google-maps.component';
+import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 
 @Component({
   selector: 'app-parking-space-details',

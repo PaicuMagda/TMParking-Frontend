@@ -126,27 +126,27 @@
       <div class="parking-space-details__container__left__all-spots">
         <app-legend></app-legend>
         <div class="parking-space-details__container__left__all-spots__cards">
-          <!-- <div
+          <div
             class="parking-space-details__container__left__all-spots__cards__spot"
-            *ngFor="let spot of parkingPlace.parkingSpots"
+            *ngFor="let spot of parkingPlace.parkingSpaceForOneParking"
           >
             <div
               class="parking-space-details__container__left__all-spots__cards__spot__status"
               [ngStyle]="{
                 'background-color':
-                  spot.isReserved === 'occupied'
+                  spot.availability === 'OCUPAT'
                     ? '#0D1C61'
-                    : spot.isReserved === 'partially_occupied'
+                    : spot.availability === 'PARTIAL-OCUPAT'
                     ? '#CBCFCF'
-                    : spot.isReserved === 'available'
+                    : spot.availability === 'FREE'
                     ? '#25A605'
                     : 'white'
               }"
             ></div>
             <div>
-              <p>{{ spot.spotNumber }}</p>
+              <p>{{ spot.name }}</p>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
