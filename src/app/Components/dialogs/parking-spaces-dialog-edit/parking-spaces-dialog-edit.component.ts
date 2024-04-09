@@ -12,6 +12,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { AddNewParkingSpaceDialogComponent } from '../add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { Subject, takeUntil } from 'rxjs';
+import { ParkingLotInterface } from 'src/app/interfaces/parking-lot-interface';
 
 @Component({
   selector: 'app-parking-spaces-dialog-edit',
@@ -41,6 +42,7 @@ export class ParkingSpacesDialogEditComponent {
   parkingSpacesOwnerId: string;
   showPdfViewer: boolean = false;
   private destroy$: Subject<void> = new Subject<void>();
+  parkingLots: any[];
 
   changeVideoSurveillanceToggleButtonValue(event: boolean) {
     this.data.isVideoSurveilance = event;
@@ -80,6 +82,19 @@ export class ParkingSpacesDialogEditComponent {
 
   showPdf() {
     this.showPdfViewer = !this.showPdfViewer;
+  }
+
+  addNewParkingLotForParkingSpace() {
+    const parkingLot: ParkingLotInterface = {
+      parkingSpacesId: this.data.parkingSpacesId,
+      name: this.addNewParkingSpaceFormGroup.get('nameParkingLot')?.value,
+      availability: 'FREE',
+    };
+    this.parkingSpacesService
+      .registerParkingLot(parkingLot)
+      .subscribe((value) => {
+        console.log(value);
+      });
   }
 
   onFileSelectedImageProfile(event: any) {
@@ -206,6 +221,7 @@ export class ParkingSpacesDialogEditComponent {
       paymentPerDay: ['', Validators.required],
       paymentPerHour: ['', Validators.required],
       paymentForSubscription: ['', Validators.required],
+      nameParkingLot: [''],
     });
 
     this.userStore
@@ -222,6 +238,13 @@ export class ParkingSpacesDialogEditComponent {
       .subscribe((val) => {
         let userIdFromToken = this.auth.getUserIdFromToken();
         this.parkingSpacesOwnerId = userIdFromToken || val;
+      });
+
+    this.parkingSpacesService
+      .getParkingLotById(this.data.parkingSpacesId)
+      .subscribe((values) => {
+        this.parkingLots = values;
+        console.log(this.parkingLots);
       });
   }
 

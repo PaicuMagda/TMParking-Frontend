@@ -356,6 +356,16 @@
           >Public transportation vehicle</mat-checkbox
         >
       </div>
+      <div class="parking-space">
+        <mat-form-field appearance="outline">
+          <mat-label>Parking space</mat-label>
+          <input matInput formControlName="nameParkingLot" />
+        </mat-form-field>
+        <button (click)="addNewParkingLotForParkingSpace()">
+          Add parking lot
+        </button>
+      </div>
+      <div class="siaplay-parking-lots"></div>
     </form>
     <div class="add_new_parking__form__create-card">
       <div class="add_new_parking__form__create-card__card-full">

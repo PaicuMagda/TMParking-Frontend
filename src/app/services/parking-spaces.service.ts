@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { TimisoaraAreas } from '../interfaces/timisoara-areas';
 import { HttpClient } from '@angular/common/http';
+import { ParkingLotInterface } from '../interfaces/parking-lot-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,15 @@ export class ParkingPlacesService {
     return this.http.delete(`${this.baseUrl}ParkingSpaces/${parkingSpacesId}`);
   }
 
+  registerParkingLot(
+    parkingLot: ParkingLotInterface
+  ): Observable<ParkingLotInterface> {
+    return this.http.post<ParkingLotInterface>(
+      `${this.baseUrl}OneParkingSpace`,
+      parkingLot
+    );
+  }
+
   updateParkingSpaces(
     idParkingSpaces: number,
     parkingSpaces: any
@@ -52,6 +62,12 @@ export class ParkingPlacesService {
     return this.http.put(
       `${this.baseUrl}ParkingSpaces/update-parking-spaces/${idParkingSpaces}`,
       parkingSpaces
+    );
+  }
+
+  getParkingLotById(parkingSpaceId: number): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}OneParkingSpace/parking-lots?parkingSpacesId=${parkingSpaceId}`
     );
   }
 }

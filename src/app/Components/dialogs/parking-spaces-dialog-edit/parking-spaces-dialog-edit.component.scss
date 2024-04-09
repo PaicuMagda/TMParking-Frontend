@@ -294,3 +294,17 @@ input[type="file"] {
     }
   }
 }
+
+.parking-space {
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+  align-items: center;
+
+  mat-form-field {
+    width: 20%;
+  }
+  button {
+    @include button-send();
+  }
+}

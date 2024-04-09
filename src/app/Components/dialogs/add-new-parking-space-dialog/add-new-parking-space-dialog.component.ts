@@ -135,9 +135,13 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       description:
         this.addNewParkingSpaceFormGroup.get('descriptionParking')?.value,
       isDraft: false,
-      paymentPerHour: 10,
-      paymentPerDay: 80,
-      paymentForSubscription: 500,
+      paymentPerHour:
+        this.addNewParkingSpaceFormGroup.get('paymentPerHour')?.value,
+      paymentPerDay:
+        this.addNewParkingSpaceFormGroup.get('paymentPerDay')?.value,
+      paymentForSubscription: this.addNewParkingSpaceFormGroup.get(
+        'paymentForSubscription'
+      )?.value,
       isVerifiedByAdmin: false,
       somethingIsWrong: false,
       parkingSpacesOwnerId: this.parkingSpacesOwnerId,
@@ -188,10 +192,11 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       isAgriculturalMachinery: [''],
       imageFileUpload: [null, Validators.required],
       leasePermit: [null, Validators.required],
+      paymentPerHour: [null, Validators.required],
+      paymentPerDay: [null, Validators.required],
+      paymentForSubscription: [null, Validators.required],
+      nameParkingLot: [null],
     });
-
-    if (this.data) {
-    }
 
     this.userStore
       .getFullNameFromStore()

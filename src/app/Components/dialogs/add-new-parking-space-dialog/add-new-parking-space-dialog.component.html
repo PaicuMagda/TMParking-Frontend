@@ -217,6 +217,70 @@
             <mat-button-toggle value="false">No</mat-button-toggle>
           </mat-button-toggle-group>
         </div>
+
+        <div
+          *ngIf="paidParking"
+          class="add_new_parking__form__details__buttons__paid-parking-options"
+        >
+          <div class="row">
+            <label class="col-md-6">Payment per hour</label>
+            <input
+              class="col-md-6"
+              type="text"
+              placeholder="Lei"
+              formControlName="paymentPerHour"
+            />
+            <mat-error
+              *ngIf="
+                addNewParkingSpaceFormGroup
+                  .get('paymentPerHour')
+                  ?.hasError('required') &&
+                addNewParkingSpaceFormGroup.get('paymentPerHour')?.touched
+              "
+            >
+              This field is required!
+            </mat-error>
+          </div>
+          <div class="row">
+            <label class="col-md-6">Payment per day</label>
+            <input
+              class="col-md-6"
+              type="text"
+              placeholder="Lei"
+              formControlName="paymentPerDay"
+            />
+            <mat-error
+              *ngIf="
+                addNewParkingSpaceFormGroup
+                  .get('paymentPerDay')
+                  ?.hasError('required') &&
+                addNewParkingSpaceFormGroup.get('paymentPerDay')?.touched
+              "
+            >
+              This field is required!
+            </mat-error>
+          </div>
+          <div class="row">
+            <label class="col-md-6">Payment for subscription</label>
+            <input
+              class="col-md-6"
+              type="text"
+              placeholder="Lei"
+              formControlName="paymentForSubscription"
+            />
+            <mat-error
+              *ngIf="
+                addNewParkingSpaceFormGroup
+                  .get('paymentForSubscription')
+                  ?.hasError('required') &&
+                addNewParkingSpaceFormGroup.get('paymentForSubscription')
+                  ?.touched
+              "
+            >
+              This field is required!
+            </mat-error>
+          </div>
+        </div>
       </div>
 
       <div class="add_new_parking__form__details__check-box">
