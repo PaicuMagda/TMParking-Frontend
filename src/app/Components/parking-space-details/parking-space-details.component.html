@@ -218,7 +218,7 @@
               </div>
             </div>
           </div>
-          <!-- <mat-error>End date has to bee smaller than start date</mat-error> -->
+
           <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"
           >
@@ -241,7 +241,7 @@
               </mat-form-field>
             </div>
           </div>
-          <!-- <div
+          <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"
           >
             <div>Name of parking spot</div>
@@ -254,15 +254,17 @@
                 />
                 <mat-autocomplete #parkingSpots="matAutocomplete">
                   <mat-option
-                    *ngFor="let parkingSpot of parkingPlace.parkingSpots"
+                    *ngFor="
+                      let parkingSpot of parkingPlace.parkingSpaceForOneParking
+                    "
                     [value]="parkingSpot.spotNumber"
                   >
-                    {{ parkingSpot.spotNumber }}
+                    {{ parkingSpot.name }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
             </div>
-          </div> -->
+          </div>
 
           <div
             class="parking-space-details__container__left__informations__booking__fields__vehicle"

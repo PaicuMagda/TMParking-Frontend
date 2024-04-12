@@ -102,6 +102,7 @@
             display: flex;
             flex-direction: row;
             gap: 28%;
+            margin-bottom: 8%;
           }
 
           &__fields {
@@ -126,7 +127,6 @@
               flex-direction: row;
               align-items: center;
               justify-content: center;
-              margin-top: 10%;
 
               div {
                 width: 100%;

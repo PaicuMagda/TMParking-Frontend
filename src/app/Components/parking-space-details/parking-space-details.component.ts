@@ -9,7 +9,7 @@ import { PaymentMethods } from 'src/app/enums/payment-methods';
 import { LeavePageDialogComponent } from '../dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { GoogleMapsComponent } from '../google-maps/google-maps.component';
-import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
+import { ReservationsService } from 'src/app/services/reservations.service';
 
 @Component({
   selector: 'app-parking-space-details',
@@ -34,13 +34,15 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   month: number;
   idParkingSpaces: number;
   activatedRouter: any;
+  reservations: any[];
 
   constructor(
     private router: ActivatedRoute,
     private activatedRoute: ActivatedRoute,
     private bookingService: ParkingSpaceBookingService,
     private vehicleService: VehiclesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private reservationsService: ReservationsService
   ) {
     // this.filteredVehicles = this.vehiclesControl.valueChanges.pipe(
     //   startWith(''),
@@ -120,5 +122,10 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       .subscribe((vehicles) => {
         this.vehicles = vehicles;
       });
+
+    this.reservationsService.getReservations().subscribe((values) => {
+      this.reservations = values;
+      console.log(this.reservations);
+    });
   }
 }
