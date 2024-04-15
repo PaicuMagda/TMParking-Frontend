@@ -55,6 +55,7 @@ import { UserEditDialogComponent } from './Components/dialogs/user-edit-dialog/u
 import { ChartsComponent } from './Components/charts/charts.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { GoogleMapsComponent } from './Components/google-maps/google-maps.component';
+import { ParkingSpaceReservationsTableComponent } from './Components/tables/parking-space-reservations-table/parking-space-reservations-table.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { GoogleMapsComponent } from './Components/google-maps/google-maps.compon
     UserEditDialogComponent,
     ChartsComponent,
     GoogleMapsComponent,
+    ParkingSpaceReservationsTableComponent,
   ],
   imports: [
     BrowserModule,

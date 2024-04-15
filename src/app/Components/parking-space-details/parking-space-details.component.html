@@ -150,7 +150,10 @@
         </div>
       </div>
     </div>
-    <div class="parking-space-details__container__left__informations__booking">
+    <div
+      class="parking-space-details__container__left__informations__booking"
+      *ngIf="role !== 'Administrator'"
+    >
       <div class="type">
         <div><h2>Book a parking spot</h2></div>
         <div>
@@ -472,6 +475,9 @@
       <div class="logo">
         <img src="../../../assets/images/logo-TMParking.png" />
       </div>
+    </div>
+    <div *ngIf="role === 'Administrator'">
+      <app-parking-space-reservations-table></app-parking-space-reservations-table>
     </div>
   </div>
 </div>

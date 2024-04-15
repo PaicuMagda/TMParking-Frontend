@@ -10,6 +10,8 @@ import { LeavePageDialogComponent } from '../dialogs/confirmation-dialogs/leave-
 import { MatDialog } from '@angular/material/dialog';
 import { GoogleMapsComponent } from '../google-maps/google-maps.component';
 import { ReservationsService } from 'src/app/services/reservations.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-parking-space-details',
@@ -35,6 +37,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   idParkingSpaces: number;
   activatedRouter: any;
   reservations: any[];
+  role: string = '';
 
   constructor(
     private router: ActivatedRoute,
@@ -42,7 +45,9 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     private bookingService: ParkingSpaceBookingService,
     private vehicleService: VehiclesService,
     private dialog: MatDialog,
-    private reservationsService: ReservationsService
+    private reservationsService: ReservationsService,
+    private userStore: UserStoreService,
+    private auth: AuthenticationService
   ) {
     // this.filteredVehicles = this.vehiclesControl.valueChanges.pipe(
     //   startWith(''),
@@ -127,5 +132,13 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       this.reservations = values;
       console.log(this.reservations);
     });
+
+    this.userStore
+      .getRoleFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        const roleFromToken = this.auth.getRoleFromToken();
+        this.role = val || roleFromToken;
+      });
   }
 }
