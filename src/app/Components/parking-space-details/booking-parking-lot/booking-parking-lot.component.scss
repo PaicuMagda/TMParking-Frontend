@@ -1,0 +1,347 @@
+@mixin button-back {
+  font-weight: 500;
+  width: 13%;
+  background-color: rgb(0 10 255);
+  color: white;
+  border: none;
+  height: 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@mixin button-paid {
+  font-weight: 500;
+  width: 13%;
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  height: 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  align-items: center;
+}
+
+@mixin button-location {
+  font-weight: 500;
+  display: flex;
+  width: 20%;
+  background-color: rgb(0, 122, 20);
+  color: white;
+  border: none;
+  height: 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  justify-content: center;
+  align-items: center;
+  gap: 6%;
+}
+
+.parking-space-details {
+  width: 100%;
+  height: 100vh;
+
+  &__close {
+    display: flex;
+    flex-direction: row;
+    gap: 88%;
+    padding: 0.5%;
+
+    span {
+      font-size: 140%;
+    }
+  }
+
+  &__container {
+    display: flex;
+    height: 88.9%;
+    gap: 2%;
+    flex-direction: row;
+
+    &__left {
+      width: 65%;
+
+      &__informations {
+        padding: 1%;
+        height: 40vh;
+        display: flex;
+        gap: 1%;
+
+        &__parking-lot {
+          width: 30%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          font-size: 120%;
+
+          span {
+            font-weight: 500;
+            font-size: 130%;
+            margin-bottom: 3%;
+          }
+          &__yes {
+            color: green;
+          }
+
+          &__no {
+            color: red;
+          }
+        }
+
+        &__booking {
+          margin-top: 0.5%;
+          width: 32%;
+          display: flex;
+          flex-direction: column;
+          padding: 1%;
+          background-color: rgb(42, 0, 81);
+          height: 95%;
+          border-radius: 2%;
+          color: white;
+
+          .type {
+            display: flex;
+            flex-direction: row;
+            gap: 28%;
+            margin-bottom: 8%;
+          }
+
+          &__fields {
+            height: 65%;
+            width: 100%;
+
+            &__one-day {
+              height: 100%;
+            }
+
+            &__many-days {
+              height: 100%;
+            }
+
+            &__subscription {
+              margin-top: 3%;
+              height: 100%;
+            }
+
+            &__date {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+
+              div {
+                width: 100%;
+                height: 100%;
+              }
+
+              mat-form-field {
+                width: 100%;
+              }
+            }
+
+            &__time {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+
+              &__mat-form-field {
+                display: flex;
+                gap: 10%;
+
+                select,
+                option {
+                  font-weight: bold;
+                  text-align: center;
+                }
+
+                mat-form-field {
+                  width: 80%;
+                }
+              }
+
+              div {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            &__vehicle {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+
+              div {
+                width: 100%;
+                height: 100%;
+              }
+
+              mat-form-field {
+                display: flex;
+              }
+            }
+          }
+
+          &__button {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            gap: 5%;
+            margin-top: 5%;
+
+            button:nth-child(1) {
+              @include button-location();
+            }
+
+            button:nth-child(2) {
+              @include button-paid();
+            }
+
+            button:nth-child(3) {
+              @include button-back();
+            }
+          }
+
+          mat-divider {
+            margin-top: 5%;
+          }
+        }
+      }
+
+      &__all-spots {
+        background-color: #efefef;
+        padding: 1%;
+        height: 54%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-left: 2%;
+
+        &__cards {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          overflow: auto;
+          gap: 5%;
+          height: 87%;
+
+          &__spot {
+            display: flex;
+            height: 18vh;
+            width: 85%;
+            border: 2px solid black;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            background: white;
+
+            &__status {
+              border: 2px solid black;
+              width: 16%;
+              height: 2.1vh;
+              background-color: red;
+              border-radius: 50%;
+            }
+
+            p {
+              font-size: 6vh;
+            }
+          }
+        }
+
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+
+    &__right {
+      width: 70%;
+      display: flex;
+      flex-direction: row;
+
+      img {
+        width: 90%;
+        border-radius: 1rem;
+        height: 34vh;
+      }
+
+      &__description {
+        width: 90%;
+        height: 92%;
+        border-radius: 0.5rem;
+        font-size: 120%;
+        border: none;
+      }
+
+      &__buttons {
+        margin-top: 10%;
+        display: flex;
+        flex-direction: row;
+        gap: 8%;
+
+        button {
+          width: 17%;
+          height: 4vh;
+          border-radius: 1rem;
+          background-color: white;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+// .mat-form-field-flex {
+//   padding-top: 3px;
+// }
+
+// ::ng-deep .mat-mdc-text-field-wrapper {
+//   height: 3.5vh;
+// }
+
+// ::ng-deep
+//   .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+//   .mdc-text-field__input {
+//   display: inline;
+// }
+
+::ng-deep.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
+}
+
+.mat-button-toggle-appearance-standard.mat-button-toggle-checked {
+  background-color: #7989e5;
+}
+
+.mat-button-toggle-label {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+
+  .mat-button-toggle-label-content {
+    text-align: center;
+    flex: 1 1 100%;
+  }
+}
+
+mat-button-toggle-group {
+  height: 4vh;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 36%;
+    height: 80%;
+    box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2),
+      0 6px 20px 0 rgba(255, 255, 255, 0.19);
+    border-radius: 1rem;
+  }
+}
