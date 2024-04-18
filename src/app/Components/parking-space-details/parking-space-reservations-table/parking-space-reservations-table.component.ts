@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Reservation } from 'src/app/interfaces/reservation';
 import { ReservationsService } from 'src/app/services/reservations.service';
@@ -10,16 +12,18 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 })
 export class ParkingSpaceReservationsTableComponent implements OnInit {
   dataSource = new MatTableDataSource<Reservation>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = [
     'index',
-    'customer',
-    'provider',
-    'parkingLot',
-    'parkingSpace',
-    'startDate',
-    'endDate',
-    'vehicleNumber',
+    'vehicleOwner',
+    'providerParkingSpace',
+    'parkingSpaceName',
+    'parkingLotName',
+    'startTime',
+    'endTime',
+    'vehicleRegisteredNumber',
   ];
 
   constructor(private reservationsService: ReservationsService) {}
@@ -28,5 +32,10 @@ export class ParkingSpaceReservationsTableComponent implements OnInit {
     this.reservationsService.getReservations().subscribe((values) => {
       this.dataSource.data = values;
     });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }
