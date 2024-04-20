@@ -57,6 +57,11 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { GoogleMapsComponent } from './Components/google-maps/google-maps.component';
 import { ParkingSpaceReservationsTableComponent } from './Components/parking-space-details/parking-space-reservations-table/parking-space-reservations-table.component';
 import { BookingParkingLotComponent } from './Components/parking-space-details/booking-parking-lot/booking-parking-lot.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { UsersChartsComponent } from './Components/charts/users-charts/users-charts.component';
+import { ParkingSpacesChartsComponent } from './Components/charts/parking-spaces-charts/parking-spaces-charts.component';
+import { VehiclesChartsComponent } from './Components/charts/vehicles-charts/vehicles-charts.component';
+import { ReservationsChartsComponent } from './Components/charts/reservations-charts/reservations-charts.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +110,10 @@ import { BookingParkingLotComponent } from './Components/parking-space-details/b
     GoogleMapsComponent,
     ParkingSpaceReservationsTableComponent,
     BookingParkingLotComponent,
+    UsersChartsComponent,
+    ParkingSpacesChartsComponent,
+    VehiclesChartsComponent,
+    ReservationsChartsComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,6 +126,7 @@ import { BookingParkingLotComponent } from './Components/parking-space-details/b
     NgToastModule,
     NgxMatFileInputModule,
     GoogleMapsModule,
+    GoogleChartsModule,
   ],
 
   providers: [
