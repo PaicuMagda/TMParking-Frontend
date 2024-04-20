@@ -19,7 +19,14 @@ export class UsersChartsComponent implements AfterViewInit {
     ]);
 
     const options = {
-      title: 'My Daily Activities',
+      colors: [
+        '#e6194B',
+        '#3cb44b',
+        '#ffe119',
+        '#4363d8',
+        '#f58231',
+        '#911eb4',
+      ],
     };
 
     const chart = new google.visualization.PieChart(
