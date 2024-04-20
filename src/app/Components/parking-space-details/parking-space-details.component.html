@@ -111,16 +111,16 @@
           </div>
         </div>
         <div class="parking-space-details__container__right">
-          <div class="parking-space-details__container__right__image">
+          <div class="parking-space-details__container__right__description">
+            <span>Description</span>
+            <textarea readonly>
+          {{ parkingPlace.description }}
+         </textarea
+            >
+          </div>
+          <div>
             <img src="{{ parkingPlace.imageProfile }}" />
           </div>
-          <textarea
-            readonly
-            class="parking-space-details__container__right__description"
-          >
-          {{ parkingPlace.description }}
-        </textarea
-          >
         </div>
       </div>
       <div class="parking-space-details__container__left__all-spots">

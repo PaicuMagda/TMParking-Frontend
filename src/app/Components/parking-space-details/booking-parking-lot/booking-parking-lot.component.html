@@ -12,16 +12,9 @@
   </div>
 </div>
 
-<div
-  class="parking-space-details__container__left__informations__booking__fields"
->
-  <div
-    *ngIf="bookingType === 'day'"
-    class="parking-space-details__container__left__informations__booking__fields__one-day"
-  >
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__date"
-    >
+<div class="booking__fields">
+  <div *ngIf="bookingType === 'day'" class="booking__fields__one-day">
+    <div class="booking__fields__date">
       <div>Choose a date</div>
       <div>
         <mat-form-field>
@@ -34,13 +27,9 @@
         </mat-form-field>
       </div>
     </div>
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__time"
-    >
+    <div class="booking__fields__time">
       <div>Alege intervalul orar</div>
-      <div
-        class="parking-space-details__container__left__informations__booking__fields__time__mat-form-field"
-      >
+      <div class="booking__fields__time__mat-form-field">
         <div>
           <mat-form-field>
             <mat-label>Start Hours</mat-label>
@@ -64,9 +53,7 @@
       </div>
     </div>
 
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Alege vehiculul care va fi parcat</div>
       <div>
         <mat-form-field>
@@ -86,9 +73,7 @@
         </mat-form-field>
       </div>
     </div>
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Name of parking spot</div>
       <div>
         <mat-form-field>
@@ -109,9 +94,7 @@
       </div>
     </div>
 
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Choose method payment</div>
       <div>
         <mat-form-field>
@@ -129,9 +112,7 @@
       </div>
     </div>
 
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Total to paint</div>
       <div>
         <mat-form-field>
@@ -140,13 +121,8 @@
       </div>
     </div>
   </div>
-  <div
-    *ngIf="bookingType === 'manyDays'"
-    class="parking-space-details__container__left__informations__booking__fields__many-days"
-  >
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__date"
-    >
+  <div *ngIf="bookingType === 'manyDays'" class="booking__fields__many-days">
+    <div class="booking__fields__date">
       <div>Choose a start date</div>
       <div>
         <mat-form-field>
@@ -159,9 +135,7 @@
         </mat-form-field>
       </div>
     </div>
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__date"
-    >
+    <div class="booking__fields__date">
       <div>Choose a end date</div>
       <div>
         <mat-form-field>
@@ -174,9 +148,7 @@
         </mat-form-field>
       </div>
     </div>
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Alege vehiculul care va fi parcat</div>
       <div>
         <mat-form-field>
@@ -196,9 +168,7 @@
         </mat-form-field>
       </div>
     </div>
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Name of parking spot</div>
       <div>
         <mat-form-field>
@@ -219,9 +189,7 @@
       </div>
     </div>
 
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Choose method payment</div>
       <div>
         <mat-form-field>
@@ -238,9 +206,7 @@
         </mat-form-field>
       </div>
     </div>
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Total to paint</div>
       <div>
         <mat-form-field>
@@ -251,11 +217,9 @@
   </div>
   <div
     *ngIf="bookingType === 'subscription'"
-    class="parking-space-details__container__left__informations__booking__fields__subscription"
+    class="booking__fields__subscription"
   >
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Select the number of months</div>
       <div>
         <mat-form-field>
@@ -267,9 +231,7 @@
         </mat-form-field>
       </div>
     </div>
-    <div
-      class="parking-space-details__container__left__informations__booking__fields__vehicle"
-    >
+    <div class="booking__fields__vehicle">
       <div>Total to paint</div>
       <div>
         <mat-form-field>
@@ -280,9 +242,7 @@
   </div>
 </div>
 
-<div
-  class="parking-space-details__container__left__informations__booking__button"
->
+<div class="booking__button">
   <button appHoverElement (click)="openLocationDialog()">
     <mat-icon svgIcon="location-dot-solid"></mat-icon>
     Location
