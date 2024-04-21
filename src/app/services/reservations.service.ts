@@ -15,4 +15,8 @@ export class ReservationsService {
   getReservations(): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(`${this.baseUrl}Reservation`);
   }
+
+  registerReservation(reservation: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}Reservation`, reservation);
+  }
 }

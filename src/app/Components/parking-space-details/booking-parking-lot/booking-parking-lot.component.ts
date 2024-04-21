@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, takeUntil } from 'rxjs';
@@ -12,6 +17,7 @@ import { VehiclesService } from 'src/app/services/vehicles.service';
 import { LeavePageDialogComponent } from '../../dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
 import { GoogleMapsComponent } from '../../google-maps/google-maps.component';
 import { PaymentMethods } from 'src/app/enums/payment-methods';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-booking-parking-lot',
@@ -38,6 +44,7 @@ export class BookingParkingLotComponent {
   activatedRouter: any;
   reservations: any[];
   role: string = '';
+  oneDayBookingFormGroup: FormGroup;
 
   constructor(
     private router: ActivatedRoute,
@@ -47,7 +54,9 @@ export class BookingParkingLotComponent {
     private dialog: MatDialog,
     private reservationsService: ReservationsService,
     private userStore: UserStoreService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private formBuilder: FormBuilder,
+    private toast: NgToastService
   ) {
     // this.filteredVehicles = this.vehiclesControl.valueChanges.pipe(
     //   startWith(''),
@@ -99,6 +108,36 @@ export class BookingParkingLotComponent {
     this.destroy$.complete();
   }
 
+  registerReservationForOneDay() {
+    const formData = {
+      startDate: this.oneDayBookingFormGroup.get('startDate')?.value,
+      vehicleRegistrationNumber: this.oneDayBookingFormGroup.get(
+        'vehicleRegistrationNumber'
+      )?.value,
+      spaceModelName: this.oneDayBookingFormGroup.get('spaceModelName')?.value,
+      paymentMethod: this.oneDayBookingFormGroup.get('paymentMethod')?.value,
+    };
+
+    this.reservationsService
+      .registerReservation(formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+        },
+        error: (err) => ({
+          summary: err.message,
+          duration: 3000,
+          detail: 'Error Message',
+        }),
+      });
+    this.oneDayBookingFormGroup.reset();
+  }
+
   // checkEndHourIsSmaller() {
   //   // return this.endHour <= this.startHour;
   //   console.log(this.startHour);
@@ -140,5 +179,12 @@ export class BookingParkingLotComponent {
         const roleFromToken = this.auth.getRoleFromToken();
         this.role = val || roleFromToken;
       });
+
+    this.oneDayBookingFormGroup = this.formBuilder.group({
+      startDate: ['', Validators.required],
+      vehicleRegistrationNumber: [''],
+      spaceModelName: [''],
+      paymentMethod: [''],
+    });
   }
 }
