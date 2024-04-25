@@ -30,6 +30,7 @@ export class VehiclesService {
           const currentVehicles = this.vehiclesSubject.getValue();
           currentVehicles.push(newVehicle);
           this.vehiclesSubject.next(currentVehicles);
+          console.log(currentVehicles);
         })
       );
   }

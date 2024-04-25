@@ -145,7 +145,7 @@ export class VehiclesComponent implements OnInit {
       color: [vehicle.color],
       year: [vehicle.year],
       vehicleIdentificationNumber: [vehicle.vehicleIdentificationNumber],
-      ownerName: [vehicle.vehicleOwnerFullName],
+      ownerName: [vehicle.vehicleOwner],
       imageProfileBase64: vehicle.imageProfileBase64,
       vehicleRegistrationCertificateBase64:
         vehicle.vehicleRegistrationCertificateBase64,

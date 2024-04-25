@@ -115,6 +115,7 @@ export class AddNewVehicleDialogComponent {
           setTimeout(() => {
             this.dialogRef.close();
           }, 1000);
+          this.vehicleService.loadVehicles();
         },
         error: (err) => ({
           summary: err.message,
@@ -122,6 +123,9 @@ export class AddNewVehicleDialogComponent {
           detail: 'Error Message',
         }),
       });
+    // this.vehicleService.vehicles$.subscribe((values) => {
+    //   console.log(values);
+    // });
   }
 
   closeAddNewVehicleDialogComponent() {
