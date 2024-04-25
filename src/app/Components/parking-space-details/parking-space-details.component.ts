@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Vehicle } from 'src/app/interfaces/vehicle';
@@ -116,18 +111,18 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value: any) => {
         this.parkingPlace = value.parkingSpacesDetails;
-        console.log(this.parkingPlace);
       });
+
     this.populateHoursArray();
     this.paymentMethods = Object.values(PaymentMethods);
     this.bookingService
-      .getMonthNumber()
+      .getNumberOfMonths()
       .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         this.months = values;
       });
-    this.vehicleService
-      .getAllVehicles()
+
+    this.vehicleService.vehicles$
       .pipe(takeUntil(this.destroy$))
       .subscribe((vehicles) => {
         this.vehicles = vehicles;
@@ -135,7 +130,6 @@ export class ParkingSpaceDetailsComponent implements OnInit {
 
     this.reservationsService.getReservations().subscribe((values) => {
       this.reservations = values;
-      console.log(this.reservations);
     });
 
     this.userStore

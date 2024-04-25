@@ -91,8 +91,7 @@ export class TablesComponent implements OnInit {
   }
 
   private exportVehiclesCsvFile() {
-    this.vehiclesService
-      .getAllVehicles()
+    this.vehiclesService.vehicles$
       .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         const data: Vehicle[] = values;

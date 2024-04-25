@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Vehicle } from '../interfaces/vehicle';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 
@@ -8,19 +8,30 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class VehiclesService {
-  constructor(private http: HttpClient) {}
-
-  baseUrl: string = environment.apiUrl;
-
-  registerVehicle(newVehicle: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}Vehicle/register-vehicle`,
-      newVehicle
-    );
+  constructor(private http: HttpClient) {
+    this.loadVehicles();
   }
 
-  getAllVehicles(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles`);
+  baseUrl: string = environment.apiUrl;
+  private vehiclesSubject = new BehaviorSubject<any[]>([]);
+  vehicles$ = this.vehiclesSubject.asObservable();
+
+  loadVehicles() {
+    this.http
+      .get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles`)
+      .subscribe((vehicles) => this.vehiclesSubject.next(vehicles));
+  }
+
+  registerVehicle(newVehicle: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.baseUrl}Vehicle/register-vehicle`, newVehicle)
+      .pipe(
+        tap((newVehicle) => {
+          const currentVehicles = this.vehiclesSubject.getValue();
+          currentVehicles.push(newVehicle);
+          this.vehiclesSubject.next(currentVehicles);
+        })
+      );
   }
 
   getVehicleByUserId(idUser: any): Observable<Vehicle[]> {

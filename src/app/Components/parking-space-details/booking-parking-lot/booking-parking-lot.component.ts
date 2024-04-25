@@ -14,7 +14,6 @@ import { ParkingSpaceBookingService } from 'src/app/services/parking-space-booki
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
-import { LeavePageDialogComponent } from '../../dialogs/confirmation-dialogs/leave-page-dialog/leave-page-dialog.component';
 import { GoogleMapsComponent } from '../../google-maps/google-maps.component';
 import { PaymentMethods } from 'src/app/enums/payment-methods';
 import { NgToastService } from 'ng-angular-popup';
@@ -29,8 +28,6 @@ export class BookingParkingLotComponent {
   showSearch: boolean = false;
   parkingPlace: any;
   bookingType: string = 'day';
-  startHour: number;
-  endHour: number;
   hours: number[] = [];
   endHourIsSmaller: boolean;
   vehicles: Vehicle[] = [];
@@ -39,12 +36,13 @@ export class BookingParkingLotComponent {
   paymentMethods: string[] = [];
   calculatedPrice: number;
   months: number[] = [];
-  month: number;
   idParkingSpaces: number;
   activatedRouter: any;
   reservations: any[];
   role: string = '';
   oneDayBookingFormGroup: FormGroup;
+  manyDaysBookingFormGroup: FormGroup;
+  subscriptionBookingForm: FormGroup;
 
   constructor(
     private router: ActivatedRoute,
@@ -84,16 +82,6 @@ export class BookingParkingLotComponent {
       .subscribe((values) => {
         this.hours = values;
       });
-  }
-
-  openLeavePageDialog() {
-    this.dialog.open(LeavePageDialogComponent, {
-      width: '23%',
-      height: '20%',
-      position: {
-        top: '5%',
-      },
-    });
   }
 
   openLocationDialog() {
@@ -150,18 +138,16 @@ export class BookingParkingLotComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value: any) => {
         this.parkingPlace = value.parkingSpacesDetails;
-        console.log(this.parkingPlace);
       });
     this.populateHoursArray();
     this.paymentMethods = Object.values(PaymentMethods);
     this.bookingService
-      .getMonthNumber()
+      .getNumberOfMonths()
       .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         this.months = values;
       });
-    this.vehicleService
-      .getAllVehicles()
+    this.vehicleService.vehicles$
       .pipe(takeUntil(this.destroy$))
       .subscribe((vehicles) => {
         this.vehicles = vehicles;
@@ -169,7 +155,6 @@ export class BookingParkingLotComponent {
 
     this.reservationsService.getReservations().subscribe((values) => {
       this.reservations = values;
-      console.log(this.reservations);
     });
 
     this.userStore
@@ -185,6 +170,19 @@ export class BookingParkingLotComponent {
       vehicleRegistrationNumber: [''],
       spaceModelName: [''],
       paymentMethod: [''],
+    });
+
+    this.manyDaysBookingFormGroup = this.formBuilder.group({
+      startDate: [''],
+      endDate: [''],
+      vehicleRegistrationNumber: [''],
+      spaceModelName: [''],
+      paymentMethod: [''],
+    });
+
+    this.subscriptionBookingForm = this.formBuilder.group({
+      numberOfMonths: [''],
+      spaceModelName: [''],
     });
   }
 }

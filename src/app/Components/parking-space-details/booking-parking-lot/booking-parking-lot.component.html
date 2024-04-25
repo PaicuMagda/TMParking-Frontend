@@ -90,6 +90,7 @@
         <mat-form-field>
           <input
             matInput
+            type="text"
             placeholder="Choose name of parking spot"
             [matAutocomplete]="parkingSpots"
             formControlName="spaceModelName"
@@ -112,6 +113,7 @@
         <mat-form-field>
           <input
             matInput
+            type="text"
             placeholder="Choose method payment"
             [matAutocomplete]="payment"
             formControlName="paymentMethod"
@@ -134,12 +136,21 @@
       </div>
     </div>
   </form>
-  <div *ngIf="bookingType === 'manyDays'" class="booking__fields__many-days">
+  <form
+    *ngIf="bookingType === 'manyDays'"
+    [formGroup]="manyDaysBookingFormGroup"
+    class="booking__fields__many-days"
+  >
     <div class="booking__fields__date">
       <div>Choose a start date</div>
       <div>
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" />
+          <input
+            matInput
+            [matDatepicker]="picker"
+            type="date"
+            formControlName="startDate"
+          />
           <mat-datepicker-toggle
             matIconSuffix
             [for]="picker"
@@ -152,7 +163,12 @@
       <div>Choose a end date</div>
       <div>
         <mat-form-field>
-          <input matInput [matDatepicker]="picker1" />
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            type="date"
+            formControlName="endDate"
+          />
           <mat-datepicker-toggle
             matIconSuffix
             [for]="picker1"
@@ -167,8 +183,10 @@
         <mat-form-field>
           <input
             matInput
+            type="text"
             placeholder="Vehicle Number"
             [matAutocomplete]="auto"
+            formControlName="vehicleRegistrationNumber"
           />
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option
@@ -187,8 +205,10 @@
         <mat-form-field>
           <input
             matInput
+            type="text"
             placeholder="Choose name of parking spot"
             [matAutocomplete]="parkingSpots"
+            formControlName="spaceModelName"
           />
           <mat-autocomplete #parkingSpots="matAutocomplete">
             <mat-option
@@ -208,8 +228,10 @@
         <mat-form-field>
           <input
             matInput
+            type="text"
             placeholder="Choose method payment"
             [matAutocomplete]="payment"
+            formControlName="paymentMethod"
           />
           <mat-autocomplete #payment="matAutocomplete">
             <mat-option *ngFor="let method of paymentMethods" [value]="method">
@@ -223,12 +245,13 @@
       <div>Total to paint</div>
       <div>
         <mat-form-field>
-          <input matInput [(ngModel)]="calculatedPrice" placeholder="LEI 💳" />
+          <input matInput placeholder="LEI 💳" />
         </mat-form-field>
       </div>
     </div>
-  </div>
-  <div
+  </form>
+  <form
+    [formGroup]="subscriptionBookingForm"
     *ngIf="bookingType === 'subscription'"
     class="booking__fields__subscription"
   >
@@ -236,11 +259,32 @@
       <div>Select the number of months</div>
       <div>
         <mat-form-field>
-          <mat-select [(ngModel)]="month">
-            <option *ngFor="let m of months" [value]="m">
-              {{ m.toString() }}
-            </option>
+          <mat-select formControlName="numberOfMonths">
+            <mat-option *ngFor="let month of months" [value]="month">
+              {{ month }}
+            </mat-option>
           </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="booking__fields__vehicle">
+      <div>Name of parking spot</div>
+      <div>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Choose name of parking spot"
+            [matAutocomplete]="parkingSpots"
+            formControlName="spaceModelName"
+          />
+          <mat-autocomplete #parkingSpots="matAutocomplete">
+            <mat-option
+              *ngFor="let parkingSpot of parkingPlace.parkingSpaceForOneParking"
+              [value]="parkingSpot.name"
+            >
+              {{ parkingSpot.name }}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
       </div>
     </div>
@@ -248,11 +292,11 @@
       <div>Total to paint</div>
       <div>
         <mat-form-field>
-          <input matInput [(ngModel)]="calculatedPrice" placeholder="LEI 💳" />
+          <input matInput placeholder="LEI 💳" />
         </mat-form-field>
       </div>
     </div>
-  </div>
+  </form>
 </div>
 
 <div class="booking__button">

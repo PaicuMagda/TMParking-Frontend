@@ -6,7 +6,17 @@ import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialo
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
-import { Subject, from, map, switchMap, takeUntil } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  finalize,
+  from,
+  map,
+  of,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { NgToastService } from 'ng-angular-popup';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,6 +28,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class VehiclesComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
+  vehicles$: Observable<any[]>;
   vehicles: any[] = [];
   vehicleForm: FormGroup[] = [];
   role: string = '';
@@ -152,59 +163,38 @@ export class VehiclesComponent implements OnInit {
 
   getVehicles() {
     this.displayCardsService.toggleValueSubjectObservable
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        if (value === 'allVehicles') {
-          this.vehicleService
-            .getAllVehicles()
-            .pipe(
-              map((vehicles) => {
-                vehicles.forEach((vehicle) => {
-                  vehicle.isEdit = false;
-                  this.isLoading = false;
-                  vehicle.vehicleOwnerFullName =
-                    vehicle.vehicleOwner.firstName +
-                    ' ' +
-                    vehicle.vehicleOwner.lastName;
-                  vehicle.showPdfViewer = false;
-                });
-                return vehicles;
-              })
-            )
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((values) => {
-              this.vehicles = values;
-              values.forEach((vehicle) => {
-                this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
-              });
-            });
-        }
-        if (value === 'myVehicles') {
-          this.vehicleService
-            .getVehicleByUserId(this.idUserLogged)
-            .pipe(
-              takeUntil(this.destroy$),
-              map((vehicles) => {
-                vehicles.forEach((vehicle) => {
-                  vehicle.isEdit = false;
-                  this.isLoading = false;
-                  vehicle.vehicleOwnerFullName =
-                    vehicle.vehicleOwner.firstName +
-                    ' ' +
-                    vehicle.vehicleOwner.lastName;
-                });
-                return vehicles;
-              })
-            )
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((values) => {
-              this.vehicles = values;
-
-              values.forEach((vehicle) => {
-                this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
-              });
-            });
-        }
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((value) => {
+          if (value === 'allVehicles') {
+            this.vehicleService.loadVehicles();
+            return this.vehicleService.vehicles$;
+          } else if (value === 'myVehicles') {
+            return this.vehicleService
+              .getVehicleByUserId(this.idUserLogged)
+              .pipe(
+                map((vehicles) => {
+                  vehicles.forEach((vehicle) => {
+                    vehicle.isEdit = false;
+                    vehicle.vehicleOwnerFullName =
+                      vehicle.vehicleOwner.firstName +
+                      ' ' +
+                      vehicle.vehicleOwner.lastName;
+                  });
+                  return vehicles;
+                })
+              );
+          } else {
+            return of([]);
+          }
+        })
+      )
+      .subscribe((values) => {
+        this.isLoading = false;
+        this.vehicles = values;
+        values.forEach((vehicle) => {
+          this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
+        });
       });
   }
 
