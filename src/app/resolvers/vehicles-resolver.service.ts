@@ -12,6 +12,6 @@ export class VehiclesResolverService {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any[]> {
-    return this.vehiclesService.vehicles$;
+    return this.vehiclesService.getVehicles();
   }
 }

@@ -1,6 +1,6 @@
 export enum EnumVehiclesTables {
   VEHICLE_IDENTIFICATION_NUMBER = 'vehicleIdentificationNumber',
-  OWNER = 'fullnameOwner',
+  OWNER = 'vehicleOwner',
   MAKE = 'make',
   MODEL = 'model',
   YEAR = 'year',
