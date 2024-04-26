@@ -28,6 +28,7 @@ export class DeleteConfirmationDialogComponent implements OnInit {
           summary: resp.message,
           duration: 3000,
         });
+        this.vehicleService.loadVehicles();
         this.dialogRef.close();
       },
       error: (err) => {

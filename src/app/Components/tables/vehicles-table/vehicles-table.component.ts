@@ -30,6 +30,9 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    this.activatedRoute.data.subscribe((values: any) => {
+      console.log(values);
+    });
     this.activatedRoute.data
       .pipe(takeUntil(this.destroy$))
       .subscribe((values: any) => {

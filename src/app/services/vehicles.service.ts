@@ -17,9 +17,10 @@ export class VehiclesService {
   vehicles$ = this.vehiclesSubject.asObservable();
 
   loadVehicles() {
-    this.http
-      .get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles`)
-      .subscribe((vehicles) => this.vehiclesSubject.next(vehicles));
+    if (this.vehiclesSubject.getValue().length === 0)
+      this.http
+        .get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles`)
+        .subscribe((vehicles) => this.vehiclesSubject.next(vehicles));
   }
 
   registerVehicle(newVehicle: any): Observable<any> {
@@ -30,7 +31,6 @@ export class VehiclesService {
           const currentVehicles = this.vehiclesSubject.getValue();
           currentVehicles.push(newVehicle);
           this.vehiclesSubject.next(currentVehicles);
-          console.log(currentVehicles);
         })
       );
   }

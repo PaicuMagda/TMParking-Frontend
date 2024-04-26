@@ -6,17 +6,7 @@ import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialo
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
-import {
-  Observable,
-  Subject,
-  finalize,
-  from,
-  map,
-  of,
-  switchMap,
-  takeUntil,
-  tap,
-} from 'rxjs';
+import { Observable, Subject, from, map, of, switchMap, takeUntil } from 'rxjs';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { NgToastService } from 'ng-angular-popup';
 import { MatDialog } from '@angular/material/dialog';
@@ -220,5 +210,8 @@ export class VehiclesComponent implements OnInit {
       });
 
     this.getVehicles();
+    this.vehicleService.vehicles$.subscribe((values) => {
+      console.log(values);
+    });
   }
 }
