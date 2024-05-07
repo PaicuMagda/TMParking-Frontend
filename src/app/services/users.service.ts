@@ -16,6 +16,10 @@ export class UsersService {
     return this.http.get<User[]>(`${this.baseUrl}User`);
   }
 
+  getUsersForAdminPage(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}User/admin-page`);
+  }
+
   registerNewUser(user: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}User/register`, user);
   }
@@ -26,6 +30,13 @@ export class UsersService {
 
   updateUser(id: number, user: any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}User/update-user/${id}`, user);
+  }
+
+  updateMyAccount(id: number, user: any): Observable<any> {
+    return this.http.put<any>(
+      `${this.baseUrl}User/update-my-account/${id}`,
+      user
+    );
   }
 
   deleteUser(userId: number): Observable<any> {

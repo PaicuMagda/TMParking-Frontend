@@ -158,7 +158,7 @@
     }
 
     &__numbersRegistered {
-      @include dimensions(3.8%, row);
+      @include dimensions(18.8%, row);
     }
 
     &__phone {
@@ -183,7 +183,7 @@
       }
 
       &__numbersRegistered {
-        @include dimensions(9%, row);
+        @include dimensions(24%, row);
 
         div {
           display: flex;

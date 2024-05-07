@@ -1,5 +1,4 @@
 import { Role } from '../enums/roles';
-import { Vehicle } from './vehicle';
 
 export interface User {
   userId: number;
@@ -15,12 +14,11 @@ export interface User {
   phone?: number;
   dateOfBirth?: Date;
   pnc?: number;
-  vehiclesRegistered?: string;
   password?: string;
   licenseValid?: boolean;
   isEdit?: boolean;
   imageUrl?: string;
   isVerifiedByAdmin: boolean;
   dateAdded: Date;
-  vehicles?: Vehicle[];
+  vehiclesRegistered: string[];
 }

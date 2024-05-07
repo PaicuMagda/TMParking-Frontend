@@ -111,10 +111,10 @@
             <input type="text" formControlName="pnc" />
           </div>
           <div class="userCard__div4__numbersRegistered">
-            <label>Number of Vehicles Registered </label>
+            <label>Vehicles Registered </label>
             <select formControlName="numberVehiclesRegistered">
-              <option *ngFor="let vehicle of user.vehicles">
-                {{ vehicle.vehicleIdentificationNumber }}
+              <option *ngFor="let vehicle of user.vehiclesRegistered">
+                {{ vehicle }}
               </option>
             </select>
           </div>
@@ -134,10 +134,10 @@
             <span class="col">{{ user.pnc }}</span>
           </div>
           <div class="userCard__div4__info__numbersRegistered">
-            <label>Number of Vehicles Registered </label>
+            <label>Vehicles Registered </label>
             <select formControlName="numberVehiclesRegistered">
-              <option *ngFor="let vehicle of user.vehicles">
-                {{ vehicle.vehicleIdentificationNumber }}
+              <option *ngFor="let vehicle of user.vehiclesRegistered">
+                {{ vehicle }}
               </option>
             </select>
           </div>

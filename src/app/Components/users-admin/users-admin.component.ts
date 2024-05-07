@@ -141,8 +141,9 @@ export class UsersAdminComponent implements OnInit {
 
   ngOnInit() {
     this.roles = Object.keys(Role);
+
     this.usersService
-      .getAllUsers()
+      .getUsersForAdminPage()
       .pipe(
         takeUntil(this.destroy$),
         map((users) => {
