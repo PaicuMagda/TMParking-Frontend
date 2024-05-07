@@ -160,6 +160,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
           setTimeout(() => {
             this.dialogRef.close();
           }, 1000);
+          this.parkingSpacesService.loadParkingSpaces();
         },
         error: (err) => {
           this.toast.error({

@@ -17,14 +17,22 @@ export class ParkingPlacesService {
   private parkingSpacesSubject = new BehaviorSubject<any[]>([]);
   parkingSpaces$ = this.parkingSpacesSubject.asObservable();
 
-  // private myParkingSpaceSubject = new BehaviorSubject<any[]>([]);
-  // myParkingSpaceSubject$=this.myParkingSpaceSubject.asObservable();
+  private myParkingSpaceSubject = new BehaviorSubject<any[]>([]);
+  myParkingSpaceSubject$ = this.myParkingSpaceSubject.asObservable();
 
   loadParkingSpaces() {
     this.http
       .get<any>(`${this.baseUrl}ParkingSpaces`)
       .subscribe((parkingSpaces) => {
         this.parkingSpacesSubject.next(parkingSpaces);
+      });
+  }
+
+  loadMyParkingSpace(userId: string) {
+    this.http
+      .get<any[]>(`${this.baseUrl}ParkingSpaces/${userId}/parking-spaces`)
+      .subscribe((myParkingSpaces) => {
+        this.myParkingSpaceSubject.next(myParkingSpaces);
       });
   }
 

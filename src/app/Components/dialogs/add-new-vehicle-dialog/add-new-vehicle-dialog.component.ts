@@ -123,9 +123,6 @@ export class AddNewVehicleDialogComponent {
           detail: 'Error Message',
         }),
       });
-    // this.vehicleService.vehicles$.subscribe((values) => {
-    //   console.log(values);
-    // });
   }
 
   closeAddNewVehicleDialogComponent() {

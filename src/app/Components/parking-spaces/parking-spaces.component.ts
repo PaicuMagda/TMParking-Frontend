@@ -106,12 +106,13 @@ export class ParkingSpacesComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         if (value === 'myParkingSpaces') {
-          this.parkingSpacesService
-            .getMyParkingSpaces(this.idUserLogged)
-            .subscribe((values) => {
+          this.parkingSpacesService.loadMyParkingSpace(this.idUserLogged);
+          this.parkingSpacesService.myParkingSpaceSubject$.subscribe(
+            (values) => {
               this.myParkingSpaces = values;
               this.isLoading = false;
-            });
+            }
+          );
           this.toggleValue = value;
         }
         if (value === 'allParkingSpaces') {
