@@ -28,6 +28,7 @@ export class ParkingSpacesComponent implements OnInit {
   ) {}
 
   parkingSpaces: any = [];
+  myParkingSpaces: any = [];
   isLogin: boolean;
   role: string = '';
   toggleValue: string;
@@ -107,22 +108,19 @@ export class ParkingSpacesComponent implements OnInit {
         if (value === 'myParkingSpaces') {
           this.parkingSpacesService
             .getMyParkingSpaces(this.idUserLogged)
-            .pipe(takeUntil(this.destroy$))
             .subscribe((values) => {
-              this.parkingSpaces = values;
+              this.myParkingSpaces = values;
               this.isLoading = false;
             });
           this.toggleValue = value;
         }
         if (value === 'allParkingSpaces') {
-          this.parkingSpacesService
-            .getParkingSpaces()
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((values) => {
-              this.parkingSpaces = values;
-              this.isLoading = false;
-            });
+          this.parkingSpacesService.loadParkingSpaces();
+          this.parkingSpacesService.parkingSpaces$.subscribe((values) => {
+            this.parkingSpaces = values;
+          });
           this.toggleValue = value;
+          this.isLoading = false;
         }
       });
   }

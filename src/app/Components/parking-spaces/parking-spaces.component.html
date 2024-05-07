@@ -1,7 +1,174 @@
-<div class="parking-spaces" *ngIf="!isLoading">
+<div
+  class="parking-spaces"
+  *ngIf="!isLoading && toggleValue === 'allParkingSpaces'"
+>
   <div
     class="parking-spaces__card"
     *ngFor="let parkingSpace of parkingSpaces"
+    appHoverElement
+    [ngClass]="
+      parkingSpaceIsExpired(parkingSpace.endDate)
+        ? 'parking-spaces__card__parkingSpaceIsExpired'
+        : ''
+    "
+  >
+    <span
+      [matBadge]="
+        isParkingNew(parkingSpace) &&
+        !parkingSpace.isVerifiedByAdmin &&
+        !parkingSpaceIsExpired(parkingSpace.endDate) &&
+        role === 'Administrator'
+          ? 'N'
+          : null
+      "
+      matBadgePosition="before"
+      matBadgeColor="warn"
+      matBadgeSize="large"
+    ></span>
+    <span
+      class="parking-spaces__card__badge"
+      [matBadge]="
+        parkingSpace.somethingIsWrong &&
+        !parkingSpaceIsExpired(parkingSpace.endDate) &&
+        role === 'User'
+          ? '!'
+          : null
+      "
+      matBadgePosition="before"
+      matBadgeColor="accent"
+      matBadgeSize="large"
+    ></span>
+
+    <div class="parking-spaces__card__image">
+      <img
+        *ngIf="parkingSpace.imageProfile"
+        [src]="parkingSpace.imageProfile"
+        (click)="
+          !parkingSpaceIsExpired(parkingSpace.endDate)
+            ? goToParkingSpaceDetails(parkingSpace.parkingSpacesId)
+            : openParkingSpaceExpiredConfirmDialog()
+        "
+      />
+      <img
+        *ngIf="!parkingSpace.imageProfile"
+        src="./../../../assets/images/parking-spaces/default-parcare.png"
+        (click)="
+          !parkingSpaceIsExpired(parkingSpace.endDate)
+            ? goToParkingSpaceDetails(parkingSpace.parkingSpacesId)
+            : openParkingSpaceExpiredConfirmDialog()
+        "
+      />
+
+      <div
+        class="parking-spaces__card__image__icons"
+        *ngIf="role === 'Administrator'"
+      >
+        <div
+          class="parking-spaces__card__image__icons__delete"
+          (click)="
+            !parkingSpaceIsExpired(parkingSpace.endDate)
+              ? openDeleteConfirmDialog(parkingSpace.parkingSpacesId)
+              : openParkingSpaceExpiredConfirmDialog()
+          "
+        >
+          <mat-icon svgIcon="delete-trash"></mat-icon>
+        </div>
+        <div *ngIf="parkingSpace.isDraft">
+          <mat-icon
+            class="parking-spaces__card__image__icons__draft"
+            svgIcon="draft"
+          ></mat-icon>
+        </div>
+        <div
+          class="parking-spaces__card__image__icons__edit"
+          (click)="
+            !parkingSpaceIsExpired(parkingSpace.endDate)
+              ? openEditDialog(parkingSpace.parkingSpacesId)
+              : openParkingSpaceExpiredConfirmDialog()
+          "
+        >
+          <mat-icon svgIcon="edit"></mat-icon>
+        </div>
+      </div>
+    </div>
+    <div
+      class="parking-spaces__card__informations"
+      (click)="
+        !parkingSpaceIsExpired(parkingSpace.endDate)
+          ? goToParkingSpaceDetails(parkingSpace.parkingSpacesId)
+          : openParkingSpaceExpiredConfirmDialog()
+      "
+    >
+      <div class="parking-spaces__card__informations__ownerAddressDate">
+        <div
+          class="parking-spaces__card__informations__ownerAddressDate__camera"
+        >
+          <span>{{ parkingSpace.ownerName }}</span>
+          <img
+            *ngIf="parkingSpace.isVideoSurveilance"
+            src="../../../assets/images/camera.png"
+          />
+        </div>
+        <div class="parking-spaces__card__informations__ownerAddressDate__paid">
+          <span>{{ parkingSpace.name }}</span>
+          <img
+            *ngIf="!parkingSpace.isFree"
+            src="../../../assets/images/paid.png"
+          />
+          <img
+            *ngIf="parkingSpace.isFree"
+            src="../../../assets/images/no-paid.png"
+          />
+        </div>
+
+        <span class="parking-spaces__card__informations__ownerAddressDate__date"
+          >{{ parkingSpace.startDate | date }} -
+          {{ parkingSpace.endDate | date }}</span
+        >
+      </div>
+      <div
+        class="parking-spaces__card__informations__typesOfVehicleNumberOfParkingSpaces"
+      >
+        <div
+          class="parking-spaces__card__informations__typesOfVehicleNumberOfParkingSpaces__typesOfVehicles"
+        >
+          <img
+            *ngIf="parkingSpace.isPersonalVehicleAccepted"
+            src="../../../assets/images/img-auto.png"
+          />
+
+          <img
+            *ngIf="parkingSpace.isCargoVehicleAccepted"
+            src="../../../assets/images/truck-image.png"
+          />
+
+          <img
+            *ngIf="parkingSpace.isAgriculturalMachineryAccepted"
+            src="../../../assets/images/tractor.png"
+          />
+
+          <img
+            *ngIf="parkingSpace.isPublicTransportAccepted"
+            src="../../../assets/images/bus.jpg"
+          />
+        </div>
+        <div
+          class="parking-spaces__card__informations__typesOfVehicleNumberOfParkingSpaces__numberOfParkingSpaces"
+        >
+          {{ parkingSpace.availableParkingSpaces }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="parking-spaces"
+  *ngIf="!isLoading && toggleValue === 'myParkingSpaces'"
+>
+  <div
+    class="parking-spaces__card"
+    *ngFor="let parkingSpace of myParkingSpaces"
     appHoverElement
     [ngClass]="
       parkingSpaceIsExpired(parkingSpace.endDate)
@@ -105,11 +272,7 @@
         <div
           class="parking-spaces__card__informations__ownerAddressDate__camera"
         >
-          <span>{{
-            parkingSpace.parkingSpacesOwner.firstName +
-              " " +
-              parkingSpace.parkingSpacesOwner.lastName
-          }}</span>
+          <span>{{ parkingSpace.ownerName }}</span>
           <img
             *ngIf="parkingSpace.isVideoSurveilance"
             src="../../../assets/images/camera.png"
@@ -139,22 +302,22 @@
           class="parking-spaces__card__informations__typesOfVehicleNumberOfParkingSpaces__typesOfVehicles"
         >
           <img
-            *ngIf="parkingSpace.isAutomobil"
+            *ngIf="parkingSpace.isPersonalVehicleAccepted"
             src="../../../assets/images/img-auto.png"
           />
 
           <img
-            *ngIf="parkingSpace.isTruck"
+            *ngIf="parkingSpace.isCargoVehicleAccepted"
             src="../../../assets/images/truck-image.png"
           />
 
           <img
-            *ngIf="parkingSpace.isAgriculturalMachinery"
+            *ngIf="parkingSpace.isAgriculturalMachineryAccepted"
             src="../../../assets/images/tractor.png"
           />
 
           <img
-            *ngIf="parkingSpace.isPublicTransport"
+            *ngIf="parkingSpace.isPublicTransportAccepted"
             src="../../../assets/images/bus.jpg"
           />
         </div>

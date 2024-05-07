@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { TimisoaraAreas } from '../interfaces/timisoara-areas';
 import { HttpClient } from '@angular/common/http';
@@ -9,9 +9,24 @@ import { ParkingLotInterface } from '../interfaces/parking-lot-interface';
   providedIn: 'root',
 })
 export class ParkingPlacesService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.loadParkingSpaces();
+  }
 
   baseUrl: string = environment.apiUrl;
+  private parkingSpacesSubject = new BehaviorSubject<any[]>([]);
+  parkingSpaces$ = this.parkingSpacesSubject.asObservable();
+
+  // private myParkingSpaceSubject = new BehaviorSubject<any[]>([]);
+  // myParkingSpaceSubject$=this.myParkingSpaceSubject.asObservable();
+
+  loadParkingSpaces() {
+    this.http
+      .get<any>(`${this.baseUrl}ParkingSpaces`)
+      .subscribe((parkingSpaces) => {
+        this.parkingSpacesSubject.next(parkingSpaces);
+      });
+  }
 
   getTimisoaraAreas(): Observable<TimisoaraAreas[]> {
     return this.http.get<TimisoaraAreas[]>(
@@ -20,17 +35,22 @@ export class ParkingPlacesService {
   }
 
   registerParkingSpaces(newParkingSpaces: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}ParkingSpaces`,
-      newParkingSpaces
-    );
+    return this.http
+      .post<any>(`${this.baseUrl}ParkingSpaces`, newParkingSpaces)
+      .pipe(
+        tap((newParkingSpace) => {
+          const currentParkingSpaces = this.parkingSpacesSubject.getValue();
+          currentParkingSpaces.push(newParkingSpace);
+          this.parkingSpacesSubject.next(currentParkingSpaces);
+        })
+      );
   }
 
   getParkingSpaces(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}ParkingSpaces`);
   }
 
-  getMyParkingSpaces(userId: string): Observable<any[]> {
+  getMyParkingSpaces(userId: string) {
     return this.http.get<any[]>(
       `${this.baseUrl}ParkingSpaces/${userId}/parking-spaces`
     );

@@ -31,6 +31,7 @@ export class DeleteParkingSpacesConfirmationDialogComponent implements OnInit {
             duration: 3000,
           });
           this.dialogRef.close();
+          this.parkingSpacesService.loadParkingSpaces();
         },
         error: (err) => {
           this.toast.error({
