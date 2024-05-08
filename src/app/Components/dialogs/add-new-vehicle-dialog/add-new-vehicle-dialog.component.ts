@@ -125,6 +125,47 @@ export class AddNewVehicleDialogComponent {
       });
   }
 
+  registerMyVehicle() {
+    const formData = {
+      color: this.addNewVehicleFormGroup.get('color')?.value,
+      dateAdded: new Date(),
+      imageProfileBase64: this.image,
+      isVerifiedByAdmin: false,
+      make: this.addNewVehicleFormGroup.get('make')?.value,
+      model: this.addNewVehicleFormGroup.get('model')?.value,
+      somethingIsWrong: false,
+      vehicleIdentificationNumber:
+        this.addNewVehicleFormGroup.get('vin')?.value,
+      vehicleOwnerId: this.idUserLogged,
+      vehicleRegistrationCertificateBase64:
+        this.vehicleRegistrationCertificateBase64,
+      year: this.addNewVehicleFormGroup.get('year')?.value,
+    };
+
+    this.vehicleService
+      .registerMyVehicle(formData, this.idUserLogged)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 1000);
+
+          this.vehicleService.loadMyVehicles(this.idUserLogged);
+        },
+        error: (err) => ({
+          summary: err.message,
+          duration: 3000,
+          detail: 'Error Message',
+        }),
+      });
+  }
+
   closeAddNewVehicleDialogComponent() {
     this.dialog
       .open(ConfirmCloseDialogComponent, {

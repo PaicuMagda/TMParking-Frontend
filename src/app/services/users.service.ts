@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../interfaces/user';
 import { environment } from 'src/environments/environment.development';
 
@@ -10,7 +10,18 @@ import { environment } from 'src/environments/environment.development';
 export class UsersService {
   baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.loadUsers();
+  }
+
+  private usersSubject = new BehaviorSubject<any[]>([]);
+  users$ = this.usersSubject.asObservable();
+
+  loadUsers() {
+    this.http
+      .get<any[]>(`${this.baseUrl}User/admin-page`)
+      .subscribe((vehicles) => this.usersSubject.next(vehicles));
+  }
 
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}User`);
@@ -21,7 +32,13 @@ export class UsersService {
   }
 
   registerNewUser(user: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}User/register`, user);
+    return this.http.post<any>(`${this.baseUrl}User/register`, user).pipe(
+      tap((user) => {
+        const currentUsers = this.usersSubject.getValue();
+        currentUsers.push(user);
+        this.usersSubject.next(currentUsers);
+      })
+    );
   }
 
   getMyAccount(userId: any): Observable<any> {

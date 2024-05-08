@@ -124,6 +124,7 @@ export class AddNewUserDialogComponent {
             summary: resp.message,
             duration: 3000,
           });
+          this.userService.loadUsers();
           setTimeout(() => {
             this.dialogRef.close();
           }, 1000);
