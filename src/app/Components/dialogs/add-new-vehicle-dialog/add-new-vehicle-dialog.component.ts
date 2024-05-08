@@ -7,6 +7,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Subject, takeUntil } from 'rxjs';
+import { DisplayCardsService } from 'src/app/services/display-cards.service';
 
 @Component({
   selector: 'app-add-new-vehicle-dialog',
@@ -23,6 +24,7 @@ export class AddNewVehicleDialogComponent {
   idUserLogged: string = '';
   userLoggedFullName: string = '';
   private destroy$: Subject<void> = new Subject();
+  toggleValue: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,10 +33,15 @@ export class AddNewVehicleDialogComponent {
     private vehicleService: VehiclesService,
     private userStore: UserStoreService,
     private auth: AuthenticationService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private displayCardService: DisplayCardsService
   ) {}
 
   ngOnInit() {
+    this.displayCardService.toggleValueSubjectObservable.subscribe(
+      (value) => (this.toggleValue = value)
+    );
+
     this.userStore
       .getIdUserFromStore()
       .pipe(takeUntil(this.destroy$))
@@ -143,7 +150,7 @@ export class AddNewVehicleDialogComponent {
     };
 
     this.vehicleService
-      .registerMyVehicle(formData, this.idUserLogged)
+      .registerMyVehicle(formData)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (resp) => {
@@ -155,7 +162,6 @@ export class AddNewVehicleDialogComponent {
           setTimeout(() => {
             this.dialogRef.close();
           }, 1000);
-
           this.vehicleService.loadMyVehicles(this.idUserLogged);
         },
         error: (err) => ({
@@ -164,6 +170,11 @@ export class AddNewVehicleDialogComponent {
           detail: 'Error Message',
         }),
       });
+  }
+
+  addNewVehicle() {
+    if (this.toggleValue === 'myVehicles') this.registerMyVehicle();
+    else this.registerVehicle();
   }
 
   closeAddNewVehicleDialogComponent() {

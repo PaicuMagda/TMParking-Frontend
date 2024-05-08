@@ -160,20 +160,15 @@ export class VehiclesComponent implements OnInit {
             this.vehicleService.loadVehicles();
             return this.vehicleService.vehicles$;
           } else if (value === 'myVehicles') {
-            return this.vehicleService
-              .getVehicleByUserId(this.idUserLogged)
-              .pipe(
-                map((vehicles) => {
-                  vehicles.forEach((vehicle) => {
-                    vehicle.isEdit = false;
-                    vehicle.vehicleOwnerFullName =
-                      vehicle.vehicleOwner.firstName +
-                      ' ' +
-                      vehicle.vehicleOwner.lastName;
-                  });
-                  return vehicles;
-                })
-              );
+            this.vehicleService.loadMyVehicles(this.idUserLogged);
+            return this.vehicleService.myVehicles$.pipe(
+              map((vehicles) => {
+                vehicles.forEach((vehicle) => {
+                  vehicle.isEdit = false;
+                });
+                return vehicles;
+              })
+            );
           } else {
             return of([]);
           }

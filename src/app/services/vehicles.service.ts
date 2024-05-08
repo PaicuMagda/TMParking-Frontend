@@ -43,6 +43,7 @@ export class VehiclesService {
       .get<Vehicle[]>(`${this.baseUrl}Vehicle/${idUser}/vehicles`)
       .subscribe((vehicles) => this.myVehiclesSubject.next(vehicles));
   }
+
   registerVehicle(newVehicle: any): Observable<any> {
     return this.http
       .post<any>(`${this.baseUrl}Vehicle/register-vehicle`, newVehicle)
@@ -55,14 +56,14 @@ export class VehiclesService {
       );
   }
 
-  registerMyVehicle(newVehicle: any, idUser: any): Observable<any> {
+  registerMyVehicle(newVehicle: any): Observable<any> {
     return this.http
-      .post<any>(`${this.baseUrl}Vehicle/${idUser}/vehicles`, newVehicle)
+      .post<any>(`${this.baseUrl}Vehicle/register-vehicle`, newVehicle)
       .pipe(
         tap((newVehicle) => {
-          const currentVehicles = this.vehiclesSubject.getValue();
+          const currentVehicles = this.myVehiclesSubject.getValue();
           currentVehicles.push(newVehicle);
-          this.vehiclesSubject.next(currentVehicles);
+          this.myVehiclesSubject.next(currentVehicles);
         })
       );
   }
