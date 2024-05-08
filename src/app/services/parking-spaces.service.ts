@@ -4,16 +4,31 @@ import { environment } from 'src/environments/environment.development';
 import { TimisoaraAreas } from '../interfaces/timisoara-areas';
 import { HttpClient } from '@angular/common/http';
 import { ParkingLotInterface } from '../interfaces/parking-lot-interface';
+import { UserStoreService } from './user-store.service';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ParkingPlacesService {
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private userStore: UserStoreService,
+    private authenticationService: AuthenticationService
+  ) {
     this.loadParkingSpaces();
+
+    this.userStore.getIdUserFromStore().subscribe((val) => {
+      let userIdFromToken = this.authenticationService.getUserIdFromToken();
+      this.idUserLogged = val || userIdFromToken;
+    });
+
+    this.loadMyParkingSpace(this.idUserLogged);
   }
 
+  idUserLogged: any = '';
   baseUrl: string = environment.apiUrl;
+
   private parkingSpacesSubject = new BehaviorSubject<any[]>([]);
   parkingSpaces$ = this.parkingSpacesSubject.asObservable();
 

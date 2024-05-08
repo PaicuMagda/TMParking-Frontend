@@ -1,7 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NgToastService } from 'ng-angular-popup';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
   selector: 'app-delete-parking-spaces-confirmation-dialog',
@@ -13,8 +16,13 @@ export class DeleteParkingSpacesConfirmationDialogComponent implements OnInit {
     private parkingSpacesService: ParkingPlacesService,
     private dialogRef: MatDialogRef<DeleteParkingSpacesConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private userStore: UserStoreService,
+    private auth: AuthenticationService
   ) {}
+
+  private destroy$: Subject<void> = new Subject<any>();
+  parkingSpacesOwnerId: string;
 
   closeDeleteDialogConfirmation() {
     this.dialogRef.close();
@@ -31,6 +39,9 @@ export class DeleteParkingSpacesConfirmationDialogComponent implements OnInit {
             duration: 3000,
           });
           this.parkingSpacesService.loadParkingSpaces();
+          this.parkingSpacesService.loadMyParkingSpace(
+            this.parkingSpacesOwnerId
+          );
           this.dialogRef.close();
         },
         error: (err) => {
@@ -44,5 +55,13 @@ export class DeleteParkingSpacesConfirmationDialogComponent implements OnInit {
       });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIdFromToken();
+        this.parkingSpacesOwnerId = userIdFromToken || val;
+      });
+  }
 }

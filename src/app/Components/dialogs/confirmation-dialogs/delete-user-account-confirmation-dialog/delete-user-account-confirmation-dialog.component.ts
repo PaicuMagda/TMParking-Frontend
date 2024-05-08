@@ -28,6 +28,7 @@ export class DeleteUserAccountConfirmationDialogComponent implements OnInit {
           summary: resp.message,
           duration: 3000,
         });
+        this.userService.loadUsers();
         this.dialogRef.close();
       },
       error: (err) => {

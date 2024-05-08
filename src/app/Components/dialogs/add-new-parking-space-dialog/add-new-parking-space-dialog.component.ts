@@ -11,6 +11,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Subject, takeUntil } from 'rxjs';
+import { DisplayCardsService } from 'src/app/services/display-cards.service';
 
 @Component({
   selector: 'app-add-new-parking-space-dialog',
@@ -27,7 +28,8 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     private auth: AuthenticationService,
     private parkingSpacesService: ParkingPlacesService,
     private toast: NgToastService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private displayCardsService: DisplayCardsService
   ) {}
 
   private destroy$: Subject<void> = new Subject<any>();
@@ -52,6 +54,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   imageProfileFileName: string | undefined;
   leasePermitFileName: string | undefined;
   parkingSpacesOwnerId: string;
+  toggleValue: string = '';
 
   changeToggleButtonValue(event: boolean) {
     this.toggleButtonValue = event;
@@ -161,6 +164,9 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
             this.dialogRef.close();
           }, 1000);
           this.parkingSpacesService.loadParkingSpaces();
+          this.parkingSpacesService.loadMyParkingSpace(
+            this.parkingSpacesOwnerId
+          );
         },
         error: (err) => {
           this.toast.error({
@@ -214,6 +220,13 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
         let userIdFromToken = this.auth.getUserIdFromToken();
         this.parkingSpacesOwnerId = userIdFromToken || val;
       });
+
+    this.displayCardsService.toggleValueSubjectObservable.subscribe(
+      (values) => {
+        this.toggleValue = values;
+        console.log(this.toggleValue);
+      }
+    );
   }
 
   ngOnDestroy(): void {
