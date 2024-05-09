@@ -12,7 +12,6 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { AddNewParkingSpaceDialogComponent } from '../add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { Subject, takeUntil } from 'rxjs';
-import { ParkingLotInterface } from 'src/app/interfaces/parking-lot-interface';
 
 @Component({
   selector: 'app-parking-spaces-dialog-edit',
@@ -85,16 +84,28 @@ export class ParkingSpacesDialogEditComponent {
   }
 
   addNewParkingLotForParkingSpace() {
-    const parkingLot: ParkingLotInterface = {
+    const parkingLot: any = {
       parkingSpacesId: this.data.parkingSpacesId,
       name: this.addNewParkingSpaceFormGroup.get('nameParkingLot')?.value,
       availability: 'FREE',
     };
-    this.parkingSpacesService
-      .registerParkingLot(parkingLot)
-      .subscribe((value) => {
-        console.log(value);
-      });
+    this.parkingSpacesService.registerParkingLot(parkingLot).subscribe({
+      next: (resp) => {
+        this.toast.info({
+          detail: 'Info Message',
+          summary: resp.message,
+          duration: 3000,
+        });
+        this.addNewParkingSpaceFormGroup.get('nameParkingLot')?.reset();
+      },
+      error: (err) => {
+        this.toast.error({
+          detail: 'Error Message',
+          summary: err.error.message,
+          duration: 5000,
+        });
+      },
+    });
   }
 
   onFileSelectedImageProfile(event: any) {

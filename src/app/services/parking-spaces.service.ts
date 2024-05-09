@@ -89,9 +89,7 @@ export class ParkingPlacesService {
     return this.http.delete(`${this.baseUrl}ParkingSpaces/${parkingSpacesId}`);
   }
 
-  registerParkingLot(
-    parkingLot: ParkingLotInterface
-  ): Observable<ParkingLotInterface> {
+  registerParkingLot(parkingLot: any): Observable<any> {
     return this.http.post<ParkingLotInterface>(
       `${this.baseUrl}OneParkingSpace`,
       parkingLot

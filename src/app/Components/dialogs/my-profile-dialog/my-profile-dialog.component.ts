@@ -130,7 +130,7 @@ export class MyProfileDialogComponent implements OnInit {
         takeUntil(this.destroy$),
         switchMap((result) => {
           if (result === 'save') {
-            return this.userService.updateUser(this.userId, formData);
+            return this.userService.updateMyAccount(this.userId, formData);
           } else {
             return from([]);
           }
