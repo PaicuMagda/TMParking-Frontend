@@ -1,5 +1,47 @@
-<div #chart class="chart"></div>
-<div class="chart__buttons">
-  <button>Status(Active/Inactive)</button>
-  <button>Number of Vehicle Registered</button>
+<div class="container">
+  <div class="container__chart-types">
+    <div #chart class="container__chart"></div>
+    <div class="container__buttons">
+      <button
+        (click)="changeChartType('bar')"
+        [ngClass]="{ selected: selectedChartType === 'bar' }"
+      >
+        Bar Chart
+      </button>
+      <button
+        (click)="changeChartType('line')"
+        [ngClass]="{ selected: selectedChartType === 'line' }"
+      >
+        Line Chart
+      </button>
+      <button
+        (click)="changeChartType('column')"
+        [ngClass]="{ selected: selectedChartType === 'column' }"
+      >
+        Column Chart
+      </button>
+      <button
+        (click)="changeChartType('area')"
+        [ngClass]="{ selected: selectedChartType === 'area' }"
+      >
+        Area Chart
+      </button>
+      <button
+        (click)="changeChartType('scatter')"
+        [ngClass]="{ selected: selectedChartType === 'scatter' }"
+      >
+        Scatter Chart
+      </button>
+      <button
+        (click)="changeChartType('histogram')"
+        [ngClass]="{ selected: selectedChartType === 'histogram' }"
+      >
+        Histogram
+      </button>
+    </div>
+  </div>
+  <div class="container__values">
+    <button>Status(Active/Inactive)</button>
+    <button>Number of Vehicle Registered</button>
+  </div>
 </div>

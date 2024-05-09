@@ -1,7 +1,19 @@
 <app-nav-bar [showSearch]="true"></app-nav-bar>
 <div class="charts">
-  <app-users-charts></app-users-charts>
-  <app-vehicles-charts></app-vehicles-charts>
-  <app-parking-spaces-charts></app-parking-spaces-charts>
-  <app-reservations-charts></app-reservations-charts>
+  <div>
+    <div class="charts__title">Users</div>
+    <app-users-charts></app-users-charts>
+  </div>
+  <div>
+    <div class="charts__title">Vehicles</div>
+    <app-vehicles-charts></app-vehicles-charts>
+  </div>
+  <div>
+    <div class="charts__title">Parking Spaces</div>
+    <app-parking-spaces-charts></app-parking-spaces-charts>
+  </div>
+  <div>
+    <div class="charts__title">Reservations</div>
+    <app-reservations-charts></app-reservations-charts>
+  </div>
 </div>
