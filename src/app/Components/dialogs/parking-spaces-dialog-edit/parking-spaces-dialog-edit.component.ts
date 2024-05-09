@@ -108,6 +108,31 @@ export class ParkingSpacesDialogEditComponent {
     });
   }
 
+  deleteParkingLotForParkingSpace() {
+    let parkingLotName =
+      this.addNewParkingSpaceFormGroup.get('nameParkingLot')?.value;
+    let parkingSpaceId = this.data.parkingSpacesId;
+    this.parkingSpacesService
+      .deletePrakingLot(parkingLotName, parkingSpaceId)
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          this.addNewParkingSpaceFormGroup.get('nameParkingLot')?.reset();
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
+  }
+
   onFileSelectedImageProfile(event: any) {
     const file: File = event.target.files[0];
     this.imageProfileFileName = file.name;

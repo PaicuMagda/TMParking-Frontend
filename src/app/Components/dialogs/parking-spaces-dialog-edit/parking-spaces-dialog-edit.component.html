@@ -360,6 +360,15 @@
           Add parking lot
         </button>
       </div>
+      <div class="parking-space">
+        <mat-form-field appearance="outline">
+          <mat-label>Parking space</mat-label>
+          <input matInput formControlName="nameParkingLot" />
+        </mat-form-field>
+        <button (click)="deleteParkingLotForParkingSpace()">
+          Delete parking lot
+        </button>
+      </div>
       <div class="siaplay-parking-lots"></div>
     </form>
     <div class="add_new_parking__form__create-card">

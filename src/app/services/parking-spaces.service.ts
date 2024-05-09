@@ -96,6 +96,15 @@ export class ParkingPlacesService {
     );
   }
 
+  deletePrakingLot(
+    parkingLotName: string,
+    parkingSpaceId: number
+  ): Observable<any> {
+    return this.http.delete(
+      `${this.baseUrl}OneParkingSpace?parkingSpaceName=${parkingLotName}&parkingSpaceId=${parkingSpaceId}`
+    );
+  }
+
   updateParkingSpaces(
     idParkingSpaces: number,
     parkingSpaces: any
