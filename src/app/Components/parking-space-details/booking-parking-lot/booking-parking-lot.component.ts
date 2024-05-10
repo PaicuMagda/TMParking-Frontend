@@ -27,7 +27,7 @@ export class BookingParkingLotComponent {
   private destroy$: Subject<void> = new Subject<void>();
   showSearch: boolean = false;
   parkingPlace: any;
-  bookingType: string = 'day';
+  bookingType: string = 'oneDay';
   hours: number[] = [];
   endHourIsSmaller: boolean;
   vehicles: Vehicle[] = [];
@@ -104,6 +104,8 @@ export class BookingParkingLotComponent {
       )?.value,
       spaceModelName: this.oneDayBookingFormGroup.get('spaceModelName')?.value,
       paymentMethod: this.oneDayBookingFormGroup.get('paymentMethod')?.value,
+      priceToPay: this.oneDayBookingFormGroup.get('totalToPay')?.value,
+      reservationType: this.bookingType,
     };
 
     this.reservationsService
@@ -124,6 +126,78 @@ export class BookingParkingLotComponent {
         }),
       });
     this.oneDayBookingFormGroup.reset();
+  }
+
+  registerReservationForManyDay() {
+    const formData = {
+      startDate: this.manyDaysBookingFormGroup.get('startDate')?.value,
+      vehicleRegistrationNumber: this.manyDaysBookingFormGroup.get(
+        'vehicleRegistrationNumber'
+      )?.value,
+      spaceModelName:
+        this.manyDaysBookingFormGroup.get('spaceModelName')?.value,
+      paymentMethod: this.manyDaysBookingFormGroup.get('paymentMethod')?.value,
+      priceToPay: this.manyDaysBookingFormGroup.get('totalToPay')?.value,
+      reservationType: this.bookingType,
+    };
+
+    this.reservationsService
+      .registerReservation(formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+        },
+        error: (err) => ({
+          summary: err.message,
+          duration: 3000,
+          detail: 'Error Message',
+        }),
+      });
+    this.manyDaysBookingFormGroup.reset();
+  }
+
+  registerSubscriptionReservation() {
+    const formData = {
+      startDate: this.subscriptionBookingForm.get('startDate')?.value,
+      spaceModelName: this.subscriptionBookingForm.get('spaceModelName')?.value,
+      priceToPay: this.subscriptionBookingForm.get('totalToPay')?.value,
+      reservationType: this.bookingType,
+      numberOfMonths: this.subscriptionBookingForm.get('numberOfMonths')?.value,
+    };
+
+    this.reservationsService
+      .registerReservation(formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+        },
+        error: (err) => ({
+          summary: err.message,
+          duration: 3000,
+          detail: 'Error Message',
+        }),
+      });
+    this.subscriptionBookingForm.reset();
+  }
+
+  registerReservation(bookingType: string) {
+    if (bookingType == 'oneDay') {
+      this.registerReservationForOneDay();
+    } else if (bookingType == 'subscription') {
+      this.registerSubscriptionReservation();
+    } else {
+      this.registerReservationForManyDay();
+    }
   }
 
   // checkEndHourIsSmaller() {
@@ -170,6 +244,7 @@ export class BookingParkingLotComponent {
       vehicleRegistrationNumber: [''],
       spaceModelName: [''],
       paymentMethod: [''],
+      totalToPay: [''],
     });
 
     this.manyDaysBookingFormGroup = this.formBuilder.group({
@@ -178,11 +253,14 @@ export class BookingParkingLotComponent {
       vehicleRegistrationNumber: [''],
       spaceModelName: [''],
       paymentMethod: [''],
+      totalToPay: [''],
     });
 
     this.subscriptionBookingForm = this.formBuilder.group({
+      startDate: [''],
       numberOfMonths: [''],
       spaceModelName: [''],
+      totalToPay: [''],
     });
   }
 }

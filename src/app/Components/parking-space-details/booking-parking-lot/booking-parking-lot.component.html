@@ -5,7 +5,7 @@
       (change)="changeType($event.value)"
       [value]="bookingType"
     >
-      <mat-button-toggle value="day">One day</mat-button-toggle>
+      <mat-button-toggle value="oneDay">One day</mat-button-toggle>
       <mat-button-toggle value="manyDays">Many days</mat-button-toggle>
       <mat-button-toggle value="subscription">Subscription</mat-button-toggle>
     </mat-button-toggle-group>
@@ -14,7 +14,7 @@
 
 <div class="booking__fields">
   <form
-    *ngIf="bookingType === 'day'"
+    *ngIf="bookingType === 'oneDay'"
     [formGroup]="oneDayBookingFormGroup"
     class="booking__fields__one-day"
   >
@@ -131,7 +131,7 @@
       <div>Total to paint</div>
       <div>
         <mat-form-field>
-          <input matInput placeholder="LEI 💳" />
+          <input matInput placeholder="LEI 💳" formControlName="totalToPay" />
         </mat-form-field>
       </div>
     </div>
@@ -245,7 +245,7 @@
       <div>Total to paint</div>
       <div>
         <mat-form-field>
-          <input matInput placeholder="LEI 💳" />
+          <input matInput placeholder="LEI 💳" formControlName="totalToPay" />
         </mat-form-field>
       </div>
     </div>
@@ -255,15 +255,40 @@
     *ngIf="bookingType === 'subscription'"
     class="booking__fields__subscription"
   >
+    <div class="booking__fields__date">
+      <div>Choose a start date</div>
+      <div>
+        <mat-form-field>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            type="date"
+            formControlName="startDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
     <div class="booking__fields__vehicle">
       <div>Select the number of months</div>
       <div>
         <mat-form-field>
-          <mat-select formControlName="numberOfMonths">
+          <input
+            matInput
+            type="text"
+            [matAutocomplete]="numberOfMonths"
+            placeholder="Select the number of months"
+            formControlName="numberOfMonths"
+          />
+          <mat-autocomplete #numberOfMonths="matAutocomplete">
             <mat-option *ngFor="let month of months" [value]="month">
               {{ month }}
             </mat-option>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
       </div>
     </div>
@@ -292,7 +317,7 @@
       <div>Total to paint</div>
       <div>
         <mat-form-field>
-          <input matInput placeholder="LEI 💳" />
+          <input matInput placeholder="LEI 💳" formControlName="totalToPay" />
         </mat-form-field>
       </div>
     </div>
@@ -306,7 +331,9 @@
   </button>
 
   <button appHoverElement>Paid</button>
-  <button appHoverElement (click)="registerReservationForOneDay()">Book</button>
+  <button appHoverElement (click)="registerReservation(bookingType)">
+    Book
+  </button>
 </div>
 
 <mat-divider></mat-divider>
