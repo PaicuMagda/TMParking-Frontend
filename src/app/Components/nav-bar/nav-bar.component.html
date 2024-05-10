@@ -11,6 +11,18 @@
       <p>{{ fullName | uppercase }}</p>
     </div>
     <div *ngIf="!isLogin">You are not logged in ...</div>
+    <div>
+      <img
+        class="notifications"
+        src="../../../assets/images/notification-icon.png"
+      />
+      <span
+        [matBadge]="reservationsNumber"
+        matBadgePosition="above after"
+        matBadgeColor="warn"
+        matBadgeSize="medium"
+      ></span>
+    </div>
   </div>
 
   <div class="buttons">

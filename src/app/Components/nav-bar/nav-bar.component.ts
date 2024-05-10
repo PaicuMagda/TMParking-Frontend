@@ -7,7 +7,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LogoutDialogComponent } from '../dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { UsersService } from 'src/app/services/users.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, toArray } from 'rxjs';
+import { ReservationsService } from 'src/app/services/reservations.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,10 +20,11 @@ export class NavBarComponent implements OnInit {
   isLogin: boolean = false;
   fullName: string = '';
   role: string = '';
-  userId: string;
+  userId: number;
   userLogged: any;
   @Input() showSearch: boolean = false;
   image: string = '';
+  reservationsNumber: number;
 
   constructor(
     private router: Router,
@@ -30,7 +32,8 @@ export class NavBarComponent implements OnInit {
     private auth: AuthenticationService,
     private userStore: UserStoreService,
     private sidenavService: NavbarService,
-    private userService: UsersService
+    private userService: UsersService,
+    private reservationsService: ReservationsService
   ) {}
 
   goToLogin() {
@@ -109,6 +112,13 @@ export class NavBarComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         this.userLogged = values;
+      });
+
+    this.reservationsService
+      .getReservationsByUserId(this.userId)
+      .pipe(toArray())
+      .subscribe((values) => {
+        this.reservationsNumber = values.length;
       });
 
     this.getImage();

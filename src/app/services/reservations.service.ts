@@ -19,4 +19,10 @@ export class ReservationsService {
   registerReservation(reservation: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}Reservation`, reservation);
   }
+
+  getReservationsByUserId(userId: number): Observable<any> {
+    return this.http.get<any[]>(
+      `${this.baseUrl}Reservation/${userId}/reservations`
+    );
+  }
 }
