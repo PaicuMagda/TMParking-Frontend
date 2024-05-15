@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Vehicle } from '../interfaces/vehicle';
-import { BehaviorSubject, Observable, of, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { UserStoreService } from './user-store.service';

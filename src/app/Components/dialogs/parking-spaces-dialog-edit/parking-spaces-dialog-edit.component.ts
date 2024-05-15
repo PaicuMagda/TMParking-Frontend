@@ -27,6 +27,7 @@ export class ParkingSpacesDialogEditComponent {
     private userStore: UserStoreService,
     private auth: AuthenticationService,
     private parkingSpacesService: ParkingPlacesService,
+    private authenticationService: AuthenticationService,
     private toast: NgToastService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -42,6 +43,7 @@ export class ParkingSpacesDialogEditComponent {
   showPdfViewer: boolean = false;
   private destroy$: Subject<void> = new Subject<void>();
   parkingLots: any[];
+  idUserLogged: string = '';
 
   changeVideoSurveillanceToggleButtonValue(event: boolean) {
     this.data.isVideoSurveilance = event;
@@ -202,6 +204,18 @@ export class ParkingSpacesDialogEditComponent {
       paymentForSubscription: this.data.paymentForSubscription,
       imageProfile: this.imageProfile,
       leasePermit: this.leasePermitFile,
+      isPersonalVehicleAccepted: this.addNewParkingSpaceFormGroup.get(
+        'isPersonalVehicleAccepted'
+      )?.value,
+      isCargoVehicleAccepted: this.addNewParkingSpaceFormGroup.get(
+        'isCargoVehicleAccepted'
+      )?.value,
+      isPublicTransportAccepted: this.addNewParkingSpaceFormGroup.get(
+        'isPublicTransportAccepted'
+      )?.value,
+      isAgriculturalMachineryAccepted: this.addNewParkingSpaceFormGroup.get(
+        'isAgriculturalMachineryAccepted'
+      )?.value,
     };
 
     this.parkingSpacesService
@@ -214,6 +228,8 @@ export class ParkingSpacesDialogEditComponent {
             summary: resp.message,
             duration: 3000,
           });
+          this.parkingSpacesService.loadParkingSpaces();
+          this.parkingSpacesService.loadMyParkingSpace(this.idUserLogged);
           setTimeout(() => {
             this.dialogRef.close();
           }, 1000);
@@ -281,6 +297,13 @@ export class ParkingSpacesDialogEditComponent {
       .subscribe((values) => {
         this.parkingLots = values;
         console.log(this.parkingLots);
+      });
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.authenticationService.getUserIdFromToken();
+        this.idUserLogged = val || userIdFromToken;
       });
   }
 

@@ -79,6 +79,7 @@ export class UsersAdminComponent implements OnInit {
                 summary: resp.message,
                 duration: 3000,
               });
+              this.usersService.loadUsers();
             },
             error: (err) => {
               this.toast.error({

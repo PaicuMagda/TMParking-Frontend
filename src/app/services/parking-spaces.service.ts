@@ -29,6 +29,9 @@ export class ParkingPlacesService {
   idUserLogged: any = '';
   baseUrl: string = environment.apiUrl;
 
+  private updateParkingSpaceSubject = new BehaviorSubject<any>(null);
+  dataUpdate$ = this.updateParkingSpaceSubject.asObservable();
+
   private parkingSpacesSubject = new BehaviorSubject<any[]>([]);
   parkingSpaces$ = this.parkingSpacesSubject.asObservable();
 
@@ -103,6 +106,10 @@ export class ParkingPlacesService {
     return this.http.delete(
       `${this.baseUrl}OneParkingSpace?parkingSpaceName=${parkingLotName}&parkingSpaceId=${parkingSpaceId}`
     );
+  }
+
+  sendUpdatedParkingSpace(updatedParkingSpaces: any) {
+    this.updateParkingSpaceSubject.next(updatedParkingSpaces);
   }
 
   updateParkingSpaces(

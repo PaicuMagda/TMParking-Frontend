@@ -81,37 +81,34 @@ export class VehiclesComponent implements OnInit {
       },
     });
 
-    dialogRef
-      .afterClosed()
-      .pipe(
-        takeUntil(this.destroy$),
-        switchMap((result: string) => {
-          if (result === 'save') {
-            this.vehicles[index].isEdit = false;
-            return this.vehicleService.updateVehicle(idVehicle, vehicleData);
-          } else {
-            dialogRef.close();
-            this.vehicles[index].isEdit = false;
-            return from([]);
-          }
-        })
-      )
-      .subscribe({
-        next: (resp) => {
-          this.toast.info({
-            detail: 'Info Message',
-            summary: resp.message,
-            duration: 3000,
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'save') {
+        this.vehicleService
+          .updateVehicle(idVehicle, vehicleData)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: (resp) => {
+              this.toast.info({
+                detail: 'Info Message',
+                summary: resp.message,
+                duration: 3000,
+              });
+              this.vehicleService.loadVehicles();
+              this.vehicleService.loadMyVehicles(this.idUserLogged);
+            },
+            error: (err) => {
+              this.toast.error({
+                detail: 'Error Message',
+                summary: err.error.message,
+                duration: 5000,
+              });
+            },
           });
-        },
-        error: (err) => {
-          this.toast.error({
-            detail: 'Error Message',
-            summary: err.error.message,
-            duration: 5000,
-          });
-        },
-      });
+      } else if (result === 'close') {
+        this.vehicles[index].isEdit = false;
+        dialogRef.close();
+      }
+    });
   }
 
   openDeleteConfirmDialog(idVehicle: number) {
@@ -183,7 +180,7 @@ export class VehiclesComponent implements OnInit {
       });
   }
 
-  ngOnSestroy(): void {
+  ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -205,8 +202,5 @@ export class VehiclesComponent implements OnInit {
       });
 
     this.getVehicles();
-    this.vehicleService.vehicles$.subscribe((values) => {
-      console.log(values);
-    });
   }
 }
