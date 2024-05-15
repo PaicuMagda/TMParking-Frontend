@@ -131,6 +131,7 @@ export class BookingParkingLotComponent {
   registerReservationForManyDay() {
     const formData = {
       startDate: this.manyDaysBookingFormGroup.get('startDate')?.value,
+      endDate: this.manyDaysBookingFormGroup.get('endDate')?.value,
       vehicleRegistrationNumber: this.manyDaysBookingFormGroup.get(
         'vehicleRegistrationNumber'
       )?.value,
@@ -163,10 +164,13 @@ export class BookingParkingLotComponent {
 
   registerSubscriptionReservation() {
     const formData = {
-      startDate: this.subscriptionBookingForm.get('startDate')?.value,
-      spaceModelName: this.subscriptionBookingForm.get('spaceModelName')?.value,
       priceToPay: this.subscriptionBookingForm.get('totalToPay')?.value,
       reservationType: this.bookingType,
+      spaceModelName: this.subscriptionBookingForm.get('spaceModelName')?.value,
+      startDate: this.subscriptionBookingForm.get('startDate')?.value,
+      vehicleRegistrationNumber: this.subscriptionBookingForm.get(
+        'vehicleRegistrationNumber'
+      )?.value,
       numberOfMonths: this.subscriptionBookingForm.get('numberOfMonths')?.value,
     };
 
@@ -261,6 +265,7 @@ export class BookingParkingLotComponent {
       numberOfMonths: [''],
       spaceModelName: [''],
       totalToPay: [''],
+      vehicleRegistrationNumber: [''],
     });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { TmParkingInfoDialogComponent } from '../dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -25,6 +25,7 @@ export class NavBarComponent implements OnInit {
   @Input() showSearch: boolean = false;
   image: string = '';
   reservationsNumber: number;
+  showNavBar: boolean = true;
 
   constructor(
     private router: Router,
@@ -34,7 +35,21 @@ export class NavBarComponent implements OnInit {
     private sidenavService: NavbarService,
     private userService: UsersService,
     private reservationsService: ReservationsService
-  ) {}
+  ) {
+    // this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     if (
+    //       event.url === '/login' ||
+    //       event.url === '/recover-account' ||
+    //       event.url === '/create-account'
+    //     ) {
+    //       this.showNavBar = false;
+    //     } else {
+    //       this.showNavBar = true;
+    //     }
+    //   }
+    // });
+  }
 
   goToLogin() {
     this.router.navigate(['/login']);
