@@ -38,6 +38,10 @@ export class ParkingPlacesService {
   private myParkingSpaceSubject = new BehaviorSubject<any[]>([]);
   myParkingSpaceSubject$ = this.myParkingSpaceSubject.asObservable();
 
+  private parkingLotsForOneParkingSpaceSubject = new BehaviorSubject<any[]>([]);
+  parkingLotsForOneParkingSpace$ =
+    this.parkingLotsForOneParkingSpaceSubject.asObservable();
+
   loadParkingSpaces() {
     this.http
       .get<any>(`${this.baseUrl}ParkingSpaces`)
@@ -122,9 +126,13 @@ export class ParkingPlacesService {
     );
   }
 
-  getParkingLotById(parkingSpaceId: number): Observable<any> {
-    return this.http.get(
+  getParkingLotsById(parkingSpaceId: number): Observable<any[]> {
+    return this.http.get<any[]>(
       `${this.baseUrl}OneParkingSpace/parking-lots?parkingSpacesId=${parkingSpaceId}`
     );
+    // .subscribe((response) => {
+    //   this.parkingLotsForOneParkingSpaceSubject.next(response);
+    //   console.log(response);
+    // });
   }
 }

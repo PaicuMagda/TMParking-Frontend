@@ -12,6 +12,7 @@ import { GoogleMapsComponent } from '../google-maps/google-maps.component';
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 
 @Component({
   selector: 'app-parking-space-details',
@@ -47,7 +48,8 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     private dialog: MatDialog,
     private reservationsService: ReservationsService,
     private userStore: UserStoreService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private parkingSpacesService: ParkingPlacesService
   ) {
     // this.filteredVehicles = this.vehiclesControl.valueChanges.pipe(
     //   startWith(''),
@@ -107,6 +109,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.idParkingSpaces = this.router.snapshot.params['id'];
+
     this.activatedRoute.data
       .pipe(takeUntil(this.destroy$))
       .subscribe((value: any) => {
@@ -138,6 +141,12 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       .subscribe((val) => {
         const roleFromToken = this.auth.getRoleFromToken();
         this.role = val || roleFromToken;
+      });
+
+    this.parkingSpacesService
+      .getParkingLotsById(this.idParkingSpaces)
+      .subscribe((value) => {
+        console.log('Aici este noua parcare adaugata:' + value);
       });
   }
 }

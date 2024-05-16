@@ -44,6 +44,7 @@ export class ParkingSpacesDialogEditComponent {
   private destroy$: Subject<void> = new Subject<void>();
   parkingLots: any[];
   idUserLogged: string = '';
+  paidParking: boolean = false;
 
   changeVideoSurveillanceToggleButtonValue(event: boolean) {
     this.data.isVideoSurveilance = event;
@@ -58,6 +59,7 @@ export class ParkingSpacesDialogEditComponent {
   changePaidParkingToggleButtonValue(event: boolean) {
     this.data.paidParking = event;
     this.cdr.detectChanges();
+    console.log(this.paidParking);
   }
 
   changeUndergroundParkingLotsToggleButtonValue(event: boolean) {
@@ -293,7 +295,7 @@ export class ParkingSpacesDialogEditComponent {
       });
 
     this.parkingSpacesService
-      .getParkingLotById(this.data.parkingSpacesId)
+      .getParkingLotsById(this.data.parkingSpacesId)
       .subscribe((values) => {
         this.parkingLots = values;
         console.log(this.parkingLots);
@@ -305,6 +307,8 @@ export class ParkingSpacesDialogEditComponent {
         let userIdFromToken = this.authenticationService.getUserIdFromToken();
         this.idUserLogged = val || userIdFromToken;
       });
+
+    this.paidParking = this.data.paidParking;
   }
 
   ngOnDestroy(): void {
