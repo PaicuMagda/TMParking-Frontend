@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { User } from '../interfaces/user';
 import { environment } from 'src/environments/environment.development';
 
@@ -19,16 +19,20 @@ export class UsersService {
 
   loadUsers() {
     this.http
-      .get<any[]>(`${this.baseUrl}User/admin-page`)
-      .subscribe((vehicles) => this.usersSubject.next(vehicles));
+      .get<User[]>(`${this.baseUrl}User/admin-page`)
+      .pipe(
+        map((users) =>
+          users.map((user) => ({
+            ...user,
+            dateAdded: new Date(user.dateAdded),
+          }))
+        )
+      )
+      .subscribe((users) => this.usersSubject.next(users));
   }
 
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}User`);
-  }
-
-  getUsersForAdminPage(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}User/admin-page`);
   }
 
   registerNewUser(user: any): Observable<any> {

@@ -4,11 +4,7 @@
       <form
         class="userCard"
         [formGroup]="userFormGroup[i]"
-        [matBadge]="
-          isUserNew(user) && !user.isVerifiedByAdmin && role === 'Administrator'
-            ? 'N'
-            : null
-        "
+        [matBadge]="isUserNew(user) && role === 'Administrator' ? 'N' : null"
         matBadgePosition="after"
         matBadgeColor="accent"
         matBadgeSize="large"

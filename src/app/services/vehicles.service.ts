@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Vehicle } from '../interfaces/vehicle';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { UserStoreService } from './user-store.service';
@@ -35,6 +35,14 @@ export class VehiclesService {
   loadVehicles() {
     this.http
       .get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles`)
+      .pipe(
+        map((vehicles) =>
+          vehicles.map((vehicle) => ({
+            ...vehicle,
+            dateAdded: new Date(vehicle.dateAdded),
+          }))
+        )
+      )
       .subscribe((vehicles) => this.vehiclesSubject.next(vehicles));
   }
 

@@ -219,6 +219,7 @@ export class ParkingSpacesDialogEditComponent {
       isAgriculturalMachineryAccepted: this.addNewParkingSpaceFormGroup.get(
         'isAgriculturalMachineryAccepted'
       )?.value,
+      dateAdded: new Date(),
     };
 
     this.parkingSpacesService

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { TimisoaraAreas } from '../interfaces/timisoara-areas';
 import { HttpClient } from '@angular/common/http';
@@ -45,7 +45,15 @@ export class ParkingPlacesService {
 
   loadParkingSpaces() {
     this.http
-      .get<any>(`${this.baseUrl}ParkingSpaces`)
+      .get<ParkingSpace[]>(`${this.baseUrl}ParkingSpaces`)
+      .pipe(
+        map((parkingSpaces) =>
+          parkingSpaces.map((space) => ({
+            ...space,
+            dateAdded: new Date(space.dateAdded),
+          }))
+        )
+      )
       .subscribe((parkingSpaces) => {
         this.parkingSpacesSubject.next(parkingSpaces);
       });
@@ -53,7 +61,17 @@ export class ParkingPlacesService {
 
   loadMyParkingSpace(userId: string) {
     this.http
-      .get<any[]>(`${this.baseUrl}ParkingSpaces/${userId}/parking-spaces`)
+      .get<ParkingSpace[]>(
+        `${this.baseUrl}ParkingSpaces/${userId}/parking-spaces`
+      )
+      .pipe(
+        map((parkingSpaces) =>
+          parkingSpaces.map((space) => ({
+            ...space,
+            dateAdded: new Date(space.dateAdded),
+          }))
+        )
+      )
       .subscribe((myParkingSpaces) => {
         this.myParkingSpaceSubject.next(myParkingSpaces);
       });

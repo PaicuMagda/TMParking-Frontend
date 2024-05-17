@@ -115,7 +115,7 @@ export class ParkingSpacesComponent implements OnInit {
           );
           this.toggleValue = value;
         }
-        if (value === 'allParkingSpaces') {
+        if (value === 'allParkingSpaces' && this.role == 'User') {
           this.parkingSpacesService.loadParkingSpaces();
           this.parkingSpacesService.parkingSpaces$
             .pipe(
@@ -128,18 +128,23 @@ export class ParkingSpacesComponent implements OnInit {
             });
           this.toggleValue = value;
           this.isLoading = false;
+        } else {
+          this.parkingSpacesService.parkingSpaces$.subscribe((values) => {
+            this.parkingSpaces = values;
+          });
+          this.toggleValue = value;
+          this.isLoading = false;
         }
       });
   }
 
   isParkingNew(parkingSpace: ParkingSpace): boolean {
-    // const currentDate = new Date().getDate();
-    // const dateAddedParkingSpace = parkingSpace.dateAdded.getTime();
-    // const differenceInDays = Math.floor(
-    //   (currentDate - dateAddedParkingSpace) / (1000 * 60 * 60 * 24)
-    // );
-    // return differenceInDays <= 3;
-    return true;
+    const currentDate = new Date().getDate();
+    const dateAddedParkingSpace = parkingSpace.dateAdded.getTime();
+    const differenceInDays = Math.floor(
+      (currentDate - dateAddedParkingSpace) / (1000 * 60 * 60 * 24)
+    );
+    return differenceInDays <= 3;
   }
 
   ngOnDestroy(): void {

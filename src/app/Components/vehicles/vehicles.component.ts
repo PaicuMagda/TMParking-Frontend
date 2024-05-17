@@ -6,7 +6,7 @@ import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialo
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
-import { Observable, Subject, from, map, of, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, map, of, switchMap, takeUntil } from 'rxjs';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { NgToastService } from 'ng-angular-popup';
 import { MatDialog } from '@angular/material/dialog';
@@ -140,12 +140,13 @@ export class VehiclesComponent implements OnInit {
   }
 
   isVehicleNew(vehicle: Vehicle): boolean {
-    const currentDate = new Date().getDate();
-    const dateAddedVehicle = vehicle.dateAdded.getTime();
-    const differenceInDays = Math.floor(
-      (currentDate - dateAddedVehicle) / (1000 * 60 * 60 * 24)
-    );
-    return differenceInDays <= 3;
+    // const currentDate = new Date().getDate();
+    // const dateAddedVehicle = vehicle.dateAdded.getTime();
+    // const differenceInDays = Math.floor(
+    //   (currentDate - dateAddedVehicle) / (1000 * 60 * 60 * 24)
+    // );
+    // return differenceInDays <= 3;
+    return true;
   }
 
   getVehicles() {
