@@ -53,7 +53,11 @@ export class IconsModule {
         'ellipsis-vertical-solid',
         this.setPath(`${this.path}/ellipsis-vertical-solid.svg`)
       )
-      .addSvgIcon('icon-close', this.setPath(`${this.path}/icon-close.svg`));
+      .addSvgIcon('icon-close', this.setPath(`${this.path}/icon-close.svg`))
+      .addSvgIcon(
+        'delete-trash-red',
+        this.setPath(`${this.path}/delete-trash-red.svg`)
+      );
   }
 
   private setPath(url: string): SafeResourceUrl {

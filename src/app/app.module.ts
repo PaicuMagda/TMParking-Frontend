@@ -62,6 +62,7 @@ import { UsersChartsComponent } from './Components/charts/users-charts/users-cha
 import { ParkingSpacesChartsComponent } from './Components/charts/parking-spaces-charts/parking-spaces-charts.component';
 import { VehiclesChartsComponent } from './Components/charts/vehicles-charts/vehicles-charts.component';
 import { ReservationsChartsComponent } from './Components/charts/reservations-charts/reservations-charts.component';
+import { DeleteReservationConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-reservation-confirmation-dialog/delete-reservation-confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { ReservationsChartsComponent } from './Components/charts/reservations-ch
     ParkingSpacesChartsComponent,
     VehiclesChartsComponent,
     ReservationsChartsComponent,
+    DeleteReservationConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,

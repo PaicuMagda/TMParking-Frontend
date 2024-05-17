@@ -213,8 +213,8 @@
             [(ngModel)]="paidParking"
             (change)="changeToggleButtonValue(toggleGroupPaid.value)"
           >
-            <mat-button-toggle value="true">Yes</mat-button-toggle>
-            <mat-button-toggle value="false">No</mat-button-toggle>
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
           </mat-button-toggle-group>
         </div>
 
@@ -345,15 +345,15 @@
             </div>
 
             <div
-              *ngIf="paidParking === 'true' || paidParking === 'false'"
+              *ngIf="paidParking || !paidParking"
               class="add_new_parking__form__create-card__card-full__image__img__div__paid"
             >
               <img
-                *ngIf="paidParking === 'true'"
+                *ngIf="paidParking"
                 src="../../../../assets/images/paid.png"
               />
               <img
-                *ngIf="paidParking === 'false'"
+                *ngIf="!paidParking"
                 src="../../../../assets/images/no-paid.png"
               />
             </div>
@@ -422,7 +422,7 @@
     </div>
   </div>
   <div class="add_new_parking__buttons">
-    <button class="btn btn-warning">Save as Draft</button>
+    <!-- <button class="btn btn-warning">Save as Draft</button> -->
     <button
       class="btn add_new_parking__buttons__send"
       (click)="registerParkingSpace()"

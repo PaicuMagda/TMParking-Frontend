@@ -37,7 +37,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   name: string = '';
   addressParkingSpace: string = '';
   numberOfParkingSpaces: number = 0;
-  paidParking: string = '';
+  paidParking: boolean = false;
   videoSurveillance: string = '';
   isPersonalVehicleAccepted: boolean = false;
   isPublicTransportAccepted: boolean = false;
