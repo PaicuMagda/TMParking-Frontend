@@ -7,7 +7,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { ConfirmationParkingSpaceExpiredDialogComponent } from '../dialogs/confirmation-parking-space-expired-dialog/confirmation-parking-space-expired-dialog.component';
 import { LoginRequiredDialogComponent } from '../dialogs/confirmation-dialogs/login-required-dialog/login-required-dialog.component';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, map, takeUntil } from 'rxjs';
 import { ParkingSpace } from 'src/app/interfaces/parking-space';
 import { DeleteParkingSpacesConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog.component';
 import { ParkingSpacesDialogEditComponent } from '../dialogs/parking-spaces-dialog-edit/parking-spaces-dialog-edit.component';
@@ -117,9 +117,15 @@ export class ParkingSpacesComponent implements OnInit {
         }
         if (value === 'allParkingSpaces') {
           this.parkingSpacesService.loadParkingSpaces();
-          this.parkingSpacesService.parkingSpaces$.subscribe((values) => {
-            this.parkingSpaces = values;
-          });
+          this.parkingSpacesService.parkingSpaces$
+            .pipe(
+              map((spaces) =>
+                spaces.filter((space) => space.somethingIsWrong == false)
+              )
+            )
+            .subscribe((values) => {
+              this.parkingSpaces = values;
+            });
           this.toggleValue = value;
           this.isLoading = false;
         }

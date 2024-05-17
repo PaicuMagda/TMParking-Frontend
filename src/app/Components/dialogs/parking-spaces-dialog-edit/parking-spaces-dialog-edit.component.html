@@ -484,6 +484,12 @@
     <button class="btn btn-danger" (click)="closeAddNewParkingSpaceDialog()">
       Discard
     </button>
-    <button class="btn add_new_parking btn-warning">Something Is Wrong</button>
+    <button
+      *ngIf="role === 'Administrator'"
+      class="add_new_parking__buttons__something-is-wrong"
+      (click)="setSomethingIsWrongParkingSpaces(data.parkingSpacesId)"
+    >
+      Something Is Wrong
+    </button>
   </div>
 </div>

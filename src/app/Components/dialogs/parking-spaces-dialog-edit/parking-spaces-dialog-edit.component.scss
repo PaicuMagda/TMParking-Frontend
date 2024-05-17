@@ -249,6 +249,12 @@
     &__send {
       @include button-send();
     }
+
+    &__something-is-wrong {
+      background-color: rgb(42, 0, 81);
+      border-radius: 0.5rem;
+      color: white;
+    }
   }
 }
 .mat-button-toggle-label {

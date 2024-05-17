@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ParkingLotInterface } from '../interfaces/parking-lot-interface';
 import { UserStoreService } from './user-store.service';
 import { AuthenticationService } from './authentication.service';
+import { ParkingSpace } from '../interfaces/parking-space';
 
 @Injectable({
   providedIn: 'root',
@@ -32,10 +33,10 @@ export class ParkingPlacesService {
   private updateParkingSpaceSubject = new BehaviorSubject<any>(null);
   dataUpdate$ = this.updateParkingSpaceSubject.asObservable();
 
-  private parkingSpacesSubject = new BehaviorSubject<any[]>([]);
+  private parkingSpacesSubject = new BehaviorSubject<ParkingSpace[]>([]);
   parkingSpaces$ = this.parkingSpacesSubject.asObservable();
 
-  private myParkingSpaceSubject = new BehaviorSubject<any[]>([]);
+  private myParkingSpaceSubject = new BehaviorSubject<ParkingSpace[]>([]);
   myParkingSpaceSubject$ = this.myParkingSpaceSubject.asObservable();
 
   private parkingLotsForOneParkingSpaceSubject = new BehaviorSubject<any[]>([]);
