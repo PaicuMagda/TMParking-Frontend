@@ -93,6 +93,13 @@ export class NavBarComponent implements OnInit {
       .subscribe((val) => (this.image = val.imageUrl));
   }
 
+  getMyReservations() {
+    this.reservationsService.getReservationsByUserId(this.userId);
+    this.reservationsService.myReservations$.subscribe((values) => {
+      this.reservationsNumber = values.length;
+    });
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -129,13 +136,7 @@ export class NavBarComponent implements OnInit {
         this.userLogged = values;
       });
 
-    this.reservationsService
-      .getReservationsByUserId(this.userId)
-      .pipe(toArray())
-      .subscribe((values) => {
-        this.reservationsNumber = values.length;
-      });
-
     this.getImage();
+    this.getMyReservations();
   }
 }

@@ -17,20 +17,39 @@ export class ReservationsService {
   private reservationSubject = new BehaviorSubject<Reservation[]>([]);
   reservations$ = this.reservationSubject.asObservable();
 
+  private myReservationsSubject = new BehaviorSubject<Reservation[]>([]);
+  myReservations$ = this.myReservationsSubject.asObservable();
+
+  private reservationsForOneParkingSubject = new BehaviorSubject<Reservation[]>(
+    []
+  );
+  reservationsForOneParking$ =
+    this.reservationsForOneParkingSubject.asObservable();
+
   registerReservation(reservation: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}Reservation`, reservation);
   }
 
-  getReservationsByUserId(userId: number): Observable<any> {
-    return this.http.get<any[]>(
-      `${this.baseUrl}Reservation/${userId}/reservations`
-    );
+  getReservationsByUserId(userId: number) {
+    this.http
+      .get<Reservation[]>(`${this.baseUrl}Reservation/${userId}/reservations`)
+      .subscribe((values) => this.myReservationsSubject.next(values));
   }
 
   deleteReservation(idReservation: number): Observable<any> {
     return this.http.delete(
       `${this.baseUrl}Reservation?reservationId=${idReservation}`
     );
+  }
+
+  getReservationsByParkingId(parkingSpaceId: number) {
+    this.http
+      .get<Reservation[]>(
+        `${this.baseUrl}Reservation/${parkingSpaceId}/reservationsForAParkingSpace`
+      )
+      .subscribe((values) =>
+        this.reservationsForOneParkingSubject.next(values)
+      );
   }
 
   loadReservations() {

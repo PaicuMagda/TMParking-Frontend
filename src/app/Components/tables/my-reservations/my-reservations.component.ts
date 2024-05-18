@@ -4,10 +4,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Reservation } from 'src/app/interfaces/reservation';
 import { ReservationsService } from 'src/app/services/reservations.service';
-import { DeleteParkingSpacesConfirmationDialogComponent } from '../../dialogs/confirmation-dialogs/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteConfirmationDialogComponent } from '../../dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 import { DeleteReservationConfirmationDialogComponent } from '../../dialogs/confirmation-dialogs/delete-reservation-confirmation-dialog/delete-reservation-confirmation-dialog.component';
+import { Subject, takeUntil } from 'rxjs';
+import { UserStoreService } from 'src/app/services/user-store.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-my-reservations',
@@ -16,6 +17,8 @@ import { DeleteReservationConfirmationDialogComponent } from '../../dialogs/conf
 })
 export class MyReservationsComponent implements OnInit {
   dataSource = new MatTableDataSource<Reservation>();
+  userId: number;
+  private destroy$: Subject<void> = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -34,7 +37,9 @@ export class MyReservationsComponent implements OnInit {
 
   constructor(
     private reservationsService: ReservationsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userStore: UserStoreService,
+    private auth: AuthenticationService
   ) {}
 
   openDeleteConfirmDialog(reservationId: number) {
@@ -57,8 +62,17 @@ export class MyReservationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reservationsService.reservations$.subscribe((values) => {
-      this.dataSource.data = values;
-    });
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIdFromToken();
+        this.userId = userIdFromToken || val;
+      });
+
+    this.reservationsService.getReservationsByUserId(this.userId);
+    this.reservationsService.myReservations$.subscribe(
+      (values) => (this.dataSource.data = values)
+    );
   }
 }
