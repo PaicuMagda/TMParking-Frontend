@@ -45,6 +45,7 @@ export class BookingParkingLotComponent {
   manyDaysBookingFormGroup: FormGroup;
   subscriptionBookingForm: FormGroup;
   @Input() allParkingLotsForThisParking: ParkingLotInterface[];
+  userId: number;
 
   constructor(
     private router: ActivatedRoute,
@@ -230,15 +231,6 @@ export class BookingParkingLotComponent {
       .subscribe((values) => {
         this.months = values;
       });
-    this.vehicleService.vehicles$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((vehicles) => {
-        this.vehicles = vehicles;
-      });
-
-    this.reservationsService.reservations$.subscribe((values) => {
-      this.reservations = values;
-    });
 
     this.userStore
       .getRoleFromStore()
@@ -247,6 +239,19 @@ export class BookingParkingLotComponent {
         const roleFromToken = this.auth.getRoleFromToken();
         this.role = val || roleFromToken;
       });
+
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.auth.getUserIdFromToken();
+        this.userId = userIdFromToken || val;
+      });
+
+    this.vehicleService.getVehicleByUserId(this.userId);
+    this.vehicleService.myVehicles$.subscribe(
+      (vehicles) => (this.vehicles = vehicles)
+    );
 
     this.oneDayBookingFormGroup = this.formBuilder.group({
       startDate: ['', Validators.required],
