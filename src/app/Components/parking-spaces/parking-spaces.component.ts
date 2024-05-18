@@ -140,7 +140,7 @@ export class ParkingSpacesComponent implements OnInit {
 
   isParkingNew(parkingSpace: ParkingSpace): boolean {
     const currentDate = new Date().getDate();
-    const dateAddedParkingSpace = parkingSpace.dateAdded.getTime();
+    const dateAddedParkingSpace = new Date(parkingSpace.dateAdded).getTime();
     const differenceInDays = Math.floor(
       (currentDate - dateAddedParkingSpace) / (1000 * 60 * 60 * 24)
     );

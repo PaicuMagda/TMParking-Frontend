@@ -97,7 +97,7 @@
           />
           <mat-autocomplete #parkingSpots="matAutocomplete">
             <mat-option
-              *ngFor="let parkingSpot of parkingPlace.parkingSpaceForOneParking"
+              *ngFor="let parkingSpot of allParkingLotsForThisParking"
               [value]="parkingSpot.name"
             >
               {{ parkingSpot.name }}
@@ -212,7 +212,7 @@
           />
           <mat-autocomplete #parkingSpots="matAutocomplete">
             <mat-option
-              *ngFor="let parkingSpot of parkingPlace.parkingSpaceForOneParking"
+              *ngFor="let parkingSpot of allParkingLotsForThisParking"
               [value]="parkingSpot.name"
             >
               {{ parkingSpot.name }}
@@ -327,7 +327,7 @@
           />
           <mat-autocomplete #parkingSpots="matAutocomplete">
             <mat-option
-              *ngFor="let parkingSpot of parkingPlace.parkingSpaceForOneParking"
+              *ngFor="let parkingSpot of allParkingLotsForThisParking"
               [value]="parkingSpot.name"
             >
               {{ parkingSpot.name }}

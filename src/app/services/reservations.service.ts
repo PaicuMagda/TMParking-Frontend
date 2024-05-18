@@ -17,10 +17,6 @@ export class ReservationsService {
   private reservationSubject = new BehaviorSubject<Reservation[]>([]);
   reservations$ = this.reservationSubject.asObservable();
 
-  getReservations(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.baseUrl}Reservation`);
-  }
-
   registerReservation(reservation: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}Reservation`, reservation);
   }

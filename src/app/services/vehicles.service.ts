@@ -35,14 +35,6 @@ export class VehiclesService {
   loadVehicles() {
     this.http
       .get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles`)
-      .pipe(
-        map((vehicles) =>
-          vehicles.map((vehicle) => ({
-            ...vehicle,
-            dateAdded: new Date(vehicle.dateAdded),
-          }))
-        )
-      )
       .subscribe((vehicles) => this.vehiclesSubject.next(vehicles));
   }
 

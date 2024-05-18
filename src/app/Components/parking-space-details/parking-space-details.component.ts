@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, takeUntil } from 'rxjs';
@@ -13,6 +13,7 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
+import { ParkingLotInterface } from 'src/app/interfaces/parking-lot-interface';
 
 @Component({
   selector: 'app-parking-space-details',
@@ -39,6 +40,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
   activatedRouter: any;
   reservations: any[];
   role: string = '';
+  allParkingLotsForThisParking: ParkingLotInterface[] = [];
 
   constructor(
     private router: ActivatedRoute,
@@ -131,7 +133,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
         this.vehicles = vehicles;
       });
 
-    this.reservationsService.getReservations().subscribe((values) => {
+    this.reservationsService.reservations$.subscribe((values) => {
       this.reservations = values;
     });
 
@@ -147,6 +149,12 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       .getParkingLotsById(this.idParkingSpaces)
       .subscribe((value) => {
         console.log('Aici este noua parcare adaugata:' + value);
+      });
+
+    this.parkingSpacesService
+      .getParkingLotsById(this.idParkingSpaces)
+      .subscribe((values) => {
+        this.allParkingLotsForThisParking = values;
       });
   }
 }

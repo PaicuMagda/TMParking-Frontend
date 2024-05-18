@@ -131,14 +131,12 @@ export class UsersAdminComponent implements OnInit {
   }
 
   isUserNew(user: User): boolean {
-    // const currentDate = new Date().getDate();
-    // const dateAddedUser = user.dateAdded.getTime();
-    // const differenceInDays = Math.floor(
-    //   (currentDate - dateAddedUser) / (1000 * 60 * 60 * 24)
-    // );
-    // return differenceInDays <= 3;
-
-    return true;
+    const currentDate = new Date().getDate();
+    const dateAddedUser = new Date(user.dateAdded).getTime();
+    const differenceInDays = Math.floor(
+      (currentDate - dateAddedUser) / (1000 * 60 * 60 * 24)
+    );
+    return differenceInDays <= 3;
   }
 
   ngOnInit() {

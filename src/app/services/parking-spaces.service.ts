@@ -46,14 +46,6 @@ export class ParkingPlacesService {
   loadParkingSpaces() {
     this.http
       .get<ParkingSpace[]>(`${this.baseUrl}ParkingSpaces`)
-      .pipe(
-        map((parkingSpaces) =>
-          parkingSpaces.map((space) => ({
-            ...space,
-            dateAdded: new Date(space.dateAdded),
-          }))
-        )
-      )
       .subscribe((parkingSpaces) => {
         this.parkingSpacesSubject.next(parkingSpaces);
       });

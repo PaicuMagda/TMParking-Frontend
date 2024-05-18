@@ -20,14 +20,6 @@ export class UsersService {
   loadUsers() {
     this.http
       .get<User[]>(`${this.baseUrl}User/admin-page`)
-      .pipe(
-        map((users) =>
-          users.map((user) => ({
-            ...user,
-            dateAdded: new Date(user.dateAdded),
-          }))
-        )
-      )
       .subscribe((users) => this.usersSubject.next(users));
   }
 

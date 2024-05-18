@@ -112,6 +112,7 @@ export class AddNewUserDialogComponent {
       pnc: this.pncFormGroup.get('pnc')?.value,
       licenseValid: true,
       imageUrl: this.imageProfile,
+      addedDate: new Date(),
     };
 
     this.userService

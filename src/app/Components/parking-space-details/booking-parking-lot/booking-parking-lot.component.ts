@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -17,6 +17,7 @@ import { VehiclesService } from 'src/app/services/vehicles.service';
 import { GoogleMapsComponent } from '../../google-maps/google-maps.component';
 import { PaymentMethods } from 'src/app/enums/payment-methods';
 import { NgToastService } from 'ng-angular-popup';
+import { ParkingLotInterface } from 'src/app/interfaces/parking-lot-interface';
 
 @Component({
   selector: 'app-booking-parking-lot',
@@ -43,6 +44,7 @@ export class BookingParkingLotComponent {
   oneDayBookingFormGroup: FormGroup;
   manyDaysBookingFormGroup: FormGroup;
   subscriptionBookingForm: FormGroup;
+  @Input() allParkingLotsForThisParking: ParkingLotInterface[];
 
   constructor(
     private router: ActivatedRoute,
@@ -126,6 +128,7 @@ export class BookingParkingLotComponent {
         }),
       });
     this.oneDayBookingFormGroup.reset();
+    this.reservationsService.loadReservations();
   }
 
   registerReservationForManyDay() {
@@ -160,6 +163,7 @@ export class BookingParkingLotComponent {
         }),
       });
     this.manyDaysBookingFormGroup.reset();
+    this.reservationsService.loadReservations();
   }
 
   registerSubscriptionReservation() {
@@ -192,6 +196,7 @@ export class BookingParkingLotComponent {
         }),
       });
     this.subscriptionBookingForm.reset();
+    this.reservationsService.loadReservations();
   }
 
   registerReservation(bookingType: string) {
@@ -231,7 +236,7 @@ export class BookingParkingLotComponent {
         this.vehicles = vehicles;
       });
 
-    this.reservationsService.getReservations().subscribe((values) => {
+    this.reservationsService.reservations$.subscribe((values) => {
       this.reservations = values;
     });
 

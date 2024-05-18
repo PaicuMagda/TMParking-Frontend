@@ -41,7 +41,7 @@
             <div class="row">
               <label class="col">Model</label>
               <span *ngIf="!vehicle.isEdit" class="col">{{
-                vehicle.dateAdded | date
+                vehicle.model
               }}</span>
               <input
                 *ngIf="vehicle.isEdit"

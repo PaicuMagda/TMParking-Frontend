@@ -140,13 +140,12 @@ export class VehiclesComponent implements OnInit {
   }
 
   isVehicleNew(vehicle: Vehicle): boolean {
-    // const currentDate = new Date().getDate();
-    // const dateAddedVehicle = vehicle.dateAdded.getTime();
-    // const differenceInDays = Math.floor(
-    //   (currentDate - dateAddedVehicle) / (1000 * 60 * 60 * 24)
-    // );
-    // return differenceInDays <= 3;
-    return true;
+    const currentDate = new Date().getDate();
+    const dateAddedVehicle = new Date(vehicle.dateAdded).getTime();
+    const differenceInDays = Math.floor(
+      (currentDate - dateAddedVehicle) / (1000 * 60 * 60 * 24)
+    );
+    return differenceInDays <= 3;
   }
 
   getVehicles() {

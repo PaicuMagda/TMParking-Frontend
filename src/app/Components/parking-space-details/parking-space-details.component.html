@@ -128,7 +128,7 @@
         <div class="parking-space-details__container__left__all-spots__cards">
           <div
             class="parking-space-details__container__left__all-spots__cards__spot"
-            *ngFor="let spot of parkingPlace.parkingSpaceForOneParking"
+            *ngFor="let spot of allParkingLotsForThisParking"
           >
             <div
               class="parking-space-details__container__left__all-spots__cards__spot__status"
@@ -154,7 +154,9 @@
       class="parking-space-details__container__left__informations__booking"
       *ngIf="role !== 'Administrator'"
     >
-      <app-booking-parking-lot></app-booking-parking-lot>
+      <app-booking-parking-lot
+        [allParkingLotsForThisParking]="allParkingLotsForThisParking"
+      ></app-booking-parking-lot>
     </div>
     <div *ngIf="role === 'Administrator'">
       <app-parking-space-reservations-table></app-parking-space-reservations-table>
