@@ -353,13 +353,11 @@
     Location
   </button>
 
-  <button appHoverElement>Paid</button>
+  <button appHoverElement (click)="openPaymentDialog()">Paid</button>
   <button appHoverElement (click)="registerReservation(bookingType)">
     Book
   </button>
 </div>
-
-<mat-divider></mat-divider>
 
 <div class="logo">
   <img src="../../../assets/images/logo-TMParking.png" />

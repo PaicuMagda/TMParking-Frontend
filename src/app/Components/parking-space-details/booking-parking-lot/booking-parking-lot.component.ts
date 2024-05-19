@@ -18,6 +18,7 @@ import { GoogleMapsComponent } from '../../google-maps/google-maps.component';
 import { PaymentMethods } from 'src/app/enums/payment-methods';
 import { NgToastService } from 'ng-angular-popup';
 import { ParkingLotInterface } from 'src/app/interfaces/parking-lot-interface';
+import { PaymentDialogComponent } from '../../dialogs/payment-dialog/payment-dialog.component';
 
 @Component({
   selector: 'app-booking-parking-lot',
@@ -218,6 +219,13 @@ export class BookingParkingLotComponent {
   //   console.log(this.startHour);
   //   console.log(this.endHour);
   // }
+
+  openPaymentDialog() {
+    this.dialog.open(PaymentDialogComponent, {
+      width: '40%',
+      height: '98%',
+    });
+  }
 
   ngOnInit() {
     this.idParkingSpaces = this.router.snapshot.params['id'];

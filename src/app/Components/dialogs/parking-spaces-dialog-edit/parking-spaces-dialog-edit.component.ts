@@ -220,6 +220,7 @@ export class ParkingSpacesDialogEditComponent {
         'isAgriculturalMachineryAccepted'
       )?.value,
       isVerifiedByAdmin: false,
+      addedDate: new Date(),
     };
 
     this.parkingSpacesService
@@ -352,7 +353,7 @@ export class ParkingSpacesDialogEditComponent {
       isAgriculturalMachineryAccepted: this.addNewParkingSpaceFormGroup.get(
         'isAgriculturalMachineryAccepted'
       )?.value,
-      somethingIsWrong: true,
+      somethingIsWrong: false,
       isVerifiedByAdmin: true,
     };
 

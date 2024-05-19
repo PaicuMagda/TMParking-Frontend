@@ -57,7 +57,7 @@ export class UsersAdminComponent implements OnInit {
   }
 
   openSaveChangesConfirmDialog(idUser: number, index: number) {
-    const userData = this.userFormGroup[index];
+    const userData = this.userFormGroup[index].value;
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',

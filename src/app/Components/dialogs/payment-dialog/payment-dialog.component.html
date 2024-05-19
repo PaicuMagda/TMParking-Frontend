@@ -1,0 +1,13 @@
+<div class="payment">
+  <div *ngIf="showSuccess" class="alert alert-success">
+    Transaction completed successfully!
+  </div>
+  <div *ngIf="showCancel" class="alert alert-warning">
+    Transaction cancelled.
+  </div>
+  <div *ngIf="showError" class="alert alert-danger">
+    An error occurred during the transaction.
+  </div>
+
+  <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+</div>

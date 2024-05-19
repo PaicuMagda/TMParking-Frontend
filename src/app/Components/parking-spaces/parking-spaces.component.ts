@@ -120,7 +120,11 @@ export class ParkingSpacesComponent implements OnInit {
           this.parkingSpacesService.parkingSpaces$
             .pipe(
               map((spaces) =>
-                spaces.filter((space) => space.somethingIsWrong == false)
+                spaces.filter(
+                  (space) =>
+                    space.somethingIsWrong == false &&
+                    space.isVerifiedByAdmin == true
+                )
               )
             )
             .subscribe((values) => {
