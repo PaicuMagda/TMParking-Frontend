@@ -286,6 +286,74 @@ export class ParkingSpacesDialogEditComponent {
         'isAgriculturalMachineryAccepted'
       )?.value,
       somethingIsWrong: true,
+      isVerifiedByAdmin: false,
+    };
+
+    this.parkingSpacesService
+      .updateParkingSpaces(parkingSpacesId, formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          this.parkingSpacesService.loadParkingSpaces();
+          this.parkingSpacesService.loadMyParkingSpace(this.idUserLogged);
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 1000);
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
+  }
+
+  isVerifiedByAdminParkingSpaces(parkingSpacesId: number) {
+    const formData = {
+      name: this.addNewParkingSpaceFormGroup.get('name')?.value,
+      address: this.addNewParkingSpaceFormGroup.get('address')?.value,
+      description:
+        this.addNewParkingSpaceFormGroup.get('descriptionParking')?.value,
+      availableParkingSpaces: this.addNewParkingSpaceFormGroup.get(
+        'availableParkingSpaces'
+      )?.value,
+      startDate: this.addNewParkingSpaceFormGroup.get('startDate')?.value,
+      endDate: this.addNewParkingSpaceFormGroup.get('endDate')?.value,
+      undergroundParkingLots: this.addNewParkingSpaceFormGroup.get(
+        'undergroundParkingLots'
+      )?.value,
+      multistoreyCarPark:
+        this.addNewParkingSpaceFormGroup.get('multistoreyCarPark')?.value,
+      paidParking: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
+      isVideoSurveilance: this.addNewParkingSpaceFormGroup.get(
+        'isVideoSurveillance'
+      )?.value,
+      paymentPerDay: this.data.paymentPerDay,
+      paymentPerHour: this.data.paymentPerHour,
+      paymentForSubscription: this.data.paymentForSubscription,
+      imageProfile: this.imageProfile,
+      leasePermit: this.leasePermitFile,
+      isPersonalVehicleAccepted: this.addNewParkingSpaceFormGroup.get(
+        'isPersonalVehicleAccepted'
+      )?.value,
+      isCargoVehicleAccepted: this.addNewParkingSpaceFormGroup.get(
+        'isCargoVehicleAccepted'
+      )?.value,
+      isPublicTransportAccepted: this.addNewParkingSpaceFormGroup.get(
+        'isPublicTransportAccepted'
+      )?.value,
+      isAgriculturalMachineryAccepted: this.addNewParkingSpaceFormGroup.get(
+        'isAgriculturalMachineryAccepted'
+      )?.value,
+      somethingIsWrong: true,
+      isVerifiedByAdmin: true,
     };
 
     this.parkingSpacesService

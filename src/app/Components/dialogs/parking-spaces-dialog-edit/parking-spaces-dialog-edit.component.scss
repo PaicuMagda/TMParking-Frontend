@@ -314,3 +314,19 @@ input[type="file"] {
     @include button-send();
   }
 }
+
+.admin-check {
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+  gap: 2%;
+
+  &__check-icon {
+    height: 4.5vh;
+    width: 3rem;
+    margin-top: 1%;
+  }
+  &__reject-icon {
+    width: 4rem;
+  }
+}

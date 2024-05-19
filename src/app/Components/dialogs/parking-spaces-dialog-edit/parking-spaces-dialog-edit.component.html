@@ -370,6 +370,20 @@
         </button>
       </div>
       <div class="siaplay-parking-lots"></div>
+      <div class="admin-check" *ngIf="role === 'Administrator'">
+        <img
+          class="admin-check__check-icon"
+          matTooltip="Everything is okay. Parking will be posted."
+          src="../../../../assets/images/check.png"
+          (click)="isVerifiedByAdminParkingSpaces(data.parkingSpacesId)"
+        />
+        <img
+          class="admin-check__reject-icon"
+          matTooltip="If you press this button, the user will receive a notification that something is wrong with his upload."
+          src="../../../../assets/images/reject.jpg"
+          (click)="setSomethingIsWrongParkingSpaces(data.parkingSpacesId)"
+        />
+      </div>
     </form>
     <div class="add_new_parking__form__create-card">
       <div class="add_new_parking__form__create-card__card-full">
@@ -483,13 +497,6 @@
     </button>
     <button class="btn btn-danger" (click)="closeAddNewParkingSpaceDialog()">
       Discard
-    </button>
-    <button
-      *ngIf="role === 'Administrator'"
-      class="add_new_parking__buttons__something-is-wrong"
-      (click)="setSomethingIsWrongParkingSpaces(data.parkingSpacesId)"
-    >
-      Something Is Wrong
     </button>
   </div>
 </div>
