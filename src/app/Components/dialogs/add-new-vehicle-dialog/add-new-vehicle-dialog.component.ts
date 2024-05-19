@@ -95,7 +95,7 @@ export class AddNewVehicleDialogComponent {
   registerVehicle() {
     const formData = {
       color: this.addNewVehicleFormGroup.get('color')?.value,
-      dateAdded: new Date(),
+      addedDate: new Date(),
       imageProfileBase64: this.image,
       isVerifiedByAdmin: false,
       make: this.addNewVehicleFormGroup.get('make')?.value,
@@ -135,7 +135,7 @@ export class AddNewVehicleDialogComponent {
   registerMyVehicle() {
     const formData = {
       color: this.addNewVehicleFormGroup.get('color')?.value,
-      dateAdded: new Date(),
+      addedDate: new Date(),
       imageProfileBase64: this.image,
       isVerifiedByAdmin: false,
       make: this.addNewVehicleFormGroup.get('make')?.value,

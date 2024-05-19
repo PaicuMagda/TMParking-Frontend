@@ -13,7 +13,7 @@ export interface Vehicle {
   isEdit?: boolean;
   vehicleRegistrationCertificateBase64?: string;
   isVerifiedByAdmin?: boolean;
-  dateAdded: Date;
+  addedDate: Date;
   somethingIsWrong?: boolean;
   vehicleOwnerFullName?: string;
 }

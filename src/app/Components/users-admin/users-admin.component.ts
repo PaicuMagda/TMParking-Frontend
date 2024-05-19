@@ -57,7 +57,7 @@ export class UsersAdminComponent implements OnInit {
   }
 
   openSaveChangesConfirmDialog(idUser: number, index: number) {
-    const userData = this.userFormGroup[index].value;
+    const userData = this.userFormGroup[index];
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
@@ -132,7 +132,7 @@ export class UsersAdminComponent implements OnInit {
 
   isUserNew(user: User): boolean {
     const currentDate = new Date().getDate();
-    const dateAddedUser = new Date(user.dateAdded).getTime();
+    const dateAddedUser = new Date(user.addedDate).getTime();
     const differenceInDays = Math.floor(
       (currentDate - dateAddedUser) / (1000 * 60 * 60 * 24)
     );

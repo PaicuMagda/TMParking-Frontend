@@ -109,6 +109,7 @@ export class BookingParkingLotComponent {
       paymentMethod: this.oneDayBookingFormGroup.get('paymentMethod')?.value,
       priceToPay: this.oneDayBookingFormGroup.get('totalToPay')?.value,
       reservationType: this.bookingType,
+      parkingSpacesId: this.idParkingSpaces,
     };
 
     this.reservationsService
@@ -144,6 +145,7 @@ export class BookingParkingLotComponent {
       paymentMethod: this.manyDaysBookingFormGroup.get('paymentMethod')?.value,
       priceToPay: this.manyDaysBookingFormGroup.get('totalToPay')?.value,
       reservationType: this.bookingType,
+      parkingSpacesId: this.idParkingSpaces,
     };
 
     this.reservationsService
@@ -177,6 +179,7 @@ export class BookingParkingLotComponent {
         'vehicleRegistrationNumber'
       )?.value,
       numberOfMonths: this.subscriptionBookingForm.get('numberOfMonths')?.value,
+      parkingSpacesId: this.idParkingSpaces,
     };
 
     this.reservationsService

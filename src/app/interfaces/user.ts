@@ -19,6 +19,6 @@ export interface User {
   isEdit?: boolean;
   imageUrl?: string;
   isVerifiedByAdmin: boolean;
-  dateAdded: Date;
+  addedDate: Date;
   vehiclesRegistered: string[];
 }

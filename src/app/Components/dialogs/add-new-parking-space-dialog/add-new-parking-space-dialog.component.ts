@@ -148,7 +148,6 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       isVerifiedByAdmin: false,
       somethingIsWrong: false,
       parkingSpacesOwnerId: this.parkingSpacesOwnerId,
-      dateAdded: new Date(),
     };
 
     this.parkingSpacesService

@@ -5,9 +5,7 @@
         <div class="vehicle__card">
           <span
             [matBadge]="
-              isVehicleNew(vehicle.dateAdded) && role === 'Administrator'
-                ? 'N'
-                : null
+              isVehicleNew(vehicle) && role === 'Administrator' ? 'N' : null
             "
             matBadgePosition="after"
             matBadgeColor="accent"

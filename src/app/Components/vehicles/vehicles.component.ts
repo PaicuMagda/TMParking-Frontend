@@ -141,7 +141,7 @@ export class VehiclesComponent implements OnInit {
 
   isVehicleNew(vehicle: Vehicle): boolean {
     const currentDate = new Date().getDate();
-    const dateAddedVehicle = new Date(vehicle.dateAdded).getTime();
+    const dateAddedVehicle = new Date(vehicle.addedDate).getTime();
     const differenceInDays = Math.floor(
       (currentDate - dateAddedVehicle) / (1000 * 60 * 60 * 24)
     );
