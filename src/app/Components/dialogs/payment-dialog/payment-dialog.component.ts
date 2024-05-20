@@ -33,11 +33,11 @@ export class PaymentDialogComponent implements OnInit {
             {
               amount: {
                 currency_code: 'USD',
-                value: '100.00',
+                value: '0.01',
                 breakdown: {
                   item_total: {
                     currency_code: 'USD',
-                    value: '100.00',
+                    value: '0.01',
                   },
                 },
               },
@@ -48,7 +48,7 @@ export class PaymentDialogComponent implements OnInit {
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
                     currency_code: 'USD',
-                    value: '100.00',
+                    value: '0.01',
                   },
                 },
               ],

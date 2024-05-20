@@ -72,7 +72,15 @@ export class VehiclesComponent implements OnInit {
   }
 
   openSaveChangesConfirmDialog(idVehicle: number, index: number) {
+    this.vehicleService.vehicles$.subscribe((values) => {
+      this.vehicles = values;
+    });
+
     const vehicleData = this.vehicleForm[index].value;
+    const vehicleUpdated = {
+      // addedDate: vehicle.addedDate,
+      ...vehicleData,
+    };
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
       width: '23%',
       height: '20%',
@@ -84,7 +92,7 @@ export class VehiclesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'save') {
         this.vehicleService
-          .updateVehicle(idVehicle, vehicleData)
+          .updateVehicle(idVehicle, vehicleUpdated)
           .pipe(takeUntil(this.destroy$))
           .subscribe({
             next: (resp) => {
@@ -109,6 +117,68 @@ export class VehiclesComponent implements OnInit {
         dialogRef.close();
       }
     });
+  }
+
+  isVerifiedByAdminFunction(idVehicle: number, index: number) {
+    const vehicle = this.vehicles[idVehicle];
+    const vehicleData = this.vehicleForm[index].value;
+    const vehicleVerified = {
+      ...vehicleData,
+      isVerifiedByAdmin: true,
+      // addedDate: vehicle.addedDate,
+    };
+    this.vehicleService
+      .updateVehicle(idVehicle, vehicleVerified)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          this.vehicleService.loadVehicles();
+          this.vehicleService.loadMyVehicles(this.idUserLogged);
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
+  }
+
+  isSomethingWrongFunction(idVehicle: number, index: number) {
+    const vehicle = this.vehicles[idVehicle];
+    const vehicleData = this.vehicleForm[index].value;
+    const vehicleVerified = {
+      ...vehicleData,
+      somethingIsWrong: true,
+      // addedDate: vehicle.addedDate,
+    };
+    this.vehicleService
+      .updateVehicle(idVehicle, vehicleVerified)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (resp) => {
+          this.toast.info({
+            detail: 'Info Message',
+            summary: resp.message,
+            duration: 3000,
+          });
+          this.vehicleService.loadVehicles();
+          this.vehicleService.loadMyVehicles(this.idUserLogged);
+        },
+        error: (err) => {
+          this.toast.error({
+            detail: 'Error Message',
+            summary: err.error.message,
+            duration: 5000,
+          });
+        },
+      });
   }
 
   openDeleteConfirmDialog(idVehicle: number) {
@@ -186,6 +256,9 @@ export class VehiclesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.vehicleService.vehicles$.subscribe((values) => {
+      this.vehicles = values;
+    });
     this.userStore
       .getRoleFromStore()
       .pipe(takeUntil(this.destroy$))

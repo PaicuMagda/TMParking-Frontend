@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-google-maps',
@@ -6,17 +11,57 @@ import { Component } from '@angular/core';
   styleUrls: ['./google-maps.component.scss'],
 })
 export class GoogleMapsComponent {
-  display: any;
-  center: google.maps.LatLngLiteral = {
-    lat: 22.2736308,
-    lng: 70.7512555,
-  };
+  @ViewChild('mapContainer', { static: false }) mapContainer: ElementRef;
+  center: google.maps.LatLngLiteral;
   zoom = 6;
-  moveMap(event: google.maps.MapMouseEvent) {
-    if (event.latLng != null) this.center = event.latLng.toJSON();
+  map: google.maps.Map;
+  userMarker: google.maps.Marker;
+
+  ngOnInit() {
+    // Inițializarea centrului hărții
+    this.center = { lat: 22.2736308, lng: 70.7512555 };
+
+    // Crearea hărții și asocierea ei cu elementul mapContainer
+    this.map = new google.maps.Map(this.mapContainer.nativeElement, {
+      center: this.center,
+      zoom: this.zoom,
+    });
   }
 
-  move(event: google.maps.MapMouseEvent) {
-    if (event.latLng != null) this.display = event.latLng.toJSON();
+  constructor(private cdRef: ChangeDetectorRef) {}
+
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          // Adăugarea sau actualizarea marker-ului utilizatorului
+          if (!this.userMarker) {
+            this.userMarker = new google.maps.Marker({
+              position: userLocation,
+              map: this.map,
+              title: 'You are here!',
+            });
+          } else {
+            this.userMarker.setPosition(userLocation);
+          }
+          // Centrarea hărții pe locația utilizatorului
+          this.map.setCenter(userLocation);
+        },
+        (error) => {
+          console.error('Eroare la obținerea locației:', error);
+        }
+      );
+    } else {
+      console.error('Geolocația nu este suportată de acest browser.');
+    }
+  }
+
+  ngAfterViewInit() {
+    this.cdRef.detectChanges();
+    // Restul codului aici
   }
 }

@@ -34,14 +34,6 @@ label {
     margin-top: 3%;
     display: flex;
 
-    img {
-      width: 6rem;
-      height: 6rem;
-      border-radius: 50%;
-      box-shadow: 0px 0px 50px 0px rgba(55, 0, 103, 0.9);
-      margin-top: 0.5rem;
-    }
-
     &__badge {
       .mat-badge-content {
         background: rgb(255, 230, 0);
@@ -52,6 +44,14 @@ label {
     &__div1 {
       @include flex(column);
       align-items: center;
+
+      &__img-profile {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        box-shadow: 0px 0px 50px 0px rgba(55, 0, 103, 0.9);
+        margin-top: 0.5rem;
+      }
     }
 
     &__div2 {
@@ -188,5 +188,19 @@ input[type="file"] {
   .mat-mdc-progress-spinner
     .mdc-circular-progress__indeterminate-circle-graphic {
     stroke: rgb(42, 0, 81) !important;
+  }
+}
+
+.admin-check {
+  display: flex;
+  gap: 2%;
+
+  &__check-icon {
+    height: 3vh;
+    width: 2rem;
+    margin-top: 2%;
+  }
+  &__reject-icon {
+    width: 3rem;
   }
 }

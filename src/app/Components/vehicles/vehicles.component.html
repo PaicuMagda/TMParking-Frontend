@@ -13,15 +13,16 @@
           ></span>
           <span
             class="vehicle__card__badge"
-            [matBadge]="
-              vehicle.somethingIsWrong && role === 'User' ? '!' : null
-            "
+            [matBadge]="vehicle.somethingIsWrong ? '!' : null"
             matBadgePosition="before"
             matBadgeColor="accent"
             matBadgeSize="large"
           ></span>
           <div class="col-sm-1 vehicle__card__div1">
-            <img [src]="vehicle.imageProfileBase64" />
+            <img
+              class="vehicle__card__div1__img-profile"
+              [src]="vehicle.imageProfileBase64"
+            />
           </div>
           <div class="col-sm-2 vehicle__card__div2 row">
             <div class="row">
@@ -128,6 +129,20 @@
                   svgIcon="plus-solid"
                   (click)="certificateInput.click()"
                 ></mat-icon> -->
+              </div>
+              <div class="admin-check" *ngIf="role === 'Administrator'">
+                <img
+                  class="admin-check__check-icon"
+                  matTooltip="Everything is okay. Parking will be posted."
+                  src="../../../../assets/images/check.png"
+                  (click)="isVerifiedByAdminFunction(vehicle.vehicleId, i)"
+                />
+                <img
+                  class="admin-check__reject-icon"
+                  matTooltip="If you press this button, the user will receive a notification that something is wrong with his upload."
+                  src="../../../../assets/images/reject.jpg"
+                  (click)="isSomethingWrongFunction(vehicle.vehicleId, i)"
+                />
               </div>
             </div>
           </div>

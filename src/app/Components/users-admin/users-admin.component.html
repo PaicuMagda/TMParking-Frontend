@@ -1,14 +1,7 @@
 <div>
   <div>
     <div *ngFor="let user of users; let i = index">
-      <form
-        class="userCard"
-        [formGroup]="userFormGroup[i]"
-        [matBadge]="isUserNew(user) && role === 'Administrator' ? 'N' : null"
-        matBadgePosition="after"
-        matBadgeColor="accent"
-        matBadgeSize="large"
-      >
+      <form class="userCard" [formGroup]="userFormGroup[i]">
         <div class="col-sm-1">
           <img class="userCard__img" src="{{ user.imageUrl }}" />
         </div>

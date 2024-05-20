@@ -1,9 +1,7 @@
-<google-map
-  height="500px"
-  width="900px"
-  [center]="center"
-  [zoom]="zoom"
-  (mapClick)="moveMap($event)"
-  (mapMousemove)="move($event)"
->
-</google-map>
+<div
+  *ngIf="mapContainer"
+  #mapContainer
+  style="height: 630px; width: 1067px"
+></div>
+
+<button (click)="getCurrentLocation()">Porniți GPS-ul</button>
