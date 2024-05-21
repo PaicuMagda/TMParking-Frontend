@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Vehicle } from 'src/app/interfaces/vehicle';
+import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class VehicleSearchComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private vehicleService: VehiclesService
+    private vehicleService: VehiclesService,
+    private displayCardsService: DisplayCardsService
   ) {
     this.filterVehicleForm = this.formBuilder.group({
       model: [''],
@@ -27,8 +28,15 @@ export class VehicleSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.vehicleService.getVehicles().subscribe((values) => {
-      this.initialVehicles = values;
+    this.displayCardsService.toggleValueSubjectObservable.subscribe((value) => {
+      if (value === 'myVehicles') {
+        this.vehicleService.myVehicles$.subscribe((values) => {
+          this.initialVehicles = values;
+        });
+      } else
+        this.vehicleService.getVehicles().subscribe((values) => {
+          this.initialVehicles = values;
+        });
     });
 
     this.filterVehicleForm.valueChanges.subscribe((filters) => {
