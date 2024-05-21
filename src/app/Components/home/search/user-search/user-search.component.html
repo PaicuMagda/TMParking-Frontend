@@ -1,45 +1,53 @@
-<div class="users-search">
+<form class="users-search" [formGroup]="filteredUserForm">
   <div class="users-search__name">
     <label>Firstname</label>
-    <input id="firstname" #firstname type="text" />
+    <input id="firstname" #firstname type="text" formControlName="firstname" />
     <label>LastName</label>
-    <input id="lastname" type="text" />
+    <input id="lastname" type="text" formControlName="lastname" />
   </div>
   <div>
     <label>Email Address 📩</label>
-    <input id="email" type="text" />
+    <input id="email" type="text" formControlName="email" />
   </div>
   <div>
     <label>Registered Vehicle</label>
-    <input id="registeredVehicle" type="text" />
+    <input
+      id="registeredVehicle"
+      type="text"
+      formControlName="registeredVehicle"
+    />
   </div>
   <div>
     <label> Personal Numerical Code</label>
-    <input id="pnc" type="text" />
+    <input id="pnc" type="text" formControlName="pnc" />
   </div>
   <div class="users-search__phone">
     <label>Phone 📞 </label>
-    <input id="phone" type="text" />
+    <input id="phone" type="text" formControlName="phone" />
   </div>
   <div class="users-search__number-of-vehicle">
     <label>Number of Vehicle Registered</label>
-    <input id="number-of-vehicle" type="text" />
+    <input
+      id="number-of-vehicle"
+      type="text"
+      formControlName="numberOfVehicleRegistered"
+    />
   </div>
   <div class="users-search__state">
     <label>State </label>
-    <input id="state" type="text" />
+    <input id="state" type="text" formControlName="state" />
   </div>
   <div class="users-search__role-zipCode">
     <div>
       <label>Role</label>
-      <select>
-        <option value="admin">User</option>
-        <option value="user">Admin</option>
+      <select formControlName="role">
+        <option value="User">User</option>
+        <option value="Administrator">Admin</option>
       </select>
     </div>
     <div>
       <label>Zip Code </label>
-      <input id="zipCode" type="text" />
+      <input id="zipCode" type="text" formControlName="zipCode" />
     </div>
   </div>
 
@@ -65,4 +73,4 @@
       <mat-button-toggle value="no">No</mat-button-toggle>
     </mat-button-toggle-group>
   </div> -->
-</div>
+</form>

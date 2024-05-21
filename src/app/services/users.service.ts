@@ -24,7 +24,7 @@ export class UsersService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}User`);
+    return this.http.get<User[]>(`${this.baseUrl}User/admin-page`);
   }
 
   registerNewUser(user: any): Observable<any> {
@@ -50,6 +50,10 @@ export class UsersService {
       `${this.baseUrl}User/update-my-account/${id}`,
       user
     );
+  }
+
+  updateUsers(users: User[]) {
+    this.usersSubject.next(users);
   }
 
   deleteUser(userId: number): Observable<any> {
