@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
+import { ResetPassword } from 'src/app/interfaces/ResetPassword';
+import { ResetPasswordService } from 'src/app/services/reset-password.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -7,7 +11,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private resetPasswordService: ResetPasswordService,
+    private toast: NgToastService,
+    private router: Router
+  ) {}
 
   resetPassword: FormGroup;
   isPasswordValid: boolean = false;
@@ -17,6 +27,9 @@ export class ResetPasswordComponent implements OnInit {
   isSpecialCharValid: boolean = false;
   showNewPassword: boolean = false;
   showNewPasswordConfirm: boolean = false;
+  emailToReset!: string;
+  emailToken!: string;
+  resetPasswordObj = new ResetPassword();
 
   checkPassword() {
     const passwordValue = this.resetPassword.get('newPassword')?.value;
@@ -41,6 +54,17 @@ export class ResetPasswordComponent implements OnInit {
     this.showNewPasswordConfirm = !this.showNewPasswordConfirm;
   }
 
+  reset() {
+    if (this.resetPassword.valid) {
+      this.resetPasswordObj.email = this.emailToReset;
+      this.resetPasswordObj.newPassword = this.resetPassword.value.password;
+      this.resetPasswordObj.confirmPassword =
+        this.resetPassword.value.confirmNewPassword;
+      this.resetPasswordObj.emailToken = this.emailToken;
+    } else {
+    }
+  }
+
   ngOnInit(): void {
     this.resetPassword = this.formBuilder.group({
       newPassword: [
@@ -52,6 +76,31 @@ export class ResetPasswordComponent implements OnInit {
         ],
       ],
       confirmNewPassword: [''],
+    });
+    this.activatedRoute.queryParams.subscribe((val) => {
+      this.emailToReset = val['email'];
+      let uriToken = val['code'];
+      this.emailToken = uriToken.replace(/ /g, '+');
+      this.emailToken = val['code'];
+      console.log(this.emailToReset);
+      console.log(this.emailToken);
+    });
+    this.resetPasswordService.resetPassword(this.resetPasswordObj).subscribe({
+      next: (resp) => {
+        this.toast.success({
+          detail: 'SUCCESS',
+          summary: 'Password Reset Successfully',
+          duration: 3000,
+        });
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        this.toast.success({
+          detail: 'ERROR',
+          summary: 'Something went wrong!',
+          duration: 3000,
+        });
+      },
     });
   }
 }
