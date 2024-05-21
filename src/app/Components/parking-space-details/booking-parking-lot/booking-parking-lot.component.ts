@@ -59,21 +59,7 @@ export class BookingParkingLotComponent {
     private auth: AuthenticationService,
     private formBuilder: FormBuilder,
     private toast: NgToastService
-  ) {
-    // this.filteredVehicles = this.vehiclesControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map((value) => this.filter(value))
-    // );
-  }
-
-  // filter(value: string): Vehicle[] {
-  //   const filterValue = value.toLowerCase();
-  //   return this.vehicles.filter(
-  //     (vehicle) =>
-  //       vehicle.vehicleIdentificationNumber !== undefined &&
-  //       vehicle.vehicleIdentificationNumber.toString().includes(filterValue)
-  //   );
-  // }
+  ) {}
 
   changeType(value: string) {
     this.bookingType = value;
@@ -224,7 +210,16 @@ export class BookingParkingLotComponent {
     this.dialog.open(PaymentDialogComponent, {
       width: '40%',
       height: '98%',
+      data: this.returnValueToPay(),
     });
+  }
+
+  returnValueToPay(): number {
+    if (this.bookingType === 'oneDay') {
+      return this.oneDayBookingFormGroup.get('totalToPay')?.value;
+    } else if (this.bookingType === 'manyDays') {
+      return this.manyDaysBookingFormGroup.get('totalToPay')?.value;
+    } else return this.subscriptionBookingForm.get('totalToPay')?.value;
   }
 
   ngOnInit() {

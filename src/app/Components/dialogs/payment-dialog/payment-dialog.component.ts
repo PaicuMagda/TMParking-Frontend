@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
 @Component({
@@ -14,7 +15,10 @@ export class PaymentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.initConfig();
+    console.log(this.data);
   }
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 
   private resetStatus(): void {
     this.showSuccess = false;
@@ -33,11 +37,11 @@ export class PaymentDialogComponent implements OnInit {
             {
               amount: {
                 currency_code: 'USD',
-                value: '0.01',
+                value: this.data,
                 breakdown: {
                   item_total: {
                     currency_code: 'USD',
-                    value: '0.01',
+                    value: this.data,
                   },
                 },
               },
@@ -48,7 +52,7 @@ export class PaymentDialogComponent implements OnInit {
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
                     currency_code: 'USD',
-                    value: '0.01',
+                    value: this.data,
                   },
                 },
               ],
