@@ -6,7 +6,7 @@ import { ResetPassword } from '../interfaces/ResetPassword';
   providedIn: 'root',
 })
 export class ResetPasswordService {
-  private baseUrl: string = 'https://localhost:7010/api/User';
+  private baseUrl: string = 'https://localhost:7010/User';
 
   constructor(private http: HttpClient) {}
 

@@ -72,10 +72,6 @@ export class VehiclesComponent implements OnInit {
   }
 
   openSaveChangesConfirmDialog(idVehicle: number, index: number) {
-    this.vehicleService.vehicles$.subscribe((values) => {
-      this.vehicles = values;
-    });
-
     const vehicleData = this.vehicleForm[index].value;
     const vehicleUpdated = {
       // addedDate: vehicle.addedDate,
@@ -256,9 +252,6 @@ export class VehiclesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vehicleService.vehicles$.subscribe((values) => {
-      this.vehicles = values;
-    });
     this.userStore
       .getRoleFromStore()
       .pipe(takeUntil(this.destroy$))

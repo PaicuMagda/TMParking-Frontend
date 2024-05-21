@@ -61,6 +61,24 @@ export class ResetPasswordComponent implements OnInit {
       this.resetPasswordObj.confirmPassword =
         this.resetPassword.value.confirmNewPassword;
       this.resetPasswordObj.emailToken = this.emailToken;
+
+      this.resetPasswordService.resetPassword(this.resetPasswordObj).subscribe({
+        next: (resp) => {
+          this.toast.success({
+            detail: 'SUCCESS',
+            summary: 'Password Reset Successfully',
+            duration: 3000,
+          });
+          this.router.navigate(['/']);
+        },
+        error: () => {
+          this.toast.success({
+            detail: 'ERROR',
+            summary: 'Something went wrong!',
+            duration: 3000,
+          });
+        },
+      });
     } else {
     }
   }
@@ -77,6 +95,7 @@ export class ResetPasswordComponent implements OnInit {
       ],
       confirmNewPassword: [''],
     });
+
     this.activatedRoute.queryParams.subscribe((val) => {
       this.emailToReset = val['email'];
       let uriToken = val['code'];
@@ -84,23 +103,6 @@ export class ResetPasswordComponent implements OnInit {
       this.emailToken = val['code'];
       console.log(this.emailToReset);
       console.log(this.emailToken);
-    });
-    this.resetPasswordService.resetPassword(this.resetPasswordObj).subscribe({
-      next: (resp) => {
-        this.toast.success({
-          detail: 'SUCCESS',
-          summary: 'Password Reset Successfully',
-          duration: 3000,
-        });
-        this.router.navigate(['/']);
-      },
-      error: () => {
-        this.toast.success({
-          detail: 'ERROR',
-          summary: 'Something went wrong!',
-          duration: 3000,
-        });
-      },
     });
   }
 }

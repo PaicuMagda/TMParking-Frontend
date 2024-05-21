@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
 
           this.toast.success({
             detail: 'Success Message',
-            summary: resp.message,
+            summary: 'You have logged in successfully.',
             duration: 3000,
           });
         },
