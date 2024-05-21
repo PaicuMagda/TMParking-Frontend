@@ -1,25 +1,26 @@
 <div class="search-vehicle">
-  <div class="search-vehicle__fields">
+  <form class="search-vehicle__fields" [formGroup]="filterVehicleForm">
     <div class="search-vehicle__fields__model">
-      <label>Model</label> <input type="text" />
+      <label>Model</label> <input type="text" formControlName="model" />
     </div>
     <div class="search-vehicle__fields__make">
-      <label>Make</label> <input type="text" />
+      <label>Make</label> <input type="text" formControlName="make" />
     </div>
     <div class="search-vehicle__fields__color">
-      <label>Color</label> <input type="text" />
+      <label>Color</label> <input type="text" formControlName="color" />
     </div>
 
     <div class="search-vehicle__fields__year">
-      <label>Year</label> <input type="text" />
+      <label>Year</label> <input type="text" formControlName="year" />
     </div>
     <div class="search-vehicle__fields__owner">
-      <label>Owner</label> <input type="text" />
+      <label>Owner</label> <input type="text" formControlName="owner" />
     </div>
     <div class="search-vehicle__fields__vin">
-      <label>Vehicle Identification Number</label> <input type="text" />
+      <label>Vehicle Identification Number</label>
+      <input type="text" formControlName="vehicleIdentificationNumber" />
     </div>
-  </div>
+  </form>
   <div class="search-vehicle__tmParkingLogo">
     <img src="../../../../../assets/images/logo-TMParking.png" />
   </div>

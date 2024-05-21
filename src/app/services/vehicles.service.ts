@@ -68,6 +68,10 @@ export class VehiclesService {
       );
   }
 
+  updateVehicles(vehicles: Vehicle[]) {
+    this.vehiclesSubject.next(vehicles);
+  }
+
   getVehicles(): Observable<any[]> {
     return this.http.get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles`);
   }
