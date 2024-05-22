@@ -15,6 +15,7 @@ import { ParkingSpace } from 'src/app/interfaces/parking-space';
 import { ParkingSpacesDialogEditComponent } from '../../dialogs/parking-spaces-dialog-edit/parking-spaces-dialog-edit.component';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { DeleteParkingSpacesConfirmationDialogComponent } from '../../dialogs/confirmation-dialogs/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog/delete-parking-spaces-confirmation-dialog.component';
 
 @Component({
   selector: 'app-parking-space-table',
@@ -60,6 +61,20 @@ export class ParkingSpaceTableComponent implements OnInit, AfterViewInit {
           data: values,
         });
       });
+  }
+
+  openDeleteConfirmDialog(parkingSpacesId: number) {
+    this.dialog.open(DeleteParkingSpacesConfirmationDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+      data: {
+        message: 'Are you sure you want to delete this parking spaces ?',
+        parkingSpacesId: parkingSpacesId,
+      },
+    });
   }
 
   ngOnDestroy(): void {

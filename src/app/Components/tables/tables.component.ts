@@ -57,6 +57,20 @@ export class TablesComponent implements OnInit {
         const data: any[] = values;
         const formula: string = 'parking-spaces';
 
+        const dataForCSVFile = data.map((parkingSpaces) => ({
+          name: parkingSpaces.name,
+          address: parkingSpaces.address,
+          availableParkingSpaces: parkingSpaces.availableParkingSpaces,
+          startDate: parkingSpaces.startDate,
+          endDate: parkingSpaces.endDate,
+          withPayment: !parkingSpaces.isFree,
+          VideoSurveilance: parkingSpaces.isVideoSurveilance,
+          cargoVehicle: parkingSpaces.isCargoVehicleAccepted,
+          personalVehicle: parkingSpaces.isPersonalVehicleAccepted,
+          agriculturalMachinery: parkingSpaces.isAgriculturalMachineryAccepted,
+          publicTransport: parkingSpaces.isPublicTransportAccepted,
+        }));
+
         var options = {
           fieldSeparator: ';',
           quoteStrings: '"',
@@ -66,7 +80,7 @@ export class TablesComponent implements OnInit {
           showTitle: false,
           useBom: false,
         };
-        const fileInfo = new ngxCsv(data, formula, options);
+        const fileInfo = new ngxCsv(dataForCSVFile, formula, options);
       });
   }
 
@@ -77,6 +91,14 @@ export class TablesComponent implements OnInit {
       .subscribe((values) => {
         const formula: string = 'users';
         const data: User[] = values;
+
+        const dataForCSVFile = data.map((user) => ({
+          firstname: user.firstName,
+          lastname: user.lastName,
+          address: user.email,
+          phone: user.phone,
+          numberOfVehicleResgistered: user.vehiclesRegistered.length,
+        }));
         var options = {
           fieldSeparator: ';',
           quoteStrings: '"',
@@ -86,7 +108,7 @@ export class TablesComponent implements OnInit {
           showTitle: false,
           useBom: false,
         };
-        const fileInfo = new ngxCsv(data, formula, options);
+        const fileInfo = new ngxCsv(dataForCSVFile, formula, options);
       });
   }
 

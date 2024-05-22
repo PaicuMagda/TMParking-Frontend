@@ -98,13 +98,6 @@ export class ParkingSpaceSearchComponent implements OnInit {
       );
     }
 
-    // if (this.selectedAreas.length > 0) {
-    //   filteredParkingSpaces = filteredParkingSpaces.filter((parking) =>
-    //     this.selectedAreas.includes(parking.area)
-    //   );
-    //   console.log(filteredParkingSpaces);
-    // }
-
     if (this.filters.selectedDate) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
         (parking) =>

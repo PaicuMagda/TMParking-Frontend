@@ -141,7 +141,12 @@
         >
           Edit
         </button>
-        <button mat-menu-item>Delete</button>
+        <button
+          mat-menu-item
+          (click)="openDeleteConfirmDialog(element.parkingSpacesId)"
+        >
+          Delete
+        </button>
       </mat-menu>
     </td>
   </ng-container>

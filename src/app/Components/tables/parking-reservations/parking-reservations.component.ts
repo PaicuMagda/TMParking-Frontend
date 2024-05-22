@@ -17,8 +17,8 @@ export class ParkingReservationsComponent implements OnInit {
 
   displayedColumns: string[] = [
     'index',
-    'customer',
-    'provider',
+    'renter',
+    'owner',
     'parkingLot',
     'parkingSpace',
     'startDate',

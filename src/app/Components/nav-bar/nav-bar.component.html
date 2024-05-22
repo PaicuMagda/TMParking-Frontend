@@ -1,10 +1,6 @@
 <mat-toolbar>
   <div class="toolbar">
-    <img
-      (click)="openTmParkingInfoDialog()"
-      class="toolbar__img"
-      src="../../../assets/images/logo-TMParking.png"
-    />
+    <img class="toolbar__img" src="../../../assets/images/logo-TMParking.png" />
     <div class="toolbar__user-login" *ngIf="isLogin === true">
       <img *ngIf="!image" src="../../../../assets/images/user-image.png" />
       <img *ngIf="image" [src]="image" />
@@ -32,6 +28,8 @@
         class="buttons__input"
         type="text"
         placeholder="Search for parking places..."
+        [(ngModel)]="parkingSpaceNameSearch"
+        (input)="applyFilter()"
       />
     </div>
     <div *ngIf="isLogin === false">

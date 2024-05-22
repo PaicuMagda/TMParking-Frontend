@@ -9,6 +9,7 @@ import { UserEditDialogComponent } from '../../dialogs/user-edit-dialog/user-edi
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from 'src/app/services/users.service';
 import { Subject, takeUntil } from 'rxjs';
+import { DeleteUserAccountConfirmationDialogComponent } from '../../dialogs/confirmation-dialogs/delete-user-account-confirmation-dialog/delete-user-account-confirmation-dialog.component';
 
 @Component({
   selector: 'app-users-table',
@@ -37,7 +38,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
           return {
             ...user,
             fullname: user.lastName + ' ' + user.firstName,
-            numberOfVehciles: user.vehicles.length,
+            numberOfVehciles: user.vehiclesRegistered.length,
           };
         });
         this.dataSource.data = usersWithFullName;
@@ -60,6 +61,20 @@ export class UsersTableComponent implements OnInit, AfterViewInit {
           data: user,
         });
       });
+  }
+
+  openDeleteConfirmDialog(idUser: number) {
+    this.dialog.open(DeleteUserAccountConfirmationDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+      data: {
+        message: 'Are you sure you want to delete this user account ?',
+        idUser: idUser,
+      },
+    });
   }
 
   ngOnDestroy(): void {

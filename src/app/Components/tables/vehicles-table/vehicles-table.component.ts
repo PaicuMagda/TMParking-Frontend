@@ -9,6 +9,7 @@ import { VehicleEditDialogComponent } from '../../dialogs/vehicle-edit-dialog/ve
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { DeleteConfirmationDialogComponent } from '../../dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-vehicles-table',
@@ -49,6 +50,20 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
         );
         this.dataSource.data = vehicleWithOwnerFullname;
       });
+  }
+
+  openDeleteConfirmDialog(idVehicle: number) {
+    this.dialog.open(DeleteConfirmationDialogComponent, {
+      width: '23%',
+      height: '20%',
+      position: {
+        top: '5%',
+      },
+      data: {
+        message: 'Are you sure you want to delete this vehicle ?',
+        vehicleId: idVehicle,
+      },
+    });
   }
 
   ngAfterViewInit() {

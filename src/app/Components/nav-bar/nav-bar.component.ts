@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TmParkingInfoDialogComponent } from '../dialogs/tm-parking-info-dialog/tm-parking-info-dialog.component';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LogoutDialogComponent } from '../dialogs/confirmation-dialogs/logout-dialog/logout-dialog.component';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { UsersService } from 'src/app/services/users.service';
-import { Subject, takeUntil, toArray } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { ReservationsService } from 'src/app/services/reservations.service';
+import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -26,6 +27,8 @@ export class NavBarComponent implements OnInit {
   image: string = '';
   reservationsNumber: number;
   showNavBar: boolean = true;
+  parkingSpaceNameSearch: string = '';
+  parkingSpaces: any[] = [];
 
   constructor(
     private router: Router,
@@ -34,7 +37,8 @@ export class NavBarComponent implements OnInit {
     private userStore: UserStoreService,
     private sidenavService: NavbarService,
     private userService: UsersService,
-    private reservationsService: ReservationsService
+    private reservationsService: ReservationsService,
+    private parkingSpacesService: ParkingPlacesService
   ) {
     // this.router.events.subscribe((event) => {
     //   if (event instanceof NavigationEnd) {
@@ -57,13 +61,6 @@ export class NavBarComponent implements OnInit {
 
   goToRegister() {
     this.router.navigate(['/create-account']);
-  }
-
-  openTmParkingInfoDialog() {
-    this.dialog.open(TmParkingInfoDialogComponent, {
-      width: '80%',
-      height: '80%',
-    });
   }
 
   openMyProfileSidenav() {
@@ -100,12 +97,24 @@ export class NavBarComponent implements OnInit {
     });
   }
 
+  applyFilter() {
+    this.parkingSpaces = this.parkingSpaces.filter(
+      (parking) => parking.name === this.parkingSpaceNameSearch
+    );
+    console.log(this.parkingSpaces);
+    this.parkingSpacesService.sendUpdatedParkingSpace(this.parkingSpaces);
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
   ngOnInit() {
+    this.parkingSpacesService.parkingSpaces$.subscribe((values) => {
+      this.parkingSpaces = values;
+    });
+    console.log(this.parkingSpaces);
     this.changeShowSearch();
     this.isLogin = this.auth.isLoggedIn();
     this.userStore
