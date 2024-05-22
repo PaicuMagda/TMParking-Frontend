@@ -16,7 +16,7 @@ export class ParkingSpaceSearchComponent implements OnInit {
   ) {
     this.parkingSpacesSearchForm = this.formBuilder.group({
       relatedTags: [''],
-      personalVehicle: [],
+      personalVehicle: [''],
       agriculturalMachinery: [],
       isCargoVehicleAccepted: [],
       isPublicTransportAccepted: [],
@@ -24,6 +24,7 @@ export class ParkingSpaceSearchComponent implements OnInit {
       isFree: [],
       availableParkingSpaces: [],
       selectedDate: [],
+      selectedAreas: [''],
     });
   }
 
@@ -31,7 +32,7 @@ export class ParkingSpaceSearchComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
   initialParkingSpaces: any[] = [];
   parkingSpacesSearchForm: FormGroup;
-  selectedArea: string;
+  selectedAreas: string[] = [];
   filters: any;
 
   ngOnInit(): void {
@@ -93,9 +94,16 @@ export class ParkingSpaceSearchComponent implements OnInit {
 
     if (this.filters.withPayment) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
-        (parking) => parking.date !== this.filters.withPayment
+        (parking) => parking.isFree !== this.filters.withPayment
       );
     }
+
+    // if (this.selectedAreas.length > 0) {
+    //   filteredParkingSpaces = filteredParkingSpaces.filter((parking) =>
+    //     this.selectedAreas.includes(parking.area)
+    //   );
+    //   console.log(filteredParkingSpaces);
+    // }
 
     if (this.filters.selectedDate) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
@@ -104,6 +112,12 @@ export class ParkingSpaceSearchComponent implements OnInit {
             new Date(this.filters.selectedDate).getDate() &&
           new Date(parking.endDate).getDate() >=
             new Date(this.filters.selectedDate).getDate()
+      );
+    }
+
+    if (this.selectedAreas.length > 0) {
+      filteredParkingSpaces = filteredParkingSpaces.filter((parking) =>
+        this.selectedAreas.includes(parking.area)
       );
     }
 
@@ -124,8 +138,17 @@ export class ParkingSpaceSearchComponent implements OnInit {
   }
 
   isButtonAreaSelected(area: TimisoaraAreas): void {
-    area.isSelected = !area.isSelected;
-    this.selectedArea = area.name;
+    if (!area.isSelected) {
+      area.isSelected = !area.isSelected;
+      this.selectedAreas.push(area.name);
+      this.applyFilters();
+    } else {
+      area.isSelected = !area.isSelected;
+      this.selectedAreas = this.selectedAreas.filter(
+        (item) => area.name !== item
+      );
+      this.applyFilters();
+    }
   }
 
   ngOnDestroy(): void {
