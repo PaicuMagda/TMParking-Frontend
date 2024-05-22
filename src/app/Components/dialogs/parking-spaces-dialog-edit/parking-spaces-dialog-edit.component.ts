@@ -198,7 +198,7 @@ export class ParkingSpacesDialogEditComponent {
       )?.value,
       multistoreyCarPark:
         this.addNewParkingSpaceFormGroup.get('multistoreyCarPark')?.value,
-      paidParking: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
+      isFree: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
       isVideoSurveilance: this.addNewParkingSpaceFormGroup.get(
         'isVideoSurveillance'
       )?.value,
@@ -409,9 +409,9 @@ export class ParkingSpacesDialogEditComponent {
       ],
       imageFileUpload: ['', Validators.required],
       leasePermit: ['', Validators.required],
-      paymentPerDay: ['', Validators.required],
-      paymentPerHour: ['', Validators.required],
-      paymentForSubscription: ['', Validators.required],
+      paymentPerDay: [0, Validators.required],
+      paymentPerHour: [0, Validators.required],
+      paymentForSubscription: [0, Validators.required],
       nameParkingLot: [''],
     });
 

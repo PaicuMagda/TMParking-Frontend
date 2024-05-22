@@ -123,8 +123,8 @@ export class ParkingPlacesService {
     );
   }
 
-  sendUpdatedParkingSpace(updatedParkingSpaces: any) {
-    this.updateParkingSpaceSubject.next(updatedParkingSpaces);
+  sendUpdatedParkingSpace(updatedParkingSpaces: any[]) {
+    this.parkingSpacesSubject.next(updatedParkingSpaces);
   }
 
   updateParkingSpaces(

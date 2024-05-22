@@ -1,46 +1,91 @@
-<div>
-  <mat-form-field appearance="outline">
-    <input matInput [matDatepicker]="picker" placeholder="Select date..." />
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</div>
-<div>
-  <h1>Related Tags 🏬</h1>
-  <div class="areas">
-    <button
-      *ngFor="let area of areas"
-      mat-button
-      class="areas__button"
-      (click)="isButtonAreaSelected(area)"
-      [ngClass]="
-        area.isSelected ? 'areas__button-no-clicked' : 'areas__button-clicked'
-      "
-    >
-      {{ "🚗" + area.name }}
-    </button>
+<form [formGroup]="parkingSpacesSearchForm">
+  <div>
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Select date..."
+        (dateChange)="applyFilters()"
+        formControlName="selectedDate"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </div>
-</div>
-
-<div class="types-of-vehicles">
-  <h2>Types of vehicles 🚙</h2>
-  <div class="types-of-vehicles__mat-checkbox">
-    <mat-checkbox color="primary">Personal Vehicle</mat-checkbox>
-    <mat-checkbox color="primary">Truck</mat-checkbox>
-    <mat-checkbox color="primary">Agricultural Machinery</mat-checkbox>
-    <mat-checkbox color="primary">Public Transport</mat-checkbox>
+  <div>
+    <h1>Related Tags 🏬</h1>
+    <div class="areas">
+      <button
+        *ngFor="let area of areas"
+        mat-button
+        class="areas__button"
+        (click)="isButtonAreaSelected(area)"
+        [ngClass]="
+          area.isSelected ? 'areas__button-no-clicked' : 'areas__button-clicked'
+        "
+      >
+        {{ "🚗" + area.name }}
+      </button>
+    </div>
   </div>
-</div>
 
-<div class="type-of-parking">
-  <h2>Type of parking 🪙</h2>
-  <div class="type-of-parking__checkbox">
-    <mat-checkbox color="primary">With payment</mat-checkbox>
-    <mat-checkbox color="primary">Free</mat-checkbox>
+  <div class="types-of-vehicles">
+    <h2>Types of vehicles 🚙</h2>
+    <div class="types-of-vehicles__mat-checkbox">
+      <mat-checkbox
+        color="primary"
+        formControlName="personalVehicle"
+        (ngModelChange)="applyFilters()"
+        >Personal Vehicles</mat-checkbox
+      >
+      <mat-checkbox
+        color="primary"
+        formControlName="isCargoVehicleAccepted"
+        (ngModelChange)="applyFilters()"
+        >Cargo Vehicles</mat-checkbox
+      >
+      <mat-checkbox
+        color="primary"
+        formControlName="agriculturalMachinery"
+        (ngModelChange)="applyFilters()"
+        >Agricultural Machinery</mat-checkbox
+      >
+      <mat-checkbox
+        color="primary"
+        formControlName="isPublicTransportAccepted"
+        (ngModelChange)="applyFilters()"
+        >Public Transport</mat-checkbox
+      >
+    </div>
   </div>
-</div>
 
-<div class="number-of-parking-spaces">
-  <h2>The number of parking spaces</h2>
-  <input type="text" />
-</div>
+  <div class="type-of-parking">
+    <h2>Type of parking 🪙</h2>
+    <div class="type-of-parking__checkbox">
+      <mat-checkbox
+        color="primary"
+        formControlName="withPayment"
+        (ngModelChange)="applyFilters()"
+        >With payment</mat-checkbox
+      >
+      <mat-checkbox
+        color="primary"
+        formControlName="isFree"
+        (ngModelChange)="applyFilters()"
+        >Free</mat-checkbox
+      >
+    </div>
+  </div>
+
+  <div class="number-of-parking-spaces">
+    <h2>The number of parking spaces</h2>
+    <input
+      type="text"
+      formControlName="availableParkingSpaces"
+      (ngModelChange)="applyFilters()"
+    />
+  </div>
+</form>
