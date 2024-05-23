@@ -76,8 +76,8 @@ export class BookingParkingLotComponent {
 
   openLocationDialog() {
     this.dialog.open(GoogleMapsComponent, {
-      width: '50%',
-      height: '60%',
+      width: '70%',
+      height: '90%',
     });
   }
 

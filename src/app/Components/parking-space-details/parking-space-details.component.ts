@@ -91,13 +91,6 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     });
   }
 
-  openLocationDialog() {
-    this.dialog.open(GoogleMapsComponent, {
-      width: '50%',
-      height: '60%',
-    });
-  }
-
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

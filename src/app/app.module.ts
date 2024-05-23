@@ -65,6 +65,8 @@ import { ReservationsChartsComponent } from './Components/charts/reservations-ch
 import { DeleteReservationConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-reservation-confirmation-dialog/delete-reservation-confirmation-dialog.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { PaymentDialogComponent } from './Components/dialogs/payment-dialog/payment-dialog.component';
+import { PlaceAutocompleteComponent } from './Components/google-maps/place-autocomplete/place-autocomplete.component';
+import { MapDisplayComponent } from './Components/google-maps/map-display/map-display.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +121,8 @@ import { PaymentDialogComponent } from './Components/dialogs/payment-dialog/paym
     ReservationsChartsComponent,
     DeleteReservationConfirmationDialogComponent,
     PaymentDialogComponent,
+    PlaceAutocompleteComponent,
+    MapDisplayComponent,
   ],
   imports: [
     BrowserModule,
