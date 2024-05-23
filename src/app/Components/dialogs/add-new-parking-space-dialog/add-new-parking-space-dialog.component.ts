@@ -199,9 +199,9 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       isAgriculturalMachinery: [''],
       imageFileUpload: [null, Validators.required],
       leasePermit: [null, Validators.required],
-      paymentPerHour: [null, Validators.required],
-      paymentPerDay: [null, Validators.required],
-      paymentForSubscription: [null, Validators.required],
+      paymentPerHour: [0, Validators.required],
+      paymentPerDay: [0, Validators.required],
+      paymentForSubscription: [0, Validators.required],
       nameParkingLot: [null],
     });
 

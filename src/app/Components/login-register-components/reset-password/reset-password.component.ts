@@ -57,28 +57,30 @@ export class ResetPasswordComponent implements OnInit {
   reset() {
     if (this.resetPassword.valid) {
       this.resetPasswordObj.email = this.emailToReset;
-      this.resetPasswordObj.newPassword = this.resetPassword.value.password;
+      this.resetPasswordObj.newPassword = this.resetPassword.value.newPassword;
       this.resetPasswordObj.confirmPassword =
         this.resetPassword.value.confirmNewPassword;
       this.resetPasswordObj.emailToken = this.emailToken;
 
-      this.resetPasswordService.resetPassword(this.resetPasswordObj).subscribe({
-        next: (resp) => {
-          this.toast.success({
-            detail: 'SUCCESS',
-            summary: 'Password Reset Successfully',
-            duration: 3000,
-          });
-          this.router.navigate(['/']);
-        },
-        error: () => {
-          this.toast.success({
-            detail: 'ERROR',
-            summary: 'Something went wrong!',
-            duration: 3000,
-          });
-        },
-      });
+      console.log(this.resetPasswordObj);
+
+      // this.resetPasswordService.resetPassword(this.resetPasswordObj).subscribe({
+      //   next: (resp) => {
+      //     this.toast.success({
+      //       detail: 'SUCCESS',
+      //       summary: 'Password Reset Successfully',
+      //       duration: 3000,
+      //     });
+      //     this.router.navigate(['/']);
+      //   },
+      //   error: () => {
+      //     this.toast.success({
+      //       detail: 'ERROR',
+      //       summary: 'Something went wrong!',
+      //       duration: 3000,
+      //     });
+      //   },
+      // });
     } else {
     }
   }

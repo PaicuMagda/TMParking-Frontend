@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { Subject, takeUntil } from 'rxjs';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
@@ -13,6 +13,8 @@ export class RecoverAccountComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
   email: string = '';
   emailFormGroup: FormGroup;
+  isValidEmail: boolean;
+  resetPasswordEmail: string = '';
 
   constructor(
     private resetPassword: ResetPasswordService,
@@ -43,9 +45,23 @@ export class RecoverAccountComponent implements OnInit {
       });
   }
 
+  checkValidEmail(event: string) {
+    const value = event;
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    this.isValidEmail = pattern.test(value);
+    return this.isValidEmail;
+  }
+
+  confirmToSend() {
+    if (this.checkValidEmail(this.resetPasswordEmail)) {
+      console.log(this.resetPasswordEmail);
+      this.resetPasswordEmail = '';
+    }
+  }
+
   ngOnInit() {
     this.emailFormGroup = this.formBuilder.group({
-      email: [''],
+      email: ['', Validators.required],
     });
   }
 

@@ -25,7 +25,17 @@
         [formGroup]="emailFormGroup"
       >
         <mat-form-field appearance="outline">
-          <input matInput type="email" formControlName="email" />
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            [(ngModel)]="resetPasswordEmail"
+            (ngModelChange)="checkValidEmail($event)"
+          />
+          <mat-error *ngIf="!resetPasswordEmail">Email is required* </mat-error>
+          <mat-error *ngIf="!isValidEmail && resetPasswordEmail"
+            >Email is invalid*
+          </mat-error>
         </mat-form-field>
       </form>
     </div>
