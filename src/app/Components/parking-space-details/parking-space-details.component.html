@@ -23,13 +23,18 @@
             <p class="col-lg">Locuri disponibile</p>
             <p class="col-sm">{{ parkingPlace.availableParkingSpaces }}</p>
           </div>
-          <!-- <div class="row">
+          <div class="row">
             <p class="col-lg">Owner</p>
             <p class="col-sm">
-              {{ parkingPlace.owner.firstname }}
-              {{ parkingPlace.owner.lastname }}
+              {{ parkingPlace.ownerName }}
             </p>
-          </div> -->
+          </div>
+          <div class="row">
+            <p class="col-lg">The specific area</p>
+            <p class="col-sm">
+              {{ parkingPlace.area }}
+            </p>
+          </div>
           <div class="row">
             <p class="col-lg">Start Date</p>
             <p class="col-sm">{{ parkingPlace.startDate | date }}</p>
@@ -96,7 +101,7 @@
             </p>
           </div>
           <div class="row">
-            <p class="col-lg">Truck</p>
+            <p class="col-lg">Cargo Vehicle</p>
             <p
               class="col-sm"
               [ngClass]="{

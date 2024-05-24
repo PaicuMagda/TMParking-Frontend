@@ -12,6 +12,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { AddNewParkingSpaceDialogComponent } from '../add-new-parking-space-dialog/add-new-parking-space-dialog.component';
 import { ConfirmCloseDialogComponent } from '../confirmation-dialogs/confirm-close-dialog/confirm-close-dialog.component';
 import { Subject, takeUntil } from 'rxjs';
+import { TimisoaraAreas } from 'src/app/interfaces/timisoara-areas';
 
 @Component({
   selector: 'app-parking-spaces-dialog-edit',
@@ -46,6 +47,8 @@ export class ParkingSpacesDialogEditComponent {
   idUserLogged: string = '';
   paidParking: boolean = false;
   role: string = '';
+  specificAreas: TimisoaraAreas[] = [];
+  selectedArea: string = this.data.area;
 
   changeVideoSurveillanceToggleButtonValue(event: boolean) {
     this.data.isVideoSurveilance = event;
@@ -219,6 +222,7 @@ export class ParkingSpacesDialogEditComponent {
       isAgriculturalMachineryAccepted: this.addNewParkingSpaceFormGroup.get(
         'isAgriculturalMachineryAccepted'
       )?.value,
+      area: this.addNewParkingSpaceFormGroup.get('area')?.value,
       isVerifiedByAdmin: false,
       addedDate: new Date(),
     };
@@ -286,6 +290,7 @@ export class ParkingSpacesDialogEditComponent {
       isAgriculturalMachineryAccepted: this.addNewParkingSpaceFormGroup.get(
         'isAgriculturalMachineryAccepted'
       )?.value,
+      area: this.addNewParkingSpaceFormGroup.get('area')?.value,
       somethingIsWrong: true,
       isVerifiedByAdmin: false,
     };
@@ -353,6 +358,7 @@ export class ParkingSpacesDialogEditComponent {
       isAgriculturalMachineryAccepted: this.addNewParkingSpaceFormGroup.get(
         'isAgriculturalMachineryAccepted'
       )?.value,
+      area: this.addNewParkingSpaceFormGroup.get('area')?.value,
       somethingIsWrong: false,
       isVerifiedByAdmin: true,
     };
@@ -413,6 +419,7 @@ export class ParkingSpacesDialogEditComponent {
       paymentPerHour: [0, Validators.required],
       paymentForSubscription: [0, Validators.required],
       nameParkingLot: [''],
+      area: [this.data.area],
     });
 
     this.userStore
@@ -451,6 +458,10 @@ export class ParkingSpacesDialogEditComponent {
         const roleFromToken = this.authenticationService.getRoleFromToken();
         this.role = val || roleFromToken;
       });
+
+    this.parkingSpacesService
+      .getTimisoaraAreas()
+      .subscribe((values) => (this.specificAreas = values));
 
     this.paidParking = this.data.paidParking;
   }

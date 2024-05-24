@@ -12,6 +12,7 @@ import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Subject, takeUntil } from 'rxjs';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
+import { TimisoaraAreas } from 'src/app/interfaces/timisoara-areas';
 
 @Component({
   selector: 'app-add-new-parking-space-dialog',
@@ -55,6 +56,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   leasePermitFileName: string | undefined;
   parkingSpacesOwnerId: string;
   toggleValue: string = '';
+  specificAreas: TimisoaraAreas[] = [];
 
   changeToggleButtonValue(event: boolean) {
     this.toggleButtonValue = event;
@@ -148,6 +150,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       isVerifiedByAdmin: false,
       somethingIsWrong: false,
       parkingSpacesOwnerId: this.parkingSpacesOwnerId,
+      area: this.addNewParkingSpaceFormGroup.get('area')?.value,
     };
 
     this.parkingSpacesService
@@ -203,6 +206,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       paymentPerDay: [0, Validators.required],
       paymentForSubscription: [0, Validators.required],
       nameParkingLot: [null],
+      area: [''],
     });
 
     this.userStore
@@ -227,6 +231,9 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
         console.log(this.toggleValue);
       }
     );
+    this.parkingSpacesService
+      .getTimisoaraAreas()
+      .subscribe((values) => (this.specificAreas = values));
   }
 
   ngOnDestroy(): void {

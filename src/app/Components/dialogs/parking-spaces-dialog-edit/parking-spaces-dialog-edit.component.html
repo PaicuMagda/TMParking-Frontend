@@ -81,6 +81,20 @@
             >Limit is set to 3 numbers.</mat-error
           >
         </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label for="options">Select a specific area</mat-label>
+          <mat-select
+            id="options"
+            formControlName="area"
+            [(ngModel)]="selectedArea"
+          >
+            <mat-option
+              *ngFor="let option of specificAreas"
+              [value]="option.name"
+              >{{ option.name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
       </div>
       <div>
         <mat-form-field>

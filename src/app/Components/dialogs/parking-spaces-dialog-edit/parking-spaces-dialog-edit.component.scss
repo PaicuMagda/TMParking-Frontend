@@ -67,8 +67,11 @@
 
       &__parkingSpaces {
         mat-form-field {
-          width: 24%;
+          width: 42%;
         }
+        display: flex;
+        flex-direction: row;
+        gap: 17%;
       }
 
       &__buttons {
