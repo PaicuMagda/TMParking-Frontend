@@ -9,4 +9,13 @@
   &__to {
     width: 50%;
   }
+
+  p {
+    font-weight: 600;
+    font-size: 150%;
+  }
+}
+
+place-autocomplete[hidden] {
+  display: none;
 }

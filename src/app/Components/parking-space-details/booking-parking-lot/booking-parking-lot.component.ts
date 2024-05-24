@@ -19,6 +19,7 @@ import { PaymentMethods } from 'src/app/enums/payment-methods';
 import { NgToastService } from 'ng-angular-popup';
 import { ParkingLotInterface } from 'src/app/interfaces/parking-lot-interface';
 import { PaymentDialogComponent } from '../../dialogs/payment-dialog/payment-dialog.component';
+import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 
 @Component({
   selector: 'app-booking-parking-lot',
@@ -28,7 +29,6 @@ import { PaymentDialogComponent } from '../../dialogs/payment-dialog/payment-dia
 export class BookingParkingLotComponent {
   private destroy$: Subject<void> = new Subject<void>();
   showSearch: boolean = false;
-  parkingPlace: any;
   bookingType: string = 'oneDay';
   hours: number[] = [];
   endHourIsSmaller: boolean;
@@ -39,7 +39,6 @@ export class BookingParkingLotComponent {
   calculatedPrice: number;
   months: number[] = [];
   idParkingSpaces: number;
-  activatedRouter: any;
   reservations: any[];
   role: string = '';
   oneDayBookingFormGroup: FormGroup;
@@ -47,10 +46,10 @@ export class BookingParkingLotComponent {
   subscriptionBookingForm: FormGroup;
   @Input() allParkingLotsForThisParking: ParkingLotInterface[];
   userId: number;
+  address: string = '';
 
   constructor(
-    private router: ActivatedRoute,
-    private activatedRoute: ActivatedRoute,
+    private activatedRouter: ActivatedRoute,
     private bookingService: ParkingSpaceBookingService,
     private vehicleService: VehiclesService,
     private dialog: MatDialog,
@@ -58,7 +57,8 @@ export class BookingParkingLotComponent {
     private userStore: UserStoreService,
     private auth: AuthenticationService,
     private formBuilder: FormBuilder,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private parkingSpaces: ParkingPlacesService
   ) {}
 
   changeType(value: string) {
@@ -75,10 +75,19 @@ export class BookingParkingLotComponent {
   }
 
   openLocationDialog() {
-    this.dialog.open(GoogleMapsComponent, {
-      width: '70%',
-      height: '90%',
-    });
+    this.parkingSpaces
+      .getParkingSpacesById(this.idParkingSpaces)
+      .subscribe((result) => {
+        this.address = result.address;
+
+        this.dialog.open(GoogleMapsComponent, {
+          width: '80%',
+          height: '100%',
+          data: {
+            address: this.address,
+          },
+        });
+      });
   }
 
   ngOnDestroy(): void {
@@ -223,12 +232,7 @@ export class BookingParkingLotComponent {
   }
 
   ngOnInit() {
-    this.idParkingSpaces = this.router.snapshot.params['id'];
-    this.activatedRoute.data
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value: any) => {
-        this.parkingPlace = value.parkingSpacesDetails;
-      });
+    this.idParkingSpaces = this.activatedRouter.snapshot.params['id'];
     this.populateHoursArray();
     this.paymentMethods = Object.values(PaymentMethods);
     this.bookingService

@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PlaceSearchResult } from 'src/app/interfaces/place-search-result';
 
 @Component({
@@ -8,9 +9,12 @@ import { PlaceSearchResult } from 'src/app/interfaces/place-search-result';
 })
 export class GoogleMapsComponent implements OnInit, AfterViewInit {
   fromValue: PlaceSearchResult | undefined;
-  toValue: PlaceSearchResult | undefined;
+  toValue: PlaceSearchResult | undefined = this.data.address;
 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
   ngAfterViewInit(): void {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.data);
+  }
 }
