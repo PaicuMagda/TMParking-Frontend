@@ -54,7 +54,6 @@ export class RecoverAccountComponent implements OnInit {
 
   confirmToSend() {
     if (this.checkValidEmail(this.resetPasswordEmail)) {
-      console.log(this.resetPasswordEmail);
       this.resetPasswordEmail = '';
     }
   }

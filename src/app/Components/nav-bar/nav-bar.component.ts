@@ -98,11 +98,10 @@ export class NavBarComponent implements OnInit {
   }
 
   applyFilter() {
-    this.parkingSpaces = this.parkingSpaces.filter(
-      (parking) => parking.name === this.parkingSpaceNameSearch
-    );
-    console.log(this.parkingSpaces);
-    this.parkingSpacesService.sendUpdatedParkingSpace(this.parkingSpaces);
+    // this.parkingSpaces = this.parkingSpaces.filter(
+    //   (parking) => parking.name === this.parkingSpaceNameSearch
+    // );
+    // this.parkingSpacesService.sendUpdatedParkingSpace(this.parkingSpaces);
   }
 
   ngOnDestroy(): void {
@@ -114,7 +113,7 @@ export class NavBarComponent implements OnInit {
     this.parkingSpacesService.parkingSpaces$.subscribe((values) => {
       this.parkingSpaces = values;
     });
-    console.log(this.parkingSpaces);
+
     this.changeShowSearch();
     this.isLogin = this.auth.isLoggedIn();
     this.userStore

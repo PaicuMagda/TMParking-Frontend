@@ -52,21 +52,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     private userStore: UserStoreService,
     private auth: AuthenticationService,
     private parkingSpacesService: ParkingPlacesService
-  ) {
-    // this.filteredVehicles = this.vehiclesControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map((value) => this.filter(value))
-    // );
-  }
-
-  // filter(value: string): Vehicle[] {
-  //   const filterValue = value.toLowerCase();
-  //   return this.vehicles.filter(
-  //     (vehicle) =>
-  //       vehicle.vehicleIdentificationNumber !== undefined &&
-  //       vehicle.vehicleIdentificationNumber.toString().includes(filterValue)
-  //   );
-  // }
+  ) {}
 
   changeType(value: string) {
     this.bookingType = value;
@@ -145,16 +131,11 @@ export class ParkingSpaceDetailsComponent implements OnInit {
         this.role = val || roleFromToken;
       });
 
-    this.parkingSpacesService
-      .getParkingLotsById(this.idParkingSpaces)
-      .subscribe((value) => {
-        console.log('Aici este noua parcare adaugata:' + value);
-      });
-
-    this.parkingSpacesService
-      .getParkingLotsById(this.idParkingSpaces)
-      .subscribe((values) => {
+    this.parkingSpacesService.getParkingLotsById(this.idParkingSpaces);
+    this.parkingSpacesService.parkingLotsForOneParkingSpace$.subscribe(
+      (values) => {
         this.allParkingLotsForThisParking = values;
-      });
+      }
+    );
   }
 }

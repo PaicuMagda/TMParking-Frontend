@@ -62,8 +62,6 @@ export class ResetPasswordComponent implements OnInit {
         this.resetPassword.value.confirmNewPassword;
       this.resetPasswordObj.emailToken = this.emailToken;
 
-      console.log(this.resetPasswordObj);
-
       // this.resetPasswordService.resetPassword(this.resetPasswordObj).subscribe({
       //   next: (resp) => {
       //     this.toast.success({

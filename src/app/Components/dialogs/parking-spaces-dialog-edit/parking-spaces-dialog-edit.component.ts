@@ -63,7 +63,6 @@ export class ParkingSpacesDialogEditComponent {
   changePaidParkingToggleButtonValue(event: boolean) {
     this.data.paidParking = event;
     this.cdr.detectChanges();
-    console.log(this.paidParking);
   }
 
   changeUndergroundParkingLotsToggleButtonValue(event: boolean) {
@@ -438,12 +437,6 @@ export class ParkingSpacesDialogEditComponent {
         this.parkingSpacesOwnerId = userIdFromToken || val;
       });
 
-    this.parkingSpacesService
-      .getParkingLotsById(this.data.parkingSpacesId)
-      .subscribe((values) => {
-        this.parkingLots = values;
-        console.log(this.parkingLots);
-      });
     this.userStore
       .getIdUserFromStore()
       .pipe(takeUntil(this.destroy$))

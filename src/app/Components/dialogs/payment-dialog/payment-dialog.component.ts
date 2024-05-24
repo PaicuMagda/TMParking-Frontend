@@ -15,7 +15,6 @@ export class PaymentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.initConfig();
-    console.log(this.data);
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
@@ -67,35 +66,18 @@ export class PaymentDialogComponent implements OnInit {
         layout: 'vertical',
       },
       onApprove: (data, actions) => {
-        console.log(
-          'onApprove - transaction was approved, but not authorized',
-          data,
-          actions
-        );
-        actions.order.get().then((details: any) => {
-          console.log(
-            'onApprove - you can get full order details inside onApprove: ',
-            details
-          );
-        });
+        actions.order.get().then((details: any) => {});
       },
       onClientAuthorization: (data) => {
-        console.log(
-          'onClientAuthorization - you should probably inform your server about completed transaction at this point',
-          data
-        );
         this.showSuccess = true;
       },
       onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
         this.showCancel = true;
       },
       onError: (err) => {
-        console.log('OnError', err);
         this.showError = true;
       },
       onClick: (data, actions) => {
-        console.log('onClick', data, actions);
         this.resetStatus();
       },
     };

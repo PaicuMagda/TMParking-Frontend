@@ -20,21 +20,19 @@
   >
     <div class="booking__fields__date">
       <div>Choose a date</div>
-      <div>
-        <mat-form-field>
-          <input
-            matInput
-            [matDatepicker]="picker"
-            type="date"
-            formControlName="startDate"
-          />
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="startDate"
+          placeholder="Select date ..."
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
     <!-- <div class="booking__fields__time">
       <div>Alege intervalul orar</div>

@@ -42,7 +42,6 @@ export class UserSearchComponent implements OnInit {
   }
 
   applyFilters(filters: any) {
-    console.log(filters);
     let filteredUsers = this.initialUsers;
     if (filters.firstname) {
       filteredUsers = filteredUsers.filter((user) =>
@@ -89,7 +88,6 @@ export class UserSearchComponent implements OnInit {
       filteredUsers = filteredUsers.filter((user) =>
         user.vehiclesRegistered.includes(filters.registeredVehicle)
       );
-      console.log(filteredUsers);
     }
 
     if (

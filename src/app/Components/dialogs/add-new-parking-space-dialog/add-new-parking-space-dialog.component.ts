@@ -228,7 +228,6 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
     this.displayCardsService.toggleValueSubjectObservable.subscribe(
       (values) => {
         this.toggleValue = values;
-        console.log(this.toggleValue);
       }
     );
     this.parkingSpacesService

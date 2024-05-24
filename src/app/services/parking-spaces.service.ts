@@ -137,13 +137,13 @@ export class ParkingPlacesService {
     );
   }
 
-  getParkingLotsById(parkingSpaceId: number): Observable<any[]> {
-    return this.http.get<any[]>(
-      `${this.baseUrl}OneParkingSpace/parking-lots?parkingSpacesId=${parkingSpaceId}`
-    );
-    // .subscribe((response) => {
-    //   this.parkingLotsForOneParkingSpaceSubject.next(response);
-    //   console.log(response);
-    // });
+  getParkingLotsById(parkingSpaceId: number) {
+    this.http
+      .get<any[]>(
+        `${this.baseUrl}OneParkingSpace/parking-lots?parkingSpacesId=${parkingSpaceId}`
+      )
+      .subscribe((response) => {
+        this.parkingLotsForOneParkingSpaceSubject.next(response);
+      });
   }
 }

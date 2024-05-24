@@ -17,9 +17,7 @@ export class DeleteReservationConfirmationDialogComponent implements OnInit {
     private toast: NgToastService
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void {}
 
   closeDeleteDialogConfirmation() {
     this.dialogRef.close();

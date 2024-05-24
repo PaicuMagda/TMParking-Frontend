@@ -141,9 +141,9 @@
                 'background-color':
                   spot.availability === 'OCUPAT'
                     ? '#0D1C61'
-                    : spot.availability === 'PARTIAL-OCUPAT'
+                    : spot.reservations.length > 0
                     ? '#CBCFCF'
-                    : spot.availability === 'FREE'
+                    : spot.reservations.length == 0
                     ? '#25A605'
                     : 'white'
               }"
