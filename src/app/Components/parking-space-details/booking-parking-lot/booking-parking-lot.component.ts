@@ -49,6 +49,8 @@ export class BookingParkingLotComponent {
   userId: number;
   startHour: string;
   endHour: string;
+  startDate: Date;
+  startDateFromPlace: Date;
 
   constructor(
     private router: ActivatedRoute,
@@ -91,6 +93,7 @@ export class BookingParkingLotComponent {
   registerReservationForOneDay() {
     const formData = {
       startDate: this.oneDayBookingFormGroup.get('startDate')?.value,
+      endDate: this.oneDayBookingFormGroup.get('startDate')?.value,
       vehicleRegistrationNumber: this.oneDayBookingFormGroup.get(
         'vehicleRegistrationNumber'
       )?.value,
@@ -202,6 +205,23 @@ export class BookingParkingLotComponent {
     }
   }
 
+  isIcorectStartDate(): boolean {
+    const selectedStartDate = new Date(
+      this.oneDayBookingFormGroup.get('startDate')?.value
+    );
+    const bigParkingEndDate = new Date(this.parkingPlace.endDate);
+    const bigParkingStartDate = new Date(this.startDateFromPlace);
+
+    return (
+      selectedStartDate.getTime() <= bigParkingStartDate.getTime() ||
+      selectedStartDate.getTime() > bigParkingEndDate.getTime()
+    );
+  }
+
+  errorAppears() {
+    this.isIcorectStartDate();
+  }
+
   // checkEndHourIsSmaller() {
   //   // return this.endHour <= this.startHour;
   //   console.log(this.startHour);
@@ -230,6 +250,7 @@ export class BookingParkingLotComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value: any) => {
         this.parkingPlace = value.parkingSpacesDetails;
+        this.startDateFromPlace = value.parkingSpacesDetails.startDate;
       });
     this.populateHoursArray();
     this.paymentMethods = Object.values(PaymentMethods);

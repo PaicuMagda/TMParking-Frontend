@@ -142,6 +142,7 @@ import { ReservationsDialogComponent } from './Components/parking-space-details/
       provide: MatDialogRef,
       useValue: {},
     },
+    HourFormatPipe,
   ],
   bootstrap: [AppComponent],
 })
