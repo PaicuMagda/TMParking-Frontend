@@ -132,7 +132,7 @@
         <app-legend></app-legend>
         <div class="parking-space-details__container__left__all-spots__cards">
           <div
-            (click)="openReservationsDialog(spot.parkingSpacesId)"
+            (click)="openReservationsDialog(spot.parkingLotId)"
             class="parking-space-details__container__left__all-spots__cards__spot"
             *ngFor="let spot of allParkingLotsForThisParking"
           >

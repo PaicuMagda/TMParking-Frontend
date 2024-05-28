@@ -90,6 +90,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     this.dialog.open(ReservationsDialogComponent, {
       width: '30%',
       height: '90%',
+      data: { parkingLotId },
     });
   }
 

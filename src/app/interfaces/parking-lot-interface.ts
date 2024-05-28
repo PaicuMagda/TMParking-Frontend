@@ -5,4 +5,5 @@ export interface ParkingLotInterface {
   availability: string;
   parkingSpacesId: number;
   reservations: Reservation[];
+  parkingLotId: number;
 }

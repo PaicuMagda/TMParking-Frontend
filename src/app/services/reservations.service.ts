@@ -42,7 +42,11 @@ export class ReservationsService {
     );
   }
 
-  getReservationsLotId(parkingLotId: number) {}
+  getReservationsByLotId(parkingLotId: number): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}Reservation/reservations/${parkingLotId}`
+    );
+  }
 
   getReservationsByParkingId(parkingSpaceId: number) {
     this.http
