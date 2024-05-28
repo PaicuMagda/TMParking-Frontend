@@ -91,9 +91,31 @@ export class BookingParkingLotComponent {
   }
 
   registerReservationForOneDay() {
+    const startDate = this.oneDayBookingFormGroup.get('startDate')?.value;
+    const startTime = this.oneDayBookingFormGroup.get('startHour')?.value;
+    const endTime = this.oneDayBookingFormGroup.get('endHour')?.value;
+    const endDate = this.oneDayBookingFormGroup.get('startDate')?.value;
+
+    const [startHours, startMinutes] = startTime.split(':');
+    const startDateToSend = new Date(startDate);
+    startDateToSend.setHours(
+      parseInt(startHours, 10),
+      parseInt(startMinutes, 10)
+    );
+    const startTimezoneOffset = startDateToSend.getTimezoneOffset() * 60000;
+    const localStartDate = new Date(
+      startDateToSend.getTime() - startTimezoneOffset
+    );
+
+    const [endHours, endMinutes] = endTime.split(':');
+    const endDateToSend = new Date(endDate);
+    endDateToSend.setHours(parseInt(endHours, 10), parseInt(endMinutes, 10));
+    const endTimezoneOffset = endDateToSend.getTimezoneOffset() * 60000;
+    const localEndDate = new Date(endDateToSend.getTime() - endTimezoneOffset);
+
     const formData = {
-      startDate: this.oneDayBookingFormGroup.get('startDate')?.value,
-      endDate: this.oneDayBookingFormGroup.get('startDate')?.value,
+      startDate: localStartDate,
+      endDate: localEndDate,
       vehicleRegistrationNumber: this.oneDayBookingFormGroup.get(
         'vehicleRegistrationNumber'
       )?.value,

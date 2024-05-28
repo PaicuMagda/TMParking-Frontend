@@ -46,29 +46,17 @@
       <div class="booking__fields__time__mat-form-field">
         <div>
           <mat-form-field>
-            <mat-label>Start Hours</mat-label>
-            <select
-              matNativeControl
-              required
-              [(ngModel)]="startHour"
-              formControlName="startHour"
-            >
-              <option *ngFor="let hour of hours" value="hour">
-                {{ hour | hourFormat }}
-              </option>
-            </select>
-          </mat-form-field>
-          <!-- <mat-form-field>
             <input
               matInput
               type="time"
-              placeholder="Selectați ora"
               formControlName="startHour"
+              placeholder="Select time"
             />
-          </mat-form-field> -->
+            <!-- <mat-icon svgIcon=""></mat-icon> -->
+          </mat-form-field>
         </div>
         <div>
-          <mat-form-field>
+          <!-- <mat-form-field>
             <mat-label>End Hours</mat-label>
             <select
               matNativeControl
@@ -80,15 +68,16 @@
                 {{ hour | hourFormat }}
               </option>
             </select>
-          </mat-form-field>
-          <!-- <mat-form-field>
+          </mat-form-field> -->
+          <mat-form-field>
             <input
               matInput
               type="time"
-              placeholder="Selectați ora"
               formControlName="endHour"
+              placeholder="Select time"
             />
-          </mat-form-field> -->
+            <!-- <mat-icon svgIcon=""></mat-icon> -->
+          </mat-form-field>
         </div>
       </div>
     </div>
