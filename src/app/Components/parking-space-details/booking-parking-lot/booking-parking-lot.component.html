@@ -34,13 +34,18 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
-    <!-- <div class="booking__fields__time">
+    <div class="booking__fields__time">
       <div>Alege intervalul orar</div>
       <div class="booking__fields__time__mat-form-field">
         <div>
           <mat-form-field>
             <mat-label>Start Hours</mat-label>
-            <select matNativeControl required [(ngModel)]="startHour">
+            <select
+              matNativeControl
+              required
+              [(ngModel)]="startHour"
+              formControlName="startHour"
+            >
               <option *ngFor="let hour of hours" value="hour">
                 {{ hour | hourFormat }}
               </option>
@@ -50,7 +55,12 @@
         <div>
           <mat-form-field>
             <mat-label>End Hours</mat-label>
-            <select matNativeControl required [(ngModel)]="endHour">
+            <select
+              matNativeControl
+              required
+              [(ngModel)]="endHour"
+              formControlName="endHour"
+            >
               <option *ngFor="let hour of hours" value="hour">
                 {{ hour | hourFormat }}
               </option>
@@ -58,7 +68,7 @@
           </mat-form-field>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <div class="booking__fields__vehicle">
       <div>Alege vehiculul care va fi parcat</div>

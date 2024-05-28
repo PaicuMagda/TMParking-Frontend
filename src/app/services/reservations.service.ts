@@ -42,6 +42,8 @@ export class ReservationsService {
     );
   }
 
+  getReservationsLotId(parkingLotId: number) {}
+
   getReservationsByParkingId(parkingSpaceId: number) {
     this.http
       .get<Reservation[]>(

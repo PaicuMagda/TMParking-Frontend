@@ -39,7 +39,6 @@ import { ParkingSpaceTableComponent } from './Components/tables/parking-space-ta
 import { UsersTableComponent } from './Components/tables/users-table/users-table.component';
 import { VehiclesTableComponent } from './Components/tables/vehicles-table/vehicles-table.component';
 import { ConfirmationParkingSpaceExpiredDialogComponent } from './Components/dialogs/confirmation-parking-space-expired-dialog/confirmation-parking-space-expired-dialog.component';
-import { HoverElementDirective } from './directives/hover-element.directive';
 import { LegendComponent } from './Components/legend/legend.component';
 import { HourFormatPipe } from './pipes/hour-format.pipe';
 import { ParkingReservationsComponent } from './Components/tables/parking-reservations/parking-reservations.component';
@@ -65,6 +64,7 @@ import { ReservationsChartsComponent } from './Components/charts/reservations-ch
 import { DeleteReservationConfirmationDialogComponent } from './Components/dialogs/confirmation-dialogs/delete-reservation-confirmation-dialog/delete-reservation-confirmation-dialog.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { PaymentDialogComponent } from './Components/dialogs/payment-dialog/payment-dialog.component';
+import { ReservationsDialogComponent } from './Components/parking-space-details/reservations-dialog/reservations-dialog.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +98,6 @@ import { PaymentDialogComponent } from './Components/dialogs/payment-dialog/paym
     UsersTableComponent,
     VehiclesTableComponent,
     ConfirmationParkingSpaceExpiredDialogComponent,
-    HoverElementDirective,
     LegendComponent,
     HourFormatPipe,
     ParkingReservationsComponent,
@@ -119,6 +118,7 @@ import { PaymentDialogComponent } from './Components/dialogs/payment-dialog/paym
     ReservationsChartsComponent,
     DeleteReservationConfirmationDialogComponent,
     PaymentDialogComponent,
+    ReservationsDialogComponent,
   ],
   imports: [
     BrowserModule,
