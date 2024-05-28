@@ -19,6 +19,7 @@ import { PaymentMethods } from 'src/app/enums/payment-methods';
 import { NgToastService } from 'ng-angular-popup';
 import { ParkingLotInterface } from 'src/app/interfaces/parking-lot-interface';
 import { PaymentDialogComponent } from '../../dialogs/payment-dialog/payment-dialog.component';
+import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 
 @Component({
   selector: 'app-booking-parking-lot',
@@ -62,11 +63,16 @@ export class BookingParkingLotComponent {
     private userStore: UserStoreService,
     private auth: AuthenticationService,
     private formBuilder: FormBuilder,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private parkingSpacesService: ParkingPlacesService
   ) {}
 
   changeType(value: string) {
     this.bookingType = value;
+  }
+
+  getParkingLots() {
+    this.parkingSpacesService.getParkingLotsById(this.idParkingSpaces);
   }
 
   populateHoursArray() {
@@ -136,6 +142,7 @@ export class BookingParkingLotComponent {
             summary: resp.message,
             duration: 3000,
           });
+          this.getParkingLots();
         },
         error: (err) => ({
           summary: err.message,

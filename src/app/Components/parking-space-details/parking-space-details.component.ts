@@ -93,6 +93,9 @@ export class ParkingSpaceDetailsComponent implements OnInit {
       data: { parkingLotId },
     });
   }
+  getParkingLots() {
+    this.parkingSpacesService.getParkingLotsById(this.idParkingSpaces);
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -141,7 +144,7 @@ export class ParkingSpaceDetailsComponent implements OnInit {
         this.role = val || roleFromToken;
       });
 
-    this.parkingSpacesService.getParkingLotsById(this.idParkingSpaces);
+    this.getParkingLots();
     this.parkingSpacesService.parkingLotsForOneParkingSpace$.subscribe(
       (values) => {
         this.allParkingLotsForThisParking = values;
