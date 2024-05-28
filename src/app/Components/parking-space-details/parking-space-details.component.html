@@ -37,11 +37,11 @@
           </div>
           <div class="row">
             <p class="col-lg">Start Date</p>
-            <p class="col-sm">{{ parkingPlace.startDate | date }}</p>
+            <p class="col-sm">{{ parkingPlace.startDate | date : "d/M/yy" }}</p>
           </div>
           <div class="row">
             <p class="col-lg">End Date</p>
-            <p class="col-sm">{{ parkingPlace.endDate | date }}</p>
+            <p class="col-sm">{{ parkingPlace.endDate | date : "d/M/yy" }}</p>
           </div>
           <span>Properties</span>
           <div class="row">

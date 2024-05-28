@@ -15,7 +15,12 @@ export class ReservationsDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  parkingSpacesDisplayedColumns: string[] = ['number', 'startTime', 'endDate'];
+  parkingSpacesDisplayedColumns: string[] = [
+    'number',
+    'startTime',
+    'endDate',
+    'reservationType',
+  ];
   dataSource = new MatTableDataSource<ParkingSpace>();
   reservations: any[] = [];
 

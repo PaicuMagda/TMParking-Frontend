@@ -29,8 +29,8 @@ export class MyReservationsComponent implements OnInit {
     'providerParkingSpace',
     'parkingSpaceName',
     'parkingLotName',
-    'startTime',
-    'endTime',
+    'startDate',
+    'endDate',
     'vehicleRegisteredNumber',
     'settings',
   ];
@@ -52,6 +52,7 @@ export class MyReservationsComponent implements OnInit {
       data: {
         message: 'Are you sure you want to delete this parking spaces ?',
         reservationId: reservationId,
+        userId: this.userId,
       },
     });
   }

@@ -51,7 +51,7 @@ export class ReservationsService {
   getReservationsByParkingId(parkingSpaceId: number) {
     this.http
       .get<Reservation[]>(
-        `${this.baseUrl}Reservation/${parkingSpaceId}/reservationsForAParkingSpace`
+        `${this.baseUrl}Reservation/${parkingSpaceId}/reservationsForABigParkingSpace`
       )
       .subscribe((values) =>
         this.reservationsForOneParkingSubject.next(values)

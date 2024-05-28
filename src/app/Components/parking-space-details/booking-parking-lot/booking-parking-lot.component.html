@@ -36,13 +36,13 @@
       </mat-form-field>
     </div>
     <div class="error-date">
-      <mat-error *ngIf="isIcorectStartDate()"
+      <mat-error *ngIf="isIcorectSelectedDateOneDay()"
         >This date is not available.
       </mat-error>
     </div>
 
     <div class="booking__fields__time">
-      <div>Alege intervalul orar</div>
+      <div>Choose the time interval</div>
       <div class="booking__fields__time__mat-form-field">
         <div>
           <mat-form-field>
@@ -52,7 +52,6 @@
               formControlName="startHour"
               placeholder="Select time"
             />
-            <!-- <mat-icon svgIcon=""></mat-icon> -->
           </mat-form-field>
         </div>
         <div>
@@ -76,7 +75,6 @@
               formControlName="endHour"
               placeholder="Select time"
             />
-            <!-- <mat-icon svgIcon=""></mat-icon> -->
           </mat-form-field>
         </div>
       </div>
@@ -168,8 +166,9 @@
           <input
             matInput
             [matDatepicker]="picker"
-            type="date"
             formControlName="startDate"
+            (dateChange)="errorAppears()"
+            placeholder="Select date ..."
           />
           <mat-datepicker-toggle
             matIconSuffix
@@ -179,15 +178,28 @@
         </mat-form-field>
       </div>
     </div>
+    <div class="error-date">
+      <mat-error *ngIf="isIcorectSelectedDateManyDays()"
+        >This date is not available.
+      </mat-error>
+      <mat-error
+        *ngIf="
+          manyDaysBookingFormGroup.get('startDate')?.hasError('required') &&
+          manyDaysBookingFormGroup.get('startDate')?.hasError('touched')
+        "
+        >This date is required.</mat-error
+      >
+    </div>
     <div class="booking__fields__date">
-      <div>Choose a end date</div>
+      <div>Choose an end date</div>
       <div>
         <mat-form-field>
           <input
             matInput
             [matDatepicker]="picker1"
-            type="date"
             formControlName="endDate"
+            (dateChange)="errorAppears()"
+            placeholder="Select date ..."
           />
           <mat-datepicker-toggle
             matIconSuffix
@@ -197,8 +209,16 @@
         </mat-form-field>
       </div>
     </div>
+    <div class="error-date">
+      <mat-error *ngIf="isIcorectSelectedDateManyDays()"
+        >This date is not available.
+      </mat-error>
+      <mat-error *ngIf="!startDateGraterThanEndDate()"
+        >The start date must be earlier than the end date.
+      </mat-error>
+    </div>
     <div class="booking__fields__vehicle">
-      <div>Alege vehiculul care va fi parcat</div>
+      <div>Choose the vehicle that will be parked</div>
       <div>
         <mat-form-field>
           <input
@@ -220,7 +240,7 @@
       </div>
     </div>
     <div class="booking__fields__vehicle">
-      <div>Name of parking spot</div>
+      <div>Parking spot name</div>
       <div>
         <mat-form-field>
           <input
@@ -243,7 +263,7 @@
     </div>
 
     <div class="booking__fields__vehicle">
-      <div>Choose method payment</div>
+      <div>Choose the payment method</div>
       <div>
         <mat-form-field>
           <input
@@ -282,8 +302,9 @@
           <input
             matInput
             [matDatepicker]="picker"
-            type="date"
+            placeholder="Select date ..."
             formControlName="startDate"
+            (dateChange)="errorAppears()"
           />
           <mat-datepicker-toggle
             matIconSuffix
@@ -294,7 +315,7 @@
       </div>
     </div>
     <div class="booking__fields__vehicle">
-      <div>Alege vehiculul care va fi parcat</div>
+      <div>Choose the vehicle that will be parked</div>
       <div>
         <mat-form-field>
           <input
@@ -335,7 +356,7 @@
       </div>
     </div>
     <div class="booking__fields__vehicle">
-      <div>Name of parking spot</div>
+      <div>Parking spot name</div>
       <div>
         <mat-form-field>
           <input

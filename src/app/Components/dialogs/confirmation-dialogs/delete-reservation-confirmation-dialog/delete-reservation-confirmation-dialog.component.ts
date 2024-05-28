@@ -23,7 +23,7 @@ export class DeleteReservationConfirmationDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  deleteUserAccountById() {
+  deleteReservationById() {
     this.reservationsService
       .deleteReservation(this.data.reservationId)
       .subscribe({
@@ -33,8 +33,7 @@ export class DeleteReservationConfirmationDialogComponent implements OnInit {
             summary: resp.message,
             duration: 3000,
           });
-          this.dialogRef.close();
-          this.reservationsService.loadReservations();
+          this.reservationsService.getReservationsByUserId(this.data.userId);
         },
         error: (err) => {
           this.toast.error({
@@ -42,8 +41,8 @@ export class DeleteReservationConfirmationDialogComponent implements OnInit {
             summary: err.title,
             duration: 3000,
           });
-          this.dialogRef.close();
         },
       });
+    this.dialogRef.close();
   }
 }

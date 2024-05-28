@@ -65,6 +65,7 @@ import { DeleteReservationConfirmationDialogComponent } from './Components/dialo
 import { NgxPayPalModule } from 'ngx-paypal';
 import { PaymentDialogComponent } from './Components/dialogs/payment-dialog/payment-dialog.component';
 import { ReservationsDialogComponent } from './Components/parking-space-details/reservations-dialog/reservations-dialog.component';
+import { HoverElementDirective } from './directives/hover-element.directive';
 
 @NgModule({
   declarations: [
@@ -119,6 +120,7 @@ import { ReservationsDialogComponent } from './Components/parking-space-details/
     DeleteReservationConfirmationDialogComponent,
     PaymentDialogComponent,
     ReservationsDialogComponent,
+    HoverElementDirective,
   ],
   imports: [
     BrowserModule,

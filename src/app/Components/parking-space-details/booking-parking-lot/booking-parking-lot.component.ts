@@ -179,6 +179,7 @@ export class BookingParkingLotComponent {
             summary: resp.message,
             duration: 3000,
           });
+          this.getParkingLots();
         },
         error: (err) => ({
           summary: err.message,
@@ -213,6 +214,7 @@ export class BookingParkingLotComponent {
             summary: resp.message,
             duration: 3000,
           });
+          this.getParkingLots();
         },
         error: (err) => ({
           summary: err.message,
@@ -234,7 +236,7 @@ export class BookingParkingLotComponent {
     }
   }
 
-  isIcorectStartDate(): boolean {
+  isIcorectSelectedDateOneDay(): boolean {
     const selectedStartDate = new Date(
       this.oneDayBookingFormGroup.get('startDate')?.value
     );
@@ -247,15 +249,59 @@ export class BookingParkingLotComponent {
     );
   }
 
-  errorAppears() {
-    this.isIcorectStartDate();
+  isIcorectSelectedDateManyDays(): boolean {
+    const selectedStartDate = new Date(
+      this.manyDaysBookingFormGroup.get('startDate')?.value
+    );
+    const selectedEndDate = new Date(
+      this.manyDaysBookingFormGroup.get('endDate')?.value
+    );
+    const bigParkingEndDate = new Date(this.parkingPlace.endDate);
+    const bigParkingStartDate = new Date(this.startDateFromPlace);
+
+    return (
+      selectedStartDate.getTime() <= bigParkingStartDate.getTime() ||
+      selectedStartDate.getTime() > bigParkingEndDate.getTime() ||
+      selectedEndDate.getTime() <= bigParkingStartDate.getTime() ||
+      selectedEndDate.getTime() > bigParkingEndDate.getTime()
+    );
   }
 
-  // checkEndHourIsSmaller() {
-  //   // return this.endHour <= this.startHour;
-  //   console.log(this.startHour);
-  //   console.log(this.endHour);
-  // }
+  isIcorectSelectedDateSubscription(): boolean {
+    const selectedStartDate = new Date(
+      this.oneDayBookingFormGroup.get('startDate')?.value
+    );
+    const bigParkingEndDate = new Date(this.parkingPlace.endDate);
+    const bigParkingStartDate = new Date(this.startDateFromPlace);
+
+    return (
+      selectedStartDate.getTime() <= bigParkingStartDate.getTime() ||
+      selectedStartDate.getTime() > bigParkingEndDate.getTime()
+    );
+  }
+
+  startDateGraterThanEndDate(): boolean {
+    const selectedStartDate = new Date(
+      this.manyDaysBookingFormGroup.get('startDate')?.value
+    );
+    const selectedEndDate = new Date(
+      this.manyDaysBookingFormGroup.get('endDate')?.value
+    );
+    return selectedStartDate < selectedEndDate;
+  }
+
+  errorAppears() {
+    if (this.bookingType === 'oneDay') {
+      this.isIcorectSelectedDateOneDay();
+    }
+    if (this.bookingType === 'manyDays') {
+      this.isIcorectSelectedDateManyDays();
+      this.startDateGraterThanEndDate();
+    }
+    if (this.bookingType === 'subscription') {
+      this.isIcorectSelectedDateSubscription();
+    }
+  }
 
   openPaymentDialog() {
     this.dialog.open(PaymentDialogComponent, {
@@ -322,8 +368,8 @@ export class BookingParkingLotComponent {
     });
 
     this.manyDaysBookingFormGroup = this.formBuilder.group({
-      startDate: [''],
-      endDate: [''],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
       vehicleRegistrationNumber: [''],
       spaceModelName: [''],
       paymentMethod: [''],

@@ -124,7 +124,7 @@
     flex-direction: row;
     justify-content: flex-end;
     gap: 5%;
-    margin-top: 5%;
+    margin-top: 2%;
 
     button:nth-child(1) {
       @include button-location();
@@ -177,7 +177,7 @@ mat-button-toggle-group {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 2%;
 
   img {
     width: 36%;
@@ -191,5 +191,6 @@ mat-button-toggle-group {
 .error-date {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 4%;
+  margin-bottom: 2%;
+  font-size: 120%;
 }

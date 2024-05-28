@@ -38,21 +38,7 @@ export class NavBarComponent implements OnInit {
     private userService: UsersService,
     private reservationsService: ReservationsService,
     private parkingSpacesService: ParkingPlacesService
-  ) {
-    // this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     if (
-    //       event.url === '/login' ||
-    //       event.url === '/recover-account' ||
-    //       event.url === '/create-account'
-    //     ) {
-    //       this.showNavBar = false;
-    //     } else {
-    //       this.showNavBar = true;
-    //     }
-    //   }
-    // });
-  }
+  ) {}
 
   goToLogin() {
     this.router.navigate(['/login']);
