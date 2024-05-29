@@ -1,0 +1,21 @@
+.place-autocomplete {
+  display: flex;
+  gap: 5%;
+  padding: 1%;
+  width: 100%;
+  flex-direction: row;
+
+  &__from,
+  &__to {
+    width: 50%;
+  }
+
+  p {
+    font-weight: 600;
+    font-size: 150%;
+  }
+}
+
+place-autocomplete[hidden] {
+  display: none;
+}

@@ -24,7 +24,6 @@ import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 export class BookingParkingLotComponent {
   private destroy$: Subject<void> = new Subject<void>();
   @Input() allParkingLotsForThisParking: ParkingLotInterface[];
-
   parkingPlace: any;
   bookingType: string = 'oneDay';
   vehicles: Vehicle[] = [];
@@ -32,6 +31,7 @@ export class BookingParkingLotComponent {
   calculatedPrice: number;
   months: number[] = [];
   idParkingSpaces: number;
+  reservations: any[];
   role: string = '';
   oneDayBookingFormGroup: FormGroup;
   manyDaysBookingFormGroup: FormGroup;
@@ -41,10 +41,10 @@ export class BookingParkingLotComponent {
   endHour: string;
   startDate: Date;
   startDateFromPlace: Date;
+  address: string = '';
 
   constructor(
-    private router: ActivatedRoute,
-    private activatedRoute: ActivatedRoute,
+    private activatedRouter: ActivatedRoute,
     private bookingService: ParkingSpaceBookingService,
     private vehicleService: VehiclesService,
     private dialog: MatDialog,
@@ -65,10 +65,19 @@ export class BookingParkingLotComponent {
   }
 
   openLocationDialog() {
-    this.dialog.open(GoogleMapsComponent, {
-      width: '50%',
-      height: '60%',
-    });
+    this.parkingSpacesService
+      .getParkingSpacesById(this.idParkingSpaces)
+      .subscribe((result) => {
+        this.address = result.address;
+
+        this.dialog.open(GoogleMapsComponent, {
+          width: '80%',
+          height: '100%',
+          data: {
+            address: this.address,
+          },
+        });
+      });
   }
 
   ngOnDestroy(): void {
@@ -302,15 +311,16 @@ export class BookingParkingLotComponent {
   }
 
   ngOnInit() {
-    this.idParkingSpaces = this.router.snapshot.params['id'];
     this.paymentMethods = Object.values(PaymentMethods);
-    this.activatedRoute.data
+    this.activatedRouter.data
       .pipe(takeUntil(this.destroy$))
       .subscribe((value: any) => {
         this.parkingPlace = value.parkingSpacesDetails;
         this.startDateFromPlace = value.parkingSpacesDetails.startDate;
       });
 
+    this.idParkingSpaces = this.activatedRouter.snapshot.params['id'];
+    this.paymentMethods = Object.values(PaymentMethods);
     this.bookingService
       .getNumberOfMonths()
       .pipe(takeUntil(this.destroy$))

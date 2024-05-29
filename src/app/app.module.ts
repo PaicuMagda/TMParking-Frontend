@@ -66,6 +66,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { PaymentDialogComponent } from './Components/dialogs/payment-dialog/payment-dialog.component';
 import { ReservationsDialogComponent } from './Components/parking-space-details/reservations-dialog/reservations-dialog.component';
 import { HoverElementDirective } from './directives/hover-element.directive';
+import { PlaceAutocompleteComponent } from './Components/google-maps/place-autocomplete/place-autocomplete.component';
+import { MapDisplayComponent } from './Components/google-maps/map-display/map-display.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +123,8 @@ import { HoverElementDirective } from './directives/hover-element.directive';
     PaymentDialogComponent,
     ReservationsDialogComponent,
     HoverElementDirective,
+    PlaceAutocompleteComponent,
+    MapDisplayComponent,
   ],
   imports: [
     BrowserModule,

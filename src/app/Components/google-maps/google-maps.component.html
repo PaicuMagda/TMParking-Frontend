@@ -1,7 +1,16 @@
-<div
-  *ngIf="mapContainer"
-  #mapContainer
-  style="height: 630px; width: 1067px"
-></div>
+<div class="place-autocomplete">
+  <div class="place-autocomplete__from">
+    <p>Starting location</p>
+    <app-place-autocomplete
+      (placeChanged)="fromValue = $event"
+    ></app-place-autocomplete>
+  </div>
+  <div class="place-autocomplete__to">
+    <p>Destination: {{ data.address }}</p>
+    <app-place-autocomplete
+      (placeChanged)="toValue = $event"
+    ></app-place-autocomplete>
+  </div>
+</div>
 
-<button (click)="getCurrentLocation()">Porniți GPS-ul</button>
+<app-map-display [from]="fromValue" [to]="toValue"></app-map-display>
