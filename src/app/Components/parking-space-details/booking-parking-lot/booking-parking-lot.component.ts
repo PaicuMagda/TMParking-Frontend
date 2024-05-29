@@ -1,13 +1,8 @@
 import { Component, Input } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ParkingSpaceBookingService } from 'src/app/services/parking-space-booking.service';
@@ -28,25 +23,19 @@ import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 })
 export class BookingParkingLotComponent {
   private destroy$: Subject<void> = new Subject<void>();
-  showSearch: boolean = false;
+  @Input() allParkingLotsForThisParking: ParkingLotInterface[];
+
   parkingPlace: any;
   bookingType: string = 'oneDay';
-  hours: number[] = [];
-  endHourIsSmaller: boolean;
   vehicles: Vehicle[] = [];
-  vehiclesControl = new FormControl();
-  filteredVehicles: Observable<Vehicle[]>;
   paymentMethods: string[] = [];
   calculatedPrice: number;
   months: number[] = [];
   idParkingSpaces: number;
-  activatedRouter: any;
-  reservations: any[];
   role: string = '';
   oneDayBookingFormGroup: FormGroup;
   manyDaysBookingFormGroup: FormGroup;
   subscriptionBookingForm: FormGroup;
-  @Input() allParkingLotsForThisParking: ParkingLotInterface[];
   userId: number;
   startHour: string;
   endHour: string;
@@ -73,15 +62,6 @@ export class BookingParkingLotComponent {
 
   getParkingLots() {
     this.parkingSpacesService.getParkingLotsById(this.idParkingSpaces);
-  }
-
-  populateHoursArray() {
-    this.bookingService
-      .getNumberArray()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((values) => {
-        this.hours = values;
-      });
   }
 
   openLocationDialog() {
@@ -144,11 +124,13 @@ export class BookingParkingLotComponent {
           });
           this.getParkingLots();
         },
-        error: (err) => ({
-          summary: err.message,
-          duration: 3000,
-          detail: 'Error Message',
-        }),
+        error: (error) => {
+          this.toast.warning({
+            detail: 'Warning',
+            summary: 'This time slot is already booked.',
+            duration: 3000,
+          });
+        },
       });
     this.oneDayBookingFormGroup.reset();
     this.reservationsService.loadReservations();
@@ -321,14 +303,14 @@ export class BookingParkingLotComponent {
 
   ngOnInit() {
     this.idParkingSpaces = this.router.snapshot.params['id'];
+    this.paymentMethods = Object.values(PaymentMethods);
     this.activatedRoute.data
       .pipe(takeUntil(this.destroy$))
       .subscribe((value: any) => {
         this.parkingPlace = value.parkingSpacesDetails;
         this.startDateFromPlace = value.parkingSpacesDetails.startDate;
       });
-    this.populateHoursArray();
-    this.paymentMethods = Object.values(PaymentMethods);
+
     this.bookingService
       .getNumberOfMonths()
       .pipe(takeUntil(this.destroy$))

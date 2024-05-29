@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Reservation } from '../interfaces/reservation';
 
@@ -27,7 +27,23 @@ export class ReservationsService {
     this.reservationsForOneParkingSubject.asObservable();
 
   registerReservation(reservation: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}Reservation`, reservation);
+    return this.http
+      .post<any>(`${this.baseUrl}Reservation`, reservation)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 400) {
+      console.error('An error occured: ', error.error);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+    }
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
   }
 
   getReservationsByUserId(userId: number) {
