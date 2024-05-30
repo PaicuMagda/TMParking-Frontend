@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-users-charts',
@@ -7,24 +9,69 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class UsersChartsComponent implements AfterViewInit {
   @ViewChild('chart') chart: ElementRef;
-  selectedChartType: string = '';
+  selectedChartType: string = 'pie';
+
+  users: User[] = [];
+
+  constructor(private activatedRoute: ActivatedRoute) {}
+
+  getDataForVehiclesRegisteredChart(users: User[]) {
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'User Name');
+    data.addColumn('number', 'Number of Vehicles Registered');
+
+    users.forEach((user) => {
+      data.addRow([user.fullName, user.vehiclesRegistered]);
+    });
+
+    return data;
+  }
+
+  getDataForParkingSpacesRegisteredChart(users: User[]) {
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'User Name');
+    data.addColumn('number', 'Parking Spaces');
+
+    users.forEach((user) => {
+      data.addRow([user.fullName, user.parkingSpacesRegistered]);
+    });
+
+    return data;
+  }
+
+  getDataForReservationsRegisteredChart(users: User[]) {
+    const data = new google.visualization.DataTable();
+    // data.addColumn('string', 'User Name');
+    // data.addColumn('number', 'Parking Spaces');
+
+    // users.forEach((user) => {
+    //   data.addRow([user.fullname, user.reservationsRegistered.length]);
+    // });
+
+    return data;
+  }
+
+  getDataForChart(users: User[]) {
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'User Name');
+    data.addColumn('number', 'Parking Spaces');
+
+    users.forEach((user) => {
+      data.addRow([user.fullName, user.vehiclesRegistered.length]);
+    });
+
+    return data;
+  }
 
   drawBarChart() {
-    const data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-      ['Eat', 2],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7],
-    ]);
+    const data = this.getDataForParkingSpacesRegisteredChart(this.users);
 
     const options = {
       colors: [
-        '#e6194B',
-        '#3cb44b',
-        '#ffe119',
-        '#4363d8',
+        '#00674b',
+        '#dcdcdc',
+        '#004c86',
+        '#b1a9c4',
         '#f58231',
         '#911eb4',
       ],
@@ -36,21 +83,14 @@ export class UsersChartsComponent implements AfterViewInit {
   }
 
   drawLineChart() {
-    const data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-      ['Eat', 2],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7],
-    ]);
+    const data = this.getDataForChart(this.users);
 
     const options = {
       colors: [
-        '#e6194B',
-        '#3cb44b',
-        '#ffe119',
-        '#4363d8',
+        '#00674b',
+        '#dcdcdc',
+        '#004c86',
+        '#b1a9c4',
         '#f58231',
         '#911eb4',
       ],
@@ -62,21 +102,14 @@ export class UsersChartsComponent implements AfterViewInit {
   }
 
   drawColumnChart() {
-    const data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-      ['Eat', 2],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7],
-    ]);
+    const data = this.getDataForReservationsRegisteredChart(this.users);
 
     const options = {
       colors: [
-        '#e6194B',
-        '#3cb44b',
-        '#ffe119',
-        '#4363d8',
+        '#00674b',
+        '#dcdcdc',
+        '#004c86',
+        '#b1a9c4',
         '#f58231',
         '#911eb4',
       ],
@@ -89,105 +122,10 @@ export class UsersChartsComponent implements AfterViewInit {
     chart.draw(data, options);
   }
 
-  drawAreaChart() {
-    const data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-      ['Eat', 2],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7],
-    ]);
-
+  drawVehiclesRegisteredCharthart = () => {
+    const data = this.getDataForVehiclesRegisteredChart(this.users);
     const options = {
-      colors: [
-        '#e6194B',
-        '#3cb44b',
-        '#ffe119',
-        '#4363d8',
-        '#f58231',
-        '#911eb4',
-      ],
-    };
-
-    const chart = new google.visualization.AreaChart(this.chart.nativeElement);
-
-    chart.draw(data, options);
-  }
-
-  drawScatterChart() {
-    const data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-      ['Eat', 2],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7],
-    ]);
-
-    const options = {
-      colors: [
-        '#e6194B',
-        '#3cb44b',
-        '#ffe119',
-        '#4363d8',
-        '#f58231',
-        '#911eb4',
-      ],
-    };
-
-    const chart = new google.visualization.ScatterChart(
-      this.chart.nativeElement
-    );
-
-    chart.draw(data, options);
-  }
-
-  drawHistogram() {
-    const data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-      ['Eat', 2],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7],
-    ]);
-
-    const options = {
-      colors: [
-        '#e6194B',
-        '#3cb44b',
-        '#ffe119',
-        '#4363d8',
-        '#f58231',
-        '#911eb4',
-      ],
-    };
-
-    const chart = new google.visualization.Histogram(this.chart.nativeElement);
-
-    chart.draw(data, options);
-  }
-
-  drawChart = () => {
-    const data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work', 11],
-      ['Eat', 2],
-      ['Commute', 2],
-      ['Watch TV', 2],
-      ['Sleep', 7],
-    ]);
-
-    const options = {
-      colors: [
-        '#e6194B',
-        '#3cb44b',
-        '#ffe119',
-        '#4363d8',
-        '#f58231',
-        '#911eb4',
-      ],
+      colors: ['#dcdcdc', '#004c86', '#b1a9c4', '#f58231', '#911eb4'],
     };
 
     const chart = new google.visualization.PieChart(this.chart.nativeElement);
@@ -207,14 +145,8 @@ export class UsersChartsComponent implements AfterViewInit {
       case 'column':
         this.drawColumnChart();
         break;
-      case 'area':
-        this.drawAreaChart();
-        break;
-      case 'scatter':
-        this.drawScatterChart();
-        break;
-      case 'histogram':
-        this.drawHistogram();
+      case 'pie':
+        this.drawVehiclesRegisteredCharthart();
         break;
       default:
         break;
@@ -223,6 +155,12 @@ export class UsersChartsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(this.drawChart);
+    google.charts.setOnLoadCallback(this.drawVehiclesRegisteredCharthart);
+  }
+
+  ngOnInit() {
+    this.activatedRoute.data.subscribe(
+      (value: any) => (this.users = value.users)
+    );
   }
 }

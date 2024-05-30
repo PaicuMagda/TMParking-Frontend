@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgToastService } from 'ng-angular-popup';
+import { ActivatedRoute } from '@angular/router';
 import { ResetPassword } from 'src/app/interfaces/ResetPassword';
-import { ResetPasswordService } from 'src/app/services/reset-password.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -13,10 +11,7 @@ import { ResetPasswordService } from 'src/app/services/reset-password.service';
 export class ResetPasswordComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private resetPasswordService: ResetPasswordService,
-    private toast: NgToastService,
-    private router: Router
+    private activatedRoute: ActivatedRoute
   ) {}
 
   resetPassword: FormGroup;

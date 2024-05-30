@@ -132,7 +132,7 @@ export class ParkingPlacesService {
     parkingSpaces: any
   ): Observable<any> {
     return this.http.put(
-      `${this.baseUrl}ParkingSpaces/update-parking-spaces/${idParkingSpaces}`,
+      `${this.baseUrl}ParkingSpaces/${idParkingSpaces}`,
       parkingSpaces
     );
   }

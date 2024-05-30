@@ -91,9 +91,6 @@ export class VehiclesService {
   }
 
   updateVehicle(idVehicle: number, vehicle: any): Observable<any> {
-    return this.http.put<any>(
-      `${this.baseUrl}Vehicle/update-vehicle/${idVehicle}`,
-      vehicle
-    );
+    return this.http.put<any>(`${this.baseUrl}Vehicle/${idVehicle}`, vehicle);
   }
 }

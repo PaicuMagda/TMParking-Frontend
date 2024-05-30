@@ -14,7 +14,6 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ParkingPlacesService } from 'src/app/services/parking-spaces.service';
 import { ParkingLotInterface } from 'src/app/interfaces/parking-lot-interface';
-import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialogs/delete-vehicle-confirmation-dialog/delete-confirmation-dialog.component';
 import { ReservationsDialogComponent } from './reservations-dialog/reservations-dialog.component';
 
 @Component({

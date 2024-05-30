@@ -4,6 +4,7 @@ export interface User {
   userId: number;
   firstName: string;
   lastName: string;
+  fullName?: string;
   username?: string;
   email?: string;
   role?: Role;
@@ -21,4 +22,6 @@ export interface User {
   isVerifiedByAdmin: boolean;
   addedDate: Date;
   vehiclesRegistered: string[];
+  parkingSpacesRegistered: string[];
+  reservationsRegistered: Date[];
 }

@@ -27,6 +27,10 @@ export class UsersService {
     return this.http.get<User[]>(`${this.baseUrl}User/admin-page`);
   }
 
+  getUsersForCharts(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}User/charts`);
+  }
+
   registerNewUser(user: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}User/register`, user).pipe(
       tap((user) => {

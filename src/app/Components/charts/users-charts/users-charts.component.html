@@ -6,7 +6,7 @@
         (click)="changeChartType('bar')"
         [ngClass]="{ selected: selectedChartType === 'bar' }"
       >
-        Bar Chart
+        Parking Registered
       </button>
       <button
         (click)="changeChartType('line')"
@@ -21,27 +21,11 @@
         Column Chart
       </button>
       <button
-        (click)="changeChartType('area')"
-        [ngClass]="{ selected: selectedChartType === 'area' }"
+        (click)="changeChartType('pie')"
+        [ngClass]="{ selected: selectedChartType === 'pie' }"
       >
-        Area Chart
-      </button>
-      <button
-        (click)="changeChartType('scatter')"
-        [ngClass]="{ selected: selectedChartType === 'scatter' }"
-      >
-        Scatter Chart
-      </button>
-      <button
-        (click)="changeChartType('histogram')"
-        [ngClass]="{ selected: selectedChartType === 'histogram' }"
-      >
-        Histogram
+        Vehicles Registered
       </button>
     </div>
-  </div>
-  <div class="container__values">
-    <button>Status(Active/Inactive)</button>
-    <button>Number of Vehicle Registered</button>
   </div>
 </div>
