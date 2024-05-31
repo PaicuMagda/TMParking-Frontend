@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-users-charts',
@@ -13,7 +14,10 @@ export class UsersChartsComponent implements AfterViewInit {
 
   users: User[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private usersService: UsersService
+  ) {}
 
   getDataForVehiclesRegisteredChart(users: User[]) {
     const data = new google.visualization.DataTable();
@@ -23,7 +27,6 @@ export class UsersChartsComponent implements AfterViewInit {
     users.forEach((user) => {
       data.addRow([user.fullName, user.vehiclesRegistered]);
     });
-
     return data;
   }
 
@@ -35,19 +38,17 @@ export class UsersChartsComponent implements AfterViewInit {
     users.forEach((user) => {
       data.addRow([user.fullName, user.parkingSpacesRegistered]);
     });
-
     return data;
   }
 
   getDataForReservationsRegisteredChart(users: User[]) {
     const data = new google.visualization.DataTable();
-    // data.addColumn('string', 'User Name');
-    // data.addColumn('number', 'Parking Spaces');
+    data.addColumn('string', 'User Name');
+    data.addColumn('number', 'Reservations Number');
 
-    // users.forEach((user) => {
-    //   data.addRow([user.fullname, user.reservationsRegistered.length]);
-    // });
-
+    users.forEach((user) => {
+      data.addRow([user.fullName, user.reservationsRegistered]);
+    });
     return data;
   }
 
@@ -59,11 +60,10 @@ export class UsersChartsComponent implements AfterViewInit {
     users.forEach((user) => {
       data.addRow([user.fullName, user.vehiclesRegistered.length]);
     });
-
     return data;
   }
 
-  drawBarChart() {
+  drawParkingSpacesChart() {
     const data = this.getDataForParkingSpacesRegisteredChart(this.users);
 
     const options = {
@@ -101,7 +101,7 @@ export class UsersChartsComponent implements AfterViewInit {
     chart.draw(data, options);
   }
 
-  drawColumnChart() {
+  drawReservationsChart() {
     const data = this.getDataForReservationsRegisteredChart(this.users);
 
     const options = {
@@ -137,13 +137,13 @@ export class UsersChartsComponent implements AfterViewInit {
     this.selectedChartType = chartType;
     switch (chartType) {
       case 'bar':
-        this.drawBarChart();
+        this.drawParkingSpacesChart();
         break;
       case 'line':
         this.drawLineChart();
         break;
       case 'column':
-        this.drawColumnChart();
+        this.drawReservationsChart();
         break;
       case 'pie':
         this.drawVehiclesRegisteredCharthart();
@@ -162,5 +162,8 @@ export class UsersChartsComponent implements AfterViewInit {
     this.activatedRoute.data.subscribe(
       (value: any) => (this.users = value.users)
     );
+    this.usersService.getUsersForCharts().subscribe((values) => {
+      console.log(values);
+    });
   }
 }
