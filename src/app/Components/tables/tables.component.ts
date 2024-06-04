@@ -7,6 +7,8 @@ import { VehiclesService } from 'src/app/services/vehicles.service';
 import { User } from 'src/app/interfaces/user';
 import { Vehicle } from 'src/app/interfaces/vehicle';
 import { Subject, takeUntil } from 'rxjs';
+import { Reservation } from 'src/app/interfaces/reservation';
+import { ReservationsService } from 'src/app/services/reservations.service';
 
 @Component({
   selector: 'app-tables',
@@ -22,7 +24,8 @@ export class TablesComponent implements OnInit {
   constructor(
     private parkingSpacesService: ParkingPlacesService,
     private usersService: UsersService,
-    private vehiclesService: VehiclesService
+    private vehiclesService: VehiclesService,
+    private reservationsService: ReservationsService
   ) {}
 
   updateTableNumber(activeTabIndex: number) {
@@ -43,6 +46,9 @@ export class TablesComponent implements OnInit {
         break;
       case 2:
         this.exportVehiclesCsvFile();
+        break;
+      case 3:
+        this.exportReservationsCsvFile();
         break;
       default:
         break;
@@ -117,6 +123,16 @@ export class TablesComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         const data: Vehicle[] = values;
+
+        const dataForCSVFile = data.map((vehicle) => ({
+          vehicleIdentificationNumber: vehicle.vehicleIdentificationNumber,
+          owner: vehicle.vehicleOwner,
+          make: vehicle.make,
+          model: vehicle.model,
+          year: vehicle.year,
+          color: vehicle.color,
+        }));
+
         const formula: string = 'vehicles';
         var options = {
           fieldSeparator: ';',
@@ -127,7 +143,36 @@ export class TablesComponent implements OnInit {
           showTitle: false,
           useBom: false,
         };
-        const fileInfo = new ngxCsv(data, formula, options);
+        const fileInfo = new ngxCsv(dataForCSVFile, formula, options);
+      });
+  }
+
+  private exportReservationsCsvFile() {
+    this.reservationsService.reservations$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((values) => {
+        const data: any[] = values;
+
+        const dataForCSVFile = data.map((reservation) => ({
+          parkingSpaceName: reservation.parkingSpaceName,
+          parkingLotName: reservation.parkingLotName,
+          vehicleOwner: reservation.vehicleOwner,
+          owner: reservation.providerParkingSpace,
+          startDate: reservation.startTime,
+          endDate: reservation.endTime,
+        }));
+
+        const formula: string = 'reservations';
+        var options = {
+          fieldSeparator: ';',
+          quoteStrings: '"',
+          decimalseparator: '.',
+          showLabels: false,
+          noDownload: false,
+          showTitle: false,
+          useBom: false,
+        };
+        const fileInfo = new ngxCsv(dataForCSVFile, formula, options);
       });
   }
 

@@ -20,11 +20,7 @@
     <td
       mat-cell
       *matCellDef="let element"
-      [ngClass]="
-        element.isCargoVehicleAccepted
-          ? 'video-surveillance-yes'
-          : 'video-surveillance-no'
-      "
+      [ngClass]="element.isCargoVehicleAccepted ? 'yes' : 'no'"
     >
       {{ element.isCargoVehicleAccepted ? "Yes" : "No" }}
     </td>
@@ -34,11 +30,7 @@
     <td
       mat-cell
       *matCellDef="let element"
-      [ngClass]="
-        element.isPersonalVehicleAccepted
-          ? 'video-surveillance-yes'
-          : 'video-surveillance-no'
-      "
+      [ngClass]="element.isPersonalVehicleAccepted ? 'yes' : 'no'"
     >
       {{ element.isPersonalVehicleAccepted ? "Yes" : "No" }}
     </td>
@@ -50,11 +42,7 @@
     <td
       mat-cell
       *matCellDef="let element"
-      [ngClass]="
-        element.isAgriculturalMachineryAccepted
-          ? 'video-surveillance-yes'
-          : 'video-surveillance-no'
-      "
+      [ngClass]="element.isAgriculturalMachineryAccepted ? 'yes' : 'no'"
     >
       {{ element.isAgriculturalMachineryAccepted ? "Yes" : "No" }}
     </td>
@@ -64,11 +52,7 @@
     <td
       mat-cell
       *matCellDef="let element"
-      [ngClass]="
-        element.isPublicTransportAccepted
-          ? 'video-surveillance-yes'
-          : 'video-surveillance-no'
-      "
+      [ngClass]="element.isPublicTransportAccepted ? 'yes' : 'no'"
     >
       {{ element.isPublicTransportAccepted ? "Yes" : "No" }}
     </td>
@@ -88,28 +72,22 @@
     <td
       mat-cell
       *matCellDef="let element"
-      [ngClass]="
-        element.isFree ? 'video-surveillance-yes' : 'video-surveillance-no'
-      "
+      [ngClass]="element.isFree ? 'yes' : 'no'"
     >
       {{ element.isFree ? "No" : "Yes" }}
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="isVideoSurveillance">
+  <ng-container matColumnDef="isVideoSurveilance">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>
       Video Surveillance
     </th>
     <td
       mat-cell
       *matCellDef="let element"
-      [ngClass]="
-        element.isVideoSurveillance
-          ? 'video-surveillance-yes'
-          : 'video-surveillance-no'
-      "
+      [ngClass]="element.isVideoSurveilance ? 'yes' : 'no'"
     >
-      {{ element.isVideoSurveillance ? "Yes" : "No" }}
+      {{ element.isVideoSurveilance ? "Yes" : "No" }}
     </td>
   </ng-container>
 

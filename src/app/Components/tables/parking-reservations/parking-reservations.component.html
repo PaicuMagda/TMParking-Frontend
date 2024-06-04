@@ -6,52 +6,52 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="renter">
+  <ng-container matColumnDef="vehicleOwner">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Renter</th>
     <td mat-cell *matCellDef="let element">
       {{ element.vehicleOwner }}
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="owner">
+  <ng-container matColumnDef="providerParkingSpace">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner</th>
     <td mat-cell *matCellDef="let element">
       {{ element.providerParkingSpace }}
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="parkingLot">
+  <ng-container matColumnDef="parkingLotName">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Parking Lot</th>
-    <td mat-cell *matCellDef="let element">
-      {{ element.parkingSpaceName }}
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="parkingSpace">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Parking Space</th>
     <td mat-cell *matCellDef="let element">
       {{ element.parkingLotName }}
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="vehicleNumber">
+  <ng-container matColumnDef="parkingSpaceName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Parking Space</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.parkingSpaceName }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="vehicleRegisteredNumber">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Vehicle's Number</th>
     <td mat-cell *matCellDef="let element">
       {{ element.vehicleRegisteredNumber }}
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="startDate">
+  <ng-container matColumnDef="startTime">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.startTime | date }}
+      {{ element.startTime | date : "dd-MM-yyyy" }}
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="endDate">
+  <ng-container matColumnDef="endTime">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.endTime | date }}
+      {{ element.endTime | date : "dd-MM-yyyy" }}
     </td>
   </ng-container>
 

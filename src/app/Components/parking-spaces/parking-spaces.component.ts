@@ -98,7 +98,7 @@ export class ParkingSpacesComponent implements OnInit {
 
   parkingSpaceIsExpired(endDate: Date): boolean {
     const currentDate = new Date();
-    return endDate < currentDate;
+    return new Date(endDate) < currentDate;
   }
 
   getParkingSpaces() {

@@ -17,13 +17,13 @@ export class ParkingReservationsComponent implements OnInit {
 
   displayedColumns: string[] = [
     'index',
-    'renter',
-    'owner',
-    'parkingLot',
-    'parkingSpace',
-    'startDate',
-    'endDate',
-    'vehicleNumber',
+    'vehicleOwner',
+    'providerParkingSpace',
+    'parkingLotName',
+    'parkingSpaceName',
+    'startTime',
+    'endTime',
+    'vehicleRegisteredNumber',
   ];
 
   constructor(private reservationsService: ReservationsService) {}

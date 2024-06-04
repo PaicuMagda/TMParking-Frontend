@@ -5,7 +5,7 @@ export enum EnumParkingSpacesTable {
   START_DATE = 'startDate',
   END_DATE = 'endDate',
   WITH_PAYMENT = 'isFree',
-  VIDEO_SUIVEILLANCE = 'isVideoSurveillance',
+  VIDEO_SUIVEILLANCE = 'isVideoSurveilance',
   CARGO = 'isCargoVehicleAccepted',
   PERSONAL_AUTOMOBILE = 'isPersonalVehicleAccepted',
   AGRICULTURAL_MACHINERY = 'isAgriculturalMachineryAccepted',
