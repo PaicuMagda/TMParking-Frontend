@@ -60,7 +60,7 @@ export class CreateAccountComponent {
         error: (err) => {
           this.toast.error({
             detail: 'Error Message',
-            summary: err?.error.message,
+            summary: 'Error',
             duration: 5000,
           });
         },
