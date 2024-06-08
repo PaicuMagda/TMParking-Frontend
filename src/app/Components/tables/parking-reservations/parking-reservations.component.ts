@@ -29,7 +29,7 @@ export class ParkingReservationsComponent implements OnInit {
   constructor(private reservationsService: ReservationsService) {}
 
   ngOnInit(): void {
-    this.reservationsService.reservations$.subscribe((values) => {
+    this.reservationsService.getReservations().subscribe((values) => {
       this.dataSource.data = values;
     });
   }

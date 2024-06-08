@@ -27,7 +27,7 @@ export class ParkingSpacesComponent implements OnInit {
     private displayCardsService: DisplayCardsService
   ) {}
 
-  parkingSpaces: any = [];
+  parkingSpaces: ParkingSpace[] = [];
   myParkingSpaces: any = [];
   isLogin: boolean;
   role: string = '';
@@ -110,22 +110,22 @@ export class ParkingSpacesComponent implements OnInit {
           this.parkingSpacesService.myParkingSpaceSubject$.subscribe(
             (values) => {
               this.myParkingSpaces = values;
-              this.isLoading = false;
             }
           );
-          this.toggleValue = value;
         }
         if (value === 'allParkingSpaces' && this.role == 'User') {
           this.parkingSpacesService.loadParkingSpaces();
           this.parkingSpacesService.parkingSpaces$
             .pipe(
-              map((spaces) =>
+              map((spaces) => {
+                this.isLoading = false;
                 spaces.filter(
                   (space) =>
                     space.somethingIsWrong == false &&
                     space.isVerifiedByAdmin == true
-                )
-              )
+                );
+                return spaces;
+              })
             )
             .subscribe((values) => {
               this.parkingSpaces = values;
@@ -157,6 +157,28 @@ export class ParkingSpacesComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.displayCardsService.toggleValueSubjectObservable.subscribe((value) => {
+    //   if (value === 'allParkingSpaces') {
+    //     this.parkingSpacesService.parkingSpaces$
+    //       // .pipe(
+    //       //   takeUntil(this.destroy$),
+    //       //   map((parkingSpaces) => {
+    //       //     this.isLoading = false;
+    //       //     return parkingSpaces;
+    //       //   })
+    //       // )
+    //       // .pipe(takeUntil(this.destroy$))
+    //       // .subscribe((values) => {
+    //       //   this.parkingSpaces = values;
+    //       //   console.log(this.parkingSpaces);
+    //       // });
+    //       .subscribe((values) => {
+    //         this.parkingSpaces = values;
+    //         console.log(this.parkingSpaces);
+    //       });
+    //   }
+    // });
+
     this.isLogin = this.authenticationService.isLoggedIn();
     this.userStore
       .getRoleFromStore()

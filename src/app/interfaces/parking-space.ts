@@ -2,7 +2,7 @@ import { ParkingSpot } from './parking-spot';
 import { User } from './user';
 
 export interface ParkingSpace {
-  id: number;
+  parkingSpacesId: number;
   name: string;
   address: string;
   availableParkingSpaces: number;
@@ -26,4 +26,5 @@ export interface ParkingSpace {
   somethingIsWrong: boolean;
   parkingSpots: ParkingSpot[];
   parkingSpacesOwner: User;
+  ownerName: string;
 }

@@ -19,6 +19,7 @@ export class MyReservationsComponent implements OnInit {
   dataSource = new MatTableDataSource<Reservation>();
   userId: number;
   private destroy$: Subject<void> = new Subject<void>();
+  values: any[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -71,7 +72,11 @@ export class MyReservationsComponent implements OnInit {
         this.userId = userIdFromToken || val;
       });
 
-    this.reservationsService.getReservationsByUserId(this.userId);
+    this.reservationsService
+      .getReservationsByUserId(this.userId)
+      .subscribe((values) => {
+        this.reservationsService.updateMyReservations(values);
+      });
     this.reservationsService.myReservations$.subscribe(
       (values) => (this.dataSource.data = values)
     );

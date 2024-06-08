@@ -33,7 +33,7 @@ export class DeleteReservationConfirmationDialogComponent implements OnInit {
             summary: resp.message,
             duration: 3000,
           });
-          this.reservationsService.getReservationsByUserId(this.data.userId);
+          this.reservationsService.updateMyReservations(this.data.userId);
         },
         error: (err) => {
           this.toast.error({

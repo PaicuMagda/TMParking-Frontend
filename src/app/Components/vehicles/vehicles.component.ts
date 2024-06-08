@@ -6,7 +6,7 @@ import { DeleteConfirmationDialogComponent } from '../dialogs/confirmation-dialo
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
-import { Observable, Subject, map, of, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, map, takeUntil } from 'rxjs';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { NgToastService } from 'ng-angular-popup';
 import { MatDialog } from '@angular/material/dialog';
@@ -215,35 +215,47 @@ export class VehiclesComponent implements OnInit {
   }
 
   getVehicles() {
-    this.displayCardsService.toggleValueSubjectObservable
-      .pipe(
-        takeUntil(this.destroy$),
-        switchMap((value) => {
-          if (value === 'allVehicles') {
-            this.vehicleService.loadVehicles();
-            return this.vehicleService.vehicles$;
-          } else if (value === 'myVehicles') {
-            this.vehicleService.loadMyVehicles(this.idUserLogged);
-            return this.vehicleService.myVehicles$.pipe(
-              map((vehicles) => {
-                vehicles.forEach((vehicle) => {
-                  vehicle.isEdit = false;
-                });
-                return vehicles;
-              })
-            );
-          } else {
-            return of([]);
-          }
-        })
-      )
-      .subscribe((values) => {
-        this.isLoading = false;
-        this.vehicles = values;
-        values.forEach((vehicle) => {
-          this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
-        });
-      });
+    this.displayCardsService.toggleValueSubjectObservable.subscribe((value) => {
+      if (value === 'allVehicles') {
+        this.vehicleService.vehicles$
+          .pipe(
+            takeUntil(this.destroy$),
+            map((vehicles) => {
+              vehicles.forEach((vehicle) => {
+                vehicle.isEdit = false;
+                this.isLoading = false;
+              });
+              return vehicles;
+            })
+          )
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((vehicles) => {
+            this.vehicles = vehicles;
+            this.vehicles.forEach((vehicle) => {
+              this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
+            });
+          });
+      } else {
+        this.vehicleService.myVehicles$
+          .pipe(
+            takeUntil(this.destroy$),
+            map((vehicles) => {
+              vehicles.forEach((vehicle) => {
+                vehicle.isEdit = false;
+                this.isLoading = false;
+              });
+              return vehicles;
+            })
+          )
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((vehicles) => {
+            this.vehicles = vehicles;
+            this.vehicles.forEach((vehicle) => {
+              this.vehicleForm.push(this.createVehicleFormGroup(vehicle));
+            });
+          });
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -266,7 +278,6 @@ export class VehiclesComponent implements OnInit {
         let userIdFromToken = this.authenticationService.getUserIdFromToken();
         this.idUserLogged = val || userIdFromToken;
       });
-
     this.getVehicles();
   }
 }

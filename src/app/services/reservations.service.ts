@@ -47,9 +47,13 @@ export class ReservationsService {
   }
 
   getReservationsByUserId(userId: number) {
-    this.http
-      .get<Reservation[]>(`${this.baseUrl}Reservation/${userId}/reservations`)
-      .subscribe((values) => this.myReservationsSubject.next(values));
+    return this.http.get<Reservation[]>(
+      `${this.baseUrl}Reservation/${userId}/reservations`
+    );
+  }
+
+  updateMyReservations(values: any[]) {
+    this.myReservationsSubject.next(values);
   }
 
   deleteReservation(idReservation: number): Observable<any> {
@@ -78,5 +82,9 @@ export class ReservationsService {
     this.http
       .get<Reservation[]>(`${this.baseUrl}Reservation`)
       .subscribe((values) => this.reservationSubject.next(values));
+  }
+
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.baseUrl}Reservation`);
   }
 }
