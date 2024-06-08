@@ -18,6 +18,6 @@ export class TablesResolverService implements Resolve<Observable<User[]>> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<User[]> {
-    return this.userService.getAllUsers();
+    return this.userService.getUsersForTables();
   }
 }

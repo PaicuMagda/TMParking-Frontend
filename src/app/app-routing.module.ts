@@ -54,7 +54,6 @@ const routes: Routes = [
     resolve: {
       users: TablesResolverService,
       parkingSpaces: ParkingSpacesService,
-      vehicles: VehiclesResolverService,
     },
   },
   {

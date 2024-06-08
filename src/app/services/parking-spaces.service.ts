@@ -91,6 +91,12 @@ export class ParkingPlacesService {
     return this.http.get<any>(`${this.baseUrl}ParkingSpaces`);
   }
 
+  getParkingSpacesForTable(): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}ParkingSpaces/parking-spaces-table`
+    );
+  }
+
   getMyParkingSpaces(userId: string) {
     return this.http.get<any[]>(
       `${this.baseUrl}ParkingSpaces/${userId}/parking-spaces`

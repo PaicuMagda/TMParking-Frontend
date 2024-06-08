@@ -31,22 +31,10 @@ export class VehiclesTableComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe((values: any) => {});
-    this.activatedRoute.data
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((values: any) => {
-        const vehicleWithOwnerFullname = values.vehicles.map(
-          (vehicle: Vehicle) => {
-            return {
-              ...vehicle,
-              fullnameOwner:
-                vehicle.vehicleOwner.firstName +
-                ' ' +
-                vehicle.vehicleOwner.lastName,
-            };
-          }
-        );
-        this.dataSource.data = vehicleWithOwnerFullname;
+    this.vehicleService
+      .getVehiclesForTables()
+      .subscribe((values: Vehicle[]) => {
+        this.dataSource.data = values;
       });
   }
 

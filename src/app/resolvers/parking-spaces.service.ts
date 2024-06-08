@@ -14,6 +14,6 @@ export class ParkingSpacesService {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<ParkingSpace[]> {
-    return this.parkingSpaces.getParkingSpaces();
+    return this.parkingSpaces.getParkingSpacesForTable();
   }
 }

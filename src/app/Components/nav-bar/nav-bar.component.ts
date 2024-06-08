@@ -68,13 +68,6 @@ export class NavBarComponent implements OnInit {
       });
   }
 
-  getImage() {
-    this.userService
-      .getMyAccount(this.userId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((val) => (this.image = val.imageUrl));
-  }
-
   getMyReservations() {
     this.reservationsService.getReservationsByUserId(this.userId);
     this.reservationsService.myReservations$.subscribe((values) => {
@@ -127,9 +120,9 @@ export class NavBarComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((values) => {
         this.userLogged = values;
+        this.image = values.imageUrl;
       });
 
-    this.getImage();
     this.getMyReservations();
   }
 }
