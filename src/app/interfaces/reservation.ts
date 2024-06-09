@@ -7,3 +7,8 @@ export interface Reservation {
   providerName: string;
   vehicleNumber: string;
 }
+
+export interface ReservationsForNavbar {
+  numberOfReservations: number;
+  reservations: Reservation;
+}

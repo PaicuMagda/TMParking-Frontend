@@ -202,7 +202,7 @@
 
       <div class="add_new_parking__form__details__buttons">
         <div class="add_new_parking__form__details__buttons__toggle-group">
-          <label>Underground parking lots*</label>
+          <mat-label>Underground parking lots*</mat-label>
           <mat-button-toggle-group
             [(ngModel)]="data.undergroundParkingLots"
             formControlName="undergroundParkingLots"
@@ -218,7 +218,7 @@
           </mat-button-toggle-group>
         </div>
         <div class="add_new_parking__form__details__buttons__toggle-group">
-          <label>Multistorey car park*</label>
+          <mat-label>Multistorey car park*</mat-label>
           <mat-button-toggle-group
             formControlName="multistoreyCarPark"
             [(ngModel)]="data.multistoreyCarPark"
@@ -232,7 +232,7 @@
           </mat-button-toggle-group>
         </div>
         <div class="add_new_parking__form__details__buttons__toggle-group">
-          <label>Video surveillance area*</label>
+          <mat-label>Video surveillance area*</mat-label>
           <mat-button-toggle-group
             formControlName="isVideoSurveillance"
             #toggleGroupVideoSurveillance="matButtonToggleGroup"
@@ -248,7 +248,7 @@
           </mat-button-toggle-group>
         </div>
         <div class="add_new_parking__form__details__buttons__toggle-group">
-          <label>Paid parking*</label>
+          <mat-label>Paid parking*</mat-label>
           <mat-button-toggle-group
             formControlName="paidParking"
             #toggleGroupPaid="matButtonToggleGroup"
@@ -265,7 +265,7 @@
           class="add_new_parking__form__details__buttons__paid-parking-options"
         >
           <div class="row">
-            <label class="col-md-6">Payment per hour</label>
+            <mat-label class="col-md-6">Payment per hour</mat-label>
             <input
               class="col-md-6"
               type="text"
@@ -285,7 +285,7 @@
             </mat-error>
           </div>
           <div class="row">
-            <label class="col-md-6">Payment per day</label>
+            <mat-label class="col-md-6">Payment per day</mat-label>
             <input
               class="col-md-6"
               type="text"
@@ -305,7 +305,7 @@
             </mat-error>
           </div>
           <div class="row">
-            <label class="col-md-6">Payment for subscription</label>
+            <mat-label class="col-md-6">Payment for subscription</mat-label>
             <input
               class="col-md-6"
               type="text"
@@ -329,8 +329,8 @@
       </div>
 
       <div class="add_new_parking__form__details__check-box">
-        <label
-          >Choose one or more types of vehicles that can be parked* :</label
+        <mat-label
+          >Choose one or more types of vehicles that can be parked* :</mat-label
         >
         <mat-checkbox
           name="automobile"

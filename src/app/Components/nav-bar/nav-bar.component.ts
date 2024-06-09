@@ -69,10 +69,11 @@ export class NavBarComponent implements OnInit {
   }
 
   getMyReservations() {
-    this.reservationsService.getReservationsByUserId(this.userId);
-    this.reservationsService.myReservations$.subscribe((values) => {
-      this.reservationsNumber = values.length;
-    });
+    this.reservationsService
+      .getReservationsByUserId(this.userId)
+      .subscribe((values) => {
+        this.reservationsService.updateMyReservations(values);
+      });
   }
 
   applyFilter() {
@@ -88,12 +89,10 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.parkingSpacesService.parkingSpaces$.subscribe((values) => {
-      this.parkingSpaces = values;
-    });
-
-    this.changeShowSearch();
     this.isLogin = this.auth.isLoggedIn();
+    this.reservationsService.myReservations$.subscribe((values) => {
+      this.reservationsNumber = values.length;
+    });
     this.userStore
       .getFullNameFromStore()
       .pipe(takeUntil(this.destroy$))
