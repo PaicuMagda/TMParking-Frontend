@@ -106,7 +106,6 @@ export class ParkingSpacesComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         if (value === 'myParkingSpaces') {
-          this.parkingSpacesService.loadMyParkingSpace(this.idUserLogged);
           this.parkingSpacesService.myParkingSpaceSubject$.subscribe(
             (values) => {
               this.myParkingSpaces = values;
@@ -198,6 +197,13 @@ export class ParkingSpacesComponent implements OnInit {
         let userIdFromToken = this.authenticationService.getUserIdFromToken();
         this.idUserLogged = val || userIdFromToken;
       });
+
+    this.parkingSpacesService
+      .getMyParkingSpaces(this.idUserLogged)
+      .subscribe((values) => {
+        this.parkingSpacesService.sendUpdateMydParkingSpace(values);
+      });
+
     this.getParkingSpaces();
   }
 }
