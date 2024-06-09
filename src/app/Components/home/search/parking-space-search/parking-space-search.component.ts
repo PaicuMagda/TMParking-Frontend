@@ -15,8 +15,8 @@ export class ParkingSpaceSearchComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.parkingSpacesSearchForm = this.formBuilder.group({
-      relatedTags: [''],
-      personalVehicle: [''],
+      relatedTags: [[]],
+      personalVehicle: [],
       agriculturalMachinery: [],
       isCargoVehicleAccepted: [],
       isPublicTransportAccepted: [],
@@ -24,7 +24,6 @@ export class ParkingSpaceSearchComponent implements OnInit {
       isFree: [],
       availableParkingSpaces: [],
       selectedDate: [],
-      selectedAreas: [''],
     });
   }
 
@@ -32,7 +31,6 @@ export class ParkingSpaceSearchComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
   initialParkingSpaces: any[] = [];
   parkingSpacesSearchForm: FormGroup;
-  selectedAreas: string[] = [];
   filters: any;
 
   ngOnInit(): void {
@@ -47,6 +45,9 @@ export class ParkingSpaceSearchComponent implements OnInit {
       });
     this.parkingSpacesService.getParkingSpaces().subscribe((values) => {
       this.initialParkingSpaces = values;
+      this.parkingSpacesService.sendUpdatedParkingSpace(
+        this.initialParkingSpaces
+      );
     });
 
     this.parkingSpacesSearchForm.valueChanges.subscribe((filters) => {
@@ -56,6 +57,9 @@ export class ParkingSpaceSearchComponent implements OnInit {
 
   applyFilters() {
     let filteredParkingSpaces = this.initialParkingSpaces;
+
+    console.log(this.filters);
+
     if (this.filters.personalVehicle) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
         (parking) =>
@@ -101,16 +105,16 @@ export class ParkingSpaceSearchComponent implements OnInit {
     if (this.filters.selectedDate) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
         (parking) =>
-          new Date(parking.startDate).getDate() <=
-            new Date(this.filters.selectedDate).getDate() &&
-          new Date(parking.endDate).getDate() >=
-            new Date(this.filters.selectedDate).getDate()
+          new Date(parking.startDate).getTime() <=
+            new Date(this.filters.selectedDate).getTime() &&
+          new Date(parking.endDate).getTime() >=
+            new Date(this.filters.selectedDate).getTime()
       );
     }
 
-    if (this.selectedAreas.length > 0) {
+    if (this.filters.relatedTags.length > 0) {
       filteredParkingSpaces = filteredParkingSpaces.filter((parking) =>
-        this.selectedAreas.includes(parking.area)
+        this.filters.relatedTags.includes(parking.area)
       );
     }
 
@@ -126,24 +130,24 @@ export class ParkingSpaceSearchComponent implements OnInit {
           parkingLot.availableParkingSpaces >= availableParkingSpaces
       );
     }
-
     this.parkingSpacesService.sendUpdatedParkingSpace(filteredParkingSpaces);
   }
 
   isButtonAreaSelected(area: TimisoaraAreas): void {
-    if (!area.isSelected) {
-      area.isSelected = !area.isSelected;
-      this.selectedAreas.push(area.name);
-      this.applyFilters();
+    area.isSelected = !area.isSelected;
+    const relatedTags = this.parkingSpacesSearchForm.value.relatedTags;
+    if (area.isSelected) {
+      if (!relatedTags.includes(area.name)) {
+        relatedTags.push(area.name);
+      }
     } else {
-      area.isSelected = !area.isSelected;
-      this.selectedAreas = this.selectedAreas.filter(
-        (item) => area.name !== item
-      );
-      this.applyFilters();
+      const index = relatedTags.indexOf(area.name);
+      if (index !== -1) {
+        relatedTags.splice(index, 1);
+      }
     }
+    this.parkingSpacesSearchForm.patchValue({ relatedTags: relatedTags });
   }
-
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

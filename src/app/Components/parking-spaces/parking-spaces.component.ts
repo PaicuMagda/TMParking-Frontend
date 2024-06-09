@@ -110,22 +110,21 @@ export class ParkingSpacesComponent implements OnInit {
           this.parkingSpacesService.myParkingSpaceSubject$.subscribe(
             (values) => {
               this.myParkingSpaces = values;
+              this.isLoading = false;
             }
           );
+          this.toggleValue = value;
         }
         if (value === 'allParkingSpaces' && this.role == 'User') {
-          this.parkingSpacesService.loadParkingSpaces();
           this.parkingSpacesService.parkingSpaces$
             .pipe(
-              map((spaces) => {
-                this.isLoading = false;
+              map((spaces) =>
                 spaces.filter(
                   (space) =>
                     space.somethingIsWrong == false &&
                     space.isVerifiedByAdmin == true
-                );
-                return spaces;
-              })
+                )
+              )
             )
             .subscribe((values) => {
               this.parkingSpaces = values;
@@ -178,6 +177,10 @@ export class ParkingSpacesComponent implements OnInit {
     //       });
     //   }
     // });
+
+    this.parkingSpacesService.getParkingSpaces().subscribe((values) => {
+      this.parkingSpacesService.sendUpdatedParkingSpace(values);
+    });
 
     this.isLogin = this.authenticationService.isLoggedIn();
     this.userStore
