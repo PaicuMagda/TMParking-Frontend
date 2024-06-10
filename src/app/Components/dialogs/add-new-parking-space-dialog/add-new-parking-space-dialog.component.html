@@ -27,7 +27,7 @@
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Location *(street and number)</mat-label>
           <input
             matInput
@@ -35,15 +35,12 @@
             required
             [(ngModel)]="addressParkingSpace"
           />
-          <mat-error
-            *ngIf="
-              this.addNewParkingSpaceFormGroup
-                .get('address')
-                ?.hasError('required')
-            "
-            >Address is required!
-          </mat-error>
-        </mat-form-field>
+       
+        </mat-form-field> -->
+        <app-place-autocomplete
+          (placeChanged)="toValue = $event"
+        ></app-place-autocomplete>
+        <mat-error *ngIf="!toValue?.address">Address is required! </mat-error>
       </div>
       <div>
         <mat-form-field appearance="outline">

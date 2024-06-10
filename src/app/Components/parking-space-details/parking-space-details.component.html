@@ -1,5 +1,4 @@
 <div class="parking-space-details">
-  <app-nav-bar [showSearch]="!showSearch"></app-nav-bar>
   <div class="parking-space-details__close">
     <span>Book a parking spot here</span>
     <mat-icon svgIcon="icon-close" (click)="openLeavePageDialog()"></mat-icon>
@@ -20,7 +19,7 @@
             <p class="col-sm">{{ parkingPlace.address }}</p>
           </div>
           <div class="row">
-            <p class="col-lg">Locuri disponibile</p>
+            <p class="col-lg">The number of parking spaces</p>
             <p class="col-sm">{{ parkingPlace.availableParkingSpaces }}</p>
           </div>
           <div class="row">
@@ -43,7 +42,7 @@
             <p class="col-lg">End Date</p>
             <p class="col-sm">{{ parkingPlace.endDate | date : "d/M/yy" }}</p>
           </div>
-          <span>Properties</span>
+          <!-- <span>Properties</span>
           <div class="row">
             <p class="col-lg">Paid Parking</p>
             <p
@@ -57,8 +56,8 @@
             >
               {{ parkingPlace.isFree ? "Yes" : "No" }}
             </p>
-          </div>
-          <div class="row">
+          </div> -->
+          <!-- <div class="row">
             <p class="col-lg">Video Surveillance</p>
             <p
               class="col-sm"
@@ -71,8 +70,8 @@
             >
               {{ parkingPlace.isVideoSurveilance ? "Yes" : "No" }}
             </p>
-          </div>
-          <div class="row">
+          </div> -->
+          <!-- <div class="row">
             <p class="col-lg">Agricultural Machinery</p>
             <p
               class="col-sm"
@@ -85,8 +84,8 @@
             >
               {{ parkingPlace.isAgriculturalMachineryAccepted ? "Yes" : "No" }}
             </p>
-          </div>
-          <div class="row">
+          </div> -->
+          <!-- <div class="row">
             <p class="col-lg">Public Transport</p>
             <p
               class="col-sm"
@@ -99,8 +98,8 @@
             >
               {{ parkingPlace.isPublicTransportAccepted ? "Yes" : "No" }}
             </p>
-          </div>
-          <div class="row">
+          </div> -->
+          <!-- <div class="row">
             <p class="col-lg">Cargo Vehicle</p>
             <p
               class="col-sm"
@@ -113,7 +112,7 @@
             >
               {{ parkingPlace.isPublicTransportAccepted ? "Yes" : "No" }}
             </p>
-          </div>
+          </div> -->
         </div>
         <div class="parking-space-details__container__right">
           <div class="parking-space-details__container__right__description">

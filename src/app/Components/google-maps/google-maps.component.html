@@ -9,6 +9,7 @@
     <p>Destination: {{ data.address }}</p>
     <app-place-autocomplete
       (placeChanged)="toValue = $event"
+      [placeholder]="data.address"
     ></app-place-autocomplete>
   </div>
 </div>

@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Inject,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
@@ -13,6 +20,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Subject, takeUntil } from 'rxjs';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
 import { TimisoaraAreas } from 'src/app/interfaces/timisoara-areas';
+import { PlaceSearchResult } from 'src/app/interfaces/place-search-result';
 
 @Component({
   selector: 'app-add-new-parking-space-dialog',
@@ -34,6 +42,8 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   ) {}
 
   private destroy$: Subject<void> = new Subject<any>();
+  @Output() placeChanged = new EventEmitter<PlaceSearchResult>();
+  toValue: PlaceSearchResult | undefined;
   toggleButtonValue: boolean = false;
   name: string = '';
   addressParkingSpace: string = '';
@@ -122,7 +132,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   registerParkingSpace() {
     const formData = {
       name: this.addNewParkingSpaceFormGroup.get('name')?.value,
-      address: this.addNewParkingSpaceFormGroup.get('address')?.value,
+      address: this.toValue?.address,
       availableParkingSpaces: this.addNewParkingSpaceFormGroup.get(
         'availableParkingSpaces'
       )?.value,

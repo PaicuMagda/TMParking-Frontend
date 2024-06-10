@@ -2,11 +2,13 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   NgZone,
   Output,
   ViewChild,
 } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PlaceSearchResult } from 'src/app/interfaces/place-search-result';
 
 @Component({
@@ -19,7 +21,10 @@ export class PlaceAutocompleteComponent {
   @ViewChild('inputField') inputField: ElementRef;
   @Output() placeChanged = new EventEmitter<PlaceSearchResult>();
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   autocomplete: google.maps.places.Autocomplete | undefined;
 
