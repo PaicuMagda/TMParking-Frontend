@@ -11,6 +11,11 @@
     </mat-button-toggle-group>
   </div>
 </div>
+<div class="payment">
+  <div>H {{ paymentPerHour }}💲</div>
+  <div>D {{ paymentPerDay }}💲</div>
+  <div>S {{ paymentForSubscription }}💲</div>
+</div>
 
 <div class="booking__fields">
   <form
@@ -39,6 +44,9 @@
       <mat-error *ngIf="isIcorectSelectedDateOneDay()"
         >This date is not available.
       </mat-error>
+      <mat-error *ngIf="isLastDate()"
+        >You cannot choose a date in the past
+      </mat-error>
     </div>
 
     <div class="booking__fields__time">
@@ -55,19 +63,6 @@
           </mat-form-field>
         </div>
         <div>
-          <!-- <mat-form-field>
-            <mat-label>End Hours</mat-label>
-            <select
-              matNativeControl
-              required
-              [(ngModel)]="endHour"
-              formControlName="endHour"
-            >
-              <option *ngFor="let hour of hours" value="hour">
-                {{ hour | hourFormat }}
-              </option>
-            </select>
-          </mat-form-field> -->
           <mat-form-field>
             <input
               matInput
@@ -188,6 +183,9 @@
       <mat-error *ngIf="isIcorectSelectedDateManyDays()"
         >This date is not available.
       </mat-error>
+      <mat-error *ngIf="isLastDate()"
+        >You cannot choose a date in the past
+      </mat-error>
       <mat-error
         *ngIf="
           manyDaysBookingFormGroup.get('startDate')?.hasError('required') &&
@@ -219,7 +217,11 @@
       <mat-error *ngIf="isIcorectSelectedDateManyDays()"
         >This date is not available.
       </mat-error>
-      <mat-error *ngIf="!startDateGraterThanEndDate()"
+      <mat-error
+        *ngIf="
+          !startDateGraterThanEndDate() &&
+          this.manyDaysBookingFormGroup.get('endDate')?.touched
+        "
         >The start date must be earlier than the end date.
       </mat-error>
     </div>
@@ -328,6 +330,9 @@
     <div class="error-date">
       <mat-error *ngIf="isIcorectSelectedDateSubscription()"
         >This date is not available.
+      </mat-error>
+      <mat-error *ngIf="isLastDate()"
+        >You cannot choose a date in the past
       </mat-error>
     </div>
 

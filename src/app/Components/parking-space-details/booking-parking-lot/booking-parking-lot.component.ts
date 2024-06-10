@@ -74,7 +74,23 @@ export class BookingParkingLotComponent {
     }
   }
 
-  calculateTotalToPayForOneDay(): void {}
+  isLastDate() {
+    const currentDate = new Date();
+    const startDateForOneDay = new Date(
+      this.oneDayBookingFormGroup.get('startDate')?.value
+    );
+    const startDateForManyDays = new Date(
+      this.manyDaysBookingFormGroup.get('startDate')?.value
+    );
+    const startDateForSubscription = new Date(
+      this.subscriptionBookingForm.get('startDate')?.value
+    );
+    return (
+      startDateForOneDay < currentDate ||
+      startDateForManyDays < currentDate ||
+      startDateForSubscription < currentDate
+    );
+  }
 
   getParkingLots() {
     this.parkingSpacesService.getParkingLotsById(this.idParkingSpaces);
@@ -149,6 +165,11 @@ export class BookingParkingLotComponent {
             duration: 3000,
           });
           this.getParkingLots();
+          this.reservationsService
+            .getReservationsByUserId(this.userId)
+            .subscribe((values) => {
+              this.reservationsService.updateMyReservations(values);
+            });
         },
         error: (error) => {
           this.toast.warning({
@@ -189,6 +210,11 @@ export class BookingParkingLotComponent {
             duration: 3000,
           });
           this.getParkingLots();
+          this.reservationsService
+            .getReservationsByUserId(this.userId)
+            .subscribe((values) => {
+              this.reservationsService.updateMyReservations(values);
+            });
         },
         error: (error) => {
           this.toast.warning({
@@ -228,6 +254,11 @@ export class BookingParkingLotComponent {
             duration: 3000,
           });
           this.getParkingLots();
+          this.reservationsService
+            .getReservationsByUserId(this.userId)
+            .subscribe((values) => {
+              this.reservationsService.updateMyReservations(values);
+            });
         },
         error: (error) => {
           this.toast.warning({
@@ -238,7 +269,6 @@ export class BookingParkingLotComponent {
         },
       });
     this.subscriptionBookingForm.reset();
-    this.reservationsService.loadReservations();
   }
 
   registerReservation(bookingType: string) {
@@ -456,6 +486,30 @@ export class BookingParkingLotComponent {
 
         if (value === 'Payment by the day') {
           this.totalPayment = this.paymentPerDay;
+        }
+      });
+
+    this.manyDaysBookingFormGroup
+      .get('paymentMethod')
+      ?.valueChanges.subscribe((value) => {
+        if (value === 'Payment by the hour') {
+          let startDate = new Date(
+            this.manyDaysBookingFormGroup.get('startDate')?.value
+          );
+          let endDate = this.manyDaysBookingFormGroup.get('endDate')?.value;
+
+          let differenceInMiliseconds = endDate.getTime() - startDate.getTime();
+          let differenceInHours = differenceInMiliseconds / (1000 * 3600);
+          this.totalPayment = this.paymentPerDay * differenceInHours;
+        }
+        if (value === 'Payment by the day') {
+          let startDate = new Date(
+            this.manyDaysBookingFormGroup.get('startDate')?.value
+          );
+          let endDate = this.manyDaysBookingFormGroup.get('endDate')?.value;
+          let differenceInMiliseconds = endDate.getTime() - startDate.getTime();
+          let differenceInDays = differenceInMiliseconds / (1000 * 3600 * 24);
+          this.totalPayment = this.paymentPerDay * differenceInDays;
         }
       });
   }

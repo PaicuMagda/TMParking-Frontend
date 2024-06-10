@@ -40,7 +40,6 @@
   display: flex;
   flex-direction: row;
   gap: 28%;
-  margin-bottom: 8%;
 }
 
 .booking {
@@ -193,4 +192,11 @@ mat-button-toggle-group {
   justify-content: flex-end;
   margin-bottom: 2%;
   font-size: 120%;
+}
+
+.payment {
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: 500;
+  gap: 5%;
 }
