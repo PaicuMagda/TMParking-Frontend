@@ -28,7 +28,6 @@ export class BookingParkingLotComponent {
   bookingType: string = 'oneDay';
   vehicles: Vehicle[] = [];
   paymentMethods: string[] = [];
-  calculatedPrice: number;
   months: number[] = [];
   idParkingSpaces: number;
   reservations: any[];
@@ -42,6 +41,13 @@ export class BookingParkingLotComponent {
   startDate: Date;
   startDateFromPlace: Date;
   address: string = '';
+  totalPayment: number;
+  paymentMethod: string = '';
+  paymentForSubscription: number;
+  paymentPerDay: number;
+  paymentPerHour: number;
+  numberOfMonths: number;
+  subscriptionEndDate: Date;
 
   constructor(
     private activatedRouter: ActivatedRoute,
@@ -59,6 +65,16 @@ export class BookingParkingLotComponent {
   changeType(value: string) {
     this.bookingType = value;
   }
+
+  calculateTotalToPayForSubscription(month: number): void {
+    if (month) {
+      this.totalPayment = month * this.paymentForSubscription;
+    } else {
+      this.totalPayment = 0;
+    }
+  }
+
+  calculateTotalToPayForOneDay(): void {}
 
   getParkingLots() {
     this.parkingSpacesService.getParkingLotsById(this.idParkingSpaces);
@@ -174,11 +190,13 @@ export class BookingParkingLotComponent {
           });
           this.getParkingLots();
         },
-        error: (err) => ({
-          summary: err.message,
-          duration: 3000,
-          detail: 'Error Message',
-        }),
+        error: (error) => {
+          this.toast.warning({
+            detail: 'Warning',
+            summary: 'This time slot is already booked.',
+            duration: 3000,
+          });
+        },
       });
     this.manyDaysBookingFormGroup.reset();
     this.reservationsService.loadReservations();
@@ -190,6 +208,7 @@ export class BookingParkingLotComponent {
       reservationType: this.bookingType,
       spaceModelName: this.subscriptionBookingForm.get('spaceModelName')?.value,
       startDate: this.subscriptionBookingForm.get('startDate')?.value,
+      endDate: this.subscriptionEndDate,
       vehicleRegistrationNumber: this.subscriptionBookingForm.get(
         'vehicleRegistrationNumber'
       )?.value,
@@ -210,11 +229,13 @@ export class BookingParkingLotComponent {
           });
           this.getParkingLots();
         },
-        error: (err) => ({
-          summary: err.message,
-          duration: 3000,
-          detail: 'Error Message',
-        }),
+        error: (error) => {
+          this.toast.warning({
+            detail: 'Warning',
+            summary: 'This time slot is already booked.',
+            duration: 3000,
+          });
+        },
       });
     this.subscriptionBookingForm.reset();
     this.reservationsService.loadReservations();
@@ -247,14 +268,12 @@ export class BookingParkingLotComponent {
     const selectedStartDate = new Date(
       this.manyDaysBookingFormGroup.get('startDate')?.value
     );
-    const selectedEndDate = new Date(
-      this.manyDaysBookingFormGroup.get('endDate')?.value
-    );
+    const selectedEndDate = new Date(this.subscriptionEndDate);
     const bigParkingEndDate = new Date(this.parkingPlace.endDate);
     const bigParkingStartDate = new Date(this.startDateFromPlace);
 
     return (
-      selectedStartDate.getTime() <= bigParkingStartDate.getTime() ||
+      selectedStartDate.getTime() < bigParkingStartDate.getTime() ||
       selectedStartDate.getTime() > bigParkingEndDate.getTime() ||
       selectedEndDate.getTime() <= bigParkingStartDate.getTime() ||
       selectedEndDate.getTime() > bigParkingEndDate.getTime()
@@ -263,14 +282,16 @@ export class BookingParkingLotComponent {
 
   isIcorectSelectedDateSubscription(): boolean {
     const selectedStartDate = new Date(
-      this.oneDayBookingFormGroup.get('startDate')?.value
+      this.subscriptionBookingForm.get('startDate')?.value
     );
+    const subscriptionEndDate = new Date(this.subscriptionEndDate);
     const bigParkingEndDate = new Date(this.parkingPlace.endDate);
     const bigParkingStartDate = new Date(this.startDateFromPlace);
 
     return (
       selectedStartDate.getTime() <= bigParkingStartDate.getTime() ||
-      selectedStartDate.getTime() > bigParkingEndDate.getTime()
+      selectedStartDate.getTime() > bigParkingEndDate.getTime() ||
+      subscriptionEndDate.getTime() > bigParkingEndDate.getTime()
     );
   }
 
@@ -320,10 +341,14 @@ export class BookingParkingLotComponent {
       .subscribe((value: any) => {
         this.parkingPlace = value.parkingSpacesDetails;
         this.startDateFromPlace = value.parkingSpacesDetails.startDate;
+        this.paymentForSubscription =
+          value.parkingSpacesDetails.paymentForSubscription;
+        this.paymentPerDay = value.parkingSpacesDetails.paymentPerDay;
+        this.paymentPerHour = value.parkingSpacesDetails.paymentPerHour;
       });
 
     this.idParkingSpaces = this.activatedRouter.snapshot.params['id'];
-    this.paymentMethods = Object.values(PaymentMethods);
+
     this.bookingService
       .getNumberOfMonths()
       .pipe(takeUntil(this.destroy$))
@@ -373,10 +398,65 @@ export class BookingParkingLotComponent {
 
     this.subscriptionBookingForm = this.formBuilder.group({
       startDate: [''],
+      endDate: [this.subscriptionEndDate],
       numberOfMonths: [''],
       spaceModelName: [''],
-      totalToPay: [''],
+      totalToPay: [this.paymentForSubscription],
       vehicleRegistrationNumber: [''],
     });
+
+    this.subscriptionBookingForm
+      .get('numberOfMonths')
+      ?.valueChanges.subscribe((value) => {
+        this.calculateTotalToPayForSubscription(value);
+        let startDate = new Date(
+          this.subscriptionBookingForm.get('startDate')?.value
+        );
+        this.subscriptionEndDate = new Date(
+          startDate.setMonth(startDate.getMonth() + value)
+        );
+      });
+
+    this.oneDayBookingFormGroup
+      .get('paymentMethod')
+      ?.valueChanges.subscribe((value) => {
+        if (value === 'Payment by the hour') {
+          const startDate = this.oneDayBookingFormGroup.get('startDate')?.value;
+          const startTime = this.oneDayBookingFormGroup.get('startHour')?.value;
+          const endTime = this.oneDayBookingFormGroup.get('endHour')?.value;
+          const endDate = this.oneDayBookingFormGroup.get('startDate')?.value;
+
+          const [startHours, startMinutes] = startTime.split(':');
+          const startDateToSend = new Date(startDate);
+          startDateToSend.setHours(
+            parseInt(startHours, 10),
+            parseInt(startMinutes, 10)
+          );
+          const startTimezoneOffset =
+            startDateToSend.getTimezoneOffset() * 60000;
+          const localStartDate = new Date(
+            startDateToSend.getTime() - startTimezoneOffset
+          );
+
+          const [endHours, endMinutes] = endTime.split(':');
+          const endDateToSend = new Date(endDate);
+          endDateToSend.setHours(
+            parseInt(endHours, 10),
+            parseInt(endMinutes, 10)
+          );
+          const endTimezoneOffset = endDateToSend.getTimezoneOffset() * 60000;
+          const localEndDate = new Date(
+            endDateToSend.getTime() - endTimezoneOffset
+          );
+          const numberOfMiliseconds =
+            localEndDate.getTime() - localStartDate.getTime();
+          const numberOfHours = numberOfMiliseconds / (1000 * 60 * 60);
+          this.totalPayment = this.paymentPerHour * numberOfHours;
+        }
+
+        if (value === 'Payment by the day') {
+          this.totalPayment = this.paymentPerDay;
+        }
+      });
   }
 }
