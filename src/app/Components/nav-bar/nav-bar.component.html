@@ -15,7 +15,7 @@
       <span
         [matBadge]="reservationsNumber"
         matBadgePosition="above after"
-        matBadgeColor="warn"
+        [matBadgeColor]="reservationsNumber != 0 ? 'warn' : 'primary'"
         matBadgeSize="medium"
       ></span>
     </div>

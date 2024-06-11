@@ -74,7 +74,7 @@ export class VehiclesComponent implements OnInit {
   openSaveChangesConfirmDialog(idVehicle: number, index: number) {
     const vehicleData = this.vehicleForm[index].value;
     const vehicleUpdated = {
-      // addedDate: vehicle.addedDate,
+      addedDate: new Date(),
       ...vehicleData,
     };
     const dialogRef = this.dialog.open(SaveChangesDialogComponent, {
@@ -97,8 +97,14 @@ export class VehiclesComponent implements OnInit {
                 summary: resp.message,
                 duration: 3000,
               });
-              this.vehicleService.loadVehicles();
-              this.vehicleService.loadMyVehicles(this.idUserLogged);
+              this.vehicleService.getVehicles().subscribe((values) => {
+                this.vehicleService.updateVehicles(values);
+              });
+              this.vehicleService
+                .getVehicleByUserId(this.idUserLogged)
+                .subscribe((values) => {
+                  this.vehicleService.updateMyVehicles(values);
+                });
             },
             error: (err) => {
               this.toast.error({
@@ -121,7 +127,6 @@ export class VehiclesComponent implements OnInit {
     const vehicleVerified = {
       ...vehicleData,
       isVerifiedByAdmin: true,
-      // addedDate: vehicle.addedDate,
     };
     this.vehicleService
       .updateVehicle(idVehicle, vehicleVerified)
@@ -133,8 +138,14 @@ export class VehiclesComponent implements OnInit {
             summary: resp.message,
             duration: 3000,
           });
-          this.vehicleService.loadVehicles();
-          this.vehicleService.loadMyVehicles(this.idUserLogged);
+          this.vehicleService.getVehicles().subscribe((values) => {
+            this.vehicleService.updateVehicles(values);
+          });
+          this.vehicleService
+            .getVehicleByUserId(this.idUserLogged)
+            .subscribe((values) => {
+              this.vehicleService.updateMyVehicles(values);
+            });
         },
         error: (err) => {
           this.toast.error({
@@ -164,8 +175,9 @@ export class VehiclesComponent implements OnInit {
             summary: resp.message,
             duration: 3000,
           });
-          this.vehicleService.loadVehicles();
-          this.vehicleService.loadMyVehicles(this.idUserLogged);
+          this.vehicleService.getVehicles().subscribe((values) => {
+            this.vehicleService.updateVehicles(values);
+          });
         },
         error: (err) => {
           this.toast.error({

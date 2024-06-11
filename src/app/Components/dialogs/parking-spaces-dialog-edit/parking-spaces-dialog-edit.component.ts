@@ -292,6 +292,7 @@ export class ParkingSpacesDialogEditComponent {
       area: this.addNewParkingSpaceFormGroup.get('area')?.value,
       somethingIsWrong: true,
       isVerifiedByAdmin: false,
+      addedDate: new Date(),
     };
 
     this.parkingSpacesService

@@ -241,7 +241,11 @@
         >
           <mat-icon svgIcon="delete-trash"></mat-icon>
         </div>
-        <div *ngIf="parkingSpace.isDraft && toggleValue === 'myParkingSpaces'">
+        <div
+          *ngIf="
+            !parkingSpace.isVerifiedByAdmin && toggleValue === 'myParkingSpaces'
+          "
+        >
           <mat-icon
             class="parking-spaces__card__image__icons__draft"
             svgIcon="draft"

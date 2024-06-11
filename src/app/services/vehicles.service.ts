@@ -71,8 +71,13 @@ export class VehiclesService {
   getVehiclesForTables(): Observable<Vehicle[]> {
     return this.http.get<Vehicle[]>(`${this.baseUrl}Vehicle/vehicles-tables`);
   }
+
   updateVehicles(vehicles: Vehicle[]) {
     this.vehiclesSubject.next(vehicles);
+  }
+
+  updateMyVehicles(vehicles: Vehicle[]) {
+    this.myVehiclesSubject.next(vehicles);
   }
 
   getVehicles(): Observable<Vehicle[]> {
