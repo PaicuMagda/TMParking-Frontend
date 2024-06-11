@@ -96,16 +96,19 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     this.parkingSpacesService.getParkingLotsById(this.idParkingSpaces);
   }
 
+  calculateDaysAvailable(startDate: Date, endDate: Date) {
+    const resultInMiliseconds =
+      new Date(endDate).getTime() - new Date(startDate).getTime();
+    const availableDays = resultInMiliseconds / (1000 * 60 * 60 * 24);
+    return availableDays;
+  }
+
+  calculateBusyDays() {}
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
-  // checkEndHourIsSmaller() {
-  //   // return this.endHour <= this.startHour;
-  //   console.log(this.startHour);
-  //   console.log(this.endHour);
-  // }
 
   ngOnInit() {
     this.idParkingSpaces = this.router.snapshot.params['id'];
@@ -147,6 +150,30 @@ export class ParkingSpaceDetailsComponent implements OnInit {
     this.parkingSpacesService.parkingLotsForOneParkingSpace$.subscribe(
       (values) => {
         this.allParkingLotsForThisParking = values;
+        this.allParkingLotsForThisParking.forEach((parkingLot) => {
+          let totalDaysOccupied = 0;
+          parkingLot.reservations.forEach((reservation) => {
+            const startDate = new Date(reservation.endDate);
+            const endDate = new Date(reservation.startDate);
+            const daysOccupied = this.calculateDaysAvailable(
+              endDate,
+              startDate
+            );
+            totalDaysOccupied = totalDaysOccupied + daysOccupied;
+          });
+          const startDate = new Date(parkingLot.endDate);
+          const endDate = new Date(parkingLot.startDate);
+          const availableParkingLotDays = this.calculateDaysAvailable(
+            endDate,
+            startDate
+          );
+          if (
+            availableParkingLotDays - totalDaysOccupied < 3 &&
+            parkingLot.reservations.length != 0
+          ) {
+            parkingLot.availability = 'occupied';
+          }
+        });
       }
     );
   }

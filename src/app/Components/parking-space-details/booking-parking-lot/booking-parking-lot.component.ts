@@ -179,7 +179,6 @@ export class BookingParkingLotComponent {
           });
         },
       });
-    this.oneDayBookingFormGroup.reset();
     this.reservationsService.loadReservations();
   }
 
@@ -224,7 +223,7 @@ export class BookingParkingLotComponent {
           });
         },
       });
-    this.manyDaysBookingFormGroup.reset();
+
     this.reservationsService.loadReservations();
   }
 
@@ -268,7 +267,6 @@ export class BookingParkingLotComponent {
           });
         },
       });
-    this.subscriptionBookingForm.reset();
   }
 
   registerReservation(bookingType: string) {

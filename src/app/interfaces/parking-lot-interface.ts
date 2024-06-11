@@ -6,4 +6,6 @@ export interface ParkingLotInterface {
   parkingSpacesId: number;
   reservations: Reservation[];
   parkingLotId: number;
+  startDate: Date;
+  endDate: Date;
 }
