@@ -49,7 +49,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
   addressParkingSpace: string = '';
   numberOfParkingSpaces: number = 0;
   paidParking: boolean = false;
-  videoSurveillance: string = '';
+  videoSurveillance: boolean;
   isPersonalVehicleAccepted: boolean = false;
   isPublicTransportAccepted: boolean = false;
   isCargoVehicleAccepted: boolean = false;
@@ -161,6 +161,7 @@ export class AddNewParkingSpaceDialogComponent implements OnInit {
       somethingIsWrong: false,
       parkingSpacesOwnerId: this.parkingSpacesOwnerId,
       area: this.addNewParkingSpaceFormGroup.get('area')?.value,
+      paidParking: this.paidParking,
     };
 
     this.parkingSpacesService

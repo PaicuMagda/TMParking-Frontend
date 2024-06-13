@@ -37,7 +37,7 @@ export class ParkingSpacesDialogEditComponent {
   userLoggedFullName: string;
   addNewParkingSpaceFormGroup: FormGroup;
   imageProfile: string = this.data.imageProfile;
-  leasePermitFile: string;
+  leasePermitFile: string = this.data.leasePermit;
   imageProfileFileName: string | undefined;
   leasePermitFileName: string | undefined;
   parkingSpacesOwnerId: string;
@@ -45,10 +45,8 @@ export class ParkingSpacesDialogEditComponent {
   private destroy$: Subject<void> = new Subject<void>();
   parkingLots: any[];
   idUserLogged: string = '';
-  paidParking: boolean = false;
   role: string = '';
   specificAreas: TimisoaraAreas[] = [];
-  selectedArea: string = this.data.area;
 
   changeVideoSurveillanceToggleButtonValue(event: boolean) {
     this.data.isVideoSurveilance = event;
@@ -200,13 +198,17 @@ export class ParkingSpacesDialogEditComponent {
       )?.value,
       multistoreyCarPark:
         this.addNewParkingSpaceFormGroup.get('multistoreyCarPark')?.value,
-      isFree: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
+
       isVideoSurveilance: this.addNewParkingSpaceFormGroup.get(
         'isVideoSurveillance'
       )?.value,
-      paymentPerDay: this.data.paymentPerDay,
-      paymentPerHour: this.data.paymentPerHour,
-      paymentForSubscription: this.data.paymentForSubscription,
+      paymentPerDay:
+        this.addNewParkingSpaceFormGroup.get('paymentPerDay')?.value,
+      paymentPerHour:
+        this.addNewParkingSpaceFormGroup.get('paymentPerHour')?.value,
+      paymentForSubscription: this.addNewParkingSpaceFormGroup.get(
+        'paymentForSubscription'
+      )?.value,
       imageProfile: this.imageProfile,
       leasePermit: this.leasePermitFile,
       isPersonalVehicleAccepted: this.addNewParkingSpaceFormGroup.get(
@@ -224,6 +226,7 @@ export class ParkingSpacesDialogEditComponent {
       area: this.addNewParkingSpaceFormGroup.get('area')?.value,
       isVerifiedByAdmin: false,
       addedDate: new Date(),
+      paidParking: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
     };
 
     this.parkingSpacesService
@@ -268,13 +271,17 @@ export class ParkingSpacesDialogEditComponent {
       )?.value,
       multistoreyCarPark:
         this.addNewParkingSpaceFormGroup.get('multistoreyCarPark')?.value,
-      paidParking: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
+
       isVideoSurveilance: this.addNewParkingSpaceFormGroup.get(
         'isVideoSurveillance'
       )?.value,
-      paymentPerDay: this.data.paymentPerDay,
-      paymentPerHour: this.data.paymentPerHour,
-      paymentForSubscription: this.data.paymentForSubscription,
+      paymentPerDay:
+        this.addNewParkingSpaceFormGroup.get('paymentPerDay')?.value,
+      paymentPerHour:
+        this.addNewParkingSpaceFormGroup.get('paymentPerHour')?.value,
+      paymentForSubscription: this.addNewParkingSpaceFormGroup.get(
+        'paymentForSubscription'
+      )?.value,
       imageProfile: this.imageProfile,
       leasePermit: this.leasePermitFile,
       isPersonalVehicleAccepted: this.addNewParkingSpaceFormGroup.get(
@@ -290,9 +297,10 @@ export class ParkingSpacesDialogEditComponent {
         'isAgriculturalMachineryAccepted'
       )?.value,
       area: this.addNewParkingSpaceFormGroup.get('area')?.value,
-      somethingIsWrong: true,
-      isVerifiedByAdmin: false,
+      isVerifiedByAdmin: true,
       addedDate: new Date(),
+      paidParking: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
+      somethingIsWrong: true,
     };
 
     this.parkingSpacesService
@@ -337,13 +345,17 @@ export class ParkingSpacesDialogEditComponent {
       )?.value,
       multistoreyCarPark:
         this.addNewParkingSpaceFormGroup.get('multistoreyCarPark')?.value,
-      paidParking: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
+
       isVideoSurveilance: this.addNewParkingSpaceFormGroup.get(
         'isVideoSurveillance'
       )?.value,
-      paymentPerDay: this.data.paymentPerDay,
-      paymentPerHour: this.data.paymentPerHour,
-      paymentForSubscription: this.data.paymentForSubscription,
+      paymentPerDay:
+        this.addNewParkingSpaceFormGroup.get('paymentPerDay')?.value,
+      paymentPerHour:
+        this.addNewParkingSpaceFormGroup.get('paymentPerHour')?.value,
+      paymentForSubscription: this.addNewParkingSpaceFormGroup.get(
+        'paymentForSubscription'
+      )?.value,
       imageProfile: this.imageProfile,
       leasePermit: this.leasePermitFile,
       isPersonalVehicleAccepted: this.addNewParkingSpaceFormGroup.get(
@@ -359,8 +371,10 @@ export class ParkingSpacesDialogEditComponent {
         'isAgriculturalMachineryAccepted'
       )?.value,
       area: this.addNewParkingSpaceFormGroup.get('area')?.value,
-      somethingIsWrong: false,
       isVerifiedByAdmin: true,
+      addedDate: new Date(),
+      paidParking: this.addNewParkingSpaceFormGroup.get('paidParking')?.value,
+      somethingIsWrong: false,
     };
 
     this.parkingSpacesService
@@ -456,8 +470,6 @@ export class ParkingSpacesDialogEditComponent {
     this.parkingSpacesService
       .getTimisoaraAreas()
       .subscribe((values) => (this.specificAreas = values));
-
-    this.paidParking = this.data.paidParking;
   }
 
   ngOnDestroy(): void {

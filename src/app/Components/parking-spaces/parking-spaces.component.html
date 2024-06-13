@@ -112,11 +112,11 @@
         <div class="parking-spaces__card__informations__ownerAddressDate__paid">
           <span>{{ parkingSpace.name }}</span>
           <img
-            *ngIf="!parkingSpace.isFree"
+            *ngIf="parkingSpace.paidParking"
             src="../../../assets/images/paid.png"
           />
           <img
-            *ngIf="parkingSpace.isFree"
+            *ngIf="!parkingSpace.paidParking"
             src="../../../assets/images/no-paid.png"
           />
         </div>
@@ -285,11 +285,11 @@
         <div class="parking-spaces__card__informations__ownerAddressDate__paid">
           <span>{{ parkingSpace.name }}</span>
           <img
-            *ngIf="!parkingSpace.isFree"
+            *ngIf="parkingSpace.paidParking"
             src="../../../assets/images/paid.png"
           />
           <img
-            *ngIf="parkingSpace.isFree"
+            *ngIf="!parkingSpace.paidParking"
             src="../../../assets/images/no-paid.png"
           />
         </div>

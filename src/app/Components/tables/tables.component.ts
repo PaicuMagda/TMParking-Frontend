@@ -69,7 +69,7 @@ export class TablesComponent implements OnInit {
           availableParkingSpaces: parkingSpaces.availableParkingSpaces,
           startDate: parkingSpaces.startDate,
           endDate: parkingSpaces.endDate,
-          withPayment: !parkingSpaces.isFree,
+          withPayment: parkingSpaces.withPayment,
           VideoSurveilance: parkingSpaces.isVideoSurveilance,
           cargoVehicle: parkingSpaces.isCargoVehicleAccepted,
           personalVehicle: parkingSpaces.isPersonalVehicleAccepted,

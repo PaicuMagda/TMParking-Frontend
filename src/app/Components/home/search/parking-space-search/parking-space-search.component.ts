@@ -27,7 +27,7 @@ export class ParkingSpaceSearchComponent implements OnInit {
       isCargoVehicleAccepted: [],
       isPublicTransportAccepted: [],
       withPayment: [],
-      isFree: [],
+      paidParking: [],
       availableParkingSpaces: [],
       selectedDate: [],
     });
@@ -109,15 +109,15 @@ export class ParkingSpaceSearchComponent implements OnInit {
       );
     }
 
-    if (this.filters.isFree) {
+    if (this.filters.paidParking) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
-        (parking) => parking.isFree === this.filters.isFree
+        (parking) => parking.paidParking !== this.filters.paidParking
       );
     }
 
     if (this.filters.withPayment) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
-        (parking) => parking.isFree !== this.filters.withPayment
+        (parking) => parking.paidParking === this.filters.withPayment
       );
     }
 
@@ -185,15 +185,15 @@ export class ParkingSpaceSearchComponent implements OnInit {
       );
     }
 
-    if (this.filters.isFree) {
+    if (this.filters.paidParking) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
-        (parking) => parking.isFree === this.filters.isFree
+        (parking) => parking.paidParking !== this.filters.paidParking
       );
     }
 
     if (this.filters.withPayment) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
-        (parking) => parking.isFree !== this.filters.withPayment
+        (parking) => parking.paidParking === this.filters.withPayment
       );
     }
 
