@@ -73,7 +73,7 @@ export class UsersService {
       email,
       newPassword,
     };
-    return this.http.post(
+    return this.http.put<any>(
       `${this.baseUrl}User/update-password?email=${email}&password=${newPassword}`,
       body
     );
