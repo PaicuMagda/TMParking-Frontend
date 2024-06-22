@@ -67,4 +67,15 @@ export class UsersService {
   deleteUser(userId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}User/${userId}`);
   }
+
+  resetPassword(email: string, newPassword: string): Observable<any> {
+    const body = {
+      email,
+      newPassword,
+    };
+    return this.http.post(
+      `${this.baseUrl}User/update-password?email=${email}&password=${newPassword}`,
+      body
+    );
+  }
 }

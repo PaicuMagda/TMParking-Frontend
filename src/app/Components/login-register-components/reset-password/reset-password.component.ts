@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ResetPassword } from 'src/app/interfaces/ResetPassword';
+import { UsersService } from 'src/app/services/users.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-reset-password',
@@ -11,7 +13,9 @@ import { ResetPassword } from 'src/app/interfaces/ResetPassword';
 export class ResetPasswordComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private usersService: UsersService,
+    private toast: NgToastService
   ) {}
 
   resetPassword: FormGroup;
@@ -22,9 +26,10 @@ export class ResetPasswordComponent implements OnInit {
   isSpecialCharValid: boolean = false;
   showNewPassword: boolean = false;
   showNewPasswordConfirm: boolean = false;
-  emailToReset!: string;
+  emailToReset: string;
   emailToken!: string;
   resetPasswordObj = new ResetPassword();
+  newPassword: string = '';
 
   checkPassword() {
     const passwordValue = this.resetPassword.get('newPassword')?.value;
@@ -56,24 +61,26 @@ export class ResetPasswordComponent implements OnInit {
       this.resetPasswordObj.confirmPassword =
         this.resetPassword.value.confirmNewPassword;
       this.resetPasswordObj.emailToken = this.emailToken;
+      const newPassword = this.resetPassword.value.newPassword;
 
-      // this.resetPasswordService.resetPassword(this.resetPasswordObj).subscribe({
-      //   next: (resp) => {
-      //     this.toast.success({
-      //       detail: 'SUCCESS',
-      //       summary: 'Password Reset Successfully',
-      //       duration: 3000,
-      //     });
-      //     this.router.navigate(['/']);
-      //   },
-      //   error: () => {
-      //     this.toast.success({
-      //       detail: 'ERROR',
-      //       summary: 'Something went wrong!',
-      //       duration: 3000,
-      //     });
-      //   },
-      // });
+      this.usersService
+        .resetPassword(this.emailToReset, newPassword)
+        .subscribe({
+          next: (resp) => {
+            this.toast.success({
+              detail: 'SUCCESS',
+              summary: 'Password Reset Successfully',
+              duration: 3000,
+            });
+          },
+          error: () => {
+            this.toast.warning({
+              detail: 'ERROR',
+              summary: 'Something went wrong!',
+              duration: 3000,
+            });
+          },
+        });
     } else {
     }
   }
