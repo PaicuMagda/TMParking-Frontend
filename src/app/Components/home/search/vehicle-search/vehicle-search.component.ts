@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { DisplayCardsService } from 'src/app/services/display-cards.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 
 @Component({
@@ -11,11 +14,19 @@ import { VehiclesService } from 'src/app/services/vehicles.service';
 export class VehicleSearchComponent implements OnInit {
   filterVehicleForm: FormGroup;
   initialVehicles: any[] = [];
+  initialMyVehicles: any[] = [];
+  private destroy$: Subject<void> = new Subject<void>();
+  role: string = '';
+  idUserLogged: string = '';
+  toggleValue = '';
+  filters: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private vehicleService: VehiclesService,
-    private displayCardsService: DisplayCardsService
+    private displayCardsService: DisplayCardsService,
+    private userStore: UserStoreService,
+    private authenticationService: AuthenticationService
   ) {
     this.filterVehicleForm = this.formBuilder.group({
       model: [''],
@@ -28,62 +39,134 @@ export class VehicleSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userStore
+      .getIdUserFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        let userIdFromToken = this.authenticationService.getUserIdFromToken();
+        this.idUserLogged = val || userIdFromToken;
+      });
+
+    this.userStore
+      .getRoleFromStore()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) => {
+        const roleFromToken = this.authenticationService.getRoleFromToken();
+        this.role = val || roleFromToken;
+      });
+
+    this.vehicleService.getVehicles().subscribe((values) => {
+      this.initialVehicles = values;
+    });
+
+    this.vehicleService
+      .getVehicleByUserId(this.idUserLogged)
+      .subscribe((values) => {
+        this.initialMyVehicles = values;
+      });
+
     this.displayCardsService.toggleValueSubjectObservable.subscribe((value) => {
-      if (value === 'myVehicles') {
-        this.vehicleService.myVehicles$.subscribe((values) => {
-          this.initialVehicles = values;
-        });
-      } else
-        this.vehicleService.getVehicles().subscribe((values) => {
-          this.initialVehicles = values;
-        });
+      this.toggleValue = value;
     });
 
     this.filterVehicleForm.valueChanges.subscribe((filters) => {
-      this.applyFilters(filters);
+      this.filters = filters;
     });
   }
 
-  applyFilters(filters: any) {
+  applyFiltersAllVehicles() {
     let filteredVehicles = this.initialVehicles;
-    if (filters.make) {
+    if (this.filters.make) {
       filteredVehicles = filteredVehicles.filter((vehicle) =>
-        vehicle.make?.toLowerCase().includes(filters.make.toLowerCase())
+        vehicle.make?.toLowerCase().includes(this.filters.make.toLowerCase())
       );
     }
-    if (filters.model) {
+    if (this.filters.model) {
       filteredVehicles = filteredVehicles.filter((vehicle) =>
-        vehicle.model?.toLowerCase().includes(filters.model.toLowerCase())
+        vehicle.model?.toLowerCase().includes(this.filters.model.toLowerCase())
       );
     }
-    if (filters.color) {
+    if (this.filters.color) {
       filteredVehicles = filteredVehicles.filter((vehicle) =>
-        vehicle.color?.toLowerCase().includes(filters.color.toLowerCase())
+        vehicle.color?.toLowerCase().includes(this.filters.color.toLowerCase())
       );
     }
 
-    if (filters.year && !isNaN(filters.year)) {
-      const year = Number(filters.year);
+    if (this.filters.year && !isNaN(this.filters.year)) {
+      const year = Number(this.filters.year);
       filteredVehicles = filteredVehicles.filter(
         (vehicle) => vehicle.year === year
       );
     }
 
-    if (filters.owner) {
+    if (this.filters.owner) {
       filteredVehicles = filteredVehicles.filter((vehicle) =>
         vehicle.vehicleOwner
           ?.toLowerCase()
-          .includes(filters.owner.toLowerCase())
+          .includes(this.filters.owner.toLowerCase())
       );
     }
 
-    if (filters.vehicleIdentificationNumber) {
+    if (this.filters.vehicleIdentificationNumber) {
       filteredVehicles = filteredVehicles.filter((vehicle) =>
         vehicle.vehicleIdentificationNumber
           ?.toLowerCase()
-          .includes(filters.vehicleIdentificationNumber.toLowerCase())
+          .includes(this.filters.vehicleIdentificationNumber.toLowerCase())
       );
     }
     this.vehicleService.updateVehicles(filteredVehicles);
+  }
+
+  applyFiltersMyVehicles() {
+    let filteredVehicles = this.initialMyVehicles;
+    if (this.filters.make) {
+      filteredVehicles = filteredVehicles.filter((vehicle) =>
+        vehicle.make?.toLowerCase().includes(this.filters.make.toLowerCase())
+      );
+    }
+    if (this.filters.model) {
+      filteredVehicles = filteredVehicles.filter((vehicle) =>
+        vehicle.model?.toLowerCase().includes(this.filters.model.toLowerCase())
+      );
+    }
+    if (this.filters.color) {
+      filteredVehicles = filteredVehicles.filter((vehicle) =>
+        vehicle.color?.toLowerCase().includes(this.filters.color.toLowerCase())
+      );
+    }
+
+    if (this.filters.year && !isNaN(this.filters.year)) {
+      const year = Number(this.filters.year);
+      filteredVehicles = filteredVehicles.filter(
+        (vehicle) => vehicle.year === year
+      );
+    }
+
+    if (this.filters.owner) {
+      filteredVehicles = filteredVehicles.filter((vehicle) =>
+        vehicle.vehicleOwner
+          ?.toLowerCase()
+          .includes(this.filters.owner.toLowerCase())
+      );
+    }
+
+    if (this.filters.vehicleIdentificationNumber) {
+      filteredVehicles = filteredVehicles.filter((vehicle) =>
+        vehicle.vehicleIdentificationNumber
+          ?.toLowerCase()
+          .includes(this.filters.vehicleIdentificationNumber.toLowerCase())
+      );
+    }
+    this.vehicleService.updateMyVehicles(filteredVehicles);
+  }
+
+  applyFilters() {
+    this.displayCardsService.toggleValueSubjectObservable.subscribe((value) => {
+      if (value === 'allVehicles') {
+        this.applyFiltersAllVehicles();
+      } else {
+        this.applyFiltersMyVehicles();
+      }
+    });
   }
 }

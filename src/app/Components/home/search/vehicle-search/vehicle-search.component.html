@@ -1,24 +1,53 @@
 <div class="search-vehicle">
   <form class="search-vehicle__fields" [formGroup]="filterVehicleForm">
     <div class="search-vehicle__fields__model">
-      <label>Model</label> <input type="text" formControlName="model" />
+      <label>Model</label>
+      <input
+        type="text"
+        formControlName="model"
+        (ngModelChange)="applyFilters()"
+      />
     </div>
     <div class="search-vehicle__fields__make">
-      <label>Make</label> <input type="text" formControlName="make" />
+      <label>Make</label>
+      <input
+        type="text"
+        formControlName="make"
+        (ngModelChange)="applyFilters()"
+      />
     </div>
     <div class="search-vehicle__fields__color">
-      <label>Color</label> <input type="text" formControlName="color" />
+      <label>Color</label>
+      <input
+        type="text"
+        formControlName="color"
+        (ngModelChange)="applyFilters()"
+      />
     </div>
 
     <div class="search-vehicle__fields__year">
-      <label>Year</label> <input type="text" formControlName="year" />
+      <label>Year</label>
+      <input
+        type="text"
+        formControlName="year"
+        (ngModelChange)="applyFilters()"
+      />
     </div>
     <div class="search-vehicle__fields__owner">
-      <label>Owner</label> <input type="text" formControlName="owner" />
+      <label>Owner</label>
+      <input
+        type="text"
+        formControlName="owner"
+        (ngModelChange)="applyFilters()"
+      />
     </div>
     <div class="search-vehicle__fields__vin">
       <label>Vehicle Identification Number</label>
-      <input type="text" formControlName="vehicleIdentificationNumber" />
+      <input
+        type="text"
+        formControlName="vehicleIdentificationNumber"
+        (ngModelChange)="applyFilters()"
+      />
     </div>
   </form>
   <div class="search-vehicle__tmParkingLogo">

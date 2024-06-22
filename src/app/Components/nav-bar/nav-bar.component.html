@@ -7,7 +7,7 @@
       <p>{{ fullName | uppercase }}</p>
     </div>
     <div *ngIf="!isLogin">You are not logged in ...</div>
-    <div>
+    <div *ngIf="role === 'User'">
       <img
         class="notifications"
         src="../../../assets/images/notification-icon.png"

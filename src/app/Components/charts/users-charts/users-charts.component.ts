@@ -106,12 +106,12 @@ export class UsersChartsComponent implements AfterViewInit {
 
     const options = {
       colors: [
-        '#00674b',
-        '#dcdcdc',
         '#004c86',
         '#b1a9c4',
         '#f58231',
         '#911eb4',
+        '#00674b',
+        '#dcdcdc',
       ],
     };
 

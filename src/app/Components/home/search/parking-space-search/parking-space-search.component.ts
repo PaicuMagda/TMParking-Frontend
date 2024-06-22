@@ -154,7 +154,7 @@ export class ParkingSpaceSearchComponent implements OnInit {
 
   applyFiltersMyParkingSpaces() {
     let filteredParkingSpaces = this.initialMyParkingSpaces;
-    console.log(this.filters);
+
     if (this.filters.personalVehicle) {
       filteredParkingSpaces = filteredParkingSpaces.filter(
         (parking) =>
