@@ -162,8 +162,5 @@ export class UsersChartsComponent implements AfterViewInit {
     this.activatedRoute.data.subscribe(
       (value: any) => (this.users = value.users)
     );
-    this.usersService.getUsersForCharts().subscribe((values) => {
-      console.log(values);
-    });
   }
 }

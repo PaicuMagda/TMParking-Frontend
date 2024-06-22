@@ -103,8 +103,6 @@ export class ResetPasswordComponent implements OnInit {
       let uriToken = val['code'];
       this.emailToken = uriToken.replace(/ /g, '+');
       this.emailToken = val['code'];
-      console.log(this.emailToReset);
-      console.log(this.emailToken);
     });
   }
 }

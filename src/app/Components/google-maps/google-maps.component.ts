@@ -14,7 +14,5 @@ export class GoogleMapsComponent implements OnInit, AfterViewInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
   ngAfterViewInit(): void {}
 
-  ngOnInit() {
-    console.log(this.data);
-  }
+  ngOnInit() {}
 }
