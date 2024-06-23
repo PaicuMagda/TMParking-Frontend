@@ -18,13 +18,13 @@ Se instalează Angular CLI . Se deschide Command Prompt și se rulează comanda 
 
 ## Pasul 5
 
-Se navighează folosind comanda "cd/path-ul-către-director" către folderul unde se se dorește atașarea proiectului.
+Se navighează folosind comanda `cd/path-ul-către-director` către folderul unde se se dorește atașarea proiectului.
 Mai este varianta de a naviga în acel director , iar in bara unde se află ierarhia de fișiere se șterge tot și
 se introduce "cmd + Enter" . Imediat se va deschide Command Prompt cu calea către acel fișier.
 
 ## Pasul 6
 
-Se rulează comanda `git clone https://gitlab.upt.ro/maria.paicu/TMParking-Frontend.git`
+Se rulează comanda `git clone https://github.com/PaicuMagda/TMParking-Frontend.git`
 
 ## Pasul 7
 
@@ -32,7 +32,7 @@ Se deschide proiectul în Visual Studio Code.
 
 ## Pasul 8
 
-În terminal se rulează comanda "npm install" pentru instalarea dependențelor. 
+În terminal se rulează comanda `npm install` pentru instalarea dependențelor. 
 
 ## Pasul 9
 
