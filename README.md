@@ -1,27 +1,16 @@
 # TMParkingFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.4.
+## Pasul 1. Se instalează Git de pe site-ul https://git-scm.com/downloads
 
-## Development server
+Pasul 2. Se instalează Visual Studio Code după ce este descărcat de pe site-ul : https://code.visualstudio.com/download
+Pasul 3. Se instalează Node.js https://nodejs.org/en/download/package-manager. Odată cu Node.js se descarcă și pachetul npm.
+Pasul 4. Se instalează Angular CLI . Se deschide Command Prompt și se rulează comanda "npm install -g @angular/cli"
+Pasul 5. Se navighează folosind comanda "cd/path-ul-către-director" către folderul unde se se dorește atașarea proiectului.
+         Mai este varianta de a naviga în acel director , iar in bara unde se află ierarhia de fișiere se șterge tot și
+         se introduce "cmd + Enter" . Imediat se va deschide Command Prompt cu calea către acel fișier.
+Pasul 6. Se rulează comanda "git clone https://gitlab.upt.ro/maria.paicu/TMParking-Frontend.git"
+Pasul 7. Se deschide proiectul în Visual Studio Code.
+Pasul 8. În terminal se rulează comanda "npm install" pentru instalarea dependențelor. 
+Pasul 9. Se rulează proiectul folosind comanda "ng serve".
+Pasul 10. Se deschide un browser la adresa "http://localhost:4200/".
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
